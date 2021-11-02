@@ -15,11 +15,19 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  flutter_bloc: ^7.3.1
+  formz: ^0.4.1
+  equatable: ^2.0.3
+  uuid: ^3.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
+
+  bloc_test: ^8.4.0
+  mocktail: ^0.2.0
 
 flutter:
   uses-material-design: true
