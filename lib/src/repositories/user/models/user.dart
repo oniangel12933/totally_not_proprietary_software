@@ -1,12 +1,22 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class User extends Equatable {
-  const User(this.id);
+part 'user.freezed.dart';
+part 'user.g.dart';
 
-  final String id;
+@freezed
+class User with _$User {
+  const factory User(final String id, {
+    @Default('-') String name,
+    @Default(0) int age,
+    @Default(0) int coolness,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
-  List<Object> get props => [id];
+  String toString() {
+    return "Name = $name";
+  }
 
-  static const empty = User('-');
+  static const empty = User('-', name: '');
 }

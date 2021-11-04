@@ -24,10 +24,12 @@ class LoginForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _UsernameInput(),
+            _PhoneInput(),
             const Padding(padding: EdgeInsets.all(12)),
-            _PasswordInput(),
-            const Padding(padding: EdgeInsets.all(12)),
+            // _UsernameInput(),
+            // const Padding(padding: EdgeInsets.all(12)),
+            // _PasswordInput(),
+            // const Padding(padding: EdgeInsets.all(12)),
             _LoginButton(),
           ],
         ),
@@ -36,19 +38,20 @@ class LoginForm extends StatelessWidget {
   }
 }
 
-class _UsernameInput extends StatelessWidget {
+
+class _PhoneInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.username != current.username,
+      buildWhen: (previous, current) => previous.phone != current.phone,
       builder: (context, state) {
         return TextField(
-          key: const Key('loginForm_usernameInput_textField'),
+          key: const Key('loginForm_phoneInput_textField'),
           onChanged: (username) =>
-              context.read<LoginBloc>().add(LoginUsernameChanged(username)),
+              context.read<LoginBloc>().add(LoginPhoneChanged(username)),
           decoration: InputDecoration(
-            labelText: 'username',
-            errorText: state.username.invalid ? 'invalid username' : null,
+            labelText: 'phone',
+            errorText: state.phone.invalid ? 'invalid phone number' : null,
           ),
         );
       },
@@ -56,26 +59,46 @@ class _UsernameInput extends StatelessWidget {
   }
 }
 
-class _PasswordInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
-        return TextField(
-          key: const Key('loginForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<LoginBloc>().add(LoginPasswordChanged(password)),
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'password',
-            errorText: state.password.invalid ? 'invalid password' : null,
-          ),
-        );
-      },
-    );
-  }
-}
+// class _UsernameInput extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<LoginBloc, LoginState>(
+//       buildWhen: (previous, current) => previous.username != current.username,
+//       builder: (context, state) {
+//         return TextField(
+//           key: const Key('loginForm_usernameInput_textField'),
+//           onChanged: (username) =>
+//               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
+//           decoration: InputDecoration(
+//             labelText: 'username',
+//             errorText: state.username.invalid ? 'invalid username' : null,
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+// class _PasswordInput extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<LoginBloc, LoginState>(
+//       buildWhen: (previous, current) => previous.password != current.password,
+//       builder: (context, state) {
+//         return TextField(
+//           key: const Key('loginForm_passwordInput_textField'),
+//           onChanged: (password) =>
+//               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+//           obscureText: true,
+//           decoration: InputDecoration(
+//             labelText: 'password',
+//             errorText: state.password.invalid ? 'invalid password' : null,
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _LoginButton extends StatelessWidget {
   @override
