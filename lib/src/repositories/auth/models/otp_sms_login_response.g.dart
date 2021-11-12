@@ -9,21 +9,21 @@ part of 'otp_sms_login_response.dart';
 _$_OtpSmsLoginResponse _$$_OtpSmsLoginResponseFromJson(
         Map<String, dynamic> json) =>
     _$_OtpSmsLoginResponse(
-      accessToken: json['accessToken'] as String?,
-      idToken: json['idToken'] as String?,
+      access_token: json['access_token'] as String?,
+      id_token: json['id_token'] as String?,
       scope: json['scope'] as String?,
-      expiresIn: json['expiresIn'] as int?,
-      tokenType: json['tokenType'] as String?,
+      expires_in: json['expires_in'] as int?,
+      token_type: json['token_type'] as String?,
       error: json['error'] as String?,
     );
 
 Map<String, dynamic> _$$_OtpSmsLoginResponseToJson(
         _$_OtpSmsLoginResponse instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'idToken': instance.idToken,
+      'access_token': instance.access_token,
+      'id_token': instance.id_token,
       'scope': instance.scope,
-      'expiresIn': instance.expiresIn,
-      'tokenType': instance.tokenType,
+      'expires_in': instance.expires_in,
+      'token_type': instance.token_type,
       'error': instance.error,
     };

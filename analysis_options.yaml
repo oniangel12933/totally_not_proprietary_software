@@ -9,6 +9,23 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+#  strong-mode:
+#    implicit-casts: false
+#    implicit-dynamic: false
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    # This is generated from the i18n vscode extension
+    - "**/i18n.dart"
+  errors:
+    # Otherwise cause the import of all_lint_rules to warn because of some rules conflicts.
+    # We explicitly enabled even conflicting rules and are fixing the conflict
+    # in this file
+    included_file_warning: ignore
+
+    invalid_annotation_target: ignore # for freezed
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`

@@ -22,18 +22,18 @@ class _$OtpSmsLoginResponseTearOff {
   const _$OtpSmsLoginResponseTearOff();
 
   _OtpSmsLoginResponse call(
-      {String? accessToken,
-      String? idToken,
+      {String? access_token,
+      String? id_token,
       String? scope,
-      int? expiresIn,
-      String? tokenType,
+      int? expires_in,
+      String? token_type,
       String? error}) {
     return _OtpSmsLoginResponse(
-      accessToken: accessToken,
-      idToken: idToken,
+      access_token: access_token,
+      id_token: id_token,
       scope: scope,
-      expiresIn: expiresIn,
-      tokenType: tokenType,
+      expires_in: expires_in,
+      token_type: token_type,
       error: error,
     );
   }
@@ -48,11 +48,11 @@ const $OtpSmsLoginResponse = _$OtpSmsLoginResponseTearOff();
 
 /// @nodoc
 mixin _$OtpSmsLoginResponse {
-  String? get accessToken => throw _privateConstructorUsedError;
-  String? get idToken => throw _privateConstructorUsedError;
+  String? get access_token => throw _privateConstructorUsedError;
+  String? get id_token => throw _privateConstructorUsedError;
   String? get scope => throw _privateConstructorUsedError;
-  int? get expiresIn => throw _privateConstructorUsedError;
-  String? get tokenType => throw _privateConstructorUsedError;
+  int? get expires_in => throw _privateConstructorUsedError;
+  String? get token_type => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,11 +67,11 @@ abstract class $OtpSmsLoginResponseCopyWith<$Res> {
           OtpSmsLoginResponse value, $Res Function(OtpSmsLoginResponse) then) =
       _$OtpSmsLoginResponseCopyWithImpl<$Res>;
   $Res call(
-      {String? accessToken,
-      String? idToken,
+      {String? access_token,
+      String? id_token,
       String? scope,
-      int? expiresIn,
-      String? tokenType,
+      int? expires_in,
+      String? token_type,
       String? error});
 }
 
@@ -86,33 +86,33 @@ class _$OtpSmsLoginResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? accessToken = freezed,
-    Object? idToken = freezed,
+    Object? access_token = freezed,
+    Object? id_token = freezed,
     Object? scope = freezed,
-    Object? expiresIn = freezed,
-    Object? tokenType = freezed,
+    Object? expires_in = freezed,
+    Object? token_type = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      accessToken: accessToken == freezed
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: access_token == freezed
+          ? _value.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as String?,
-      idToken: idToken == freezed
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
+      id_token: id_token == freezed
+          ? _value.id_token
+          : id_token // ignore: cast_nullable_to_non_nullable
               as String?,
       scope: scope == freezed
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String?,
-      expiresIn: expiresIn == freezed
-          ? _value.expiresIn
-          : expiresIn // ignore: cast_nullable_to_non_nullable
+      expires_in: expires_in == freezed
+          ? _value.expires_in
+          : expires_in // ignore: cast_nullable_to_non_nullable
               as int?,
-      tokenType: tokenType == freezed
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
+      token_type: token_type == freezed
+          ? _value.token_type
+          : token_type // ignore: cast_nullable_to_non_nullable
               as String?,
       error: error == freezed
           ? _value.error
@@ -130,11 +130,11 @@ abstract class _$OtpSmsLoginResponseCopyWith<$Res>
       __$OtpSmsLoginResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? accessToken,
-      String? idToken,
+      {String? access_token,
+      String? id_token,
       String? scope,
-      int? expiresIn,
-      String? tokenType,
+      int? expires_in,
+      String? token_type,
       String? error});
 }
 
@@ -151,33 +151,33 @@ class __$OtpSmsLoginResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? accessToken = freezed,
-    Object? idToken = freezed,
+    Object? access_token = freezed,
+    Object? id_token = freezed,
     Object? scope = freezed,
-    Object? expiresIn = freezed,
-    Object? tokenType = freezed,
+    Object? expires_in = freezed,
+    Object? token_type = freezed,
     Object? error = freezed,
   }) {
     return _then(_OtpSmsLoginResponse(
-      accessToken: accessToken == freezed
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: access_token == freezed
+          ? _value.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as String?,
-      idToken: idToken == freezed
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
+      id_token: id_token == freezed
+          ? _value.id_token
+          : id_token // ignore: cast_nullable_to_non_nullable
               as String?,
       scope: scope == freezed
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String?,
-      expiresIn: expiresIn == freezed
-          ? _value.expiresIn
-          : expiresIn // ignore: cast_nullable_to_non_nullable
+      expires_in: expires_in == freezed
+          ? _value.expires_in
+          : expires_in // ignore: cast_nullable_to_non_nullable
               as int?,
-      tokenType: tokenType == freezed
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
+      token_type: token_type == freezed
+          ? _value.token_type
+          : token_type // ignore: cast_nullable_to_non_nullable
               as String?,
       error: error == freezed
           ? _value.error
@@ -191,32 +191,32 @@ class __$OtpSmsLoginResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OtpSmsLoginResponse implements _OtpSmsLoginResponse {
   const _$_OtpSmsLoginResponse(
-      {this.accessToken,
-      this.idToken,
+      {this.access_token,
+      this.id_token,
       this.scope,
-      this.expiresIn,
-      this.tokenType,
+      this.expires_in,
+      this.token_type,
       this.error});
 
   factory _$_OtpSmsLoginResponse.fromJson(Map<String, dynamic> json) =>
       _$$_OtpSmsLoginResponseFromJson(json);
 
   @override
-  final String? accessToken;
+  final String? access_token;
   @override
-  final String? idToken;
+  final String? id_token;
   @override
   final String? scope;
   @override
-  final int? expiresIn;
+  final int? expires_in;
   @override
-  final String? tokenType;
+  final String? token_type;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'OtpSmsLoginResponse(accessToken: $accessToken, idToken: $idToken, scope: $scope, expiresIn: $expiresIn, tokenType: $tokenType, error: $error)';
+    return 'OtpSmsLoginResponse(access_token: $access_token, id_token: $id_token, scope: $scope, expires_in: $expires_in, token_type: $token_type, error: $error)';
   }
 
   @override
@@ -224,20 +224,21 @@ class _$_OtpSmsLoginResponse implements _OtpSmsLoginResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OtpSmsLoginResponse &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.idToken, idToken) || other.idToken == idToken) &&
+            (identical(other.access_token, access_token) ||
+                other.access_token == access_token) &&
+            (identical(other.id_token, id_token) ||
+                other.id_token == id_token) &&
             (identical(other.scope, scope) || other.scope == scope) &&
-            (identical(other.expiresIn, expiresIn) ||
-                other.expiresIn == expiresIn) &&
-            (identical(other.tokenType, tokenType) ||
-                other.tokenType == tokenType) &&
+            (identical(other.expires_in, expires_in) ||
+                other.expires_in == expires_in) &&
+            (identical(other.token_type, token_type) ||
+                other.token_type == token_type) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, accessToken, idToken, scope, expiresIn, tokenType, error);
+  int get hashCode => Object.hash(runtimeType, access_token, id_token, scope,
+      expires_in, token_type, error);
 
   @JsonKey(ignore: true)
   @override
@@ -253,26 +254,26 @@ class _$_OtpSmsLoginResponse implements _OtpSmsLoginResponse {
 
 abstract class _OtpSmsLoginResponse implements OtpSmsLoginResponse {
   const factory _OtpSmsLoginResponse(
-      {String? accessToken,
-      String? idToken,
+      {String? access_token,
+      String? id_token,
       String? scope,
-      int? expiresIn,
-      String? tokenType,
+      int? expires_in,
+      String? token_type,
       String? error}) = _$_OtpSmsLoginResponse;
 
   factory _OtpSmsLoginResponse.fromJson(Map<String, dynamic> json) =
       _$_OtpSmsLoginResponse.fromJson;
 
   @override
-  String? get accessToken;
+  String? get access_token;
   @override
-  String? get idToken;
+  String? get id_token;
   @override
   String? get scope;
   @override
-  int? get expiresIn;
+  int? get expires_in;
   @override
-  String? get tokenType;
+  String? get token_type;
   @override
   String? get error;
   @override

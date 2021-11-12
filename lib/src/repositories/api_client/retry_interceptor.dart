@@ -42,7 +42,7 @@ class DioConnectivityRequestRetrier {
     late StreamSubscription streamSubscription;
     final responseCompleter = Completer<Response>();
     streamSubscription = connectivity.onConnectivityChanged.listen(
-          (connectivityResult) {
+      (connectivityResult) {
         if (connectivityResult != ConnectivityResult.none) {
           streamSubscription.cancel();
 
@@ -63,7 +63,7 @@ class DioConnectivityRequestRetrier {
                     contentType: requestOptions.contentType,
                     validateStatus: requestOptions.validateStatus,
                     receiveDataWhenStatusError:
-                    requestOptions.receiveDataWhenStatusError,
+                        requestOptions.receiveDataWhenStatusError,
                     followRedirects: requestOptions.followRedirects,
                     maxRedirects: requestOptions.maxRedirects,
                     requestEncoder: requestOptions.requestEncoder,

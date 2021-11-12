@@ -1,13 +1,19 @@
 import 'package:formz/formz.dart';
+import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 
-enum PhoneNumberValidationError { empty }
+enum PhoneNumberValidationError { empty, toLong }
 
-class PhoneNumber extends FormzInput<String, PhoneNumberValidationError> {
-  const PhoneNumber.pure() : super.pure('');
-  const PhoneNumber.dirty([String value = '']) : super.dirty(value);
+class PhoneNumber extends FormzInput<PhoneEntity, PhoneNumberValidationError> {
+  const PhoneNumber.pure() : super.pure(PhoneEntity.empty);
+  const PhoneNumber.dirty([PhoneEntity value = PhoneEntity.empty]) : super.dirty(value);
 
   @override
-  PhoneNumberValidationError? validator(String? value) {
-    return value?.isNotEmpty == true ? null : PhoneNumberValidationError.empty;
+  PhoneNumberValidationError? validator(PhoneEntity? value) {
+
+    if (value?.number == null || value?.number?.isEmpty == true) {
+      return PhoneNumberValidationError.empty;
+    }
+
+    return null;
   }
 }

@@ -1,5 +1,3 @@
-//     final signUpResponse = signUpResponseFromJson(jsonString);
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
@@ -11,12 +9,12 @@ SignUpResponse signUpResponseFromJson(String str) => SignUpResponse.fromJson(jso
 String signUpResponseToJson(SignUpResponse data) => json.encode(data.toJson());
 
 @freezed
-abstract class SignUpResponse with _$SignUpResponse {
+class SignUpResponse with _$SignUpResponse {
   const factory SignUpResponse({
     String? error,
     String? response,
     bool? success,
-    String? accessToken,
+    String? access_token,
   }) = _SignUpResponse;
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) => _$SignUpResponseFromJson(json);

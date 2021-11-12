@@ -1,5 +1,3 @@
-//     final signUpRequest = signUpRequestFromJson(jsonString);
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
@@ -14,11 +12,10 @@ String signUpRequestToJson(SignUpRequest data) => json.encode(data.toJson());
 class SignUpRequest with _$SignUpRequest {
   const factory SignUpRequest({
     String? email,
-    String? username,
-    String? phone,
-    String? firstName,
-    String? lastName,
-    DateTime? birthdate,
+    required String username,
+    required String phone,
+    required String name,
+    required String birthdate,
   }) = _SignUpRequest;
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);

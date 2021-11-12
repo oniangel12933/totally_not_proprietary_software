@@ -22,14 +22,14 @@ class _$OtpSmsStartResponseTearOff {
   const _$OtpSmsStartResponseTearOff();
 
   _OtpSmsStartResponse call(
-      {String? phoneNumber,
-      bool? phoneVerified,
-      String? requestLanguage,
+      {String? phone_number,
+      bool? phone_verified,
+      String? request_language,
       String? error}) {
     return _OtpSmsStartResponse(
-      phoneNumber: phoneNumber,
-      phoneVerified: phoneVerified,
-      requestLanguage: requestLanguage,
+      phone_number: phone_number,
+      phone_verified: phone_verified,
+      request_language: request_language,
       error: error,
     );
   }
@@ -44,9 +44,9 @@ const $OtpSmsStartResponse = _$OtpSmsStartResponseTearOff();
 
 /// @nodoc
 mixin _$OtpSmsStartResponse {
-  String? get phoneNumber => throw _privateConstructorUsedError;
-  bool? get phoneVerified => throw _privateConstructorUsedError;
-  String? get requestLanguage => throw _privateConstructorUsedError;
+  String? get phone_number => throw _privateConstructorUsedError;
+  bool? get phone_verified => throw _privateConstructorUsedError;
+  String? get request_language => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,9 +61,9 @@ abstract class $OtpSmsStartResponseCopyWith<$Res> {
           OtpSmsStartResponse value, $Res Function(OtpSmsStartResponse) then) =
       _$OtpSmsStartResponseCopyWithImpl<$Res>;
   $Res call(
-      {String? phoneNumber,
-      bool? phoneVerified,
-      String? requestLanguage,
+      {String? phone_number,
+      bool? phone_verified,
+      String? request_language,
       String? error});
 }
 
@@ -78,23 +78,23 @@ class _$OtpSmsStartResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
-    Object? phoneVerified = freezed,
-    Object? requestLanguage = freezed,
+    Object? phone_number = freezed,
+    Object? phone_verified = freezed,
+    Object? request_language = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      phone_number: phone_number == freezed
+          ? _value.phone_number
+          : phone_number // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneVerified: phoneVerified == freezed
-          ? _value.phoneVerified
-          : phoneVerified // ignore: cast_nullable_to_non_nullable
+      phone_verified: phone_verified == freezed
+          ? _value.phone_verified
+          : phone_verified // ignore: cast_nullable_to_non_nullable
               as bool?,
-      requestLanguage: requestLanguage == freezed
-          ? _value.requestLanguage
-          : requestLanguage // ignore: cast_nullable_to_non_nullable
+      request_language: request_language == freezed
+          ? _value.request_language
+          : request_language // ignore: cast_nullable_to_non_nullable
               as String?,
       error: error == freezed
           ? _value.error
@@ -112,9 +112,9 @@ abstract class _$OtpSmsStartResponseCopyWith<$Res>
       __$OtpSmsStartResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? phoneNumber,
-      bool? phoneVerified,
-      String? requestLanguage,
+      {String? phone_number,
+      bool? phone_verified,
+      String? request_language,
       String? error});
 }
 
@@ -131,23 +131,23 @@ class __$OtpSmsStartResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
-    Object? phoneVerified = freezed,
-    Object? requestLanguage = freezed,
+    Object? phone_number = freezed,
+    Object? phone_verified = freezed,
+    Object? request_language = freezed,
     Object? error = freezed,
   }) {
     return _then(_OtpSmsStartResponse(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      phone_number: phone_number == freezed
+          ? _value.phone_number
+          : phone_number // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneVerified: phoneVerified == freezed
-          ? _value.phoneVerified
-          : phoneVerified // ignore: cast_nullable_to_non_nullable
+      phone_verified: phone_verified == freezed
+          ? _value.phone_verified
+          : phone_verified // ignore: cast_nullable_to_non_nullable
               as bool?,
-      requestLanguage: requestLanguage == freezed
-          ? _value.requestLanguage
-          : requestLanguage // ignore: cast_nullable_to_non_nullable
+      request_language: request_language == freezed
+          ? _value.request_language
+          : request_language // ignore: cast_nullable_to_non_nullable
               as String?,
       error: error == freezed
           ? _value.error
@@ -161,23 +161,26 @@ class __$OtpSmsStartResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OtpSmsStartResponse implements _OtpSmsStartResponse {
   const _$_OtpSmsStartResponse(
-      {this.phoneNumber, this.phoneVerified, this.requestLanguage, this.error});
+      {this.phone_number,
+      this.phone_verified,
+      this.request_language,
+      this.error});
 
   factory _$_OtpSmsStartResponse.fromJson(Map<String, dynamic> json) =>
       _$$_OtpSmsStartResponseFromJson(json);
 
   @override
-  final String? phoneNumber;
+  final String? phone_number;
   @override
-  final bool? phoneVerified;
+  final bool? phone_verified;
   @override
-  final String? requestLanguage;
+  final String? request_language;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'OtpSmsStartResponse(phoneNumber: $phoneNumber, phoneVerified: $phoneVerified, requestLanguage: $requestLanguage, error: $error)';
+    return 'OtpSmsStartResponse(phone_number: $phone_number, phone_verified: $phone_verified, request_language: $request_language, error: $error)';
   }
 
   @override
@@ -185,18 +188,18 @@ class _$_OtpSmsStartResponse implements _OtpSmsStartResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OtpSmsStartResponse &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.phoneVerified, phoneVerified) ||
-                other.phoneVerified == phoneVerified) &&
-            (identical(other.requestLanguage, requestLanguage) ||
-                other.requestLanguage == requestLanguage) &&
+            (identical(other.phone_number, phone_number) ||
+                other.phone_number == phone_number) &&
+            (identical(other.phone_verified, phone_verified) ||
+                other.phone_verified == phone_verified) &&
+            (identical(other.request_language, request_language) ||
+                other.request_language == request_language) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, phoneNumber, phoneVerified, requestLanguage, error);
+      runtimeType, phone_number, phone_verified, request_language, error);
 
   @JsonKey(ignore: true)
   @override
@@ -212,20 +215,20 @@ class _$_OtpSmsStartResponse implements _OtpSmsStartResponse {
 
 abstract class _OtpSmsStartResponse implements OtpSmsStartResponse {
   const factory _OtpSmsStartResponse(
-      {String? phoneNumber,
-      bool? phoneVerified,
-      String? requestLanguage,
+      {String? phone_number,
+      bool? phone_verified,
+      String? request_language,
       String? error}) = _$_OtpSmsStartResponse;
 
   factory _OtpSmsStartResponse.fromJson(Map<String, dynamic> json) =
       _$_OtpSmsStartResponse.fromJson;
 
   @override
-  String? get phoneNumber;
+  String? get phone_number;
   @override
-  bool? get phoneVerified;
+  bool? get phone_verified;
   @override
-  String? get requestLanguage;
+  String? get request_language;
   @override
   String? get error;
   @override

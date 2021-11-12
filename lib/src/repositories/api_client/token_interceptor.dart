@@ -9,10 +9,9 @@ class TokenInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    var accessToken = await SecureStorage().getToken();
+    var accessToken = await SecureStorageRepository().getToken();
 
     if (accessToken != null) {
-
       // Duration? expiration = await SecureStorage().getTokenRemainingTime();
       // if (expiration != null && expiration.inSeconds < 60) {
       //   dio.interceptors.requestLock.lock();
@@ -27,6 +26,8 @@ class TokenInterceptor extends Interceptor {
       // }
 
       options.headers['Authorization'] = 'Bearer $accessToken';
+
+      print('TokenInterceptor **** $accessToken');
     }
 
     return handler.next(options);

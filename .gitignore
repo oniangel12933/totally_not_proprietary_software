@@ -47,3 +47,9 @@ app.*.map.json
 /lib/gen
 /bin
 /assets/env
+
+todo.txt
+lib/packages
+
+*.g.dart
+*.freezed.dart

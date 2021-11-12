@@ -23,17 +23,15 @@ class _$SignUpRequestTearOff {
 
   _SignUpRequest call(
       {String? email,
-      String? username,
-      String? phone,
-      String? firstName,
-      String? lastName,
-      DateTime? birthdate}) {
+      required String username,
+      required String phone,
+      required String name,
+      required String birthdate}) {
     return _SignUpRequest(
       email: email,
       username: username,
       phone: phone,
-      firstName: firstName,
-      lastName: lastName,
+      name: name,
       birthdate: birthdate,
     );
   }
@@ -49,11 +47,10 @@ const $SignUpRequest = _$SignUpRequestTearOff();
 /// @nodoc
 mixin _$SignUpRequest {
   String? get email => throw _privateConstructorUsedError;
-  String? get username => throw _privateConstructorUsedError;
-  String? get phone => throw _privateConstructorUsedError;
-  String? get firstName => throw _privateConstructorUsedError;
-  String? get lastName => throw _privateConstructorUsedError;
-  DateTime? get birthdate => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get birthdate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,11 +65,10 @@ abstract class $SignUpRequestCopyWith<$Res> {
       _$SignUpRequestCopyWithImpl<$Res>;
   $Res call(
       {String? email,
-      String? username,
-      String? phone,
-      String? firstName,
-      String? lastName,
-      DateTime? birthdate});
+      String username,
+      String phone,
+      String name,
+      String birthdate});
 }
 
 /// @nodoc
@@ -89,8 +85,7 @@ class _$SignUpRequestCopyWithImpl<$Res>
     Object? email = freezed,
     Object? username = freezed,
     Object? phone = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? name = freezed,
     Object? birthdate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -101,23 +96,19 @@ class _$SignUpRequestCopyWithImpl<$Res>
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String?,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: lastName == freezed
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       birthdate: birthdate == freezed
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String,
     ));
   }
 }
@@ -131,11 +122,10 @@ abstract class _$SignUpRequestCopyWith<$Res>
   @override
   $Res call(
       {String? email,
-      String? username,
-      String? phone,
-      String? firstName,
-      String? lastName,
-      DateTime? birthdate});
+      String username,
+      String phone,
+      String name,
+      String birthdate});
 }
 
 /// @nodoc
@@ -154,8 +144,7 @@ class __$SignUpRequestCopyWithImpl<$Res>
     Object? email = freezed,
     Object? username = freezed,
     Object? phone = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? name = freezed,
     Object? birthdate = freezed,
   }) {
     return _then(_SignUpRequest(
@@ -166,23 +155,19 @@ class __$SignUpRequestCopyWithImpl<$Res>
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String?,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: lastName == freezed
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       birthdate: birthdate == freezed
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String,
     ));
   }
 }
@@ -192,11 +177,10 @@ class __$SignUpRequestCopyWithImpl<$Res>
 class _$_SignUpRequest implements _SignUpRequest {
   const _$_SignUpRequest(
       {this.email,
-      this.username,
-      this.phone,
-      this.firstName,
-      this.lastName,
-      this.birthdate});
+      required this.username,
+      required this.phone,
+      required this.name,
+      required this.birthdate});
 
   factory _$_SignUpRequest.fromJson(Map<String, dynamic> json) =>
       _$$_SignUpRequestFromJson(json);
@@ -204,19 +188,17 @@ class _$_SignUpRequest implements _SignUpRequest {
   @override
   final String? email;
   @override
-  final String? username;
+  final String username;
   @override
-  final String? phone;
+  final String phone;
   @override
-  final String? firstName;
+  final String name;
   @override
-  final String? lastName;
-  @override
-  final DateTime? birthdate;
+  final String birthdate;
 
   @override
   String toString() {
-    return 'SignUpRequest(email: $email, username: $username, phone: $phone, firstName: $firstName, lastName: $lastName, birthdate: $birthdate)';
+    return 'SignUpRequest(email: $email, username: $username, phone: $phone, name: $name, birthdate: $birthdate)';
   }
 
   @override
@@ -228,17 +210,14 @@ class _$_SignUpRequest implements _SignUpRequest {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.birthdate, birthdate) ||
                 other.birthdate == birthdate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, email, username, phone, firstName, lastName, birthdate);
+  int get hashCode =>
+      Object.hash(runtimeType, email, username, phone, name, birthdate);
 
   @JsonKey(ignore: true)
   @override
@@ -254,11 +233,10 @@ class _$_SignUpRequest implements _SignUpRequest {
 abstract class _SignUpRequest implements SignUpRequest {
   const factory _SignUpRequest(
       {String? email,
-      String? username,
-      String? phone,
-      String? firstName,
-      String? lastName,
-      DateTime? birthdate}) = _$_SignUpRequest;
+      required String username,
+      required String phone,
+      required String name,
+      required String birthdate}) = _$_SignUpRequest;
 
   factory _SignUpRequest.fromJson(Map<String, dynamic> json) =
       _$_SignUpRequest.fromJson;
@@ -266,15 +244,13 @@ abstract class _SignUpRequest implements SignUpRequest {
   @override
   String? get email;
   @override
-  String? get username;
+  String get username;
   @override
-  String? get phone;
+  String get phone;
   @override
-  String? get firstName;
+  String get name;
   @override
-  String? get lastName;
-  @override
-  DateTime? get birthdate;
+  String get birthdate;
   @override
   @JsonKey(ignore: true)
   _$SignUpRequestCopyWith<_SignUpRequest> get copyWith =>
