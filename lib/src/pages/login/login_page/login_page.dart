@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
@@ -6,6 +7,7 @@ import 'package:insidersapp/src/pages/login/login_page/login_form.dart';
 import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/pages/login/login_title_widget.dart';
+import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 import 'bloc/login_bloc.dart';
@@ -33,7 +35,8 @@ class LoginPage extends StatelessWidget {
           return BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               if (state.loginFormStatus.isSubmissionSuccess) {
-                Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
+                // Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
+                context.router.push(const EnterOtpRoute());
               }
             },
             child: Scaffold(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
@@ -7,6 +8,7 @@ import 'package:insidersapp/src/repositories/api_client/error_interceptor.dart';
 import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/pages/login/login_title_widget.dart';
+import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 import 'bloc/sign_up_bloc.dart';
@@ -14,7 +16,7 @@ import 'bloc/sign_up_bloc.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
-  static const routeName = '/sign_up';
+  static const routeName = '/signup';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,8 @@ class SignUpPage extends StatelessWidget {
           return BlocListener<SignUpBloc, SignUpState>(
             listener: (context, state) {
               if (state.signUpFormStatus.isSubmissionSuccess) {
-                Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
+                //Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
+                context.router.push(const EnterOtpRoute());
               }
             },
             child: Scaffold(

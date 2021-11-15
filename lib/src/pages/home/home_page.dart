@@ -3,24 +3,21 @@ import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/theme/theme_cubit.dart';
 import 'package:provider/src/provider.dart';
 
-import 'settings_controller.dart';
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-/// Displays the various settings that can be customized by the user.
-///
-/// When a user changes a setting, the SettingsController is updated and
-/// Widgets that listen to the SettingsController are rebuilt.
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
-
-  //final SettingsController controller;
+  static const routeName = '/home';
 
   @override
-  Widget build(BuildContext context) {
-    //context.read<LoginBloc>().add(const LoginSubmitted());
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('Home'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -34,6 +31,7 @@ class SettingsPage extends StatelessWidget {
               // Read the selected themeMode from the controller
               value: context.read<ThemeCubit>().getThemeMode(),
               // Call the updateThemeMode method any time the user selects a theme.
+              //onChanged: controller.updateThemeMode,
               onChanged: context.read<ThemeCubit>().setThemeMode,
               items: const [
                 DropdownMenuItem(
@@ -50,15 +48,14 @@ class SettingsPage extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30,),
             TextButton(
               // style: ButtonStyle(
               //   foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               // ),
               onPressed: () {
-                context.read<AuthBloc>().setLoggedOut();
+                context.read<AuthBloc>()
+                    .setLoggedOut();
               },
               child: const Text('Logout!!'),
             )

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:insidersapp/src/pages/login/login_title_widget.dart';
+import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 class GetStartedPage extends StatefulWidget {
@@ -31,7 +33,6 @@ class _GetStartedPageState extends State<GetStartedPage> {
           Padding(
             padding: const EdgeInsets.all(12),
 
-            /// the CustomScrollView helps fo
             child: CustomScrollView(
               slivers: [
                 /// SliverFillRemaining helps force terms of services
@@ -74,10 +75,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
                                 ),
                               ),
                             ),
-                            onPressed: () => Navigator.restorablePushNamed(
-                              context,
-                              SignUpPage.routeName,
-                            ),
+                            onPressed: () => context.router.push(const SignUpRoute()),
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -102,10 +100,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
                   const Text('Already have an account?'),
                   TextButton(
                     child: const Text('Log In'),
-                    onPressed: () => Navigator.restorablePushNamed(
-                      context,
-                      LoginPage.routeName,
-                    ),
+                    onPressed: () => context.router.push(const LoginRoute()),
                   ),
                 ],
               ),

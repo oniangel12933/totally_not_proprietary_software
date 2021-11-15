@@ -16,8 +16,6 @@ import 'bloc/otp_state.dart';
 class EnterOtpPage extends StatefulWidget {
   const EnterOtpPage({Key? key}) : super(key: key);
 
-  static const routeName = '/enter_otp';
-
   @override
   _EnterOtpPageState createState() => _EnterOtpPageState();
 }

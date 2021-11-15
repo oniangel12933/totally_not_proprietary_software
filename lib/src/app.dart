@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,6 +21,7 @@ import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'package:insidersapp/src/theme/theme_cubit.dart';
 
+import 'package:insidersapp/src/router/router.gr.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
@@ -73,7 +75,7 @@ class _AppState extends State<MyApp> {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 }
 
-class AppView extends StatelessWidget {
+class AppView extends StatefulWidget {
   const AppView({
     Key? key,
     required this.settingsController,
@@ -84,17 +86,26 @@ class AppView extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
 
   @override
+  State<AppView> createState() => _AppViewState();
+}
+
+class _AppViewState extends State<AppView> {
+  final _appRouter = AppRouter(
+      // authGuard: AuthGuard(),
+      );
+
+  int count = 0;
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (BuildContext context, ThemeState themeState) {
         // The AnimatedBuilder Widget listens to the SettingsController for changes.
         // Whenever the user updates their settings, the MaterialApp is rebuilt.
         return AnimatedBuilder(
-          animation: settingsController,
+          animation: widget.settingsController,
           builder: (BuildContext context, Widget? child) {
-            return MaterialApp(
-              navigatorKey: navigatorKey,
-
+            return MaterialApp.router(
               // Providing a restorationScopeId allows the Navigator built by the
               // MaterialApp to restore the navigation stack when a user leaves and
               // returns to the app after it has been killed while running in the
@@ -131,79 +142,50 @@ class AppView extends StatelessWidget {
                     .copyWith(secondary: AppColors.accent),
               ),
               themeMode: themeState.themeMode,
-              builder: (context, child) {
-                return BlocListener<AuthBloc, AuthState>(
-                  listener: (context, state) {
 
+              routerDelegate: _appRouter.delegate(),
+              routeInformationProvider: _appRouter.routeInfoProvider(),
+              routeInformationParser: _appRouter.defaultRouteParser(),
+
+              builder: (context, router) {
+                return BlocListener<AuthBloc, AuthState>(
+                  listener: (context, AuthState state) {
                     if (state is AuthUninitialized) {
-                      // Handle the initial state when the app isn't fully started.
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                              SplashPage.routeName, (route) => false);
-                    } else if (state is AuthLoading) {
                       // We are loading something, show spinner since it can take some time
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                              SplashPage.routeName, (route) => false);
+                      _appRouter.replace(const SplashRoute());
                     } else if (state is AuthLoggingOut) {
                       // We are logging out (may take a second or two, show loading screen)
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                              SplashPage.routeName, (route) => false);
+                      _appRouter.replace(const SplashRoute());
                     } else if (state is AuthLoggedOut) {
                       // We are logged out
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                          GetStartedPage.routeName, (route) => false);
+                      _appRouter.replaceAll([const GetStartedRoute()]);
                     } else if (state is AuthUnauthenticated) {
                       // User is not authenticated, show the splash/start screen
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                              //SampleItemListView.routeName, (route) => false);
-                              //LoginMain.routeName, (route) => false);
-                              GetStartedPage.routeName,
-                              (route) => false);
+                      _appRouter.replaceAll([const GetStartedRoute()]);
                     } else if (state is AuthAuthenticated) {
-                      navigatorKey.currentState
-                          ?.restorablePushNamedAndRemoveUntil(
-                              SampleItemListView.routeName, (route) => false);
+                      // HomePage
+                      _appRouter.replaceAll([const SampleItemListRoute()]);
                     }
-                  },
-                  child: child,
-                );
-              },
 
-              // Define a function to handle named routes in order to support
-              // Flutter web url navigation and deep linking.
-              onGenerateRoute: (RouteSettings routeSettings) {
-                return MaterialPageRoute<void>(
-                  settings: routeSettings,
-                  builder: (BuildContext context) {
-                    return BlocBuilder<AuthBloc, AuthState>(
-                      builder: (context, state) {
-                        switch (routeSettings.name) {
-                          case GetStartedPage.routeName:
-                            return const GetStartedPage();
-                          case SignUpPage.routeName:
-                            return const SignUpPage();
-                          case LoginPage.routeName:
-                            return const LoginPage();
-                          case EnterOtpPage.routeName:
-                            return const EnterOtpPage();
-                          case SettingsView.routeName:
-                            return SettingsView(controller: settingsController);
-                          case SampleItemDetailsView.routeName:
-                            return const SampleItemDetailsView();
-                          case SampleItemListView.routeName:
-                            return const SampleItemListView();
-                          // case SplashPage.routeName:
-                          //   return const SplashPage();
-                          default:
-                            return const SplashPage();
-                        }
-                      },
-                    );
+                    // state.when(
+                    //   authUnauthenticated: () =>
+                    //       _appRouter.replace(const GetStartedPageRoute()),
+                    //   authAuthenticated: () =>
+                    //       _appRouter.replace(const HomePageRoute()),
+                    //   authLoggingOut: () =>
+                    //       _appRouter.replace(const SplashPageRoute()),
+                    //   authUninitialized: () =>
+                    //       _appRouter.replace(const SplashPageRoute()),
+                    //   authLoading: () =>
+                    //       _appRouter.replace(const SplashPageRoute()),
+                    //   authLoggedOut: () =>
+                    //       _appRouter.replace(const GetStartedPageRoute()),
+                    // );
                   },
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                    return router ?? Container();
+                  }),
                 );
               },
             );

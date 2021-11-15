@@ -17,8 +17,6 @@ import 'package:insidersapp/src/shared/config/app_config.dart';
 import 'gen/assets.gen.dart';
 import 'src/app.dart';
 
-
-
 void main() async {
   await dotenv.load(fileName: Assets.env.envDevelopment);
   await AppConfig().setup();
@@ -50,12 +48,10 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(
-    MyApp(
-      settingsController: settingsController,
-      authenticationRepository: AuthRepository(),
-      userRepository: UserRepository(),
-      secureRepository: SecureStorageRepository(),
-    ),
-  );
+  runApp(MyApp(
+    settingsController: settingsController,
+    authenticationRepository: AuthRepository(),
+    userRepository: UserRepository(),
+    secureRepository: SecureStorageRepository(),
+  ));
 }
