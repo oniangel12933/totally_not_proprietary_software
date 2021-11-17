@@ -2,47 +2,62 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
+
 @immutable
 class ThemeState extends Equatable {
-  final ThemeMode themeMode;
+  final bool isDark;
 
-  const ThemeState(this.themeMode);
+  const ThemeState({required this.isDark});
 
   @override
-  List<Object?> get props => [themeMode];
+  List<Object?> get props => [isDark];
+
+  ThemeMode getMaterialThemeMode() {
+    return isDark ? ThemeMode.dark : ThemeMode.light;
+  }
+
+  Brightness getCupThemeBrightness() {
+    return isDark ? Brightness.dark : Brightness.light;
+  }
 }
 
 class ThemeCubit extends HydratedCubit<ThemeState> {
-  ThemeCubit() : super(const ThemeState(ThemeMode.dark));
+  ThemeCubit() : super(const ThemeState(isDark: true));
 
   void setDark() {
-    emit(const ThemeState(ThemeMode.dark));
+    emit(const ThemeState(isDark: true));
   }
 
   void setLight() {
-    emit(const ThemeState(ThemeMode.light));
+    emit(const ThemeState(isDark: false));
   }
 
-  ThemeMode getThemeMode() {
-    return state.themeMode;
+  void setIsDark({required bool isDark}) {
+    emit(ThemeState(isDark: isDark));
   }
 
-  void setThemeMode(ThemeMode? themeMode) {
-    if (themeMode == null) {
-      return;
-    }
-    emit(ThemeState(themeMode));
+  bool getIsDark() {
+    return state.isDark;
+  }
+
+  ThemeMode getMaterialThemeMode() {
+    return state.isDark ? ThemeMode.dark : ThemeMode.light;
+  }
+
+  Brightness getCupThemeBrightness() {
+    return state.isDark ? Brightness.dark : Brightness.light;
   }
 
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {
+
     return json['isDark'] as bool
-        ? const ThemeState(ThemeMode.dark)
-        : const ThemeState(ThemeMode.light);
+        ? const ThemeState(isDark: true)
+        : const ThemeState(isDark: false);
   }
 
   @override
   Map<String, bool>? toJson(ThemeState state) {
-    return {'isDark': state.themeMode == ThemeMode.dark};
+    return {'isDark': state.isDark};
   }
 }

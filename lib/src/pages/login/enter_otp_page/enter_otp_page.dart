@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dart';
 import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/widgets/loading_indicator.dart';
 import 'package:insidersapp/src/pages/login/login_title_widget.dart';
@@ -130,7 +131,8 @@ class PinPutTestState extends State<PinPutTest> {
               ..showSnackBar(
                 const SnackBar(content: Text('Missing phone number')),
               );
-            Navigator.restorablePushNamed(context, GetStartedPage.routeName);
+            //Navigator.restorablePushNamed(context, GetStartedPage.routeName);
+            context.router.replaceAll([const GetStartedRoute()]);
           }
         },
         child: BlocBuilder<OtpBloc, OtpState>(

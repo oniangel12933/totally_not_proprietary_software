@@ -12,14 +12,14 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
-      path: SplashPage.routeName,
+      path: '/splash',
       page: SplashPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
     AutoRoute(
-      path: GetStartedPage.routeName,
+      path: '/get_started',
       page: GetStartedPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
@@ -64,7 +64,7 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
     ),
     AutoRoute(
       initial: true,
-      path: '/list',
+      path: '/sample',
       page: SampleItemListPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
@@ -72,7 +72,7 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
     ),
 
     // redirect all other paths
-    RedirectRoute(path: '*', redirectTo: '/login'),
+    RedirectRoute(path: '*', redirectTo: '/get_started'),
     //Home
   ],
 )

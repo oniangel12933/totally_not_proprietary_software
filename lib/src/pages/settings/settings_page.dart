@@ -12,42 +12,34 @@ import 'settings_controller.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
-  //final SettingsController controller;
-
   @override
   Widget build(BuildContext context) {
-    //context.read<LoginBloc>().add(const LoginSubmitted());
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
+
         // When a user selects a theme from the dropdown list, the
         // SettingsController is updated, which rebuilds the MaterialApp.
         child: Column(
           children: [
-            DropdownButton<ThemeMode>(
+            DropdownButton<bool>(
               // Read the selected themeMode from the controller
-              value: context.read<ThemeCubit>().getThemeMode(),
+              value: context.read<ThemeCubit>().getIsDark(),
               // Call the updateThemeMode method any time the user selects a theme.
-              onChanged: context.read<ThemeCubit>().setThemeMode,
+              onChanged: (bool? isDark) =>
+                  context.read<ThemeCubit>().setIsDark(isDark: isDark ?? true),
               items: const [
                 DropdownMenuItem(
-                  value: ThemeMode.system,
-                  child: Text('System Theme'),
+                  value: true,
+                  child: Text('Dark Theme'),
                 ),
                 DropdownMenuItem(
-                  value: ThemeMode.light,
+                  value: false,
                   child: Text('Light Theme'),
                 ),
-                DropdownMenuItem(
-                  value: ThemeMode.dark,
-                  child: Text('Dark Theme'),
-                )
               ],
             ),
             const SizedBox(

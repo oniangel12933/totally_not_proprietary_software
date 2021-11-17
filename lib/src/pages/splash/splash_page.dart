@@ -5,8 +5,6 @@ import 'package:insidersapp/gen/assets.gen.dart';
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
-  static const routeName = '/splash';
-
   static Route route() {
     return MaterialPageRoute<void>(builder: (_) => const SplashPage());
   }

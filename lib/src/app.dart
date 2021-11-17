@@ -3,15 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
-import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dart';
-import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
-import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
-import 'package:insidersapp/src/pages/sample_feature/sample_item_details_view.dart';
-import 'package:insidersapp/src/pages/sample_feature/sample_item_list_view.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:insidersapp/src/pages/settings/settings_controller.dart';
-import 'package:insidersapp/src/pages/settings/settings_page.dart';
-import 'package:insidersapp/src/pages/splash/splash_page.dart';
 import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/repositories/user/user_repository.dart';
@@ -65,25 +58,35 @@ class _AppState extends State<MyApp> {
             create: (BuildContext context) => ThemeCubit(),
           ),
         ],
-        child: AppView(
+        child: PlatformProvider(
+          settings: PlatformSettingsData(
+            platformStyle: const PlatformStyleData(
+              web: PlatformStyle.Cupertino,
+              android: PlatformStyle.Cupertino,
+            ),
+            //iosUsesMaterialWidgets: true,
+          ),
+          builder: (BuildContext context) => AppView(
             settingsController: widget.settingsController,
-            navigatorKey: _navigatorKey),
+            //navigatorKey: _navigatorKey,
+          ),
+        ),
       ),
     );
   }
 
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  //final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 }
 
 class AppView extends StatefulWidget {
   const AppView({
     Key? key,
     required this.settingsController,
-    required this.navigatorKey,
+    //required this.navigatorKey,
   }) : super(key: key);
 
   final SettingsController settingsController;
-  final GlobalKey<NavigatorState> navigatorKey;
+  //final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   State<AppView> createState() => _AppViewState();
@@ -105,7 +108,7 @@ class _AppViewState extends State<AppView> {
         return AnimatedBuilder(
           animation: widget.settingsController,
           builder: (BuildContext context, Widget? child) {
-            return MaterialApp.router(
+            return PlatformApp.router(
               // Providing a restorationScopeId allows the Navigator built by the
               // MaterialApp to restore the navigation stack when a user leaves and
               // returns to the app after it has been killed while running in the
@@ -133,15 +136,21 @@ class _AppViewState extends State<AppView> {
               onGenerateTitle: (BuildContext context) =>
                   AppLocalizations.of(context)!.appTitle,
 
-              // Define a light and dark color theme. Then, read the user's
-              // preferred ThemeMode (light, dark, or system default) from the
-              // SettingsController to display the correct theme.
-              theme: AppThemes.lightTheme,
-              darkTheme: AppThemes.darkTheme.copyWith(
-                colorScheme: AppThemes.darkTheme.colorScheme
-                    .copyWith(secondary: AppColors.accent),
+              material: (BuildContext build, PlatformTarget target) =>
+                  MaterialAppRouterData(
+                theme: AppThemes.materialLightTheme,
+                darkTheme: AppThemes.materialDarkTheme.copyWith(
+                  colorScheme: AppThemes.materialDarkTheme.colorScheme
+                      .copyWith(secondary: AppColors.accent),
+                ),
+                themeMode: themeState.getMaterialThemeMode(),
               ),
-              themeMode: themeState.themeMode,
+              cupertino: (BuildContext build, PlatformTarget target) =>
+                  CupertinoAppRouterData(
+                theme: themeState.isDark
+                    ? AppThemes.cupertinoDarkTheme
+                    : AppThemes.cupertinoLightTheme,
+              ),
 
               routerDelegate: _appRouter.delegate(),
               routeInformationProvider: _appRouter.routeInfoProvider(),
@@ -164,7 +173,8 @@ class _AppViewState extends State<AppView> {
                       _appRouter.replaceAll([const GetStartedRoute()]);
                     } else if (state is AuthAuthenticated) {
                       // HomePage
-                      _appRouter.replaceAll([const SampleItemListRoute()]);
+                      //_appRouter.replaceAll([const SampleItemListRoute()]);
+                      _appRouter.replaceAll([const HomeRoute()]);
                     }
 
                     // state.when(

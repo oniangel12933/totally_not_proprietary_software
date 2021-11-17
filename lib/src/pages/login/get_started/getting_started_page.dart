@@ -9,8 +9,6 @@ import 'package:insidersapp/src/theme/colors.dart';
 class GetStartedPage extends StatefulWidget {
   const GetStartedPage({Key? key}) : super(key: key);
 
-  static const routeName = '/get_started';
-
   @override
   _GetStartedPageState createState() => _GetStartedPageState();
 }

@@ -48,9 +48,14 @@ app.*.map.json
 /bin
 /assets/env
 
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+*.xcworkspace
+*.xcodeproj
+
 todo.txt
 lib/packages
 
+# Flutter generated files
 *.g.dart
 *.freezed.dart
 *.gr.dart
