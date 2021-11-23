@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:insidersapp/src/pages/home/home_page.dart';
 import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dart';
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
+import 'package:insidersapp/src/pages/main/main_page.dart';
 import 'package:insidersapp/src/pages/sample_feature/sample_item_list_view.dart';
 import 'package:insidersapp/src/pages/settings/settings_page.dart';
 import 'package:insidersapp/src/pages/splash/splash_page.dart';
@@ -49,7 +49,7 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
     AutoRoute(
       initial: true,
       path: '/home',
-      page: HomePage,
+      page: MainPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],
@@ -70,7 +70,6 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
-
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: '/get_started'),
     //Home

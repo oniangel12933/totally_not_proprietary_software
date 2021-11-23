@@ -62,9 +62,10 @@ class _AppState extends State<MyApp> {
           settings: PlatformSettingsData(
             platformStyle: const PlatformStyleData(
               web: PlatformStyle.Cupertino,
-              android: PlatformStyle.Cupertino,
+              //android: PlatformStyle.Cupertino,
+              //ios: PlatformStyle.Material,
             ),
-            //iosUsesMaterialWidgets: true,
+            iosUsesMaterialWidgets: true,
           ),
           builder: (BuildContext context) => AppView(
             settingsController: widget.settingsController,
@@ -108,17 +109,18 @@ class _AppViewState extends State<AppView> {
         return AnimatedBuilder(
           animation: widget.settingsController,
           builder: (BuildContext context, Widget? child) {
-            return PlatformApp.router(
+            return MaterialApp.router(
               // Providing a restorationScopeId allows the Navigator built by the
               // MaterialApp to restore the navigation stack when a user leaves and
               // returns to the app after it has been killed while running in the
               // background.
               restorationScopeId: 'app',
 
+
               // Provide the generated AppLocalizations to the MaterialApp. This
               // allows descendant Widgets to display the correct translations
               // depending on the user's locale.
-              localizationsDelegates: const [
+              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
@@ -136,21 +138,13 @@ class _AppViewState extends State<AppView> {
               onGenerateTitle: (BuildContext context) =>
                   AppLocalizations.of(context)!.appTitle,
 
-              material: (BuildContext build, PlatformTarget target) =>
-                  MaterialAppRouterData(
                 theme: AppThemes.materialLightTheme,
                 darkTheme: AppThemes.materialDarkTheme.copyWith(
                   colorScheme: AppThemes.materialDarkTheme.colorScheme
-                      .copyWith(secondary: AppColors.accent),
+                      .copyWith(secondary: AppColors.involioBrightBlue),
                 ),
                 themeMode: themeState.getMaterialThemeMode(),
-              ),
-              cupertino: (BuildContext build, PlatformTarget target) =>
-                  CupertinoAppRouterData(
-                theme: themeState.isDark
-                    ? AppThemes.cupertinoDarkTheme
-                    : AppThemes.cupertinoLightTheme,
-              ),
+
 
               routerDelegate: _appRouter.delegate(),
               routeInformationProvider: _appRouter.routeInfoProvider(),
@@ -174,7 +168,7 @@ class _AppViewState extends State<AppView> {
                     } else if (state is AuthAuthenticated) {
                       // HomePage
                       //_appRouter.replaceAll([const SampleItemListRoute()]);
-                      _appRouter.replaceAll([const HomeRoute()]);
+                      _appRouter.replaceAll([const MainRoute()]);
                     }
 
                     // state.when(

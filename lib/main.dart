@@ -21,8 +21,6 @@ void main() async {
   await dotenv.load(fileName: Assets.env.envDevelopment);
   await AppConfig().setup();
 
-  Bloc.observer = AppBlocObserver();
-
   // make sure that widget bindings are initialized before running app
   // this prevents possible exceptions
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,10 +29,10 @@ void main() async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  HydratedBloc.storage = await HydratedStorage.build(
+  final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
+        : await getTemporaryDirectory(), // await getApplicationDocumentsDirectory(),
   );
 
   // Set up the SettingsController, which will glue user settings to multiple
@@ -48,10 +46,16 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(MyApp(
-    settingsController: settingsController,
-    authenticationRepository: AuthRepository(),
-    userRepository: UserRepository(),
-    secureRepository: SecureStorageRepository(),
-  ));
+  BlocOverrides.runZoned(
+    () => HydratedBlocOverrides.runZoned(
+      () => runApp(MyApp(
+        settingsController: settingsController,
+        authenticationRepository: AuthRepository(),
+        userRepository: UserRepository(),
+        secureRepository: SecureStorageRepository(),
+      )),
+      storage: storage,
+    ),
+    blocObserver: AppBlocObserver(),
+  );
 }

@@ -61,7 +61,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         print('OtpBloc ------------------');
         print(response);
 
-        if (response.error != null || response.access_token == null) {
+        if (response.error != null || response.accessToken == null) {
           print(response.error);
           emit(OtpState(
             phone: state.phone,
@@ -77,7 +77,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
           _authBloc.setLoggedIn(
             phone: state.phone!,
-            token: response.access_token!,
+            token: response.accessToken!,
           );
         }
 

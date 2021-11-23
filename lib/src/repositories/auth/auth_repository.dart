@@ -40,7 +40,7 @@ class AuthRepository {
 
     OtpSmsLoginResponse responseModel = OtpSmsLoginResponse.fromJson(response.data);
 
-    if (responseModel.access_token != null) {
+    if (responseModel.accessToken != null) {
 
     }
 

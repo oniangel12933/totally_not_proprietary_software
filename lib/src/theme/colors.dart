@@ -1,49 +1,47 @@
 import 'package:flutter/material.dart';
-
 import 'package:insidersapp/src/extensions/swatch_gen.dart';
 
 /// Used to contain custom colors that are used by the app
 class AppColors {
+  static late MaterialColor involioBlueSwatch = AppColors.involioBlue.genSwatch;
+  static late MaterialColor involioBackgroundSwatch =
+      AppColors.involioBackground.genSwatch;
 
+  //static late Color involioDarkModeIconColor = involioBackgroundSwatch[100]!;
 
-  static const insidersColorsDeepBlue = Color(0xff0e225d);
+  static const involioLightBackground = Colors.white;
 
-  static const insidersColorsDarkBlue = Color(0xff244fd8);
+  static const involioBlue = Color(0xff1a67db);
+  static const involioDarkBlue = Color(0xff0e225d);
+  static const involioGreyBlue = Color(0xff2b5c95);
+  static const involioBrightBlue = Color(0xff45a9e1);
+  static const involioGreenGrayBlue = Color(0xffa2aeb3);
 
-  static const insidersColorsVibrantBlue = Color(0xff00cbf8);
+  static const involioBackground = Color(0xff282c32);
+  static const involioPopUps = Color(0xff1f2025);
+  static const involioFooter = Color(0xff1e1f24);
+  static const involioTabInactive = Color(0xffcfd3d9);
+  static const involioFillFormText = Color(0xffebebf5);
+  static const involioFillFormBackgroundColor = Color(0xff343840);
+  static const involioUserNameColor = Color(0xffc9cacc);
+  static const involioAssistiveAndAlertRed = Color(0xffff3737);
+  static const involioAssistiveAndAlertGreen = Color(0xff3fdb4f);
 
-  static const insidersColorsUiSelectionBoxes = Color(0xff2c2c2e);
+  // static const involioBlackShades100 = Color(0xff000000);
+  // static const involioBlackShades80 = Color(0xff2c2c2c);
+  // static const involioBlackShades60 = Color(0xff575757);
+  // static const involioBlackShades40 = Color(0xff838383);
+  // static const involioBlackShades20 = Color(0xffaeaeae);
+  // static const involioBlackShades10 = Color(0xffc4c4c4);
+  // static const involioBlackShades5 = Color(0xffcfcfcf);
 
-  static const insidersColorsAssistiveErrorRed = Color(0xffff3737);
-
-  static const insidersColorsAssistiveSuccessGreen = Color(0xff3fdb4f);
-
-  static const insidersColorsInsidersBlueInt = 0xff085fe1;
-  static const insidersColorsInsidersBlue = Color(0xff085fe1);
-  static MaterialColor insidersColorsInsidersBlueSwatch = AppColors.insidersColorsInsidersBlue.genSwatch;
-
-  static const insidersColorsAppBackgroundInt = 0xff1f2025;
-  static const insidersColorsAppBackground = Color(0xff1f2025);
-  static MaterialColor insidersColorsAppBackgroundSwatch = AppColors.insidersColorsAppBackground.genSwatch;
-
-  // static const insidersBlack60 = Color(0xff575757);
-  // static const insidersBlack40 = Color(0xff838383);
-  // static const insidersBlack20 = Color(0xffaeaeae);
-  // static const insidersBlack10 = Color(0xffc4c4c4);
-  // static const insidersBlack5 = Color(0xffcfcfcf);
-  // static const insidersBlack80 = Color(0xff2c2c2c);
-  // static const insidersBlack100 = Color(0xff000000);
-  // static const insidersWhite100 = Color(0xffffffff);
-
-  //static const MaterialColor primarySwatch = Colors.grey;
-  //static const int primaryInt = 0xff1f2025;
-  static const Color primary = insidersColorsInsidersBlue; // #1F2025 1F2025FF // insidersColorsAppBackground
-  static const Color accent = insidersColorsInsidersBlue;
-  static const Color primaryLight = Color(0xFFFFFFFF);
-  static const Color gradientLight = Color(0xFF2D383E);
-  static const Color iconColor = Colors.grey;
-
-  static const insidersColorsCheckMarks = insidersColorsAssistiveSuccessGreen;
+  // static const involioWhiteShades100 = Color(0xffffffff);
+  // static const involioWhiteShades80 = Color(0xfff8f8f8);
+  // static const involioWhiteShades60 = Color(0xfff0f0f0);
+  // static const involioWhiteShades40 = Color(0xffe9e9e9);
+  // static const involioWhiteShades20 = Color(0xffe1e1e1);
+  // static const involioWhiteShades10 = Color(0xffdedede);
+  // static const involioWhiteShades5 = Color(0xffdcdcdc);
 
   AppColors._();
 }

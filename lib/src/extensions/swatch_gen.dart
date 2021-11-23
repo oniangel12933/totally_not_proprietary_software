@@ -23,8 +23,8 @@ MaterialColor createMaterialColor(Color color) {
   return MaterialColor(color.value, swatch);
 }
 
-extension ColorToSwatchExtension on Color{
-  get genSwatch {
+extension ColorToSwatchExtension on Color {
+  MaterialColor get genSwatch {
     return createMaterialColor(this);
   }
 }

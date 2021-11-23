@@ -22,12 +22,12 @@ class _$SignUpResponseTearOff {
   const _$SignUpResponseTearOff();
 
   _SignUpResponse call(
-      {String? error, String? response, bool? success, String? access_token}) {
+      {String? error, String? response, bool? success, String? accessToken}) {
     return _SignUpResponse(
       error: error,
       response: response,
       success: success,
-      access_token: access_token,
+      accessToken: accessToken,
     );
   }
 
@@ -44,7 +44,7 @@ mixin _$SignUpResponse {
   String? get error => throw _privateConstructorUsedError;
   String? get response => throw _privateConstructorUsedError;
   bool? get success => throw _privateConstructorUsedError;
-  String? get access_token => throw _privateConstructorUsedError;
+  String? get accessToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +58,7 @@ abstract class $SignUpResponseCopyWith<$Res> {
           SignUpResponse value, $Res Function(SignUpResponse) then) =
       _$SignUpResponseCopyWithImpl<$Res>;
   $Res call(
-      {String? error, String? response, bool? success, String? access_token});
+      {String? error, String? response, bool? success, String? accessToken});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$SignUpResponseCopyWithImpl<$Res>
     Object? error = freezed,
     Object? response = freezed,
     Object? success = freezed,
-    Object? access_token = freezed,
+    Object? accessToken = freezed,
   }) {
     return _then(_value.copyWith(
       error: error == freezed
@@ -90,9 +90,9 @@ class _$SignUpResponseCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      access_token: access_token == freezed
-          ? _value.access_token
-          : access_token // ignore: cast_nullable_to_non_nullable
+      accessToken: accessToken == freezed
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -106,7 +106,7 @@ abstract class _$SignUpResponseCopyWith<$Res>
       __$SignUpResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? error, String? response, bool? success, String? access_token});
+      {String? error, String? response, bool? success, String? accessToken});
 }
 
 /// @nodoc
@@ -125,7 +125,7 @@ class __$SignUpResponseCopyWithImpl<$Res>
     Object? error = freezed,
     Object? response = freezed,
     Object? success = freezed,
-    Object? access_token = freezed,
+    Object? accessToken = freezed,
   }) {
     return _then(_SignUpResponse(
       error: error == freezed
@@ -140,9 +140,9 @@ class __$SignUpResponseCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      access_token: access_token == freezed
-          ? _value.access_token
-          : access_token // ignore: cast_nullable_to_non_nullable
+      accessToken: accessToken == freezed
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -152,7 +152,7 @@ class __$SignUpResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SignUpResponse implements _SignUpResponse {
   const _$_SignUpResponse(
-      {this.error, this.response, this.success, this.access_token});
+      {this.error, this.response, this.success, this.accessToken});
 
   factory _$_SignUpResponse.fromJson(Map<String, dynamic> json) =>
       _$$_SignUpResponseFromJson(json);
@@ -164,11 +164,11 @@ class _$_SignUpResponse implements _SignUpResponse {
   @override
   final bool? success;
   @override
-  final String? access_token;
+  final String? accessToken;
 
   @override
   String toString() {
-    return 'SignUpResponse(error: $error, response: $response, success: $success, access_token: $access_token)';
+    return 'SignUpResponse(error: $error, response: $response, success: $success, accessToken: $accessToken)';
   }
 
   @override
@@ -180,13 +180,13 @@ class _$_SignUpResponse implements _SignUpResponse {
             (identical(other.response, response) ||
                 other.response == response) &&
             (identical(other.success, success) || other.success == success) &&
-            (identical(other.access_token, access_token) ||
-                other.access_token == access_token));
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, error, response, success, access_token);
+      Object.hash(runtimeType, error, response, success, accessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +204,7 @@ abstract class _SignUpResponse implements SignUpResponse {
       {String? error,
       String? response,
       bool? success,
-      String? access_token}) = _$_SignUpResponse;
+      String? accessToken}) = _$_SignUpResponse;
 
   factory _SignUpResponse.fromJson(Map<String, dynamic> json) =
       _$_SignUpResponse.fromJson;
@@ -216,7 +216,7 @@ abstract class _SignUpResponse implements SignUpResponse {
   @override
   bool? get success;
   @override
-  String? get access_token;
+  String? get accessToken;
   @override
   @JsonKey(ignore: true)
   _$SignUpResponseCopyWith<_SignUpResponse> get copyWith =>

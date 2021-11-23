@@ -14,7 +14,7 @@ class SignUpResponse with _$SignUpResponse {
     String? error,
     String? response,
     bool? success,
-    String? access_token,
+    String? accessToken,
   }) = _SignUpResponse;
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) => _$SignUpResponseFromJson(json);

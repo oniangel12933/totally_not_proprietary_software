@@ -15,16 +15,16 @@ class PhoneEntity with _$PhoneEntity {
 
   const factory PhoneEntity({
     required String number,
-    required String countryCode,
-    required String countryISOCode,
+    required String dialCode,
+    required String isoCode,
   }) = _PhoneEntity;
 
   factory PhoneEntity.fromJson(Map<String, dynamic> json) =>
       _$PhoneEntityFromJson(json);
 
-  static const empty = PhoneEntity(number: '', countryCode: '', countryISOCode: '');
+  static const empty = PhoneEntity(number: '', dialCode: '', isoCode: '');
 
   String completeNumber() {
-    return '$countryCode$number';
+    return '$dialCode$number';
   }
 }

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:insidersapp/src/pages/login/login_page/login_form.dart';
 import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/pages/login/login_title_widget.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
+import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
+import '../get_login_app_bar.dart';
 import 'bloc/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -40,13 +41,10 @@ class LoginPage extends StatelessWidget {
               }
             },
             child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                title: const LoginTitleWidget(),
-              ),
+              appBar: getLoginAppBar(),
               body: const SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: EdgeInsets.only(left: AppThemes.edgePadding, right: AppThemes.edgePadding),
                   child: LoginForm(),
                 ),
               ),
@@ -59,8 +57,8 @@ class LoginPage extends StatelessWidget {
                 tooltip: 'Log In',
                 child: const Icon(Icons.keyboard_arrow_right),
                 backgroundColor: state.loginFormStatus.isValidated
-                    ? AppColors.accent
-                    : Colors.grey,
+                    ? AppColors.involioBlue
+                    : AppColors.involioGreyBlue,
                 foregroundColor: Colors.white,
               ),
             ),

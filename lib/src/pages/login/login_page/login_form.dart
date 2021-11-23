@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/theme/colors.dart';
 
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart' as pn;
+import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
 import '../login_input_decoration.dart';
 import 'bloc/login_bloc.dart';
@@ -41,12 +39,12 @@ class _LoginFormState extends State<LoginForm> {
               const SnackBar(content: Text('Authentication Failed')),
             );
         }
-        if (state.initialPhone?.number != null && state.phone.pure) {
-          phoneController.text = state.initialPhone!.number;
-          context.read<LoginBloc>().phoneChanged(
-            phone: state.initialPhone!,
-          );
-        }
+        // if (state.initialPhone?.number != null && state.phone.pure) {
+        //   phoneController.text = state.initialPhone!.number;
+        //   context.read<LoginBloc>().phoneChanged(
+        //         phone: state.initialPhone!,
+        //       );
+        // }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -72,34 +70,77 @@ class _LoginFormState extends State<LoginForm> {
                       previous.initialPhone != current.initialPhone ||
                       previous.readyToDisplay != current.readyToDisplay),
               builder: (context, state) {
+                //String initialCountry = 'US';
+                ipn.PhoneNumber initialNumber = ipn.PhoneNumber(
+                  isoCode: 'US',
+                );
+                if (state.initialPhone?.number != null && state.phone.pure) {
+                  initialNumber = ipn.PhoneNumber(
+                    isoCode: state.initialPhone?.isoCode ?? 'US',
+                    dialCode: state.initialPhone?.dialCode,
+                    phoneNumber: state.initialPhone?.number,
+                  );
+                } else if (state.phone.value.isoCode.isNotEmpty) {
+                  String initialCountry = state.phone.value.isoCode;
+                  initialNumber = ipn.PhoneNumber(isoCode: initialCountry);
+                }
+
                 /// readyToDisplay makes sure that the phone number and
                 /// country code is loaded from storage before displaying
                 return state.readyToDisplay
-                    ? IntlPhoneField(
-                        controller: phoneController,
-                        initialCountryCode:
-                            state.initialPhone?.countryISOCode ?? 'US',
-                        showDropdownIcon: true,
-                        dropdownDecoration: BoxDecoration(
-                          color:
-                              AppColors.insidersColorsAppBackgroundSwatch[400],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        decoration: getLoginInputDecoration(
-                            labelText: 'Your Phone Number',
-                            errorText: 'Invalid phone number',
-                            field: state.phone),
-                        onChanged: (pn.PhoneNumber phoneNumber) {
-                          context.read<LoginBloc>().phoneChanged(
-                                phone: PhoneEntity(
-                                  number: phoneNumber.number ?? '',
-                                  countryCode: phoneNumber.countryCode ?? '',
-                                  countryISOCode:
-                                      phoneNumber.countryISOCode ?? '',
-                                ),
-                              );
+                    ? ipn.InternationalPhoneNumberInput(
+                        initialValue: initialNumber,
+                        textFieldController: phoneController,
+                        // onInputChanged: (ipn.PhoneNumber number) {
+                        //   print(number.phoneNumber);
+                        // },
+                        onInputChanged: (ipn.PhoneNumber phoneNumber) {
+
+                          // if there is only a dial code without a phone number, the phone number will be the dial code
+                          // this removes country code from number
+                          String? phoneN = (phoneNumber.dialCode?.length ==
+                                  phoneNumber.phoneNumber?.length)
+                              ? null
+                              : phoneNumber.phoneNumber?.substring(
+                                  phoneNumber.dialCode?.length ?? 0,
+                                );
+
+                          if (phoneN?.isNotEmpty != null &&
+                              phoneNumber.dialCode?.isNotEmpty != null &&
+                              phoneNumber.phoneNumber?.isNotEmpty != null) {
+                            context.read<LoginBloc>().phoneChanged(
+                                  phone: PhoneEntity(
+                                    number: phoneN ?? '',
+                                    dialCode: phoneNumber.dialCode ?? '',
+                                    isoCode: phoneNumber.isoCode ?? '',
+                                  ),
+                                );
+                          }
                         },
-                        onCountryChanged: (pn.PhoneNumber phone) {},
+                        onInputValidated: (bool value) {
+                          //print(value);
+                        },
+                        selectorConfig: const ipn.SelectorConfig(
+                          selectorType: ipn.PhoneInputSelectorType.BOTTOM_SHEET,
+                          showFlags: true,
+                          useEmoji: false,
+                          leadingPadding: 0,
+                          trailingSpace: false,
+                          setSelectorButtonAsPrefixIcon: false,
+                        ),
+                        ignoreBlank: false,
+                        autoValidateMode: AutovalidateMode.disabled,
+                        //selectorTextStyle: const TextStyle(color: Colors.black),
+
+                        formatInput: true,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
+                        inputBorder: const OutlineInputBorder(),
+                        inputDecoration: getLoginInputDecoration(
+                          labelText: 'Your Phone Number',
+                          errorText: 'Invalid phone number',
+                          field: state.phone,
+                        ),
                       )
                     : Container();
               },

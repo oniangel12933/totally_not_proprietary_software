@@ -7,10 +7,10 @@ import 'package:insidersapp/src/repositories/user/user_repository.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/widgets/loading_indicator.dart';
-import 'package:insidersapp/src/pages/login/login_title_widget.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
+import '../get_login_app_bar.dart';
 import 'bloc/otp_bloc.dart';
 import 'bloc/otp_state.dart';
 
@@ -48,10 +48,7 @@ class _EnterOtpPageState extends State<EnterOtpPage>
             RepositoryProvider.of<SecureStorageRepository>(context),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const LoginTitleWidget(),
-        ),
+        appBar: getLoginAppBar(),
         body: const PinPutTest(),
       ),
     );
@@ -71,7 +68,7 @@ class PinPutTestState extends State<PinPutTest> {
 
   BoxDecoration get _pinPutDecoration {
     return BoxDecoration(
-      color: AppColors.insidersColorsAppBackgroundSwatch[400],
+      color: AppColors.involioBackgroundSwatch[400],
       borderRadius: BorderRadius.circular(5.0),
     );
   }
@@ -152,20 +149,21 @@ class PinPutTestState extends State<PinPutTest> {
                 children: <Widget>[
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 32),
-                    child: Text('Verify your phone number',
-                    style: TextStyle(
-                      fontSize: 28.0,
-                    ),),
+                    child: Text(
+                      'Verify your phone number',
+                      style: TextStyle(
+                        fontSize: 28.0,
+                      ),
+                    ),
                   ),
                   Text(
-                      'Thank you for entering you your number, now we just need to verify. Please enter the code sent to $phoneNumber',
+                    'Thank you for entering you your number, now we just need to verify. Please enter the code sent to $phoneNumber',
                     style: const TextStyle(
-                    fontSize: 16.0,
-                  ),),
+                      fontSize: 16.0,
+                    ),
+                  ),
                   const SizedBox(height: 32.0),
                   SizedBox(
-                    //margin: const EdgeInsets.all(20.0),
-                    //padding: const EdgeInsets.all(20.0),
                     width: 400,
                     child: PinPut(
                       fieldsAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +177,7 @@ class PinPutTestState extends State<PinPutTest> {
                       submittedFieldDecoration: _pinPutDecoration,
                       selectedFieldDecoration: _pinPutDecoration.copyWith(
                         border: Border.all(
-                          color: AppColors.accent.withOpacity(.5),
+                          color: AppColors.involioBlue.withOpacity(.5),
                         ),
                       ),
                       followingFieldDecoration: _pinPutDecoration,
@@ -189,13 +187,19 @@ class PinPutTestState extends State<PinPutTest> {
                   ),
                   Row(
                     children: [
-                      const Text("Didn't receive a text?",style: TextStyle(
-                        fontSize: 16.0,
-                      ),),
-                      TextButton(
-                        child: const Text('Resend', style: TextStyle(
+                      const Text(
+                        "Didn't receive a text?",
+                        style: TextStyle(
                           fontSize: 16.0,
-                        ),),
+                        ),
+                      ),
+                      TextButton(
+                        child: const Text(
+                          'Resend',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
                         onPressed: () => context.read<OtpBloc>().resendSms(),
                       )
                     ],

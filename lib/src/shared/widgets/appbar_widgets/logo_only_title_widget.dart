@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:insidersapp/gen/assets.gen.dart';
 
-class LoginTitleWidget extends StatelessWidget {
-  const LoginTitleWidget({Key? key}) : super(key: key);
-
-  static const routeName = '/sign_up';
+class LogoOnlyTitleWidget extends StatelessWidget {
+  const LogoOnlyTitleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +18,6 @@ class LoginTitleWidget extends StatelessWidget {
           child: SvgPicture.asset(Assets.images.insidersLogo,
               semanticsLabel: '', height: 32, width: 32),
         ),
-        Container(
-            margin: const EdgeInsets.only(left: 8.0),
-            child: const Text(
-              'involio',
-              style: TextStyle(fontSize: 28.0),
-            ))
       ],
     );
   }

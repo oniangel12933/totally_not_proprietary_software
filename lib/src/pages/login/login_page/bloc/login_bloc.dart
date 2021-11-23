@@ -86,7 +86,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         OtpSmsStartResponse otpSmsStartResponse =
             await _authenticationRepository.getOtpForPhoneNumber(
-          phone: '${state.phone.value.countryCode}${state.phone.value.number}',
+          phone: '${state.phone.value.dialCode}${state.phone.value.number}',
         );
 
         if (otpSmsStartResponse.error == null) {

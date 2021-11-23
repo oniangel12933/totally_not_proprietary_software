@@ -39,7 +39,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       // this is for testing. needs to be removed eventually
       const Name name = Name.dirty(secretName);
       const Username username = Username.dirty('jory');
-      const PhoneNumber phone = PhoneNumber.dirty(PhoneEntity(number: "4062093508", countryCode: '+1', countryISOCode: 'US'));
+      const PhoneNumber phone = PhoneNumber.dirty(PhoneEntity(number: "4062093508", dialCode: '+1', isoCode: 'US'));
       const BirthDate birthDate = BirthDate.dirty("1978-03-22");
 
       emit(state.copyWith(
@@ -138,7 +138,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(signUpFormStatus: FormzStatus.submissionInProgress, error: null));
       try {
 
-        String fullPhoneNumber = '${state.phone.value.countryCode}${state.phone.value.number}';
+        String fullPhoneNumber = '${state.phone.value.dialCode}${state.phone.value.number}';
         SignUpResponse signUpResponse =
             await _authenticationRepository.signUpNewUser(
           email: null,
@@ -165,9 +165,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             print("persisting ${state.phone.value} to secure storage");
             await _secureRepository.persistPhoneNumber(state.phone.value.number);
             await _secureRepository
-                .persistPhoneCountryCode(state.phone.value.countryCode);
+                .persistPhoneCountryCode(state.phone.value.dialCode);
             await _secureRepository
-                .persistPhoneCountryISOCode(state.phone.value.countryISOCode);
+                .persistPhoneCountryISOCode(state.phone.value.isoCode);
 
             emit(state.copyWith(signUpFormStatus: FormzStatus.submissionSuccess, error: null));
           } else {

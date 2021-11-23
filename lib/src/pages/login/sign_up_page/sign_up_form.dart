@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/theme/colors.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart' as pn;
+import 'package:insidersapp/src/shared/widgets/platform_date_picker_modal.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
 import '../login_input_decoration.dart';
 import 'bloc/sign_up_bloc.dart';
@@ -35,7 +34,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     EdgeInsets fieldPadding =
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 20);
+        const EdgeInsets.symmetric(horizontal: 0, vertical: 20);
 
     return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
@@ -53,7 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+            padding: const EdgeInsets.only(left: 0, right: 0, bottom: 12),
             child: Text(
               'Create your account',
               style: Theme.of(context).textTheme.headline5,
@@ -94,16 +93,25 @@ class _NameInput extends StatelessWidget {
         if (state.name.value == SignUpBloc.secretName) {
           controller.text = state.name.value;
         }
-        return TextField(
-          controller: controller,
-          key: const Key('loginForm_nameInput_textField'),
-          onChanged: (name) =>
-              context.read<SignUpBloc>().add(SignUpNameChanged(name)),
-          decoration: getLoginInputDecoration(
-            labelText: 'Your Name',
-            errorText: 'Invalid name',
-            field: state.name,
-          ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 20),
+            //   child: Text("Your Name", style: TextStyle(fontSize: 12),),
+            // ),
+            TextField(
+              controller: controller,
+              key: const Key('loginForm_nameInput_textField'),
+              onChanged: (name) =>
+                  context.read<SignUpBloc>().add(SignUpNameChanged(name)),
+              decoration: getLoginInputDecoration(
+                labelText: 'Your Name',
+                errorText: 'Invalid name',
+                field: state.name,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -155,32 +163,77 @@ class _PhoneInput extends StatelessWidget {
           controller.text = state.phone.value.number;
         }
 
-        return IntlPhoneField(
-          controller: controller,
-          showDropdownIcon: true,
-          dropdownDecoration: BoxDecoration(
-            color: AppColors.insidersColorsAppBackgroundSwatch[400],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          decoration: getLoginInputDecoration(
-              labelText: 'Your Phone Number',
-              errorText: 'Invalid phone number',
-              field: state.phone),
-          onChanged: (pn.PhoneNumber phoneNumber) {
-            print(phoneNumber.completeNumber);
-            if (phoneNumber.countryISOCode != null &&
-                phoneNumber.countryCode != null &&
-                phoneNumber.number != null) {
+        String initialCountry = 'US';
+        if (state.phone.value.isoCode.isNotEmpty) {
+          initialCountry = state.phone.value.isoCode;
+        }
+        ipn.PhoneNumber initialNumber =
+            ipn.PhoneNumber(isoCode: initialCountry);
+
+        // ipn.PhoneNumber initialNumber = ipn.PhoneNumber(
+        //   isoCode: 'US',
+        // );
+        // if (state.?.number != null && state.phone.pure) {
+        //   initialNumber = ipn.PhoneNumber(
+        //     isoCode: state.initialPhone?.isoCode ?? 'US',
+        //     dialCode: state.initialPhone?.dialCode,
+        //     phoneNumber: state.initialPhone?.number,
+        //   );
+        // }
+
+        return ipn.InternationalPhoneNumberInput(
+          initialValue: initialNumber,
+
+          textFieldController: controller,
+          // onInputChanged: (ipn.PhoneNumber number) {
+          //   print(number.phoneNumber);
+          // },
+          onInputChanged: (ipn.PhoneNumber phoneNumber) {
+            // if there is only a dial code without a phone number, the phone number will be the dial code
+            // this removes country code from number
+            String? phoneN = (phoneNumber.dialCode?.length ==
+                    phoneNumber.phoneNumber?.length)
+                ? null
+                : phoneNumber.phoneNumber?.substring(
+                    phoneNumber.dialCode?.length ?? 0,
+                  );
+
+            if (phoneN?.isNotEmpty != null &&
+                phoneNumber.dialCode?.isNotEmpty != null &&
+                phoneNumber.phoneNumber?.isNotEmpty != null) {
               context.read<SignUpBloc>().phoneChanged(
                     phone: PhoneEntity(
-                      number: phoneNumber.number!,
-                      countryCode: phoneNumber.countryCode!,
-                      countryISOCode: phoneNumber.countryISOCode!,
+                      number: phoneN!,
+                      dialCode: phoneNumber.dialCode!,
+                      isoCode: phoneNumber.isoCode!,
                     ),
                   );
             }
           },
-          onCountryChanged: (pn.PhoneNumber phone) {},
+          onInputValidated: (bool value) {
+            //print(value);
+          },
+          selectorConfig: const ipn.SelectorConfig(
+            selectorType: ipn.PhoneInputSelectorType.BOTTOM_SHEET,
+            showFlags: true,
+            useEmoji: false,
+            leadingPadding: 0,
+            trailingSpace: false,
+            setSelectorButtonAsPrefixIcon: false,
+          ),
+          ignoreBlank: false,
+          autoValidateMode: AutovalidateMode.disabled,
+          //selectorTextStyle: const TextStyle(color: Colors.black),
+
+          formatInput: true,
+          keyboardType: const TextInputType.numberWithOptions(
+              signed: true, decimal: true),
+          inputBorder: const OutlineInputBorder(),
+          inputDecoration: getLoginInputDecoration(
+            labelText: 'Your Phone Number',
+            errorText: 'Invalid phone number',
+            field: state.phone,
+          ),
         );
       },
     );
@@ -200,12 +253,17 @@ class _BirthDateInputState extends State<_BirthDateInput> {
   DateTime selectedDate = DateTime(2000);
 
   _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate, //.subtract(const Duration(days: 365*10)),
-        firstDate: DateTime(1910),
-        lastDate: DateTime.now());
-    if (picked != null && picked != selectedDate) {
+    final DateTime? picked = await showPlatformDatePicker2(
+      context: context,
+      initialDate: selectedDate, //.subtract(const Duration(days: 365*10)),
+      firstDate: DateTime(1910),
+      lastDate: DateTime.now(),
+    );
+    await _datePicked(picked);
+  }
+
+  _datePicked(DateTime? picked) async {
+    if (picked != null) {
       setState(() {
         selectedDate = picked;
         String date =

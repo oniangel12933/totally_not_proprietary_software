@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
-import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
-import 'package:insidersapp/src/pages/login/login_title_widget.dart';
+import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
@@ -23,7 +21,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
       key: scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        title: const LoginTitleWidget(),
+        title: const LogoOnlyTitleWidget(),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -64,7 +62,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
                             ),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
-                                AppColors.insidersColorsInsidersBlue,
+                                AppColors.involioBlue,
                               ),
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
@@ -90,7 +88,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
             right: 0.0,
             child: Container(
               height: 80,
-              color: AppColors.insidersColorsAppBackground.withOpacity(0.8),
+              color: AppColors.involioBackground.withOpacity(0.8),
               padding: const EdgeInsets.only(
                   left: 20, right: 80, top: 20, bottom: 20),
               child: Row(

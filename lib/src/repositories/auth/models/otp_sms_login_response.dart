@@ -14,11 +14,11 @@ String otpSmsLoginResponseToJson(OtpSmsLoginResponse data) =>
 @freezed
 class OtpSmsLoginResponse with _$OtpSmsLoginResponse {
   const factory OtpSmsLoginResponse({
-    String? access_token,
-    String? id_token,
+    String? accessToken,
+    String? idToken,
     String? scope,
-    int? expires_in,
-    String? token_type,
+    int? expiresIn,
+    String? tokenType,
     String? error,
   }) = _OtpSmsLoginResponse;
 

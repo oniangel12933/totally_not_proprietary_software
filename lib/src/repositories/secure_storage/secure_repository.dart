@@ -28,8 +28,8 @@ class SecureStorageRepository {
   Future<void> persistPhone(
     PhoneEntity phone,
   ) async {
-    await persistPhoneCountryISOCode(phone.countryISOCode);
-    await persistPhoneCountryCode(phone.countryCode);
+    await persistPhoneCountryISOCode(phone.isoCode);
+    await persistPhoneCountryCode(phone.dialCode);
     await persistPhoneNumber(phone.number);
   }
 
@@ -103,8 +103,8 @@ class SecureStorageRepository {
         phoneNumberStr != null &&
         phoneNumberStr.isNotEmpty) {
       return PhoneEntity(
-        countryISOCode: phoneCountryISOCodeStr,
-        countryCode: phoneCountryCodeStr,
+        isoCode: phoneCountryISOCodeStr,
+        dialCode: phoneCountryCodeStr,
         number: phoneNumberStr,
       );
     }

@@ -14,9 +14,9 @@ String otpStartResponseToJson(OtpSmsStartResponse data) =>
 @freezed
 class OtpSmsStartResponse with _$OtpSmsStartResponse {
   const factory OtpSmsStartResponse({
-    String? phone_number,
-    bool? phone_verified,
-    String? request_language,
+    String? phoneNumber,
+    bool? phoneVerified,
+    String? requestLanguage,
     String? error,
   }) = _OtpSmsStartResponse;
 

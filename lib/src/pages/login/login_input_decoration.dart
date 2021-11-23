@@ -10,31 +10,35 @@ InputDecoration getLoginInputDecoration({
   String? hintText,
 }) {
   return InputDecoration(
+
+    /// uncomment below to add checkmarks when a field is validated.
+    // suffixIcon: field.valid
+    //     ? const Icon(Icons.check, color: AppColors.involioAssistiveAndAlertGreen)
+    //     : null,
+
     labelText: labelText,
-    suffixIcon: field.valid
-        ? const Icon(Icons.check, color: AppColors.insidersColorsCheckMarks)
-        : null,
     prefix: prefix != null ? Text(prefix) : null,
     errorText: field.invalid ? errorText : null,
-    fillColor: AppColors.insidersColorsAppBackgroundSwatch[400],
-    hintStyle:
-        TextStyle(color: AppColors.insidersColorsAppBackgroundSwatch[100]),
+    fillColor: AppColors.involioBackgroundSwatch[400],
+    hintStyle: TextStyle(color: AppColors.involioBackgroundSwatch[100]),
     hintText: hintText,
     filled: true,
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    //floatingLabelBehavior: FloatingLabelBehavior.never,
     border: OutlineInputBorder(
       borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
-          color: AppColors.insidersColorsInsidersBlue, width: 1.0),
+          color: AppColors.involioBlue, width: 1.0),
       borderRadius: BorderRadius.circular(12.0),
     ),
     labelStyle: const TextStyle(
       color: Colors.white,
     ),
     contentPadding: const EdgeInsets.symmetric(
-      vertical: 20,
+      vertical: 10,
       horizontal: 20,
     ),
   );
