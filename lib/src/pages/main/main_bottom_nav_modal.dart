@@ -18,6 +18,7 @@ class MainBottomNavModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            const SizedBox(height: 10,),
             ListTile(
               title: const Text('Account'),
               leading: Icon(context.involioIcons.account),

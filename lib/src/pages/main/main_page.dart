@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:insidersapp/src/shared/icons/involio_action_icon.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/pages/main/pages.dart';
@@ -45,10 +46,18 @@ class _MainPageState extends State<MainPage> {
         leading: IconButton(
           icon: Icon(context.involioIcons.menu),
           onPressed: () {
-            showBarModalBottomSheet(
+            isMaterial(context) ? showMaterialModalBottomSheet(
               expand: false,
               context: context,
-              backgroundColor: Colors.transparent,
+              barrierColor: Colors.black.withOpacity(0.5),
+              //backgroundColor: Colors.transparent,
+              builder: (context) => const MainBottomNavModal(),
+            ) : showCupertinoModalBottomSheet(
+              expand: false,
+              context: context,
+              //backgroundColor: Colors.green,
+              //backgroundColor: Colors.transparent,
+              barrierColor: Colors.black.withOpacity(0.5),
               builder: (context) => const MainBottomNavModal(),
             );
           },
@@ -115,12 +124,12 @@ class _MainPageState extends State<MainPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.home),
-            activeIcon: Icon(context.involioIcons.homeFill),
+            //activeIcon: Icon(context.involioIcons.homeFill),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.search),
-            activeIcon: Icon(context.involioIcons.searchFill),
+            //activeIcon: Icon(context.involioIcons.searchFill),
             label: 'Search',
           ),
           BottomNavigationBarItem(
@@ -129,12 +138,12 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.chartLine),
-            activeIcon: Icon(context.involioIcons.chartLineFill),
+            //activeIcon: Icon(context.involioIcons.chartLineFill),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.account),
-            activeIcon: Icon(context.involioIcons.accountFill),
+            //activeIcon: Icon(context.involioIcons.accountFill),
             label: 'Account',
           ),
         ],

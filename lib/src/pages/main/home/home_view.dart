@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
 import 'package:insidersapp/src/theme/colors.dart';
-import 'package:insidersapp/src/pages/main/home/posts/posts_list.dart';
 
 /// this builds a widget that displays tabs on the homepage above the posts
 class HomeView extends StatelessWidget {
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  Posts(),
+                  PostsView(),
                   Center(child: Text('Drops Tab')),
                 ],
               ),

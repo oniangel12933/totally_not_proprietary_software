@@ -96,17 +96,20 @@ class _NameInput extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 20),
-            //   child: Text("Your Name", style: TextStyle(fontSize: 12),),
-            // ),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Your Name",
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
             TextField(
               controller: controller,
               key: const Key('loginForm_nameInput_textField'),
               onChanged: (name) =>
                   context.read<SignUpBloc>().add(SignUpNameChanged(name)),
               decoration: getLoginInputDecoration(
-                labelText: 'Your Name',
+                labelText: '',
                 errorText: 'Invalid name',
                 field: state.name,
               ),
@@ -132,17 +135,30 @@ class _UsernameInput extends StatelessWidget {
           controller.text = state.username.value;
         }
 
-        return TextField(
-          controller: controller,
-          key: const Key('loginForm_usernameInput_textField'),
-          onChanged: (username) =>
-              context.read<SignUpBloc>().add(SignUpUsernameChanged(username)),
-          decoration: getLoginInputDecoration(
-            labelText: 'Your User Name',
-            errorText: 'Invalid username',
-            field: state.username,
-            prefix: '@',
-          ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Your User Name",
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            TextField(
+              controller: controller,
+              key: const Key('loginForm_usernameInput_textField'),
+              onChanged: (username) => context
+                  .read<SignUpBloc>()
+                  .add(SignUpUsernameChanged(username)),
+              decoration: getLoginInputDecoration(
+                labelText: '',
+                errorText: 'Invalid username',
+                field: state.username,
+                prefix: '@',
+              ),
+            ),
+          ],
         );
       },
     );
@@ -181,59 +197,71 @@ class _PhoneInput extends StatelessWidget {
         //   );
         // }
 
-        return ipn.InternationalPhoneNumberInput(
-          initialValue: initialNumber,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 102),
+              child: Text(
+                "Your Phone Number",
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            ipn.InternationalPhoneNumberInput(
+              initialValue: initialNumber,
 
-          textFieldController: controller,
-          // onInputChanged: (ipn.PhoneNumber number) {
-          //   print(number.phoneNumber);
-          // },
-          onInputChanged: (ipn.PhoneNumber phoneNumber) {
-            // if there is only a dial code without a phone number, the phone number will be the dial code
-            // this removes country code from number
-            String? phoneN = (phoneNumber.dialCode?.length ==
-                    phoneNumber.phoneNumber?.length)
-                ? null
-                : phoneNumber.phoneNumber?.substring(
-                    phoneNumber.dialCode?.length ?? 0,
-                  );
+              textFieldController: controller,
+              // onInputChanged: (ipn.PhoneNumber number) {
+              //   print(number.phoneNumber);
+              // },
+              onInputChanged: (ipn.PhoneNumber phoneNumber) {
+                // if there is only a dial code without a phone number, the phone number will be the dial code
+                // this removes country code from number
+                String? phoneN = (phoneNumber.dialCode?.length ==
+                        phoneNumber.phoneNumber?.length)
+                    ? null
+                    : phoneNumber.phoneNumber?.substring(
+                        phoneNumber.dialCode?.length ?? 0,
+                      );
 
-            if (phoneN?.isNotEmpty != null &&
-                phoneNumber.dialCode?.isNotEmpty != null &&
-                phoneNumber.phoneNumber?.isNotEmpty != null) {
-              context.read<SignUpBloc>().phoneChanged(
-                    phone: PhoneEntity(
-                      number: phoneN!,
-                      dialCode: phoneNumber.dialCode!,
-                      isoCode: phoneNumber.isoCode!,
-                    ),
-                  );
-            }
-          },
-          onInputValidated: (bool value) {
-            //print(value);
-          },
-          selectorConfig: const ipn.SelectorConfig(
-            selectorType: ipn.PhoneInputSelectorType.BOTTOM_SHEET,
-            showFlags: true,
-            useEmoji: false,
-            leadingPadding: 0,
-            trailingSpace: false,
-            setSelectorButtonAsPrefixIcon: false,
-          ),
-          ignoreBlank: false,
-          autoValidateMode: AutovalidateMode.disabled,
-          //selectorTextStyle: const TextStyle(color: Colors.black),
+                if (phoneN?.isNotEmpty != null &&
+                    phoneNumber.dialCode?.isNotEmpty != null &&
+                    phoneNumber.phoneNumber?.isNotEmpty != null) {
+                  context.read<SignUpBloc>().phoneChanged(
+                        phone: PhoneEntity(
+                          number: phoneN!,
+                          dialCode: phoneNumber.dialCode!,
+                          isoCode: phoneNumber.isoCode!,
+                        ),
+                      );
+                }
+              },
+              onInputValidated: (bool value) {
+                //print(value);
+              },
+              selectorConfig: const ipn.SelectorConfig(
+                selectorType: ipn.PhoneInputSelectorType.BOTTOM_SHEET,
+                showFlags: true,
+                useEmoji: false,
+                leadingPadding: 0,
+                trailingSpace: false,
+                setSelectorButtonAsPrefixIcon: false,
+              ),
+              ignoreBlank: false,
+              autoValidateMode: AutovalidateMode.disabled,
+              //selectorTextStyle: const TextStyle(color: Colors.black),
 
-          formatInput: true,
-          keyboardType: const TextInputType.numberWithOptions(
-              signed: true, decimal: true),
-          inputBorder: const OutlineInputBorder(),
-          inputDecoration: getLoginInputDecoration(
-            labelText: 'Your Phone Number',
-            errorText: 'Invalid phone number',
-            field: state.phone,
-          ),
+              formatInput: true,
+              keyboardType: const TextInputType.numberWithOptions(
+                  signed: true, decimal: true),
+              inputBorder: const OutlineInputBorder(),
+              inputDecoration: getLoginInputDecoration(
+                labelText: '',
+                errorText: 'Invalid phone number',
+                field: state.phone,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -280,31 +308,44 @@ class _BirthDateInputState extends State<_BirthDateInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
-      buildWhen: (previous, current) => previous.birthDate != current.birthDate,
-      builder: (context, state) {
-        if (state.name.value == SignUpBloc.secretName) {
-          widget.controller.text = state.birthDate.value;
-        }
-
-        return GestureDetector(
-          onTap: () {
-            _selectDate(context);
-            FocusScope.of(context).unfocus(); // hide keyboard
-          },
-          child: AbsorbPointer(
-            child: TextFormField(
-              controller: widget.controller,
-              decoration: getLoginInputDecoration(
-                labelText: 'Date of Birth',
-                errorText: 'Invalid birth date',
-                field: state.birthDate,
-                hintText: 'mm/dd/yyy',
-              ),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+            "Date of Birth",
+            style: TextStyle(fontSize: 12),
           ),
-        );
-      },
+        ),
+        BlocBuilder<SignUpBloc, SignUpState>(
+          buildWhen: (previous, current) =>
+              previous.birthDate != current.birthDate,
+          builder: (context, state) {
+            if (state.name.value == SignUpBloc.secretName) {
+              widget.controller.text = state.birthDate.value;
+            }
+
+            return GestureDetector(
+              onTap: () {
+                _selectDate(context);
+                FocusScope.of(context).unfocus(); // hide keyboard
+              },
+              child: AbsorbPointer(
+                child: TextFormField(
+                  controller: widget.controller,
+                  decoration: getLoginInputDecoration(
+                    labelText: '',
+                    errorText: 'Invalid birth date',
+                    field: state.birthDate,
+                    hintText: 'mm/dd/yyy',
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

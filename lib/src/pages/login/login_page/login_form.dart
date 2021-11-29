@@ -88,59 +88,71 @@ class _LoginFormState extends State<LoginForm> {
                 /// readyToDisplay makes sure that the phone number and
                 /// country code is loaded from storage before displaying
                 return state.readyToDisplay
-                    ? ipn.InternationalPhoneNumberInput(
-                        initialValue: initialNumber,
-                        textFieldController: phoneController,
-                        // onInputChanged: (ipn.PhoneNumber number) {
-                        //   print(number.phoneNumber);
-                        // },
-                        onInputChanged: (ipn.PhoneNumber phoneNumber) {
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 102),
+                            child: Text(
+                              "Your Phone Number",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          ipn.InternationalPhoneNumberInput(
+                            initialValue: initialNumber,
+                            textFieldController: phoneController,
+                            // onInputChanged: (ipn.PhoneNumber number) {
+                            //   print(number.phoneNumber);
+                            // },
+                            onInputChanged: (ipn.PhoneNumber phoneNumber) {
+                              // if there is only a dial code without a phone number, the phone number will be the dial code
+                              // this removes country code from number
+                              String? phoneN = (phoneNumber.dialCode?.length ==
+                                      phoneNumber.phoneNumber?.length)
+                                  ? null
+                                  : phoneNumber.phoneNumber?.substring(
+                                      phoneNumber.dialCode?.length ?? 0,
+                                    );
 
-                          // if there is only a dial code without a phone number, the phone number will be the dial code
-                          // this removes country code from number
-                          String? phoneN = (phoneNumber.dialCode?.length ==
-                                  phoneNumber.phoneNumber?.length)
-                              ? null
-                              : phoneNumber.phoneNumber?.substring(
-                                  phoneNumber.dialCode?.length ?? 0,
-                                );
+                              if (phoneN?.isNotEmpty != null &&
+                                  phoneNumber.dialCode?.isNotEmpty != null &&
+                                  phoneNumber.phoneNumber?.isNotEmpty != null) {
+                                context.read<LoginBloc>().phoneChanged(
+                                      phone: PhoneEntity(
+                                        number: phoneN ?? '',
+                                        dialCode: phoneNumber.dialCode ?? '',
+                                        isoCode: phoneNumber.isoCode ?? '',
+                                      ),
+                                    );
+                              }
+                            },
+                            onInputValidated: (bool value) {
+                              //print(value);
+                            },
+                            selectorConfig: const ipn.SelectorConfig(
+                              selectorType:
+                                  ipn.PhoneInputSelectorType.BOTTOM_SHEET,
+                              showFlags: true,
+                              useEmoji: false,
+                              leadingPadding: 0,
+                              trailingSpace: false,
+                              setSelectorButtonAsPrefixIcon: false,
+                            ),
+                            ignoreBlank: false,
+                            autoValidateMode: AutovalidateMode.disabled,
+                            //selectorTextStyle: const TextStyle(color: Colors.black),
 
-                          if (phoneN?.isNotEmpty != null &&
-                              phoneNumber.dialCode?.isNotEmpty != null &&
-                              phoneNumber.phoneNumber?.isNotEmpty != null) {
-                            context.read<LoginBloc>().phoneChanged(
-                                  phone: PhoneEntity(
-                                    number: phoneN ?? '',
-                                    dialCode: phoneNumber.dialCode ?? '',
-                                    isoCode: phoneNumber.isoCode ?? '',
-                                  ),
-                                );
-                          }
-                        },
-                        onInputValidated: (bool value) {
-                          //print(value);
-                        },
-                        selectorConfig: const ipn.SelectorConfig(
-                          selectorType: ipn.PhoneInputSelectorType.BOTTOM_SHEET,
-                          showFlags: true,
-                          useEmoji: false,
-                          leadingPadding: 0,
-                          trailingSpace: false,
-                          setSelectorButtonAsPrefixIcon: false,
-                        ),
-                        ignoreBlank: false,
-                        autoValidateMode: AutovalidateMode.disabled,
-                        //selectorTextStyle: const TextStyle(color: Colors.black),
-
-                        formatInput: true,
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        inputBorder: const OutlineInputBorder(),
-                        inputDecoration: getLoginInputDecoration(
-                          labelText: 'Your Phone Number',
-                          errorText: 'Invalid phone number',
-                          field: state.phone,
-                        ),
+                            formatInput: true,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true, decimal: true),
+                            inputBorder: const OutlineInputBorder(),
+                            inputDecoration: getLoginInputDecoration(
+                              labelText: '',
+                              errorText: 'Invalid phone number',
+                              field: state.phone,
+                            ),
+                          ),
+                        ],
                       )
                     : Container();
               },
