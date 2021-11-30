@@ -5,8 +5,9 @@ part 'otp_sms_login_request.freezed.dart';
 
 part 'otp_sms_login_request.g.dart';
 
-OtpSmsLoginRequest otpSmsLoginRequestFromJson(String str) =>
-    OtpSmsLoginRequest.fromJson(json.decode(str));
+OtpSmsLoginRequest otpSmsLoginRequestFromJson(String str) {
+  return OtpSmsLoginRequest.fromJson(json.decode(str));
+}
 
 String otpSmsLoginRequestToJson(OtpSmsLoginRequest data) =>
     json.encode(data.toJson());

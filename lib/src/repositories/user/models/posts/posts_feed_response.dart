@@ -52,9 +52,6 @@ class Owner with _$Owner {
 class OwnerAvatar with _$OwnerAvatar {
   const factory OwnerAvatar({
     String? id,
-    String? s3Object,
-    String? fileType,
-    DateTime? timestamp,
   }) = _OwnerAvatar;
 
   factory OwnerAvatar.fromJson(Map<String, dynamic> json) => _$OwnerAvatarFromJson(json);

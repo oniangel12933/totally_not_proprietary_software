@@ -43,8 +43,6 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
   ) async {
     //print('--- like button pressed');
 
-    //print('mapEventToState CreateEventButtonPressed loading $state');
-
     final String postId = event.postId ?? state.postId;
 
     final bool likeWas = event.likeWas ?? state.like;
@@ -70,33 +68,17 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
       ),
     );
 
-    //int like = likeData[UserToEventModel.LIKE];
-    //String postId = likeData[UserToEventModel.EVENT_ID];
-
     try {
-      //DFEventModel dfEventModel = await wydf.api.dfEvent.createNewDFEvent(data);
-      //UserToEventModel userToEvent = await wydf.api.dfEvent.setGoing(postId: postId, going: going);
-
-      //print('---event post bloc: is PostLikeButtonPressed: postId=$postId like=$like');
-
-      // final Map<String, dynamic> userToEventMap = await wydf.api.dfEventApi
-      //     .setUserEventReaction(postId: postId, like: like);
-
       //todo: get repository a better way then creating a new one
       final PostLikeResponse postLikeResponse =
           await UserRepository().setPostLiked(
         postId: postId,
       );
 
-      //final UserToEventModel userToEvent = userToEventMap['userToEvent'];
-      //final DFEventModel dfEvent = userToEvent.mEvent;
-
       //todo: have backend return boolean and combine add and remove like
       if (postLikeResponse.success == "True") {
         emit(
           PostLikeState.success(
-            // userToEvent: userToEvent,
-            // dfEvent: dfEvent,
             postId: postId,
             like: like, // result
             likeCnt: likeCnt, // result
@@ -112,7 +94,6 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
           ),
         );
       }
-      //print('mapEventToState CreateEventButtonPressed success after $state');
     } catch (error, trace) {
       print('catch PostLikeBloc error: $error - $trace');
 
