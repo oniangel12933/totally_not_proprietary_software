@@ -4,23 +4,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:insidersapp/src/pages/settings/settings_controller.dart';
+import 'package:insidersapp/garb/settings_controller.dart';
 import 'package:insidersapp/src/pages/settings/settings_service.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/shared/get_it_setup.dart';
+import 'package:insidersapp/src/shared/config/get_it_setup.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:insidersapp/src/shared/bloc_observer.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/shared/blocs/bloc_observer.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:insidersapp/src/shared/config/app_config.dart';
 
 import 'gen/assets.gen.dart';
 import 'src/app.dart';
 
 void main() async {
   await dotenv.load(fileName: Assets.env.envDevelopment);
-  //await AppConfig().setup(); // moved into get_it
   await getItSetUp();
 
   // make sure that widget bindings are initialized before running app
@@ -50,12 +45,7 @@ void main() async {
   // SettingsView.
   BlocOverrides.runZoned(
     () => HydratedBlocOverrides.runZoned(
-      () => runApp(MyApp(
-        settingsController: settingsController,
-        authenticationRepository: AuthRepository(),
-        userRepository: UserRepository(),
-        secureRepository: SecureStorageRepository(),
-      )),
+      () => runApp(const MyApp()),
       storage: storage,
     ),
     blocObserver: AppBlocObserver(),

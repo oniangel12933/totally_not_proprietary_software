@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_request.dart';
 import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_response.dart';
 
@@ -14,6 +15,7 @@ import 'models/sign_up_response.dart';
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
 class AuthRepository {
+  final getIt = GetIt.instance;
   final _controller = StreamController<AuthStatus>();
 
   Stream<AuthStatus> get status async* {
@@ -31,7 +33,7 @@ class AuthRepository {
 
     OtpSmsLoginRequest request = OtpSmsLoginRequest(phone: phone, code: password);
 
-    Response response = await Api()
+    Response response = await getIt.get<Api>()
         .dio
         .post('api/auth/login/sms', data: jsonEncode(request.toJson()));
 
@@ -53,7 +55,7 @@ class AuthRepository {
     required String phone,
   }) async {
     OtpSmsStartRequest request = OtpSmsStartRequest(phone: phone);
-    Response response = await Api()
+    Response response = await getIt.get<Api>()
         .dio
         .post('api/auth/login/sms/start', data: jsonEncode(request.toJson()));
 
@@ -86,7 +88,7 @@ class AuthRepository {
     //print("#############################");
     //print(request);
 
-    Response response = await Api()
+    Response response = await getIt.get<Api>()
         .dio
         .post('api/auth/signup', data: jsonEncode(request.toJson()));
 

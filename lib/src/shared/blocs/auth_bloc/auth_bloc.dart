@@ -2,32 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authenticationRepository;
-  final UserRepository _userRepository;
-  final SecureStorageRepository _secureRepository;
+  late final SecureStorageRepository _secureRepository;
 
   static Widget injectNewBloc({
     required Widget child,
-    required AuthRepository authenticationRepository,
-    required UserRepository userRepository,
-    required SecureStorageRepository secureRepository,
   }) {
     /// this auto closes
     return BlocProvider<AuthBloc>(
-      create: (BuildContext context) => AuthBloc(
-          authenticationRepository: authenticationRepository,
-          userRepository: userRepository,
-          secureRepository: secureRepository),
+      create: (BuildContext context) => AuthBloc(),
       child: child,
     );
   }
@@ -39,14 +30,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  AuthBloc({
-    required AuthRepository authenticationRepository,
-    required UserRepository userRepository,
-    required SecureStorageRepository secureRepository,
-  })  : _authenticationRepository = authenticationRepository,
-        _userRepository = userRepository,
-        _secureRepository = secureRepository,
-        super(const AuthUninitialized()) {
+  AuthBloc() : super(const AuthUninitialized()) {
+    _secureRepository = GetIt.I.get<SecureStorageRepository>();
+
     on<AppStarted>((event, emit) async {
       await _appStarted(event, emit);
     });

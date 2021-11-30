@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:insidersapp/src/pages/profile/profile_page.dart';
-import 'package:insidersapp/src/pages/settings/settings_controller.dart';
+import 'package:insidersapp/garb/settings_controller.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:provider/src/provider.dart';
 import '../settings/settings_page.dart';

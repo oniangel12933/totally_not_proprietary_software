@@ -5,7 +5,7 @@ import 'package:insidersapp/src/repositories/posts/posts_repository.dart';
 import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/repositories/user/user_repository.dart';
 
-import 'config/app_config.dart';
+import 'app_config.dart';
 
 final getIt = GetIt.instance;
 
