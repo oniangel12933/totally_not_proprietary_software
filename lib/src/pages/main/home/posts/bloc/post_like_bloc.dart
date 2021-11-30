@@ -1,13 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/post_like_event.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/post_like_state.dart';
-import 'package:insidersapp/src/repositories/user/models/posts/post_like_response.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/repositories/posts/posts/post_like_response.dart';
+import 'package:insidersapp/src/repositories/posts/posts_repository.dart';
 import 'package:insidersapp/src/shared/blocs/event_transformers/throttle.dart';
 
 const throttleDuration = Duration(milliseconds: 200);
 
 class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
+
+  final getIt = GetIt.instance;
+
   void likeButtonPressed({
     String? postId,
     bool? likeWas,
@@ -69,9 +73,9 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
     );
 
     try {
-      //todo: get repository a better way then creating a new one
+      PostsRepository postsRepository = getIt.get<PostsRepository>();
       final PostLikeResponse postLikeResponse =
-          await UserRepository().setPostLiked(
+          await postsRepository.setPostLiked(
         postId: postId,
       );
 

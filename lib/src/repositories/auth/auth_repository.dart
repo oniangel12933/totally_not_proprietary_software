@@ -83,8 +83,8 @@ class AuthRepository {
       birthdate: birthdate,
     );
 
-    print("#############################");
-    print(request);
+    //print("#############################");
+    //print(request);
 
     Response response = await Api()
         .dio

@@ -4,12 +4,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:insidersapp/src/repositories/posts/posts/posts_feed_response.dart';
+import 'package:insidersapp/src/repositories/posts/posts_repository.dart';
 import 'package:recase/recase.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
 import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
-import 'package:insidersapp/src/repositories/user/models/posts/posts_feed_response.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
@@ -21,11 +22,9 @@ import 'bloc/posts_filter_state.dart';
 class PostsList extends StatefulWidget {
   const PostsList({
     Key? key,
-    required this.userRepository,
     required this.filters,
   }) : super(key: key);
 
-  final UserRepository userRepository;
   final List<String> filters;
 
   @override
@@ -35,6 +34,7 @@ class PostsList extends StatefulWidget {
 class _PostsListState extends State<PostsList> {
   static const _pageSize = 10;
 
+  final getIt = GetIt.instance;
   late ScrollController _scrollViewController;
   bool _showFiltersButton = true;
   bool isScrollingDown = false;
@@ -100,8 +100,7 @@ class _PostsListState extends State<PostsList> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final PostsFeedResponse postsFeedResponse =
-          await widget.userRepository.getPostsFeed(
+      final PostsFeedResponse postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
         filter: _filterName.toLowerCase(),
         page: pageKey,
         size: _pageSize,

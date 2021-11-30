@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/repositories/api_client/retry_interceptor.dart';
 import 'package:insidersapp/src/repositories/api_client/token_interceptor.dart';
 import '../../shared/config/app_config.dart';
@@ -23,8 +24,10 @@ class Api {
   factory Api() => _singleton;
 
   static Dio _createDio() {
+    final getIt = GetIt.instance;
+
     var dio = Dio(BaseOptions(
-      baseUrl: AppConfig().baseUrl,
+      baseUrl: getIt.get<AppConfig>().baseUrl,
       receiveTimeout: 15000, // 15 seconds
       connectTimeout: 15000,
       sendTimeout: 15000,
