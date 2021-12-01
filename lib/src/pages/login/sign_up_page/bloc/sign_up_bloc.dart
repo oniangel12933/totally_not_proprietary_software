@@ -16,16 +16,9 @@ part 'sign_up_state.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   static const secretName = 'Jory';
 
-  late final AuthRepository _authRepository;
-  late final SecureStorageRepository _secureRepository;
-
   //late final LoginFlowCubit _loginFlowCubit;
 
   SignUpBloc() : super(const SignUpState()) {
-    GetIt getIt = GetIt.instance;
-    _authRepository = getIt.get<AuthRepository>();
-    _secureRepository = getIt.get<SecureStorageRepository>();
-
     on<SignUpNameChanged>(_onNameChanged);
     on<SignUpUsernameChanged>(_onUsernameChanged);
     on<SignUpPhoneChanged>(_onPhoneChanged);
@@ -137,14 +130,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpSubmitted event,
     Emitter<SignUpState> emit,
   ) async {
+    final AuthRepository _authRepository = GetIt.I.get<AuthRepository>();
+    final SecureStorageRepository _secureRepository =
+        GetIt.I.get<SecureStorageRepository>();
+
     if (state.signUpFormStatus.isValidated) {
       emit(state.copyWith(
           signUpFormStatus: FormzStatus.submissionInProgress, error: null));
       try {
         String fullPhoneNumber =
             '${state.phone.value.dialCode}${state.phone.value.number}';
-        SignUpResponse signUpResponse =
-            await _authRepository.signUpNewUser(
+        SignUpResponse signUpResponse = await _authRepository.signUpNewUser(
           email: null,
           username: state.username.value,
           phone: fullPhoneNumber,
@@ -190,7 +186,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       } catch (e) {
         print(e);
         emit(state.copyWith(
-            signUpFormStatus: FormzStatus.submissionFailure, error: null));
+          signUpFormStatus: FormzStatus.submissionFailure,
+          error: null,
+        ));
       }
     }
   }

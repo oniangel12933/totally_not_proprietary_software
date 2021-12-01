@@ -17,9 +17,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   late final SecureStorageRepository _secureRepository;
 
   LoginBloc() : super(const LoginState()) {
-    GetIt getIt = GetIt.instance;
-    _authRepository = getIt.get<AuthRepository>();
-    _secureRepository = getIt.get<SecureStorageRepository>();
+    _authRepository = GetIt.I.get<AuthRepository>();
+    _secureRepository = GetIt.I.get<SecureStorageRepository>();
 
     on<LoginLoadStoredNumber>(_onLoadStoredNumber);
     on<LoginPhoneChanged>(_onPhoneChanged);

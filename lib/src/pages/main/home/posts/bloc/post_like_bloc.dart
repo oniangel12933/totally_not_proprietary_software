@@ -9,7 +9,6 @@ import 'package:insidersapp/src/shared/blocs/event_transformers/throttle.dart';
 const throttleDuration = Duration(milliseconds: 200);
 
 class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
-  final getIt = GetIt.instance;
 
   void likeButtonPressed({
     String? postId,
@@ -72,7 +71,7 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
     );
 
     try {
-      PostsRepository postsRepository = getIt.get<PostsRepository>();
+      PostsRepository postsRepository = GetIt.I.get<PostsRepository>();
       final PostLikeResponse postLikeResponse =
           await postsRepository.setPostLiked(
         postId: postId,

@@ -22,11 +22,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     required AuthBloc authBloc,
   })  : _authBloc = authBloc,
         super(const OtpState()) {
-
-    GetIt getIt = GetIt.instance;
-
-    _authRepository = getIt.get<AuthRepository>();
-    _secureRepository = getIt.get<SecureStorageRepository>();
+    _authRepository = GetIt.I.get<AuthRepository>();
+    _secureRepository = GetIt.I.get<SecureStorageRepository>();
 
     on<RetrievePhoneNumberFromStorageOtpEvent>((event, emit) async {
       PhoneEntity? phone = await _secureRepository.getPhone();
