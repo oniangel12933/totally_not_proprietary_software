@@ -1,32 +1,32 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_response.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
+import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 
 part 'login_event.dart';
 
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({
-    required AuthRepository authenticationRepository,
-    required SecureStorageRepository secureRepository,
-  })  : _authenticationRepository = authenticationRepository,
-        _secureRepository = secureRepository,
-        super(const LoginState()) {
+  late final AuthRepository _authRepository;
+  late final SecureStorageRepository _secureRepository;
+
+  LoginBloc() : super(const LoginState()) {
+    GetIt getIt = GetIt.instance;
+    _authRepository = getIt.get<AuthRepository>();
+    _secureRepository = getIt.get<SecureStorageRepository>();
+
     on<LoginLoadStoredNumber>(_onLoadStoredNumber);
     on<LoginPhoneChanged>(_onPhoneChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
 
     loadStoredNumber();
   }
-
-  late final AuthRepository _authenticationRepository;
-  late final SecureStorageRepository _secureRepository;
 
   void loadStoredNumber() {
     add(const LoginLoadStoredNumber());
@@ -85,7 +85,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(loginFormStatus: FormzStatus.submissionInProgress));
       try {
         OtpSmsStartResponse otpSmsStartResponse =
-            await _authenticationRepository.getOtpForPhoneNumber(
+            await _authRepository.getOtpForPhoneNumber(
           phone: '${state.phone.value.dialCode}${state.phone.value.number}',
         );
 

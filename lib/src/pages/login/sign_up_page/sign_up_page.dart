@@ -3,8 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_form.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
@@ -21,12 +19,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return SignUpBloc(
-          authenticationRepository:
-              RepositoryProvider.of<AuthRepository>(context),
-          secureRepository:
-              RepositoryProvider.of<SecureStorageRepository>(context),
-        );
+        return SignUpBloc();
       },
       child: BlocBuilder<SignUpBloc, SignUpState>(
         buildWhen: (previous, current) =>

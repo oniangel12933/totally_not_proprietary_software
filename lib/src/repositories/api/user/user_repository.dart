@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:insidersapp/src/repositories/api_client/api_client.dart';
-import 'package:insidersapp/src/repositories/user/models/get_user_response.dart';
+import 'package:get_it/get_it.dart';
+import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
+import 'models/get_user_response.dart';
 import 'models/models.dart';
 
 class UserRepository {
+  final getIt = GetIt.instance;
   User? _user;
 
   // Future<User?> getUser() async {
@@ -15,7 +17,7 @@ class UserRepository {
   // }
 
   Future<GetUserResponse> getUser() async {
-    Response response = await Api().dio.get('api/user/get_user');
+    Response response = await getIt.get<Api>().dio.get('api/user/get_user');
 
     return GetUserResponse.fromJson(response.data);
   }

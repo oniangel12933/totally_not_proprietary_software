@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
 import 'package:insidersapp/src/shared/blocs/user/cubit.dart';
 
 class ProfilePage extends StatefulWidget {

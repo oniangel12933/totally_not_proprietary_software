@@ -3,12 +3,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_request.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_response.dart';
+import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
 
-import '../api_client/api_client.dart';
 import 'models/otp_sms_login_request.dart';
 import 'models/otp_sms_login_response.dart';
+import 'models/otp_sms_start_request.dart';
+import 'models/otp_sms_start_response.dart';
 import 'models/sign_up_request.dart';
 import 'models/sign_up_response.dart';
 

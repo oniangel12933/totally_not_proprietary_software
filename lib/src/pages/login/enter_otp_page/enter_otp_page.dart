@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/widgets/loading_indicator.dart';
@@ -40,13 +37,7 @@ class _EnterOtpPageState extends State<EnterOtpPage>
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OtpBloc>(
-      create: (context) => OtpBloc(
-        authBloc: context.read<AuthBloc>(),
-        authRepository: RepositoryProvider.of<AuthRepository>(context),
-        userRepository: RepositoryProvider.of<UserRepository>(context),
-        secureRepository:
-            RepositoryProvider.of<SecureStorageRepository>(context),
-      ),
+      create: (context) => OtpBloc(authBloc: context.read<AuthBloc>()),
       child: Scaffold(
         appBar: getLoginAppBar(),
         body: const PinPutTest(),

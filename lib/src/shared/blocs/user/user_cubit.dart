@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:insidersapp/src/repositories/user/models/get_user_response.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/repositories/api/user/models/get_user_response.dart';
+import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
 import 'cubit.dart';
 
 class UserCubit extends Cubit<UserState> {

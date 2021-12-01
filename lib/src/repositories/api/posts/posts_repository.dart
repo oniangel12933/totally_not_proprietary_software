@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:insidersapp/src/repositories/api_client/api_client.dart';
-import 'package:insidersapp/src/repositories/posts/posts/post_like_remove_request.dart';
-import 'package:insidersapp/src/repositories/posts/posts/post_like_remove_response.dart';
-import 'package:insidersapp/src/repositories/posts/posts/post_like_request.dart';
-import 'package:insidersapp/src/repositories/posts/posts/post_like_response.dart';
-import 'package:insidersapp/src/repositories/posts/posts/posts_feed_request.dart';
-import 'package:insidersapp/src/repositories/posts/posts/posts_feed_response.dart';
+import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/post_like_remove_request.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/post_like_remove_response.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/post_like_request.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/post_like_response.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/posts_feed_request.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts/posts_feed_response.dart';
 
 class PostsRepository {
   final getIt = GetIt.instance;

@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_login_response.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_response.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/repositories/user/user_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_login_response.dart';
+import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
+import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/blocs/event_transformers/throttle.dart';
 
@@ -15,20 +15,19 @@ const throttleDuration = Duration(milliseconds: 200);
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final AuthBloc _authBloc;
-  final AuthRepository _authRepository;
-  final UserRepository _userRepository;
-  final SecureStorageRepository _secureRepository;
+  late final AuthRepository _authRepository;
+  late final SecureStorageRepository _secureRepository;
 
   OtpBloc({
     required AuthBloc authBloc,
-    required AuthRepository authRepository,
-    required UserRepository userRepository,
-    required SecureStorageRepository secureRepository,
   })  : _authBloc = authBloc,
-        _authRepository = authRepository,
-        _userRepository = userRepository,
-        _secureRepository = secureRepository,
         super(const OtpState()) {
+
+    GetIt getIt = GetIt.instance;
+
+    _authRepository = getIt.get<AuthRepository>();
+    _secureRepository = getIt.get<SecureStorageRepository>();
+
     on<RetrievePhoneNumberFromStorageOtpEvent>((event, emit) async {
       PhoneEntity? phone = await _secureRepository.getPhone();
 

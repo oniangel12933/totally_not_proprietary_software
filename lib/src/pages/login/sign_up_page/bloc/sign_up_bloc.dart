@@ -1,35 +1,37 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:get_it/get_it.dart';
 import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/auth/models/otp_sms_start_response.dart';
-import 'package:insidersapp/src/repositories/auth/models/sign_up_response.dart';
-import 'package:insidersapp/src/repositories/secure_storage/secure_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
+import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
+import 'package:insidersapp/src/repositories/api/auth/models/sign_up_response.dart';
+import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 
 part 'sign_up_event.dart';
+
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   static const secretName = 'Jory';
 
-  SignUpBloc({
-    required AuthRepository authenticationRepository,
-    required SecureStorageRepository secureRepository,
-  })  : _authenticationRepository = authenticationRepository,
-        _secureRepository = secureRepository,
-        super(const SignUpState()) {
+  late final AuthRepository _authRepository;
+  late final SecureStorageRepository _secureRepository;
+
+  //late final LoginFlowCubit _loginFlowCubit;
+
+  SignUpBloc() : super(const SignUpState()) {
+    GetIt getIt = GetIt.instance;
+    _authRepository = getIt.get<AuthRepository>();
+    _secureRepository = getIt.get<SecureStorageRepository>();
+
     on<SignUpNameChanged>(_onNameChanged);
     on<SignUpUsernameChanged>(_onUsernameChanged);
     on<SignUpPhoneChanged>(_onPhoneChanged);
     on<SignUpBirthDateChanged>(_onBirthDateChanged);
     on<SignUpSubmitted>(_onSignUpSubmitted);
   }
-
-  late final AuthRepository _authenticationRepository;
-  late final SecureStorageRepository _secureRepository;
-  //late final LoginFlowCubit _loginFlowCubit;
 
   void _onNameChanged(
     SignUpNameChanged event,
@@ -39,7 +41,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       // this is for testing. needs to be removed eventually
       const Name name = Name.dirty(secretName);
       const Username username = Username.dirty('jory');
-      const PhoneNumber phone = PhoneNumber.dirty(PhoneEntity(number: "4062093508", dialCode: '+1', isoCode: 'US'));
+      const PhoneNumber phone = PhoneNumber.dirty(
+          PhoneEntity(number: "4062093508", dialCode: '+1', isoCode: 'US'));
       const BirthDate birthDate = BirthDate.dirty("1978-03-22");
 
       emit(state.copyWith(
@@ -135,12 +138,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     if (state.signUpFormStatus.isValidated) {
-      emit(state.copyWith(signUpFormStatus: FormzStatus.submissionInProgress, error: null));
+      emit(state.copyWith(
+          signUpFormStatus: FormzStatus.submissionInProgress, error: null));
       try {
-
-        String fullPhoneNumber = '${state.phone.value.dialCode}${state.phone.value.number}';
+        String fullPhoneNumber =
+            '${state.phone.value.dialCode}${state.phone.value.number}';
         SignUpResponse signUpResponse =
-            await _authenticationRepository.signUpNewUser(
+            await _authRepository.signUpNewUser(
           email: null,
           username: state.username.value,
           phone: fullPhoneNumber,
@@ -154,7 +158,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         if (signUpResponse.error == null) {
           //emit(state.copyWith(signUpFormStatus: FormzStatus.submissionSuccess));
 
-          OtpSmsStartResponse otpSmsStartResponse = await _authenticationRepository.getOtpForPhoneNumber(
+          OtpSmsStartResponse otpSmsStartResponse =
+              await _authRepository.getOtpForPhoneNumber(
             phone: fullPhoneNumber,
           );
 
@@ -163,24 +168,29 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
           if (otpSmsStartResponse.error == null) {
             print("persisting ${state.phone.value} to secure storage");
-            await _secureRepository.persistPhoneNumber(state.phone.value.number);
+            await _secureRepository
+                .persistPhoneNumber(state.phone.value.number);
             await _secureRepository
                 .persistPhoneCountryCode(state.phone.value.dialCode);
             await _secureRepository
                 .persistPhoneCountryISOCode(state.phone.value.isoCode);
 
-            emit(state.copyWith(signUpFormStatus: FormzStatus.submissionSuccess, error: null));
+            emit(state.copyWith(
+                signUpFormStatus: FormzStatus.submissionSuccess, error: null));
           } else {
-            emit(state.copyWith(signUpFormStatus: FormzStatus.submissionFailure,
-            error: otpSmsStartResponse.error));
+            emit(state.copyWith(
+                signUpFormStatus: FormzStatus.submissionFailure,
+                error: otpSmsStartResponse.error));
           }
-
         } else {
-          emit(state.copyWith(signUpFormStatus: FormzStatus.submissionFailure, error: signUpResponse.error));
+          emit(state.copyWith(
+              signUpFormStatus: FormzStatus.submissionFailure,
+              error: signUpResponse.error));
         }
       } catch (e) {
         print(e);
-        emit(state.copyWith(signUpFormStatus: FormzStatus.submissionFailure, error: null));
+        emit(state.copyWith(
+            signUpFormStatus: FormzStatus.submissionFailure, error: null));
       }
     }
   }

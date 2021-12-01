@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
-import 'package:insidersapp/src/repositories/user/models/get_user_response.dart';
+import 'package:insidersapp/src/repositories/api/user/models/get_user_response.dart';
 
 part 'user_state.freezed.dart';
 
