@@ -77,7 +77,6 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
         postId: postId,
       );
 
-      //todo: have backend return boolean and combine add and remove like
       if (postLikeResponse.success == "True") {
         emit(
           PostLikeState.success(

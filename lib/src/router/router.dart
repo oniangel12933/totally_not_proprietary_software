@@ -4,7 +4,6 @@ import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dar
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:insidersapp/src/pages/main/main_page.dart';
-import 'package:insidersapp/src/pages/sample_feature/sample_item_list_view.dart';
 import 'package:insidersapp/src/pages/settings/settings_page.dart';
 import 'package:insidersapp/src/pages/splash/splash_page.dart';
 
@@ -58,14 +57,6 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
       initial: true,
       path: '/settings',
       page: SettingsPage,
-      children: [
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
-    ),
-    AutoRoute(
-      initial: true,
-      path: '/sample',
-      page: SampleItemListPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],
