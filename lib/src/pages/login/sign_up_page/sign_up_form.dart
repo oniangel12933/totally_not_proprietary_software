@@ -43,7 +43,8 @@ class _SignUpFormState extends State<SignUpForm> {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                  content: Text(state.error ?? "Could not create new user")),
+                content: Text(state.error ?? "Could not create new user"),
+              ),
             );
         }
       },

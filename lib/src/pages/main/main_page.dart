@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:insidersapp/src/pages/main/search/search_view.dart';
 import 'package:insidersapp/src/shared/icons/involio_action_icon.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/pages/main/pages.dart';
@@ -21,7 +22,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
-  late List<Widget> _pages;
+  late final List<Widget> _pages;
+  late final List<Widget> _titles;
 
   @override
   void initState() {
@@ -29,20 +31,29 @@ class _MainPageState extends State<MainPage> {
 
     _pages = [
       const HomeView(),
-      const SearchTab(),
+      const SearchView(),
       const SettingTab(),
       const InfoTab(),
       const ProfileTab(),
+    ];
+    Widget titleWidget = const LogoOnlyTitleWidget();
+    _titles = [
+      titleWidget,
+      const Text("Discover"),
+      titleWidget,
+      titleWidget,
+      titleWidget
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         //elevation: 0,
         centerTitle: true,
-        title: const LogoOnlyTitleWidget(),
+        title: _titles[currentIndex],
         leading: IconButton(
           icon: Icon(context.involioIcons.menu),
           onPressed: () {
@@ -65,12 +76,12 @@ class _MainPageState extends State<MainPage> {
         actions: <Widget>[
           IconButton(
             padding: EdgeInsets.zero,
-            icon: Icon(context.involioIcons.bell),
+            icon: Icon(context.involioIcons.followUser),
             onPressed: () {},
           ),
           IconButton(
             padding: EdgeInsets.zero,
-            icon: Icon(context.involioIcons.messages),
+            icon: Icon(context.involioIcons.bell),
             onPressed: () {},
           ),
         ],

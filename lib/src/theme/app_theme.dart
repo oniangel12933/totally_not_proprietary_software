@@ -60,6 +60,11 @@ class AppFonts {
     letterSpacing: 0.4,
   );
   static TextStyle headline7 = GoogleFonts.rubik(
+    fontSize: 16.0,
+    fontWeight: fontWeightMedium,
+    letterSpacing: 0.8,
+  );
+  static TextStyle headline8 = GoogleFonts.rubik(
     fontSize: 14.0,
     fontWeight: fontWeightMedium,
     letterSpacing: 0.8,

@@ -120,7 +120,7 @@ class _UserPostState extends State<UserPost> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildName(),
-              _buildUserNameAndPostTime()
+              _buildUserNameAndPostTime(),
             ],
           ),
           _buildEllipsisButton(context),

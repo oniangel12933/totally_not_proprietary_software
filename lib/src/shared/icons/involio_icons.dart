@@ -110,5 +110,8 @@ class InvolioIcons { // extends PlatformIcons {
 
   IconData get dropDown =>
       isMaterial(context) ? PhosphorIcons.caretDown : PhosphorIcons.caretDown;
+
+  IconData get followUser =>
+      isMaterial(context) ? PhosphorIcons.userPlus : PhosphorIcons.userPlus;
 }
 

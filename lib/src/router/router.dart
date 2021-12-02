@@ -7,7 +7,7 @@ import 'package:insidersapp/src/pages/main/main_page.dart';
 import 'package:insidersapp/src/pages/settings/settings_page.dart';
 import 'package:insidersapp/src/pages/splash/splash_page.dart';
 
-@AdaptiveAutoRouter(
+@MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
