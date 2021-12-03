@@ -94,6 +94,11 @@ class AppFonts {
     fontWeight: fontWeightRegular,
     letterSpacing: -0.4,
   );
+  static TextStyle notForFinancialAdvice = GoogleFonts.rubik(
+    fontSize: 12.0,
+    fontWeight: fontWeightRegular,
+    letterSpacing: -0.4,
+  );
 
   static TextTheme textTheme = TextTheme(
     headline1: GoogleFonts.rubik(
