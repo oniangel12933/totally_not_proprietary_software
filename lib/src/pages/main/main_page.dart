@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'package:insidersapp/src/pages/main/pages.dart';
 import 'package:insidersapp/src/pages/main/search/search_view.dart';
 import 'package:insidersapp/src/shared/icons/involio_action_icon.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/pages/main/pages.dart';
 import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
 import 'package:insidersapp/src/shared/widgets/fade_indexed_stack.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import 'home/home_view.dart';
 import 'main_bottom_nav_modal.dart';
-
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

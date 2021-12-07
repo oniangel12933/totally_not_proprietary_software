@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/shared/widgets/platform_date_picker_modal.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
+import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
+import 'package:insidersapp/src/shared/widgets/platform_date_picker_modal.dart';
 import '../login_input_decoration.dart';
 import 'bloc/sign_up_bloc.dart';
 

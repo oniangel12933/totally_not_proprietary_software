@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:formz/formz.dart';
+
 import 'package:insidersapp/src/theme/colors.dart';
 
 InputDecoration getLoginInputDecoration({

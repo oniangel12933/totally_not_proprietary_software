@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:jwt_decode/jwt_decode.dart';
+
+import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 
 class SecureStorageRepository {
   static SecureStorageRepository? _instance;

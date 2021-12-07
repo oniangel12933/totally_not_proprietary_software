@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/theme/theme_cubit.dart';
-import 'package:provider/provider.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///

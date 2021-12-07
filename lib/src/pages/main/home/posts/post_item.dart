@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
-
 import 'like_button.dart';
 
 /// This is a single post item that will be displayed in a list of posts

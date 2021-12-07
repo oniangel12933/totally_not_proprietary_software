@@ -2,13 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:insidersapp/src/shared/config/get_it_setup.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:insidersapp/src/shared/blocs/bloc_observer.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'package:insidersapp/src/shared/blocs/bloc_observer.dart';
+import 'package:insidersapp/src/shared/config/get_it_setup.dart';
 import 'gen/assets.gen.dart';
 import 'src/app.dart';
 

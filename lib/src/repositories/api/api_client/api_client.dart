@@ -1,12 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
 import 'package:insidersapp/src/repositories/api/api_client/curl_interceptor.dart';
 import 'package:insidersapp/src/repositories/api/api_client/retry_interceptor.dart';
 import 'package:insidersapp/src/repositories/api/api_client/token_interceptor.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
 
 class Api {
   final dio = _createDioClient();

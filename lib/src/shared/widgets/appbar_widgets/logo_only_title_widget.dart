@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_svg/svg.dart';
+
 import 'package:insidersapp/gen/assets.gen.dart';
 
 class LogoOnlyTitleWidget extends StatelessWidget {

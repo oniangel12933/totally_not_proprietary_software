@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+
 import 'package:insidersapp/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dart';
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';

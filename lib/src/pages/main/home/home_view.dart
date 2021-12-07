@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:insidersapp/src/extensions/swatch_gen.dart';
 
 /// Used to contain custom colors that are used by the app

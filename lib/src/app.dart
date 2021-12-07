@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_state.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'package:insidersapp/src/theme/theme_cubit.dart';
-
-import 'package:insidersapp/src/router/router.gr.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({

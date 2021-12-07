@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 

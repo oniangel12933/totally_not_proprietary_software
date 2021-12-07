@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
 

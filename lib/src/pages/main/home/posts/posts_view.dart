@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
 import 'package:insidersapp/src/pages/main/home/posts/posts_list.dart';
 

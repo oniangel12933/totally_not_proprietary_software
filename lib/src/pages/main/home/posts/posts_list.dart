@@ -2,19 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:recase/recase.dart';
+
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
 import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-
+import 'package:insidersapp/src/theme/app_theme.dart';
 import 'bloc/posts_filter_bloc.dart';
 import 'bloc/posts_filter_state.dart';
 

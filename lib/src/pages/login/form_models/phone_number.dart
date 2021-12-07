@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 
 enum PhoneNumberValidationError { empty, toLong }

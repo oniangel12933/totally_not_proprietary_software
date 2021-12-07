@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 
 class TokenInterceptor extends Interceptor {

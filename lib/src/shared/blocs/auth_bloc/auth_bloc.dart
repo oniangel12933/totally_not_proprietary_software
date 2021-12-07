@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
+import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
