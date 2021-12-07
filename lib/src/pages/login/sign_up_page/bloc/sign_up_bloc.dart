@@ -2,11 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:get_it/get_it.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
-import 'package:insidersapp/src/repositories/api/auth/models/sign_up_response.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 
 part 'sign_up_event.dart';
@@ -140,12 +139,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       try {
         String fullPhoneNumber =
             '${state.phone.value.dialCode}${state.phone.value.number}';
-        SignUpResponse signUpResponse = await _authRepository.signUpNewUser(
+        DateTime birthDate = DateTime.parse(state.birthDate.value);
+        UserResponse signUpResponse = await _authRepository.signUpNewUser(
           email: null,
           username: state.username.value,
           phone: fullPhoneNumber,
           name: state.name.value,
-          birthdate: state.birthDate.value,
+          birthdate: birthDate,
         );
 
         //print('222222222222222222222222222222222222');
@@ -154,7 +154,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         if (signUpResponse.error == null) {
           //emit(state.copyWith(signUpFormStatus: FormzStatus.submissionSuccess));
 
-          OtpSmsStartResponse otpSmsStartResponse =
+          SMSStartResponse otpSmsStartResponse =
               await _authRepository.getOtpForPhoneNumber(
             phone: fullPhoneNumber,
           );

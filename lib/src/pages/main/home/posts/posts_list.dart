@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:insidersapp/src/repositories/api/posts/posts/posts_feed_response.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:recase/recase.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
@@ -41,7 +41,7 @@ class _PostsListState extends State<PostsList> {
 
   late String _filterName;
 
-  final PagingController<int, Item> _pagingController =
+  final PagingController<int, AppApiFeedSchemaPost> _pagingController =
       PagingController(firstPageKey: 1);
 
   @override
@@ -100,7 +100,7 @@ class _PostsListState extends State<PostsList> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final PostsFeedResponse postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
+      final PagePost postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
         filter: _filterName.toLowerCase(),
         page: pageKey,
         size: _pageSize,
@@ -173,9 +173,9 @@ class _PostsListState extends State<PostsList> {
                     //physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollViewController,
                     slivers: <Widget>[
-                      PagedSliverList<int, Item>(
+                      PagedSliverList<int, AppApiFeedSchemaPost>(
                         pagingController: _pagingController,
-                        builderDelegate: PagedChildBuilderDelegate<Item>(
+                        builderDelegate: PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
                           noItemsFoundIndicatorBuilder: (context) => NoItemsFoundWidget(onTryAgain: () {
                             _pagingController.refresh();
                           }),
@@ -184,7 +184,7 @@ class _PostsListState extends State<PostsList> {
                               // if we start to use websockets for post,
                               // this will need to be moved into the bloc
                               String imageUrl =
-                                  "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.id}";
+                                  "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
                               //print("imageUrl: $imageUrl");
                               return UserPost(
                                 postId: item.id ?? "",

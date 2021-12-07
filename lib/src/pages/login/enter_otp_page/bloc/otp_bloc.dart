@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_login_response.dart';
-import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:insidersapp/src/shared/blocs/event_transformers/throttle.dart';
@@ -54,7 +53,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           print(
               'Submitting OTP ${event.otp} to ${state.phone?.completeNumber}');
 
-          OtpSmsLoginResponse response = await _authRepository.logInWithPhone(
+          OTPLoginResponse response = await _authRepository.logInWithPhone(
             phone: state.phone!.completeNumber(),
             password: event.otp,
           );
@@ -100,7 +99,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           print('Resending SMS to ${state.phone?.completeNumber}');
 
           try {
-            OtpSmsStartResponse otpSmsStartResponse =
+            SMSStartResponse otpSmsStartResponse =
                 await _authRepository.getOtpForPhoneNumber(
               phone: state.phone!.completeNumber(),
             );

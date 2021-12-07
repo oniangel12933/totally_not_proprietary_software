@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:get_it/get_it.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/api/auth/models/otp_sms_start_response.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 
 part 'login_event.dart';
@@ -83,7 +83,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.loginFormStatus.isValidated) {
       emit(state.copyWith(loginFormStatus: FormzStatus.submissionInProgress));
       try {
-        OtpSmsStartResponse otpSmsStartResponse =
+        SMSStartResponse otpSmsStartResponse =
             await _authRepository.getOtpForPhoneNumber(
           phone: '${state.phone.value.dialCode}${state.phone.value.number}',
         );

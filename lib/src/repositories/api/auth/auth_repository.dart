@@ -3,14 +3,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
-
-import 'models/otp_sms_login_request.dart';
-import 'models/otp_sms_login_response.dart';
-import 'models/otp_sms_start_request.dart';
-import 'models/otp_sms_start_response.dart';
-import 'models/sign_up_request.dart';
-import 'models/sign_up_response.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
@@ -26,12 +20,12 @@ class AuthRepository {
     yield* _controller.stream;
   }
 
-  Future<OtpSmsLoginResponse> logInWithPhone({
+  Future<OTPLoginResponse> logInWithPhone({
      required String phone,
      required String password,
    }) async {
 
-    OtpSmsLoginRequest request = OtpSmsLoginRequest(phone: phone, code: password);
+    SMSLogin request = SMSLogin(phone: phone, code: password);
 
     Response response = await getIt.get<Api>()
         .dio
@@ -40,21 +34,21 @@ class AuthRepository {
     // print('AuthRepo logInWithPhone 2 --------');
     // print(response.data);
 
-    OtpSmsLoginResponse responseModel = OtpSmsLoginResponse.fromJson(response.data);
+    OTPLoginResponse responseModel = OTPLoginResponse.fromJson(response.data);
 
     if (responseModel.accessToken != null) {
 
     }
 
-    return OtpSmsLoginResponse.fromJson(response.data);
+    return OTPLoginResponse.fromJson(response.data);
   }
 
   /// https://api.insidersapp.io/docs#/auth/otp_start_api_auth_login_sms_start_post
   /// https://api.insidersapp.io/api/auth/login/sms/start
-  Future<OtpSmsStartResponse> getOtpForPhoneNumber({
+  Future<SMSStartResponse> getOtpForPhoneNumber({
     required String phone,
   }) async {
-    OtpSmsStartRequest request = OtpSmsStartRequest(phone: phone);
+    SMSStart request = SMSStart(phone: phone);
     Response response = await getIt.get<Api>()
         .dio
         .post('api/auth/login/sms/start', data: jsonEncode(request.toJson()));
@@ -65,19 +59,19 @@ class AuthRepository {
     //   () => _controller.add(AuthenticationStatus.authenticated),
     // );
 
-    return OtpSmsStartResponse.fromJson(response.data);
+    return SMSStartResponse.fromJson(response.data);
   }
 
   /// https://api.insidersapp.io/docs#/auth/create_user_api_auth_signup_post
   /// https://api.insidersapp.io/api/auth/signup
-  Future<SignUpResponse> signUpNewUser({
+  Future<UserResponse> signUpNewUser({
     String? email,
     required String username,
     required String phone,
     required String name,
-    required String birthdate,
+    required DateTime birthdate,
   }) async {
-    SignUpRequest request = SignUpRequest(
+    UserCreate request = UserCreate(
       email: email,
       username: username,
       phone: phone,
@@ -92,7 +86,7 @@ class AuthRepository {
         .dio
         .post('api/auth/signup', data: jsonEncode(request.toJson()));
 
-    return SignUpResponse.fromJson(response.data);
+    return UserResponse.fromJson(response.data);
   }
 
   void logOut() {

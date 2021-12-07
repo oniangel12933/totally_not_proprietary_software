@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'dart:convert';
-
-import 'package:insidersapp/src/repositories/api/user/models/get_user_response.dart';
 
 part 'user_state.freezed.dart';
 
@@ -14,7 +13,7 @@ String userStateToJson(UserState data) => json.encode(data.toJson());
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    GetUserResponse? user,
+    UserResponse? user,
   }) = _UserState;
 
   factory UserState.fromJson(Map<String, dynamic> json) =>
