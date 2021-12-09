@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/shared/widgets/platform_date_picker_modal.dart';
 import '../login_input_decoration.dart';
 import 'bloc/sign_up_bloc.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
+import 'package:insidersapp/src/theme/colors.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -44,7 +49,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.error ?? "Could not create new user"),
+                content: Text(state.error ?? AppLocalizations.of(context)!.userCreationError),
               ),
             );
         }
@@ -56,8 +61,8 @@ class _SignUpFormState extends State<SignUpForm> {
           Padding(
             padding: const EdgeInsets.only(left: 0, right: 0, bottom: 12),
             child: Text(
-              'Create your account',
-              style: Theme.of(context).textTheme.headline5,
+              AppLocalizations.of(context)!.createAccount,
+              style: AppFonts.headline2.copyWith(color: AppColors.involioWhiteShades100),
             ),
           ),
           Padding(
@@ -98,11 +103,11 @@ class _NameInput extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 0),
               child: Text(
-                "Your Name",
-                style: TextStyle(fontSize: 12),
+                AppLocalizations.of(context)!.nameSignUp,
+                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             TextField(
@@ -112,8 +117,9 @@ class _NameInput extends StatelessWidget {
                   context.read<SignUpBloc>().add(SignUpNameChanged(name)),
               decoration: getLoginInputDecoration(
                 labelText: '',
-                errorText: 'Invalid name',
+                errorText: AppLocalizations.of(context)!.invalidName,
                 field: state.name,
+                hintText: AppLocalizations.of(context)!.nameFormat
               ),
             ),
           ],
@@ -140,11 +146,11 @@ class _UsernameInput extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 0),
               child: Text(
-                "Your User Name",
-                style: TextStyle(fontSize: 12),
+                AppLocalizations.of(context)!.userNameSignUp,
+                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             TextField(
@@ -155,9 +161,12 @@ class _UsernameInput extends StatelessWidget {
                   .add(SignUpUsernameChanged(username)),
               decoration: getLoginInputDecoration(
                 labelText: '',
-                errorText: 'Invalid username',
+                errorText: AppLocalizations.of(context)!.invalidUserName,
                 field: state.username,
-                prefix: '@',
+                prefixIcon: Icon(context.involioIcons.at,
+                  color: AppColors.involioWhiteShades100,
+                  size: 24,),
+                hintText: AppLocalizations.of(context)!.userNameFormat,
               ),
             ),
           ],
@@ -202,11 +211,11 @@ class _PhoneInput extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 102),
+            Padding(
+              padding: const EdgeInsets.only(left: 0),
               child: Text(
-                "Your Phone Number",
-                style: TextStyle(fontSize: 12),
+                AppLocalizations.of(context)!.phoneNumberSignUp,
+                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             ipn.InternationalPhoneNumberInput(
@@ -259,8 +268,9 @@ class _PhoneInput extends StatelessWidget {
               inputBorder: const OutlineInputBorder(),
               inputDecoration: getLoginInputDecoration(
                 labelText: '',
-                errorText: 'Invalid phone number',
+                errorText: AppLocalizations.of(context)!.invalidPhoneNumber,
                 field: state.phone,
+                hintText: AppLocalizations.of(context)!.phoneNumberFormat,
               ),
             ),
           ],
@@ -313,11 +323,11 @@ class _BirthDateInputState extends State<_BirthDateInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 20),
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
           child: Text(
-            "Date of Birth",
-            style: TextStyle(fontSize: 12),
+            AppLocalizations.of(context)!.dateOfBirth,
+            style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
           ),
         ),
         BlocBuilder<SignUpBloc, SignUpState>(
@@ -338,9 +348,9 @@ class _BirthDateInputState extends State<_BirthDateInput> {
                   controller: widget.controller,
                   decoration: getLoginInputDecoration(
                     labelText: '',
-                    errorText: 'Invalid birth date',
+                    errorText: AppLocalizations.of(context)!.invalidDateOfBirth,
                     field: state.birthDate,
-                    hintText: 'mm/dd/yyy',
+                    hintText: AppLocalizations.of(context)!.dateFormat,
                   ),
                 ),
               ),

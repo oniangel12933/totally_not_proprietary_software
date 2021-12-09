@@ -114,5 +114,8 @@ class InvolioIcons { // extends PlatformIcons {
 
   IconData get followUser =>
       isMaterial(context) ? PhosphorIcons.userPlus : PhosphorIcons.userPlus;
+
+  IconData get at =>
+      isMaterial(context) ? PhosphorIcons.at : PhosphorIcons.at;
 }
 

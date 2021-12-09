@@ -9,6 +9,10 @@ import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import '../login_input_decoration.dart';
 import 'bloc/login_bloc.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
+import 'package:insidersapp/src/theme/colors.dart';
+
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
 
@@ -58,8 +62,8 @@ class _LoginFormState extends State<LoginForm> {
               bottom: 32,
             ),
             child: Text(
-              'Welcome Back!',
-              style: Theme.of(context).textTheme.headline5,
+              AppLocalizations.of(context)!.welcomeBack,
+              style: AppFonts.headline2.copyWith(color: AppColors.involioWhiteShades100),
             ),
           ),
           Padding(
@@ -91,11 +95,11 @@ class _LoginFormState extends State<LoginForm> {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 102),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0),
                             child: Text(
-                              "Your Phone Number",
-                              style: TextStyle(fontSize: 12),
+                              AppLocalizations.of(context)!.phoneNumberLogIn,
+                              style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
                             ),
                           ),
                           ipn.InternationalPhoneNumberInput(
@@ -148,8 +152,9 @@ class _LoginFormState extends State<LoginForm> {
                             inputBorder: const OutlineInputBorder(),
                             inputDecoration: getLoginInputDecoration(
                               labelText: '',
-                              errorText: 'Invalid phone number',
+                              errorText: AppLocalizations.of(context)!.invalidPhoneNumber,
                               field: state.phone,
+                              hintText: AppLocalizations.of(context)!.phoneNumberFormat,
                             ),
                           ),
                         ],

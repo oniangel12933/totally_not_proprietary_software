@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 
 import 'package:insidersapp/src/pages/login/login_page/login_form.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
@@ -47,7 +48,7 @@ class LoginPage extends StatelessWidget {
                         context.read<LoginBloc>().submitLogin();
                       }
                     : null,
-                tooltip: 'Log In',
+                tooltip: AppLocalizations.of(context)!.logIn,
                 child: const Icon(Icons.keyboard_arrow_right),
                 backgroundColor: state.loginFormStatus.isValidated
                     ? AppColors.involioBlue

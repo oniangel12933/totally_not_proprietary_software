@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:formz/formz.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
 
 import 'package:insidersapp/src/theme/colors.dart';
 
@@ -9,6 +10,7 @@ InputDecoration getLoginInputDecoration({
   required String errorText,
   required FormzInput field,
   String? prefix,
+  Widget? prefixIcon,
   String? hintText,
 }) {
   return InputDecoration(
@@ -19,10 +21,12 @@ InputDecoration getLoginInputDecoration({
     //     : null,
 
     labelText: labelText,
+    prefixIcon: prefixIcon,
     prefix: prefix != null ? Text(prefix) : null,
     errorText: field.invalid ? errorText : null,
-    fillColor: AppColors.involioBackgroundSwatch[400],
-    hintStyle: TextStyle(color: AppColors.involioBackgroundSwatch[100]),
+    errorStyle: TextStyle(color: AppColors.involioAssistiveAndAlertRed),
+    fillColor: AppColors.involioFillFormBackgroundColor,
+    hintStyle: AppFonts.bodyBig.copyWith(color: AppColors.involioWhiteShades100.withOpacity(.3)),
     hintText: hintText,
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.always,

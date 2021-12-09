@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_form.dart';
+
 import 'package:insidersapp/src/router/router.gr.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
@@ -63,8 +65,9 @@ class SignUpPage extends StatelessWidget {
                             color: AppColors.involioBackground.withOpacity(0.8),
                             padding: const EdgeInsets.only(
                                 left: 20, right: 20, top: 0, bottom: 10),
-                            child: const Text(
-                              'By continuing, you agree to our terms of service and privacy policy',
+                            child: Text(
+                              AppLocalizations.of(context)!.policyAgreement,
+                              style: AppFonts.bodySmall.copyWith(color: AppColors.involioWhiteShades100),
                             ),
                           ),
                         ),
@@ -78,7 +81,7 @@ class SignUpPage extends StatelessWidget {
                                     //Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
                                   }
                                 : null,
-                            tooltip: 'Sign Up',
+                            tooltip: AppLocalizations.of(context)!.signUp,
                             child: const Icon(Icons.keyboard_arrow_right),
                             backgroundColor: state.signUpFormStatus.isValidated
                                 ? AppColors.involioBlue

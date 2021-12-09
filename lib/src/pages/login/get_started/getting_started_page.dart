@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
-
 import 'package:insidersapp/src/router/router.gr.dart';
+
 import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 class GetStartedPage extends StatefulWidget {
@@ -44,23 +46,18 @@ class _GetStartedPageState extends State<GetStartedPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 98),
-                        const Text(
-                          'Welcome to the\nepicenter of social\ninvesting',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            //fontWeight: FontWeight.bold,
-                          ),
+                        Text(
+                          AppLocalizations.of(context)!.welcome,
+                          style: AppFonts.headline2.copyWith(color: AppColors.involioWhiteShades80),
                         ),
                         const SizedBox(height: 28),
                         SizedBox(
                           width: 130,
-                          height: 54,
+                          height: 48,
                           child: TextButton(
-                            child: const Text(
-                              'Get Started',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                            child: Text(
+                              AppLocalizations.of(context)!.getStarted,
+                              style: AppFonts.headline7.copyWith(color: AppColors.involioWhiteShades100),
                             ),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
@@ -92,12 +89,15 @@ class _GetStartedPageState extends State<GetStartedPage> {
               height: 80,
               color: AppColors.involioBackground.withOpacity(0.8),
               padding: const EdgeInsets.only(
-                  left: 20, right: 80, top: 20, bottom: 20),
+                  left: 20, right: 0, top: 20, bottom: 20),
               child: Row(
                 children: [
-                  const Text('Already have an account?'),
+                  Text (AppLocalizations.of(context)!.accountExists,
+                  style: AppFonts.headline6.copyWith(color: AppColors.involioWhiteShades80,),
+                  ),
                   TextButton(
-                    child: const Text('Log In'),
+                    child: Text(AppLocalizations.of(context)!.logIn),
+                    style: TextButton.styleFrom(primary: AppColors.involioBlue, textStyle: AppFonts.bodyBig,),
                     onPressed: () => context.router.push(const LoginRoute()),
                   ),
                 ],

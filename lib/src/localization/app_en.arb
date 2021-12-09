@@ -1,6 +1,98 @@
 {
-  "appTitle": "Insiders",
+  "appTitle": "Involio",
   "@appTitle": {
     "description": "The title of the application"
-  }
+  },
+  "welcome": "Welcome to the\nepicenter of social\ninvesting",
+  "@welcome": {
+    "description": "The welcome page to the application"
+  },
+  "welcomeBack": "Welcome Back!",
+  "@welcomeBack": {
+    "description": "The welcome back page to the application"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Button triggering account creation"
+  },
+  "accountExists": "Already have an account?",
+  "@accountExists": {
+      "description": "Asks user about an existing account"
+  },
+  "logIn": "Log in",
+  "@logIn": {
+      "description": "Button triggering account sign in"
+  },
+  "userCreationError": "Could not create new user",
+  "@userCreationError": {
+      "description": "Error thrown on failed user creation"
+  },
+   "createAccount": "Create your account",
+   "@createAccount": {
+       "description": ""
+   },
+   "nameSignUp": "Your Name",
+   "@nameSignUp": {
+       "description": "Requests new user's name at Sign Up"
+   },
+   "invalidName": "Invalid name",
+   "@invalidName": {
+       "description": "Error thrown on invalid name entry"
+   },
+   "nameFormat": "Your First and Last Name",
+   "@nameFormat": {
+       "description": "Hint text displaying name format"
+   },
+   "userNameSignUp": "Your User Name",
+   "@userNameSignUp": {
+       "description": "Requests new user's username at Sign Up"
+   },
+   "invalidUserName": "Invalid username",
+   "@invalidUserName": {
+       "description": "Error thrown on invalid username entry"
+   },
+   "userNameFormat": "Pick a unique user name",
+   "@userNameFormat": {
+       "description": "Hint text displaying username format"
+   },
+   "phoneNumberSignUp": "Your Phone Number",
+   "@phoneNumberSignUp": {
+       "description": "Requests new user's phone number at Sign Up"
+   },
+   "phoneNumberLogIn": "Please enter your phone number",
+   "@phoneNumberLogIn": {
+       "description": "Requests existing user's phone number at Log In"
+   },
+   "invalidPhoneNumber": "Invalid phone number",
+   "@invalidPhoneNumber": {
+       "description": "Error thrown on invalid phone number entry"
+   },
+   "phoneNumberFormat": "123-456-7890",
+   "@phoneNumberFormat": {
+       "description": "Hint text displaying phone number format"
+   },
+   "dateOfBirth": "Date of Birth",
+   "@dateOfBirth": {
+       "description": "Requests new user's date of birth"
+   },
+   "invalidDateOfBirth": "Invalid birth date",
+   "@invalidDateOfBirth": {
+       "description": "Error thrown on invalid date entry"
+   },
+   "dateFormat": "mm/dd/yyy",
+   "@dateFormat": {
+       "description": "Hint text displaying date format"
+   },
+   "policyAgreement": "By continuing, you agree to our terms of service and privacy policy",
+   "@policyAgreement": {
+       "description": "Ensures new user is aware of policy agreement"
+   },
+   "signUp": "Sign Up",
+   "@signUp": {
+       "description": "Button linked to user creation"
+   },
+   "logIn": "Log In",
+   "@logIn": {
+       "description": "Button linked to user log in"
+   }
 }

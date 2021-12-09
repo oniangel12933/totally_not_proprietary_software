@@ -72,7 +72,7 @@ dependencies:
   cached_network_image: ^3.2.0
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.1.0
-  #intl: ^0.17.0
+  intl: ^0.17.0
   page_transition: ^2.0.4
   url_launcher: ^6.0.17
 
