@@ -8,6 +8,7 @@ import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:intl/intl.dart';
 
 part 'sign_up_event.dart';
 
@@ -135,12 +136,16 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         GetIt.I.get<SecureStorageRepository>();
 
     if (state.signUpFormStatus.isValidated) {
+
       emit(state.copyWith(
           signUpFormStatus: FormzStatus.submissionInProgress, error: null));
       try {
         String fullPhoneNumber =
             '${state.phone.value.dialCode}${state.phone.value.number}';
-        DateTime birthDate = DateTime.parse(state.birthDate.value);
+
+        DateFormat format = DateFormat("yyyy-M-d");
+        DateTime birthDate = format.parse(state.birthDate.value);
+
         UserResponse signUpResponse = await _authRepository.signUpNewUser(
           email: null,
           username: state.username.value,
