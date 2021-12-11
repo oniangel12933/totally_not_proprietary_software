@@ -20,6 +20,7 @@ class UserPost extends StatefulWidget {
   final String imageUrl;
   final String name;
   final String username;
+  final String timestamp;
   final String text;
   final int likes;
   final bool liked;
@@ -34,6 +35,7 @@ class UserPost extends StatefulWidget {
     required this.imageUrl,
     required this.name,
     required this.username,
+    required this.timestamp,
     required this.text,
     required this.likes,
     required this.liked,
@@ -46,7 +48,6 @@ class UserPost extends StatefulWidget {
 }
 
 class _UserPostState extends State<UserPost> {
-
   @override
   void initState() {
     super.initState();
@@ -62,7 +63,8 @@ class _UserPostState extends State<UserPost> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.only(left: UserPost.edge, right: UserPost.edge),
+          padding:
+              const EdgeInsets.only(left: UserPost.edge, right: UserPost.edge),
           child: Column(
             children: [
               SizedBox(
@@ -71,21 +73,30 @@ class _UserPostState extends State<UserPost> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildImage(),
-                    const SizedBox(width: 8.0,),
+                    const SizedBox(
+                      width: 8.0,
+                    ),
                     _buildHeaderText(context)
                   ],
                 ),
               ),
-              const SizedBox(height: 8.0,),
+              const SizedBox(
+                height: 8.0,
+              ),
               _buildText(),
-              const SizedBox(height: 16.0,),
+              const SizedBox(
+                height: 16.0,
+              ),
               _buildButtons(context),
-              const SizedBox(height: 12.0,),
+              const SizedBox(
+                height: 12.0,
+              ),
             ],
           ),
         ),
         Container(
-          padding: const EdgeInsets.only(top: 0, bottom: 24, left: 0.0, right: 0.0),
+          padding:
+              const EdgeInsets.only(top: 0, bottom: 24, left: 0.0, right: 0.0),
           child: const Divider(
             height: 0,
             color: AppColors.involioGreenGrayBlue,
@@ -135,9 +146,7 @@ class _UserPostState extends State<UserPost> {
       children: [
         Text(
           widget.name,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12.0,
+          style: AppFonts.headline7.copyWith(
             color: AppColors.involioGreenGrayBlue,
           ),
         ),
@@ -149,11 +158,9 @@ class _UserPostState extends State<UserPost> {
     return Row(
       children: [
         Text(
-          "${widget.username} · 1h",
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 12.0,
-            color: AppColors.involioUserNameColor,
+          "${widget.username}  ·  ${widget.timestamp}",
+          style: AppFonts.bodySmall.copyWith(
+            color: AppColors.involioGreenGrayBlue,
           ),
         ),
       ],
@@ -161,10 +168,17 @@ class _UserPostState extends State<UserPost> {
   }
 
   Widget _buildText() {
-    return Text(
-      widget.text,
-      overflow: TextOverflow.clip,
-      style: const TextStyle(),
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        widget.text.length < 100
+            ? widget.text
+            : widget.text.substring(0, 100) + ' ...',
+        //TODO add expanding elipsies button
+        softWrap: true,
+        style:
+            AppFonts.comments1.copyWith(color: AppColors.involioWhiteShades60),
+      ),
     );
   }
 
@@ -200,11 +214,12 @@ class _UserPostState extends State<UserPost> {
           size: 16.0,
           color: AppColors.involioGreenGrayBlue,
         ),
-        const SizedBox(width: 8.0,),
+        const SizedBox(
+          width: 8.0,
+        ),
         Text(
           text,
-          style: const TextStyle(
-            fontSize: 12.0,
+          style: AppFonts.comments1.copyWith(
             color: AppColors.involioGreenGrayBlue,
           ),
         ),
@@ -212,5 +227,3 @@ class _UserPostState extends State<UserPost> {
     );
   }
 }
-
-

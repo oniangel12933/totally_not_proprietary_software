@@ -96,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 0),
+                            padding: const EdgeInsets.only(left: 0, bottom: 8),
                             child: Text(
                               AppLocalizations.of(context)!.phoneNumberLogIn,
                               style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),

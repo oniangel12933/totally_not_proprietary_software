@@ -104,7 +104,7 @@ class _NameInput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 0),
+              padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.nameSignUp,
                 style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
@@ -147,7 +147,7 @@ class _UsernameInput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 0),
+              padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.userNameSignUp,
                 style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
@@ -212,7 +212,7 @@ class _PhoneInput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 0),
+              padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.phoneNumberSignUp,
                 style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
@@ -324,7 +324,7 @@ class _BirthDateInputState extends State<_BirthDateInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 0),
+          padding: const EdgeInsets.only(left: 0, bottom: 8),
           child: Text(
             AppLocalizations.of(context)!.dateOfBirth,
             style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),

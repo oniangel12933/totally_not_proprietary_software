@@ -9,8 +9,10 @@ import 'package:insidersapp/src/shared/icons/involio_action_icon.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
 import 'package:insidersapp/src/shared/widgets/fade_indexed_stack.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'home/home_view.dart';
 import 'main_bottom_nav_modal.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -136,16 +138,16 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.home),
             //activeIcon: Icon(context.involioIcons.homeFill),
-            label: 'Home',
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.search),
             //activeIcon: Icon(context.involioIcons.searchFill),
-            label: 'Search',
+            label: AppLocalizations.of(context)!.search,
           ),
           BottomNavigationBarItem(
             icon: getInvolioActionButtonIcon(context),
-            label: 'Add',
+            label: AppLocalizations.of(context)!.add,
           ),
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.chartLine),
@@ -155,7 +157,7 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(context.involioIcons.account),
             //activeIcon: Icon(context.involioIcons.accountFill),
-            label: 'Account',
+            label: AppLocalizations.of(context)!.account,
           ),
         ],
       ),

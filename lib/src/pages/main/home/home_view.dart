@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 /// this builds a widget that displays tabs on the homepage above the posts
@@ -14,7 +16,7 @@ class HomeView extends StatelessWidget {
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             TabBar(
               unselectedLabelColor:
                   AppColors.involioGreenGrayBlue,
@@ -23,19 +25,19 @@ class HomeView extends StatelessWidget {
               tabs: [
                 Tab(
                   child: Text(
-                    'Posts',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context)!.posts,
+                    style: AppFonts.headline7,
                   ),
                 ),
                 Tab(
                   child: Text(
-                    'Drops',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context)!.drops,
+                    style: AppFonts.headline7,
                   ),
                 ),
               ],
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   PostsView(),

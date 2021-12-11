@@ -94,5 +94,41 @@
    "logIn": "Log In",
    "@logIn": {
        "description": "Button linked to user log in"
-   }
+   },
+   "posts": "Posts",
+   "@posts": {
+       "description": "Home screen tab for posts"
+   },
+   "drops": "Drops",
+   "@drops": {
+       "description": "Home screen tab for drops"
+   },
+   "trending": "Trending",
+   "@trending": {
+       "description": "Posts by trending filter"
+   },
+   "following": "Following",
+   "@following": {
+       "description": "Posts by following filter"
+   },
+   "interests": "Interests",
+   "@interests": {
+       "description": "Posts by interests filter"
+   },
+       "home": "Home",
+       "@home": {
+           "description": "Navigation bar home"
+       },
+       "search": "Search",
+       "@search": {
+           "description": "Navigation bar Search"
+       },
+       "add": "Add",
+       "@add": {
+           "description": "Navigation bar Add"
+       },
+       "account": "Account",
+       "@account": {
+           "description": "Navigation bar Account"
+       }
 }

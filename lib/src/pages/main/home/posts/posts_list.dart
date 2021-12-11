@@ -7,15 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
 import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
 import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
-import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
+import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
+import 'package:insidersapp/src/theme/colors.dart';
 import 'bloc/posts_filter_bloc.dart';
 import 'bloc/posts_filter_state.dart';
 
@@ -176,29 +178,36 @@ class _PostsListState extends State<PostsList> {
                     slivers: <Widget>[
                       PagedSliverList<int, AppApiFeedSchemaPost>(
                         pagingController: _pagingController,
-                        builderDelegate: PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
-                          noItemsFoundIndicatorBuilder: (context) => NoItemsFoundWidget(onTryAgain: () {
-                            _pagingController.refresh();
-                          }),
-                            animateTransitions: true,
-                            itemBuilder: (context, item, index) {
-                              // if we start to use websockets for post,
-                              // this will need to be moved into the bloc
-                              String imageUrl =
-                                  "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
-                              //print("imageUrl: $imageUrl");
-                              return UserPost(
-                                postId: item.id ?? "",
-                                imageUrl: imageUrl,
-                                name: item.owner?.name ?? "",
-                                username: "@${item.owner?.username}",
-                                text: item.content ?? "",
-                                likes: item.postLikes ?? 0,
-                                liked: item.liked ?? false,
-                                comments: "${item.postComments}",
-                                dollars: "${item.tips}",
-                              );
-                            }),
+                        builderDelegate:
+                            PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
+                                noItemsFoundIndicatorBuilder: (context) =>
+                                    NoItemsFoundWidget(onTryAgain: () {
+                                      _pagingController.refresh();
+                                    }),
+                                animateTransitions: true,
+                                itemBuilder: (context, item, index) {
+                                  // if we start to use websockets for post,
+                                  // this will need to be moved into the bloc
+                                  String imageUrl =
+                                      "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
+                                  //print("imageUrl: $imageUrl");
+                                  return UserPost(
+                                    postId: item.id ?? "",
+                                    imageUrl: imageUrl,
+                                    name: item.owner?.name ?? "",
+                                    username: "@${item.owner?.username}",
+                                    //TODO in future should show days ago/weeks ago/etc if longer than a day.
+                                    timestamp: item.timestamp != null
+                                        ? DateFormat('h:mm a')
+                                            .format(item.timestamp as DateTime)
+                                        : '',
+                                    text: item.content ?? "",
+                                    likes: item.postLikes ?? 0,
+                                    liked: item.liked ?? false,
+                                    comments: "${item.postComments}",
+                                    dollars: "${item.tips}",
+                                  );
+                                }),
                       ),
                     ],
                   ),
@@ -240,7 +249,8 @@ class _PostsListState extends State<PostsList> {
           children: [
             Text(
               _filterName.titleCase,
-              style: Theme.of(context).textTheme.button,
+              style: AppFonts.headline7
+                  .copyWith(color: AppColors.involioWhiteShades80),
             ),
             // using RichText instead of Icon so that the
             // icon will move when animated
@@ -249,7 +259,7 @@ class _PostsListState extends State<PostsList> {
                 text: String.fromCharCode((iconData).codePoint),
                 style: TextStyle(
                   inherit: false,
-                  color: Colors.white,
+                  color: AppColors.involioWhiteShades80,
                   fontSize: 16,
                   fontFamily: (iconData).fontFamily,
                   package: (iconData).fontPackage,
@@ -339,10 +349,10 @@ class NoItemsFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListItemsException(
-    title: 'No posts found',
-    //message: 'This list is currently empty.',
-    onTryAgain: onTryAgain,
-  );
+        title: 'No posts found',
+        //message: 'This list is currently empty.',
+        onTryAgain: onTryAgain,
+      );
 }
 
 class ListItemsException extends StatelessWidget {
