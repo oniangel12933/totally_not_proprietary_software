@@ -14,6 +14,7 @@ class OptimisticLikeButton extends StatefulWidget {
     required this.postId,
     required this.totalLikeCount,
     required this.isLikedByUser,
+    this.isVirticle = false,
     //required this.postLikeBloc,
   }) : super(key: key);
 
@@ -23,6 +24,7 @@ class OptimisticLikeButton extends StatefulWidget {
   final String postId;
   final int totalLikeCount;
   final bool isLikedByUser;
+  final bool isVirticle;
 
   @override
   State<OptimisticLikeButton> createState() => _OptimisticLikeButtonState();
@@ -77,33 +79,7 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
 
           return TextButton(
             //padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  likedState.like == true
-                      ? context.involioIcons.heartFill
-                      : context.involioIcons.heart,
-                  color: likedState.like == true
-                      ? Colors.red
-                      : Theme.of(context).brightness == Brightness.light
-                          ? Colors.grey.shade600
-                          : Colors.grey.shade500,
-                  size: widget.iconSize,
-                ),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                Text(
-                  '${likedState.likeCnt}',
-                  style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.grey.shade600
-                        : Colors.grey.shade500,
-                    fontSize: widget.fontSize,
-                  ),
-                ),
-              ],
-            ),
+            child: format_heart_icon(likedState),
             onPressed: () {
               // todo: like count number for different types of likes
               _postLikeBloc.likeButtonPressed(
@@ -132,4 +108,39 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
           );
         });
   }
+
+  Widget format_heart_icon(PostLikeState likedState) {
+    if (widget.isVirticle) {
+      return Column(children: heartIcon(likedState));
+    } else {
+      return Row(children: heartIcon(likedState));
+    }
+  }
+
+  List<Widget> heartIcon(PostLikeState likedState) => [
+        Icon(
+          likedState.like == true
+              ? context.involioIcons.heartFill
+              : context.involioIcons.heart,
+          color: likedState.like == true
+              ? Colors.red
+              : Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey.shade600
+                  : Colors.grey.shade500,
+          size: widget.iconSize,
+        ),
+        const SizedBox(
+          width: 8.0,
+          height: 10,
+        ),
+        Text(
+          '${likedState.likeCnt}',
+          style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.grey.shade600
+                : Colors.grey.shade500,
+            fontSize: widget.fontSize,
+          ),
+        ),
+      ];
 }
