@@ -155,9 +155,9 @@ class _MainPageState extends State<MainPage> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(context.involioIcons.account),
+            icon: Icon(context.involioIcons.profile),
             //activeIcon: Icon(context.involioIcons.accountFill),
-            label: AppLocalizations.of(context)!.account,
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),

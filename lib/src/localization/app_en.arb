@@ -115,20 +115,56 @@
    "@interests": {
        "description": "Posts by interests filter"
    },
-       "home": "Home",
-       "@home": {
-           "description": "Navigation bar home"
-       },
-       "search": "Search",
-       "@search": {
-           "description": "Navigation bar Search"
-       },
-       "add": "Add",
-       "@add": {
-           "description": "Navigation bar Add"
-       },
-       "account": "Account",
-       "@account": {
-           "description": "Navigation bar Account"
-       }
+   "home": "Home",
+   "@home": {
+       "description": "Navigation bar home"
+   },
+   "search": "Search",
+   "@search": {
+       "description": "Navigation bar Search"
+   },
+   "add": "Add",
+   "@add": {
+       "description": "Navigation bar Add"
+   },
+   "profile": "Profile",
+   "@add": {
+       "description": "Navigation bar Profile"
+   },
+   "account": "Account",
+   "@account": {
+       "description": "Hamburger dropdown Account"
+   },
+   "settings": "Settings",
+   "@settings": {
+       "description": "Hamburger dropdown Settings"
+   },
+   "notifications": "Notifications",
+   "@notifications": {
+       "description": "Hamburger dropdown Notifications"
+   },
+   "myInterests": "My Interests",
+   "@myInterests": {
+       "description": "Hamburger dropdown My Interests"
+   },
+   "myReviews": "My Reviews",
+   "@myReviews": {
+       "description": "Hamburger dropdown My Reviews"
+   },
+   "drafts": "Drafts",
+   "@drafts": {
+       "description": "Hamburger dropdown Drafts"
+   },
+   "giveFeedback": "Give Feedback",
+   "@giveFeedback": {
+       "description": "Hamburger dropdown Give Feedback"
+   },
+   "involioWalkthrough": "Involio Walkthrough",
+   "@involioWalkthrough": {
+       "description": "Hamburger dropdown Involio Walkthrough"
+   },
+   "helpCenter" : "Help Center",
+   "@helpCenter": {
+       "description": "Hamburger dropdown Help Center"
+   }
 }

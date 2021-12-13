@@ -24,15 +24,15 @@ class InvolioIcons { // extends PlatformIcons {
       isMaterial(context) ? PhosphorIcons.bell : PhosphorIcons.bell;
 
   IconData get interests => isMaterial(context)
-      ? PhosphorIcons.squaresFour
-      : PhosphorIcons.squaresFour;
+      ? PhosphorIcons.lightbulb
+      : PhosphorIcons.lightbulb;
 
   IconData get feedback => isMaterial(context)
-      ? PhosphorIcons.clipboardText
-      : PhosphorIcons.clipboardText;
+      ? PhosphorIcons.chats
+      : PhosphorIcons.chats;
 
   IconData get walkThrough =>
-      isMaterial(context) ? PhosphorIcons.bookOpen : PhosphorIcons.bookOpen;
+      isMaterial(context) ? PhosphorIcons.personSimpleWalk : PhosphorIcons.personSimpleWalk;
 
   IconData get helpCenter =>
       isMaterial(context) ? PhosphorIcons.question : PhosphorIcons.question;
@@ -53,10 +53,13 @@ class InvolioIcons { // extends PlatformIcons {
       isMaterial(context) ? PhosphorIcons.houseFill : PhosphorIcons.houseFill;
 
   IconData get settings =>
-      isMaterial(context) ? PhosphorIcons.sliders : PhosphorIcons.sliders;
+      isMaterial(context) ? PhosphorIcons.gearSix : PhosphorIcons.gearSix;
+
+  IconData get profile =>
+      isMaterial(context) ? PhosphorIcons.user : PhosphorIcons.user;
 
   IconData get account =>
-      isMaterial(context) ? PhosphorIcons.user : PhosphorIcons.user;
+      isMaterial(context) ? PhosphorIcons.userSquare : PhosphorIcons.userSquare;
 
   IconData get accountFill =>
       isMaterial(context) ? PhosphorIcons.userFill : PhosphorIcons.userFill;
