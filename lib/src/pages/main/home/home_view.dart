@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 

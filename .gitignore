@@ -60,3 +60,5 @@ lib/packages
 *.g.dart
 *.freezed.dart
 *.gr.dart
+
+swaggers/involio_api.json.2*

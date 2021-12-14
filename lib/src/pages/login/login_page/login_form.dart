@@ -2,16 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import '../login_input_decoration.dart';
-import 'bloc/login_bloc.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
+import '../login_input_decoration.dart';
+import 'bloc/login_bloc.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);

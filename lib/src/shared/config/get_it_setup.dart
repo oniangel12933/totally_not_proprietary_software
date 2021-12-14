@@ -7,9 +7,13 @@ import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'app_config.dart';
 
-final getIt = GetIt.instance;
+Future<void> getItSetUp({bool testing = false}) async {
+  final getIt = GetIt.instance;
 
-Future<void> getItSetUp() async {
+  if (testing) {
+    // can setup mocks here
+  }
+
   getIt.registerSingletonAsync<AppConfig>(() async {
     AppConfig appConfig = AppConfig();
     await appConfig.setup();
@@ -19,15 +23,18 @@ Future<void> getItSetUp() async {
   getIt.registerLazySingleton<Api>(
     () => Api(),
   );
-  getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepository(),
-  );
+
+  getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(),
+      dispose: (AuthRepository ar) => ar.dispose());
+
   getIt.registerLazySingleton<SecureStorageRepository>(
     () => SecureStorageRepository(),
   );
+
   getIt.registerLazySingleton<UserRepository>(
     () => UserRepository(),
   );
+
   getIt.registerLazySingleton<PostsRepository>(
     () => PostsRepository(),
   );

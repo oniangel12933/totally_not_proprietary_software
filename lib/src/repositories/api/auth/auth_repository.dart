@@ -95,6 +95,4 @@ class AuthRepository {
   }
 
   void dispose() => _controller.close();
-
-  Future<void> refresh() async {}
 }

@@ -16,7 +16,8 @@ String authEventToJson(AuthEvent data) => json.encode(data.toJson());
 class AuthEvent with _$AuthEvent {
   const factory AuthEvent({
     PhoneEntity? phone,
-    String? token,
+    String? accessToken,
+    String? refreshToken,
     @Default(0) int expiresIn,
     String? error,
   }) = _AuthEvent;
@@ -25,7 +26,8 @@ class AuthEvent with _$AuthEvent {
 
   const factory AuthEvent.loggedIn({
     required PhoneEntity phone,
-    required String token,
+    required String accessToken,
+    required String refreshToken,
     @Default(0) int expiresIn,
     String? error,
   }) = LoggedIn;

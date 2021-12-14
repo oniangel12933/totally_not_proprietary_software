@@ -2,13 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 
 import 'package:insidersapp/gen/involio_api.swagger.dart';
 import 'package:insidersapp/src/pages/login/form_models/models.dart';
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
-import 'package:intl/intl.dart';
 
 part 'sign_up_event.dart';
 

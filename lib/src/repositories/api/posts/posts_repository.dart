@@ -28,8 +28,8 @@ class PostsRepository {
         .dio
         .post('api/social/feed/get_post_feed', data: jsonEncode(request.toJson()));
 
-    PagePost pagePost = PagePost.fromJson(response.data);
-    return pagePost;
+    PagePost postFeedResponse = PagePost.fromJson(response.data);
+    return postFeedResponse;
   }
 
   Future<LikeResponse> setPostLiked({

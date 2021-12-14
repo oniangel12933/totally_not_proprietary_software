@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_form.dart';
-
 import 'package:insidersapp/src/router/router.gr.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import '../get_login_app_bar.dart';

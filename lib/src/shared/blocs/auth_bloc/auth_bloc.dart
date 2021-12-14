@@ -73,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final hasToken = await _secureRepository.hasToken();
+    final hasToken = await _secureRepository.hasAccessToken();
 
     if (!hasToken) {
       emit(const AuthUnauthenticated());
@@ -84,13 +84,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void setLoggedIn({
     required PhoneEntity phone,
-    required String token,
+    required String accessToken,
+    required String refreshToken,
     int expiresIn = 0,
     String? error,
   }) {
     add(AuthEvent.loggedIn(
       phone: phone,
-      token: token,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
       expiresIn: expiresIn,
       error: error,
     ));
@@ -103,7 +105,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthLoading());
     await _secureRepository.persistPhoneAndToken(
       phone: event.phone,
-      token: event.token,
+      accessToken: event.accessToken,
+      refreshToken: event.refreshToken,
     );
     await _initStartup(event, emit);
   }
@@ -113,7 +116,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoggingOut());
-    await _secureRepository.deleteToken();
+    await _secureRepository.deleteAccessToken();
     emit(const AuthLoggedOut());
   }
 

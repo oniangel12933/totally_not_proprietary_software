@@ -77,7 +77,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
             _authBloc.setLoggedIn(
               phone: state.phone!,
-              token: response.accessToken!,
+              accessToken: response.accessToken!,
+              refreshToken: response.refreshToken!,
             );
           }
 

@@ -11,10 +11,10 @@ class TokenInterceptorForRefresh extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    var accessToken = await GetIt.I.get<SecureStorageRepository>().getRefreshToken();
+    var refreshToken = await GetIt.I.get<SecureStorageRepository>().getRefreshToken();
 
-    if (accessToken != null && accessToken.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $accessToken';
+    if (refreshToken != null && refreshToken.isNotEmpty) {
+      options.headers['Authorization'] = 'Bearer $refreshToken';
     }
 
     return handler.next(options);
