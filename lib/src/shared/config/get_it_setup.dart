@@ -5,6 +5,7 @@ import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
 import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'app_config.dart';
 
 Future<void> getItSetUp({bool testing = false}) async {
@@ -24,8 +25,10 @@ Future<void> getItSetUp({bool testing = false}) async {
     () => Api(),
   );
 
-  getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(),
-      dispose: (AuthRepository ar) => ar.dispose());
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepository(),
+    dispose: (AuthRepository ar) => ar.dispose(),
+  );
 
   getIt.registerLazySingleton<SecureStorageRepository>(
     () => SecureStorageRepository(),
@@ -37,6 +40,11 @@ Future<void> getItSetUp({bool testing = false}) async {
 
   getIt.registerLazySingleton<PostsRepository>(
     () => PostsRepository(),
+  );
+
+  getIt.registerLazySingleton<AuthBloc>(
+    () => AuthBloc(),
+    dispose: (AuthBloc authBloc) => authBloc.close(),
   );
 
   return getIt.allReady();

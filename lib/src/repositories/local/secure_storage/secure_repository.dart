@@ -1,11 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 
 import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-
-abstract class IStorage {
-  Future<void> saveToken(String token);
-}
 
 class SecureStorageRepository {
   static SecureStorageRepository? _instance;
@@ -153,33 +150,33 @@ class SecureStorageRepository {
     return await _storage.read(key: _refreshTokenKey);
   }
 
-  /// todo: make sure that the token uses utc time
-  Future<bool> isTokenExpired() async {
-    String? token = await getAccessToken();
-    if (token != null) {
-      //Map<String, dynamic> payload = Jwt.parseJwt(token);
-      DateTime? expirationDate = Jwt.getExpiryDate(token);
-      if (expirationDate != null) {
-        return DateTime.now().toUtc().isAfter(expirationDate);
-      } else {
-        return false;
-      }
-    }
-    return true;
-  }
+  // /// todo: make sure that the token uses utc time
+  // Future<bool> isTokenExpired() async {
+  //   String? token = await getAccessToken();
+  //   if (token != null) {
+  //     //Map<String, dynamic> payload = Jwt.parseJwt(token);
+  //     DateTime? expirationDate = Jwt.getExpiryDate(token);
+  //     if (expirationDate != null) {
+  //       return DateTime.now().toUtc().isAfter(expirationDate);
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
-  /// todo: make sure that the token uses utc time
-  Future<Duration?> getTokenRemainingTime() async {
-    String? token = await getAccessToken();
-    if (token != null) {
-      //Map<String, dynamic> payload = Jwt.parseJwt(token);
-      DateTime? expirationDate = Jwt.getExpiryDate(token);
-      if (expirationDate != null) {
-        return expirationDate.difference(DateTime.now().toUtc());
-      }
-    }
-    return null;
-  }
+  // /// todo: make sure that the token uses utc time
+  // Future<Duration?> getTokenRemainingTime() async {
+  //   String? token = await getAccessToken();
+  //   if (token != null) {
+  //     //Map<String, dynamic> payload = Jwt.parseJwt(token);
+  //     DateTime? expirationDate = Jwt.getExpiryDate(token);
+  //     if (expirationDate != null) {
+  //       return expirationDate.difference(DateTime.now().toUtc());
+  //     }
+  //   }
+  //   return null;
+  // }
 
   Future<void> deleteAll() async {
     return _storage.deleteAll();

@@ -32,15 +32,6 @@ class AuthRepository {
         .dio
         .post('api/auth/login/sms', data: jsonEncode(request.toJson()));
 
-    // print('AuthRepo logInWithPhone 2 --------');
-    // print(response.data);
-
-    OTPLoginResponse responseModel = OTPLoginResponse.fromJson(response.data);
-
-    if (responseModel.accessToken != null) {
-
-    }
-
     return OTPLoginResponse.fromJson(response.data);
   }
 
@@ -79,9 +70,6 @@ class AuthRepository {
       name: name,
       birthdate: birthdate,
     );
-
-    //print("#############################");
-    //print(request);
 
     Response response = await getIt.get<Api>()
         .dio
