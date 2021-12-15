@@ -29,7 +29,7 @@ dependencies:
 
   # logging
   catcher: ^0.6.9
-  sentry: ^6.2.1
+  sentry: ^6.2.2
 
   formz: ^0.4.1
   equatable: ^2.0.3
@@ -103,8 +103,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  swagger_dart_code_generator: ^2.2.8
-  chopper_generator: ^4.0.3
+  swagger_dart_code_generator: ^2.2.9
+  #chopper_generator: ^4.0.3
 
   flutter_lints: ^1.0.4
 
