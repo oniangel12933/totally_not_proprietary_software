@@ -15,8 +15,6 @@ import 'bloc/sign_up_bloc.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
-  static const routeName = '/signup';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
