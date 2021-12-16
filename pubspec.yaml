@@ -103,7 +103,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  swagger_dart_code_generator: ^2.2.9
+  swagger_dart_code_generator: ^2.2.10
   #chopper_generator: ^4.0.3
 
   flutter_lints: ^1.0.4

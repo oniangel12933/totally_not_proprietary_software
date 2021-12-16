@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -38,8 +37,9 @@ class _PostsListState extends State<PostsList> {
 
   final getIt = GetIt.instance;
   late ScrollController _scrollViewController;
-  bool _showFiltersButton = true;
-  bool isScrollingDown = false;
+
+  //bool _showFiltersButton = true;
+  //bool isScrollingDown = false;
 
   late String _filterName;
 
@@ -54,6 +54,7 @@ class _PostsListState extends State<PostsList> {
 
     _pagingController.addPageRequestListener((pageKey) {
       print("_pagingController.addPageRequestListener pageKey=$pageKey");
+      //int p = pageKey // _pageSize;
       _fetchPage(pageKey);
     });
 
@@ -74,47 +75,53 @@ class _PostsListState extends State<PostsList> {
     });
 
     _scrollViewController = ScrollController();
-    _scrollViewController.addListener(_scrollListener);
+    //_scrollViewController.addListener(_scrollListener);
   }
 
-  void _scrollListener() {
-    if (_scrollViewController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
-      if (!isScrollingDown) {
-        isScrollingDown = true;
-        _showFiltersButton = false;
-        if (mounted) {
-          setState(() {});
-        }
-      }
-    }
-
-    if (_scrollViewController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      if (isScrollingDown) {
-        isScrollingDown = false;
-        _showFiltersButton = true;
-        if (mounted) {
-          setState(() {});
-        }
-      }
-    }
-  }
+  // void _scrollListener() {
+  //   if (_scrollViewController.position.userScrollDirection ==
+  //       ScrollDirection.reverse) {
+  //     if (!isScrollingDown) {
+  //       isScrollingDown = true;
+  //       _showFiltersButton = false;
+  //       if (mounted) {
+  //         setState(() {});
+  //       }
+  //     }
+  //   }
+  //
+  //   if (_scrollViewController.position.userScrollDirection ==
+  //       ScrollDirection.forward) {
+  //     if (isScrollingDown) {
+  //       isScrollingDown = false;
+  //       _showFiltersButton = true;
+  //       if (mounted) {
+  //         setState(() {});
+  //       }
+  //     }
+  //   }
+  // }
 
   Future<void> _fetchPage(int pageKey) async {
+
     try {
-      final PagePost postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
+      final PostFeedResponse postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
         filter: _filterName.toLowerCase(),
         page: pageKey,
         size: _pageSize,
       );
 
       if (postsFeedResponse.items != null) {
+
+        print("${postsFeedResponse.items!.length} < $_pageSize");
+
         final isLastPage = postsFeedResponse.items!.length < _pageSize;
+
         if (isLastPage) {
           _pagingController.appendLastPage(postsFeedResponse.items!);
         } else {
-          final int nextPageKey = pageKey + postsFeedResponse.items!.length;
+          //final int nextPageKey = pageKey + postsFeedResponse.items!.length;
+          final int nextPageKey = pageKey + 1;
           _pagingController.appendPage(postsFeedResponse.items!, nextPageKey);
         }
       }
@@ -152,16 +159,22 @@ class _PostsListState extends State<PostsList> {
                       top: 8.0,
                       bottom: 8.0,
                     ),
-                    child: AnimatedContainer(
-                      height: _showFiltersButton ? filterButtonHeight : 0.0,
-                      duration: const Duration(milliseconds: 200),
-                      child: _getFilterButton(
-                          context: context,
-                          buttonHeight: filterButtonHeight,
-                          onPressed: () {
-                            _showPopupSheet(context);
-                          }),
-                    ),
+                    child: _getFilterButton(
+                        context: context,
+                        buttonHeight: filterButtonHeight,
+                        onPressed: () {
+                          _showPopupSheet(context);
+                        }),
+                    // AnimatedContainer(
+                    //   height: _showFiltersButton ? filterButtonHeight : 0.0,
+                    //   duration: const Duration(milliseconds: 200),
+                    //   child: _getFilterButton(
+                    //       context: context,
+                    //       buttonHeight: filterButtonHeight,
+                    //       onPressed: () {
+                    //         _showPopupSheet(context);
+                    //       }),
+                    // ),
                   ),
                 ],
               ),
@@ -173,7 +186,7 @@ class _PostsListState extends State<PostsList> {
                   child: CustomScrollView(
                     /// AlwaysScrollableScrollPhysics allows pull to refresh
                     /// to work on an empty list
-                    //physics: const AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollViewController,
                     slivers: <Widget>[
                       PagedSliverList<int, AppApiFeedSchemaPost>(
@@ -223,7 +236,7 @@ class _PostsListState extends State<PostsList> {
   @override
   void dispose() {
     _pagingController.dispose();
-    _scrollViewController.removeListener(_scrollListener);
+    //_scrollViewController.removeListener(_scrollListener);
     _scrollViewController.dispose();
     super.dispose();
   }

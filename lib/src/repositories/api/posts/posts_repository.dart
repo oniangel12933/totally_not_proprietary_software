@@ -9,17 +9,26 @@ import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
 class PostsRepository {
   final getIt = GetIt.instance;
 
-  Future<PagePost> getPostsFeed({
+  Future<PostFeedResponse> getPostsFeed({
     required String filter,
     required int page,
     required int size,
   }) async {
 
-    var request = BodyGetPostFeedApiSocialFeedGetPostFeedPost(
-        context: GetFeed(
+    // var request = BodyGetPostFeedApiSocialFeedGetPostFeedPost(
+    //     context: GetFeed(
+    //       filter: filter,
+    //     ),
+    //     params: Params(
+    //       page: page,
+    //       size: size,
+    //     ));
+
+    var request = GetFeed(
+        context: Filter(
           filter: filter,
         ),
-        params: Params(
+        params: AppApiFeedSchemaParams(
           page: page,
           size: size,
         ));
@@ -28,7 +37,7 @@ class PostsRepository {
         .dio
         .post('api/social/feed/get_post_feed', data: jsonEncode(request.toJson()));
 
-    PagePost postFeedResponse = PagePost.fromJson(response.data);
+    PostFeedResponse postFeedResponse = PostFeedResponse.fromJson(response.data);
     return postFeedResponse;
   }
 

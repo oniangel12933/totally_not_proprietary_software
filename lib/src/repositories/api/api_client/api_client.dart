@@ -87,9 +87,9 @@ class Api {
     return {
       //newMemoryCacheInterceptor('/api/social/feed/get_post_feed', 'post_feed', store: store),
       PrettyDioLogger(
-          requestHeader: true,
+          //requestHeader: true,
           requestBody: true,
-          responseBody: true,
+          responseBody: false,
           //responseHeader: false,
           error: true,
           compact: true,
