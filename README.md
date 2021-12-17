@@ -18,3 +18,13 @@
 
 ## Development
 [Install Android Studio](https://developer.android.com/studio/)
+
+Swagger Backend 
+https://api.insidersapp.io/docs
+
+When an endpoint is changed in the backed, the new endpoint objects 
+need to be regenerated using [swagger_dart_code_generator](https://pub.dev/packages/swagger_dart_code_generator)
+
+`curl https://api.insidersapp.io/openapi.json --output swaggers/involio_api.json`
+then for generating code, run:
+`flutter pub run build_runner build --delete-conflicting-outputs`
