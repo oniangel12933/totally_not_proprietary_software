@@ -174,10 +174,11 @@ class _UserPostState extends State<UserPost> {
         widget.text.length < 100
             ? widget.text
             : widget.text.substring(0, 100) + ' ...',
-        //TODO add expanding elipsies button
+        //TODO add expanding ellipses button
         softWrap: true,
-        style:
-            AppFonts.comments1.copyWith(color: AppColors.involioWhiteShades60),
+        style: AppFonts.comments1.copyWith(
+          color: AppColors.involioWhiteShades60,
+        ),
       ),
     );
   }

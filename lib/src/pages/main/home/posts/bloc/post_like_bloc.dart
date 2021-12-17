@@ -32,7 +32,7 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
   }) : super(PostLikeState.initial(
           postId: postId,
           likeCnt: likedCount,
-          like: liked,
+          isLiked: liked,
         )) {
     on<PostLikeButtonPressedEvent>(
       _onLikeButtonPressed,
@@ -48,53 +48,82 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
 
     final String postId = event.postId ?? state.postId;
 
-    final bool likeWas = event.likeWas ?? state.like;
-    bool like = false;
+    final bool likeWas = event.likeWas ?? state.isLiked;
+    bool isLiked = false;
 
     final int likeCntWas = event.likeCntWas ?? state.likeCnt;
     int likeCnt = likeCntWas;
 
     if (likeWas == true) {
       likeCnt = likeCntWas - 1;
+      isLiked = false;
     }
 
     if (likeWas == false) {
       likeCnt = likeCntWas + 1;
-      like = true;
+      isLiked = true;
     }
 
     emit(
       PostLikeState.saving(
         postId: postId,
-        like: like,
+        isLiked: isLiked,
         likeCnt: likeCnt,
       ),
     );
 
     try {
       PostsRepository postsRepository = GetIt.I.get<PostsRepository>();
-      final LikeResponse postLikeResponse =
-          await postsRepository.setPostLiked(
-        postId: postId,
-      );
 
-      if (postLikeResponse.success == "True") {
-        emit(
-          PostLikeState.success(
-            postId: postId,
-            like: like, // result
-            likeCnt: likeCnt, // result
-          ),
+      if (isLiked) {
+        final LikeResponse postLikeResponse =
+        await postsRepository.setPostLiked(
+          postId: postId,
         );
+
+        // todo:
+        if (postLikeResponse.success == true) {
+          emit(
+            PostLikeState.success(
+              postId: postId,
+              isLiked: isLiked,
+              likeCnt: likeCnt,
+            ),
+          );
+        } else {
+          emit(
+            PostLikeState.failure(
+              error: postLikeResponse.error,
+              postId: postId,
+              isLiked: likeWas,
+              likeCnt: likeCntWas,
+            ),
+          );
+        }
       } else {
-        emit(
-          PostLikeState.failure(
-            error: postLikeResponse.error,
-            postId: postId,
-            like: likeWas,
-            likeCnt: likeCntWas,
-          ),
+        final RemoveLikeResponse removeLikeResponse =
+        await postsRepository.removePostLiked(
+          postId: postId,
         );
+
+        if (removeLikeResponse.success == true) {
+          emit(
+            PostLikeState.success(
+              postId: postId,
+              isLiked: isLiked,
+              likeCnt: likeCnt,
+            ),
+          );
+        } else {
+          emit(
+            PostLikeState.failure(
+              error: removeLikeResponse.error,
+              postId: postId,
+              isLiked: likeWas,
+              likeCnt: likeCntWas,
+            ),
+          );
+        }
       }
     } catch (error, trace) {
       print('catch PostLikeBloc error: $error - $trace');
@@ -103,7 +132,7 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
         PostLikeState.failure(
           error: error.toString(),
           postId: postId,
-          like: likeWas,
+          isLiked: likeWas,
           likeCnt: likeCntWas,
         ),
       );

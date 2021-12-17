@@ -25,7 +25,7 @@ class PostsRepository {
     //     ));
 
     var request = GetFeed(
-        context: Filter(
+        context: AppApiFeedSchemaFilter(
           filter: filter,
         ),
         params: AppApiFeedSchemaParams(

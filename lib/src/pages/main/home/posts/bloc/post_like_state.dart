@@ -15,7 +15,7 @@ class PostLikeState with _$PostLikeState {
     @Default(false) bool? isSavingLike,
     required String postId,
     required int likeCnt,
-    required bool like,
+    required bool isLiked,
     String? error,
   }) = PostLikeStateMain;
 
@@ -24,14 +24,14 @@ class PostLikeState with _$PostLikeState {
     String? error,
     required String postId,
     required int likeCnt,
-    required bool like,
+    required bool isLiked,
   }) = InitialPostLikeState;
 
   const factory PostLikeState.saving({
     @Default(true) bool isSavingLike,
     required String postId,
     required int likeCnt,
-    required bool like,
+    required bool isLiked,
     String? error,
   }) = SavingPostLikeState;
 
@@ -39,7 +39,7 @@ class PostLikeState with _$PostLikeState {
     @Default(true) bool isSavingLike,
     required String postId,
     required int likeCnt,
-    required bool like,
+    required bool isLiked,
     String? error,
   }) = SuccessPostLikeState;
 
@@ -47,7 +47,7 @@ class PostLikeState with _$PostLikeState {
     @Default(true) bool isSavingLike,
     required String postId,
     required int likeCnt,
-    required bool like,
+    required bool isLiked,
     String? error,
   }) = FailurePostLikeState;
 

@@ -14,7 +14,6 @@ import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
 import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'bloc/posts_filter_bloc.dart';

@@ -64,7 +64,7 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
 
           if (likedState.error != null) {}
 
-          if (likedState.like != null) {
+          if (likedState.isLiked != null) {
             // if (bState.userToEvent != null) {
             //   //UserToEventModel userToEvent = bState.userToEvent;
             //   //DFEventModel dfEvent = bState.dfEvent;
@@ -80,10 +80,10 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
             child: Row(
               children: <Widget>[
                 Icon(
-                  likedState.like == true
+                  likedState.isLiked == true
                       ? context.involioIcons.heartFill
                       : context.involioIcons.heart,
-                  color: likedState.like == true
+                  color: likedState.isLiked == true
                       ? Colors.red
                       : Theme.of(context).brightness == Brightness.light
                           ? Colors.grey.shade600
@@ -109,7 +109,7 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
               _postLikeBloc.likeButtonPressed(
                 postId: widget.postId,
                 //like: widget.post.isLike() ? UserToEventModel.LIKE_NO : UserToEventModel.LIKE_YES,
-                likeWas: likedState.like,
+                likeWas: likedState.isLiked,
                 //likeCnt: widget.post.isLike()? widget.post.mLikeCount - 1 : widget.post.mLikeCount + 1,
                 likeCntWas: likedState.likeCnt,
               );
