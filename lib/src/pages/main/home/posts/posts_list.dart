@@ -14,6 +14,7 @@ import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
 import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
 import 'package:insidersapp/src/shared/config/app_config.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
+
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'bloc/posts_filter_bloc.dart';
@@ -33,13 +34,10 @@ class PostsList extends StatefulWidget {
 }
 
 class _PostsListState extends State<PostsList> {
-  static const _pageSize = 10;
+  static const _pageSize = 20;
 
   final getIt = GetIt.instance;
   late ScrollController _scrollViewController;
-
-  //bool _showFiltersButton = true;
-  //bool isScrollingDown = false;
 
   late String _filterName;
 
@@ -54,7 +52,6 @@ class _PostsListState extends State<PostsList> {
 
     _pagingController.addPageRequestListener((pageKey) {
       print("_pagingController.addPageRequestListener pageKey=$pageKey");
-      //int p = pageKey // _pageSize;
       _fetchPage(pageKey);
     });
 
@@ -75,44 +72,18 @@ class _PostsListState extends State<PostsList> {
     });
 
     _scrollViewController = ScrollController();
-    //_scrollViewController.addListener(_scrollListener);
   }
 
-  // void _scrollListener() {
-  //   if (_scrollViewController.position.userScrollDirection ==
-  //       ScrollDirection.reverse) {
-  //     if (!isScrollingDown) {
-  //       isScrollingDown = true;
-  //       _showFiltersButton = false;
-  //       if (mounted) {
-  //         setState(() {});
-  //       }
-  //     }
-  //   }
-  //
-  //   if (_scrollViewController.position.userScrollDirection ==
-  //       ScrollDirection.forward) {
-  //     if (isScrollingDown) {
-  //       isScrollingDown = false;
-  //       _showFiltersButton = true;
-  //       if (mounted) {
-  //         setState(() {});
-  //       }
-  //     }
-  //   }
-  // }
-
   Future<void> _fetchPage(int pageKey) async {
-
     try {
-      final PostFeedResponse postsFeedResponse = await getIt.get<PostsRepository>().getPostsFeed(
-        filter: _filterName.toLowerCase(),
-        page: pageKey,
-        size: _pageSize,
-      );
+      final PostFeedResponse postsFeedResponse =
+          await getIt.get<PostsRepository>().getPostsFeed(
+                filter: _filterName.toLowerCase(),
+                page: pageKey,
+                size: _pageSize,
+              );
 
       if (postsFeedResponse.items != null) {
-
         print("${postsFeedResponse.items!.length} < $_pageSize");
 
         final isLastPage = postsFeedResponse.items!.length < _pageSize;
@@ -120,7 +91,6 @@ class _PostsListState extends State<PostsList> {
         if (isLastPage) {
           _pagingController.appendLastPage(postsFeedResponse.items!);
         } else {
-          //final int nextPageKey = pageKey + postsFeedResponse.items!.length;
           final int nextPageKey = pageKey + 1;
           _pagingController.appendPage(postsFeedResponse.items!, nextPageKey);
         }
@@ -132,7 +102,6 @@ class _PostsListState extends State<PostsList> {
 
   @override
   Widget build(BuildContext context) {
-    //print("show filter button $_showFiltersButton");
     const double filterButtonHeight = 25.0;
 
     return BlocListener<PostsFilterBloc, PostsFilterState>(
@@ -147,8 +116,59 @@ class _PostsListState extends State<PostsList> {
         buildWhen: (previous, current) =>
             previous.filterName != current.filterName,
         builder: (context, state) {
-          return Column(
+          return Stack(
+            alignment: Alignment.topLeft,
             children: [
+              RefreshIndicator(
+                onRefresh: () => Future.sync(
+                  () => _pagingController.refresh(),
+                ),
+                child: CustomScrollView(
+                  /// AlwaysScrollableScrollPhysics allows pull to refresh
+                  /// to work on an empty list
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  controller: _scrollViewController,
+                  slivers: <Widget>[
+                    const SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 32,
+                      ),
+                    ),
+                    PagedSliverList<int, AppApiFeedSchemaPost>(
+                      pagingController: _pagingController,
+                      builderDelegate:
+                          PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
+                              noItemsFoundIndicatorBuilder: (context) =>
+                                  NoItemsFoundWidget(onTryAgain: () {
+                                    _pagingController.refresh();
+                                  }),
+                              animateTransitions: true,
+                              itemBuilder: (context, item, index) {
+                                // if we start to use websockets for post,
+                                // this will need to be moved into the bloc
+                                String imageUrl =
+                                    "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
+                                return UserPost(
+                                  postId: item.id ?? "",
+                                  imageUrl: imageUrl,
+                                  name: item.owner?.name ?? "",
+                                  username: "@${item.owner?.username}",
+                                  //TODO in future should show days ago/weeks ago/etc if longer than a day.
+                                  timestamp: item.timestamp != null
+                                      ? DateFormat('h:mm a')
+                                          .format(item.timestamp as DateTime)
+                                      : '',
+                                  text: item.content ?? "",
+                                  likes: item.postLikes ?? 0,
+                                  liked: item.liked ?? false,
+                                  comments: "${item.postComments}",
+                                  dollars: "${item.tips}",
+                                );
+                              }),
+                    ),
+                  ],
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -165,66 +185,8 @@ class _PostsListState extends State<PostsList> {
                         onPressed: () {
                           _showPopupSheet(context);
                         }),
-                    // AnimatedContainer(
-                    //   height: _showFiltersButton ? filterButtonHeight : 0.0,
-                    //   duration: const Duration(milliseconds: 200),
-                    //   child: _getFilterButton(
-                    //       context: context,
-                    //       buttonHeight: filterButtonHeight,
-                    //       onPressed: () {
-                    //         _showPopupSheet(context);
-                    //       }),
-                    // ),
                   ),
                 ],
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () => Future.sync(
-                    () => _pagingController.refresh(),
-                  ),
-                  child: CustomScrollView(
-                    /// AlwaysScrollableScrollPhysics allows pull to refresh
-                    /// to work on an empty list
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    controller: _scrollViewController,
-                    slivers: <Widget>[
-                      PagedSliverList<int, AppApiFeedSchemaPost>(
-                        pagingController: _pagingController,
-                        builderDelegate:
-                            PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
-                                noItemsFoundIndicatorBuilder: (context) =>
-                                    NoItemsFoundWidget(onTryAgain: () {
-                                      _pagingController.refresh();
-                                    }),
-                                animateTransitions: true,
-                                itemBuilder: (context, item, index) {
-                                  // if we start to use websockets for post,
-                                  // this will need to be moved into the bloc
-                                  String imageUrl =
-                                      "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
-                                  //print("imageUrl: $imageUrl");
-                                  return UserPost(
-                                    postId: item.id ?? "",
-                                    imageUrl: imageUrl,
-                                    name: item.owner?.name ?? "",
-                                    username: "@${item.owner?.username}",
-                                    //TODO in future should show days ago/weeks ago/etc if longer than a day.
-                                    timestamp: item.timestamp != null
-                                        ? DateFormat('h:mm a')
-                                            .format(item.timestamp as DateTime)
-                                        : '',
-                                    text: item.content ?? "",
-                                    likes: item.postLikes ?? 0,
-                                    liked: item.liked ?? false,
-                                    comments: "${item.postComments}",
-                                    dollars: "${item.tips}",
-                                  );
-                                }),
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ],
           );
@@ -236,7 +198,6 @@ class _PostsListState extends State<PostsList> {
   @override
   void dispose() {
     _pagingController.dispose();
-    //_scrollViewController.removeListener(_scrollListener);
     _scrollViewController.dispose();
     super.dispose();
   }
@@ -249,10 +210,12 @@ class _PostsListState extends State<PostsList> {
     IconData iconData = context.involioIcons.dropDown;
     return ConstrainedBox(
       constraints: BoxConstraints.tightFor(
-        //width: 107,
         height: buttonHeight,
       ),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: AppColors.involioBlue,
+        ),
         onPressed: () {
           if (onPressed != null) {
             onPressed();
