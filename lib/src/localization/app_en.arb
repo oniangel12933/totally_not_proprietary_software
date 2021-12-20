@@ -166,5 +166,25 @@
    "helpCenter" : "Help Center",
    "@helpCenter": {
        "description": "Hamburger dropdown Help Center"
+   },
+   "trendingPortfolios": "Trending Portfolios",
+   "@trendingPortfolios": {
+       "description": "Search page portfolio title"
+   },
+   "trendingStrategies": "Trending Strategies",
+   "@trendingStrategies": {
+       "description": "Search page strategy title"
+   },
+   "top20Portfolios": "Top 20 Portfolios",
+   "@top20Portfolios": {
+       "description": "Top 20 portfolios title"
+   },
+   "top20Strategies": "Top 20 Strategies",
+   "@top20Strategies": {
+       "description": "Top 20 strategies title"
+   },
+   "viewTop20": "View Top 20",
+   "@viewTop20": {
+       "description": "Text button linking to top 20 trending of category"
    }
 }

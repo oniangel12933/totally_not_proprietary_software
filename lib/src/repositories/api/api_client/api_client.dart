@@ -4,8 +4,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:stash_dio/stash_dio.dart';
-import 'package:stash_memory/stash_memory.dart';
 
 import 'package:insidersapp/src/repositories/api/api_client/curl_interceptor.dart';
 import 'package:insidersapp/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
@@ -92,7 +90,7 @@ class Api {
           responseBody: false,
           //responseHeader: false,
           error: true,
-          compact: true,
+          //compact: true,
           maxWidth: 90),
       getCurlLoggerInterceptor(),
       // RetryInterceptor(

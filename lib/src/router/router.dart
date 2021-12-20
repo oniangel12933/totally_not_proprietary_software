@@ -5,6 +5,8 @@ import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dar
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:insidersapp/src/pages/main/main_page.dart';
+import 'package:insidersapp/src/pages/main/search/top_twenty_portfolios.dart';
+import 'package:insidersapp/src/pages/main/search/top_twenty_strategies.dart';
 import 'package:insidersapp/src/pages/settings/settings_page.dart';
 import 'package:insidersapp/src/pages/splash/splash_page.dart';
 
@@ -62,10 +64,25 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
+    AutoRoute(
+      initial: true,
+      path: '/portfolios',
+      page: PortfoliosTopTwentyPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    AutoRoute(
+      initial: true,
+      path: '/portfolios',
+      page: StrategiesTopTwentyPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: '/get_started'),
     //Home
   ],
 )
 class $AppRouter {}
-

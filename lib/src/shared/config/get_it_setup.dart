@@ -2,7 +2,9 @@ import 'package:get_it/get_it.dart';
 
 import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
 import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
+import 'package:insidersapp/src/repositories/api/portfolios/portfolios_repository.dart';
 import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
+import 'package:insidersapp/src/repositories/api/strategies/strategies_repository.dart';
 import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
 import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
@@ -40,6 +42,12 @@ Future<void> getItSetUp({bool testing = false}) async {
 
   getIt.registerLazySingleton<PostsRepository>(
     () => PostsRepository(),
+  );
+  getIt.registerLazySingleton<PortfoliosRepository>(
+    () => PortfoliosRepository(),
+  );
+  getIt.registerLazySingleton<StrategiesRepository>(
+    () => StrategiesRepository(),
   );
 
   getIt.registerLazySingleton<AuthBloc>(
