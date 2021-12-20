@@ -82,7 +82,7 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
         );
 
         // todo:
-        if (postLikeResponse.success == true) {
+        if (postLikeResponse.error == null) {
           emit(
             PostLikeState.success(
               postId: postId,
@@ -106,7 +106,7 @@ class PostLikeBloc extends Bloc<PostLikeEvent, PostLikeState> {
           postId: postId,
         );
 
-        if (removeLikeResponse.success == true) {
+        if (removeLikeResponse.error == null) {
           emit(
             PostLikeState.success(
               postId: postId,

@@ -89,10 +89,10 @@ class Api {
       PrettyDioLogger(
           //requestHeader: true,
           requestBody: true,
-          responseBody: false,
+          responseBody: true,
           //responseHeader: false,
           error: true,
-          compact: true,
+          //compact: true,
           maxWidth: 90),
       getCurlLoggerInterceptor(),
       // RetryInterceptor(
