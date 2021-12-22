@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:insidersapp/src/router/router.gr.dart';
-import 'package:insidersapp/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/router/router.gr.dart';
+import 'package:involio/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 class GetStartedPage extends StatefulWidget {
   const GetStartedPage({Key? key}) : super(key: key);

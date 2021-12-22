@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'cubit.dart';
 
 class UserCubit extends Cubit<UserState> {

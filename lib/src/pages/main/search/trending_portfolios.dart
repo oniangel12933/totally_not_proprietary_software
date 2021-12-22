@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 class TrendingCategory extends StatelessWidget {
   final String title;

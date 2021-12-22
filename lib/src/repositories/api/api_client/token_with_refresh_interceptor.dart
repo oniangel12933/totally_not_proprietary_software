@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 
 /// This will use the access token in the auth header to complete the request.
 /// If the access token is expired, it will use the refresh token to get a

@@ -8,10 +8,10 @@ import 'package:stash/stash_api.dart';
 import 'package:stash_dio/stash_dio.dart';
 import 'package:stash_memory/stash_memory.dart';
 
-import 'package:insidersapp/src/repositories/api/api_client/curl_interceptor.dart';
-import 'package:insidersapp/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
-import 'package:insidersapp/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
-import 'package:insidersapp/src/shared/config/app_config.dart';
+import 'package:involio/src/repositories/api/api_client/curl_interceptor.dart';
+import 'package:involio/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
+import 'package:involio/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
+import 'package:involio/src/shared/config/app_config.dart';
 
 class Api {
   final dio = _createDioClient();

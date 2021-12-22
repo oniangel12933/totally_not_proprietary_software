@@ -1,11 +1,11 @@
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
-import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
-import 'package:insidersapp/src/repositories/api/user/user_repository.dart';
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/repositories/api/api_client/api_client.dart';
+import 'package:involio/src/repositories/api/auth/auth_repository.dart';
+import 'package:involio/src/repositories/api/posts/posts_repository.dart';
+import 'package:involio/src/repositories/api/user/user_repository.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'app_config.dart';
 
 Future<void> getItSetUp({bool testing = false}) async {

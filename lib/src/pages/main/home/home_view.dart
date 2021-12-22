@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:insidersapp/src/pages/main/home/posts/posts_view.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/pages/main/home/posts/posts_view.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 /// this builds a widget that displays tabs on the homepage above the posts
 class HomeView extends StatelessWidget {

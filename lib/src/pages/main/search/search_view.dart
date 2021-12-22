@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:insidersapp/src/pages/main/search/trending_portfolios.dart';
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/pages/main/search/trending_portfolios.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);

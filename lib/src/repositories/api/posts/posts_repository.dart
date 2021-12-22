@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/api/api_client/api_client.dart';
 
 class PostsRepository {
   final getIt = GetIt.instance;

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/theme/colors.dart';
 
 Widget getInvolioActionButtonIcon(BuildContext context) {
   const double size = 30.0;
