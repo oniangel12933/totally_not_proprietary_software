@@ -34,6 +34,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
             padding: const EdgeInsets.all(12),
 
             child: CustomScrollView(
+              physics: const ClampingScrollPhysics(),
               slivers: [
                 /// SliverFillRemaining helps force terms of services
                 /// to the bottom of the page

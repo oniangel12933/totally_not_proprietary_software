@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
+
 import 'package:involio/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
 import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/config/get_it_setup.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockDioResponse extends Mock implements Response {}
 
