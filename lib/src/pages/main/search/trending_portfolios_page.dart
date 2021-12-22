@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insidersapp/src/pages/main/search/trending_list.dart';
+import 'package:insidersapp/src/pages/main/search/portfolios_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 import 'bloc/trending_portfolio_cubit.dart';
 
-class PortfoliosTopTwentyPage extends StatelessWidget {
-  const PortfoliosTopTwentyPage({Key? key}) : super(key: key);
+class TrendingPortfoliosPage extends StatelessWidget {
+  const TrendingPortfoliosPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

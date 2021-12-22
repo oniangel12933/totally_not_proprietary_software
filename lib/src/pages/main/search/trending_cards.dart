@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:numeral/numeral.dart';
 
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
 
 class TrendingCategory extends StatelessWidget {
   final String title;
@@ -34,7 +31,6 @@ class TrendingCategory extends StatelessWidget {
                     .copyWith(color: AppColors.involioWhiteShades60)),
             TextButton(
               style: TextButton.styleFrom(
-                //minimumSize: Size.zero,
                 padding: const EdgeInsets.only(top: 16, bottom: 16),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),

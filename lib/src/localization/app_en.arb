@@ -175,6 +175,10 @@
    "@trendingStrategies": {
        "description": "Search page strategy title"
    },
+   "trendingUsers": "Trending Users",
+   "@trendingUsers": {
+       "description": "Search page users title"
+   },
    "top20Portfolios": "Top 20 Portfolios",
    "@top20Portfolios": {
        "description": "Top 20 portfolios title"
@@ -183,8 +187,24 @@
    "@top20Strategies": {
        "description": "Top 20 strategies title"
    },
+   "top20Users": "Top 20 Users",
+   "@top20Users": {
+       "description": "Top 20 users title"
+   },
    "viewTop20": "View Top 20",
    "@viewTop20": {
        "description": "Text button linking to top 20 trending of category"
+   },
+   "follow": "Follow",
+   "@follow": {
+       "description": "User is not following/ prompt to follow user"
+   },
+   "following": "Following",
+   "@following": {
+       "description": "User is following/ prompt to unfollow user"
+   },
+   "followers": "Followers",
+   "@followers": {
+       "description": "Displays user's follower count"
    }
 }

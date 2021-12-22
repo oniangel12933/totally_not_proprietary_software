@@ -15,7 +15,6 @@ class TrendingPortfolioCubit extends Cubit<TrendingPortfolioState> {
   }
 
   Future<void> getData() async {
-    print("We hit this break point");
 
     final TrendingPortfolioResponse portfolioResponse =
         await GetIt.I.get<PortfoliosRepository>().getPortfolios(

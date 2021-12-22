@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insidersapp/src/pages/main/search/bloc/trending_strategy_cubit.dart';
-import 'package:insidersapp/src/pages/main/search/trending_list.dart';
+import 'package:insidersapp/src/pages/main/search/strategies_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
-class StrategiesTopTwentyPage extends StatelessWidget {
-  const StrategiesTopTwentyPage({Key? key}) : super(key: key);
+class TrendingStrategiesPage extends StatelessWidget {
+  const TrendingStrategiesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

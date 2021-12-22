@@ -5,34 +5,31 @@ import 'package:insidersapp/src/pages/main/search/trending_cards.dart';
 import 'package:insidersapp/src/router/router.gr.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'bloc/trending_portfolio_cubit.dart';
+import 'bloc/trending_strategy_cubit.dart';
 
-class TrendingPortfolioTopTwo extends StatefulWidget {
-  const TrendingPortfolioTopTwo({Key? key}) : super(key: key);
+class DiscoverTrendingStrategies extends StatefulWidget {
+  const DiscoverTrendingStrategies({Key? key}) : super(key: key);
 
   @override
-  _TrendingPortfolioTopTwoState createState() =>
-      _TrendingPortfolioTopTwoState();
+  _DiscoverTrendingStrategiesState createState() => _DiscoverTrendingStrategiesState();
 }
 
-class _TrendingPortfolioTopTwoState extends State<TrendingPortfolioTopTwo> {
+class _DiscoverTrendingStrategiesState extends State<DiscoverTrendingStrategies> {
   @override
   void initState() {
     super.initState();
-
-    context.read<TrendingPortfolioCubit>().getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrendingPortfolioCubit, TrendingPortfolioState>(
-      builder: (context, TrendingPortfolioState state) {
+    return BlocBuilder<TrendingStrategyCubit, TrendingStrategyState>(
+      builder: (context, TrendingStrategyState state) {
         return TrendingCategory(
-          title: AppLocalizations.of(context)!.trendingPortfolios,
+          title: AppLocalizations.of(context)!.trendingStrategies,
           onPressed: () =>
-              context.router.push(const PortfoliosTopTwentyRoute()),
+              context.router.push(const TrendingStrategiesRoute()),
           child: SizedBox(
-            height: 162, //TODO adjust height if trendingPortfolios.length < 2
+            height: 162, //TODO adjust height if trendingStrategies.length < 2
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: state.data.length,

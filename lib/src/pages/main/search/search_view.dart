@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insidersapp/src/pages/main/search/bloc/trending_portfolio_cubit.dart';
-import 'package:insidersapp/src/pages/main/search/top_two_portfolios.dart';
-import 'package:insidersapp/src/pages/main/search/top_two_strategies.dart';
+import 'package:insidersapp/src/pages/main/search/discover_users.dart';
+import 'package:insidersapp/src/pages/main/search/discover_portfolios.dart';
+import 'package:insidersapp/src/pages/main/search/discover_strategies.dart';
 
-import 'package:insidersapp/src/pages/main/search/trending_cards.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 
 import 'bloc/trending_strategy_cubit.dart';
+import 'bloc/trending_user_cubit.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -46,6 +47,9 @@ class _SearchViewState extends State<SearchView> {
         BlocProvider<TrendingStrategyCubit>(
           create: (context) => TrendingStrategyCubit(pageSize: 2),
         ),
+        BlocProvider<TrendingUserCubit>(
+          create: (context) => TrendingUserCubit(pageSize: 20), //ToDo set pagination to 3 items
+        ),
       ],
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: AppThemes.edgePadding),
@@ -78,7 +82,7 @@ class _SearchInput extends StatelessWidget {
                 size: 20.0,
               ),
               context: context,
-              hintText: "Search",
+              hintText: AppLocalizations.of(context)!.search,
               errorText: '',
             ),
             style: AppFonts.body,
@@ -88,65 +92,15 @@ class _SearchInput extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
             child: Column(
-              children: [
-                TrendingPortfolioTopTwo(),
-                TrendingStrategyTopTwo(),
-                TrendingCategory(
-                  title: "Trending Users",
-                  onPressed: () {},
-                  child: Column(
-                    children: const [
-                      UserImageList(),
-                    ],
-                  ),
-                ),
+              children: const [
+                DiscoverTrendingPortfolios(),
+                DiscoverTrendingStrategies(),
+                DiscoverTrendingUsers(),
               ],
             ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class UserImageList extends StatelessWidget {
-  const UserImageList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      //margin: const EdgeInsets.all(10.0),
-      height: 114.0,
-      child: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(width: 20);
-        },
-        itemBuilder: (_, i) => const TrendingUserCard(),
-        scrollDirection: Axis.horizontal,
-      ),
-    );
-  }
-}
-
-class TrendingUserCard extends StatelessWidget {
-  const TrendingUserCard({
-    Key? key,
-  }) : super(key: key);
-
-  final imageUrl =
-      "https://i.kym-cdn.com/photos/images/original/001/764/548/d82.jpg";
-  final imageSize = 114.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(7.0),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        height: imageSize,
-        //width: imageSize,
-      ),
     );
   }
 }

@@ -5,8 +5,9 @@ import 'package:insidersapp/src/pages/login/get_started/getting_started_page.dar
 import 'package:insidersapp/src/pages/login/login_page/login_page.dart';
 import 'package:insidersapp/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:insidersapp/src/pages/main/main_page.dart';
-import 'package:insidersapp/src/pages/main/search/top_twenty_portfolios.dart';
-import 'package:insidersapp/src/pages/main/search/top_twenty_strategies.dart';
+import 'package:insidersapp/src/pages/main/search/trending_portfolios_page.dart';
+import 'package:insidersapp/src/pages/main/search/trending_strategies_page.dart';
+import 'package:insidersapp/src/pages/main/search/trending_users_page.dart';
 import 'package:insidersapp/src/pages/settings/settings_page.dart';
 import 'package:insidersapp/src/pages/splash/splash_page.dart';
 
@@ -67,7 +68,7 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
     AutoRoute(
       initial: true,
       path: '/portfolios',
-      page: PortfoliosTopTwentyPage,
+      page: TrendingPortfoliosPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],
@@ -75,7 +76,15 @@ import 'package:insidersapp/src/pages/splash/splash_page.dart';
     AutoRoute(
       initial: true,
       path: '/portfolios',
-      page: StrategiesTopTwentyPage,
+      page: TrendingStrategiesPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    AutoRoute(
+      initial: true,
+      path: '/users',
+      page: TrendingUsersPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],

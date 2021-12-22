@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:insidersapp/src/shared/icons/involio_icons.dart';
+import 'package:insidersapp/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:insidersapp/src/theme/app_theme.dart';
 import 'package:insidersapp/src/theme/colors.dart';
 import 'like_button.dart';
@@ -72,7 +73,11 @@ class _UserPostState extends State<UserPost> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildImage(),
+                    AppImageBuilder(
+                        imageUrl: widget.imageUrl,
+                        height: UserPost.imageSize,
+                        width: UserPost.imageSize,
+                        radius: 3.0),
                     const SizedBox(
                       width: 8.0,
                     ),
@@ -103,17 +108,6 @@ class _UserPostState extends State<UserPost> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(3.0),
-      child: CachedNetworkImage(
-        imageUrl: widget.imageUrl,
-        height: UserPost.imageSize,
-        width: UserPost.imageSize,
-      ),
     );
   }
 
