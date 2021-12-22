@@ -8,8 +8,8 @@ import 'package:flutter_dotenv/src/errors.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:insidersapp/src/shared/blocs/bloc_observer.dart';
-import 'package:insidersapp/src/shared/config/get_it_setup.dart';
+import 'package:involio/src/shared/blocs/bloc_observer.dart';
+import 'package:involio/src/shared/config/get_it_setup.dart';
 import 'src/app.dart';
 
 void main() async {

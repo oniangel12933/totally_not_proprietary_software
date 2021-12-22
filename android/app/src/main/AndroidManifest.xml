@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.involio.involio_mobile">
    <application
-        android:label="involio_mobile"
+        android:label="involio"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

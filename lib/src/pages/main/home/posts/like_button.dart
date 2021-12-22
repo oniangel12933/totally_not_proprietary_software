@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'bloc/post_like_bloc.dart';
 import 'bloc/post_like_state.dart';
 

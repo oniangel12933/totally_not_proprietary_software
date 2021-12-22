@@ -4,10 +4,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
-import 'package:insidersapp/src/router/router.gr.dart';
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
-import 'package:insidersapp/src/shared/widgets/loading_indicator.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/router/router.gr.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/shared/widgets/loading_indicator.dart';
+import 'package:involio/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
 import 'bloc/otp_bloc.dart';
 import 'bloc/otp_state.dart';

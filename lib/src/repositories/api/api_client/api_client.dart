@@ -4,11 +4,14 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:stash/stash_api.dart';
+import 'package:stash_dio/stash_dio.dart';
+import 'package:stash_memory/stash_memory.dart';
 
-import 'package:insidersapp/src/repositories/api/api_client/curl_interceptor.dart';
-import 'package:insidersapp/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
-import 'package:insidersapp/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
-import 'package:insidersapp/src/shared/config/app_config.dart';
+import 'package:involio/src/repositories/api/api_client/curl_interceptor.dart';
+import 'package:involio/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
+import 'package:involio/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
+import 'package:involio/src/shared/config/app_config.dart';
 
 class Api {
   final dio = _createDioClient();
@@ -81,9 +84,12 @@ class Api {
   }
 
   static _getSharedInterceptors({required Dio dio}) {
-    //MemoryStore store = newMemoryStore();
+    //final MemoryCacheStore store = newMemoryCacheStore();
+    //final cache = store.cache(eventListenerMode: EventListenerMode.synchronous);
+    //cache.on<CacheEntryCreatedEvent>().listen((event) => print('Key "${event.entry.key}" added to the cache'));
+
     return {
-      //newMemoryCacheInterceptor('/api/social/feed/get_post_feed', 'post_feed', store: store),
+      //cache.interceptor('/api/social/feed/get_post_feed'),
       PrettyDioLogger(
           //requestHeader: true,
           requestBody: true,

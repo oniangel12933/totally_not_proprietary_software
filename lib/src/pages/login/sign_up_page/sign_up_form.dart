@@ -5,11 +5,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
 
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/shared/widgets/platform_date_picker_modal.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/shared/widgets/platform_date_picker_modal.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 import '../login_input_decoration.dart';
 import 'bloc/sign_up_bloc.dart';
 

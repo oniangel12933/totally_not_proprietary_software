@@ -8,14 +8,14 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
-import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
-import 'package:insidersapp/src/repositories/api/posts/posts_repository.dart';
-import 'package:insidersapp/src/shared/config/app_config.dart';
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
+import 'package:involio/src/pages/main/home/posts/post_item.dart';
+import 'package:involio/src/repositories/api/posts/posts_repository.dart';
+import 'package:involio/src/shared/config/app_config.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 import 'bloc/posts_filter_bloc.dart';
 import 'bloc/posts_filter_state.dart';
 

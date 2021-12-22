@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_state.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_state.dart';
 
 class AuthWrapperPage extends StatelessWidget {
   const AuthWrapperPage({Key? key}) : super(key: key);

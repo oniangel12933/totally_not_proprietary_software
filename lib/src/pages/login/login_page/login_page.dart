@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
-import 'package:insidersapp/src/pages/login/login_page/login_form.dart';
-import 'package:insidersapp/src/router/router.gr.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/pages/login/login_page/login_form.dart';
+import 'package:involio/src/router/router.gr.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
 import 'bloc/login_bloc.dart';
 

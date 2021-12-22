@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 
 class TokenInterceptorForRefresh extends Interceptor {
   TokenInterceptorForRefresh();

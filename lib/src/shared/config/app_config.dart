@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:insidersapp/src/extensions/string_extentions.dart';
+import 'package:involio/src/extensions/string_extentions.dart';
 
 class AppConfig {
   static AppConfig? _instance;
@@ -12,7 +12,7 @@ class AppConfig {
   Future<void> setup() async {}
 
   String get baseUrl {
-    return dotenv.get("BASE_URL", fallback: "https://api.insidersapp.io/");
+    return dotenv.get("BASE_URL", fallback: "https://api.involio.io/");
   }
 
   bool get isProduction {

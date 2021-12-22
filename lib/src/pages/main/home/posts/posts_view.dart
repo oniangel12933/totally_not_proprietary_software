@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
-import 'package:insidersapp/src/pages/main/home/posts/posts_list.dart';
+import 'package:involio/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
+import 'package:involio/src/pages/main/home/posts/posts_list.dart';
 
 class PostsView extends StatelessWidget {
   const PostsView({Key? key}) : super(key: key);
