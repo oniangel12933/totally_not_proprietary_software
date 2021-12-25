@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/api/portfolios/portfolios_repository.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/api/portfolios/portfolios_repository.dart';
 
 part 'trending_portfolio_state.dart';
 
