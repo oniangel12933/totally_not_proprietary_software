@@ -55,9 +55,9 @@ class TrendingCard extends StatelessWidget {
 
   const TrendingCard({
     Key? key,
-    this.title = "",
-    this.investmentType = "",
-    this.followerCount = 0,
+    required this.title,
+    required this.investmentType,
+    required this.followerCount,
   }) : super(key: key);
 
   @override
@@ -80,16 +80,16 @@ class TrendingCard extends StatelessWidget {
         children: [
           Container(
               padding: const EdgeInsets.only(bottom: 2),
-              child: Text(title!, style: AppFonts.headline7)),
+              child: Text(title ?? "", style: AppFonts.headline7)),
           const SizedBox(width: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(investmentType!, style: AppFonts.numbers1),
+              Text(investmentType ?? "", style: AppFonts.numbers1),
               const SizedBox(width: 4),
               Text("•", style: AppFonts.numbers1),
               const SizedBox(width: 4),
-              Text(Numeral(followerCount!).value(fractionDigits: 1),
+              Text(Numeral(followerCount ?? 0).value(fractionDigits: 1),
                   style: AppFonts.numbers1),
               const SizedBox(width: 4),
               Text(AppLocalizations.of(context)!.followers,

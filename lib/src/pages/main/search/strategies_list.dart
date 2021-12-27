@@ -54,11 +54,7 @@ class _TrendingStrategyListState extends State<TrendingStrategyList> {
                           Container(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
-                              state.data[index].owner != null
-                                  ? state.data[index].owner!.name != null
-                                      ? state.data[index].owner!.name!
-                                      : ""
-                                  : "",
+                              state.data[index].owner?.name ?? "",
                               style: AppFonts.bodySmall.copyWith(
                                   color: AppColors.involioWhiteShades100),
                             ),
