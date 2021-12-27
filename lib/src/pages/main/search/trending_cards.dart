@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
+import 'package:numeral/numeral.dart';
 
 class TrendingCategory extends StatelessWidget {
   final String title;
@@ -24,16 +26,17 @@ class TrendingCategory extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(title, style: AppFonts.headline6),
+            Text(title,
+                style: AppFonts.headline6
+                    .copyWith(color: AppColors.involioWhiteShades60)),
             TextButton(
               style: TextButton.styleFrom(
-                //minimumSize: Size.zero,
                 padding: const EdgeInsets.only(top: 16, bottom: 16),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                "View Top 20",
-                style: AppFonts.body,
+                AppLocalizations.of(context)!.viewTop20,
+                style: AppFonts.body.copyWith(color: AppColors.involioBlue),
               ),
               onPressed: onPressed,
             ),
@@ -46,38 +49,50 @@ class TrendingCategory extends StatelessWidget {
 }
 
 class TrendingCard extends StatelessWidget {
-  const TrendingCard({Key? key}) : super(key: key);
+  final String? title;
+  final String? investmentType;
+  final int? followerCount;
+
+  const TrendingCard({
+    Key? key,
+    required this.title,
+    required this.investmentType,
+    required this.followerCount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: 73.0,
       decoration: BoxDecoration(
-          color: AppColors.involioBackgroundSwatch[400]!,
+          color: AppColors.involioFillFormBackgroundColor,
           border: Border.all(
-            color: AppColors.involioBackgroundSwatch[400]!,
+            color: AppColors.involioFillFormBackgroundColor,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(7))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("My First Portfolio Long Hold Stuffs",
-              style: AppFonts.headline7),
+          Container(
+              padding: const EdgeInsets.only(bottom: 2),
+              child: Text(title ?? "", style: AppFonts.headline7)),
           const SizedBox(width: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Cryptocurrency", style: AppFonts.numbers1),
+              Text(investmentType ?? "", style: AppFonts.numbers1),
               const SizedBox(width: 4),
               Text("•", style: AppFonts.numbers1),
               const SizedBox(width: 4),
-              Text("256k", style: AppFonts.numbers1),
+              Text(Numeral(followerCount ?? 0).value(fractionDigits: 1),
+                  style: AppFonts.numbers1),
               const SizedBox(width: 4),
-              Text("Followers",
+              Text(AppLocalizations.of(context)!.followers,
                   style: AppFonts.numbers1.copyWith(
                     color: AppColors.involioGreenGrayBlue,
                   )),
