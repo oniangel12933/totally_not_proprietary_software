@@ -49,19 +49,20 @@ class TrendingCategory extends StatelessWidget {
 }
 
 class TrendingCard extends StatelessWidget {
-  final String title;
-  final String investmentType;
-  final int followerCount;
+  final String? title;
+  final String? investmentType;
+  final int? followerCount;
 
   const TrendingCard({
     Key? key,
-    required this.title,
-    required this.investmentType,
-    required this.followerCount,
+    this.title = "",
+    this.investmentType = "",
+    this.followerCount = 0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: Alignment.centerLeft,
@@ -79,19 +80,19 @@ class TrendingCard extends StatelessWidget {
         children: [
           Container(
               padding: const EdgeInsets.only(bottom: 2),
-              child: Text(title, style: AppFonts.headline7)),
+              child: Text(title!, style: AppFonts.headline7)),
           const SizedBox(width: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(investmentType, style: AppFonts.numbers1),
+              Text(investmentType!, style: AppFonts.numbers1),
               const SizedBox(width: 4),
               Text("•", style: AppFonts.numbers1),
               const SizedBox(width: 4),
-              Text(Numeral(followerCount).value(fractionDigits: 1),
+              Text(Numeral(followerCount!).value(fractionDigits: 1),
                   style: AppFonts.numbers1),
               const SizedBox(width: 4),
-              Text("Followers",
+              Text(AppLocalizations.of(context)!.followers,
                   style: AppFonts.numbers1.copyWith(
                     color: AppColors.involioGreenGrayBlue,
                   )),

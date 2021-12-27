@@ -47,14 +47,18 @@ class _TrendingStrategyListState extends State<TrendingStrategyList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TrendingCard(
-                            title: state.data[index].name!,
-                            followerCount: state.data[index].followers!,
-                            investmentType: state.data[index].investmentType!,
+                            title: state.data[index].name,
+                            followerCount: state.data[index].followers,
+                            investmentType: state.data[index].investmentType,
                           ),
                           Container(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
-                              state.data[index].owner!.name!,
+                              state.data[index].owner != null
+                                  ? state.data[index].owner!.name != null
+                                      ? state.data[index].owner!.name!
+                                      : ""
+                                  : "",
                               style: AppFonts.bodySmall.copyWith(
                                   color: AppColors.involioWhiteShades100),
                             ),

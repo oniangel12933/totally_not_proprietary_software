@@ -40,9 +40,9 @@ class _DiscoverTrendingPortfoliosState extends State<DiscoverTrendingPortfolios>
                   const SizedBox(height: 16.0),
               itemBuilder: (BuildContext context, int index) {
                 return TrendingCard(
-                  title: state.data[index].name!,
-                  followerCount: state.data[index].followers!,
-                  investmentType: state.data[index].investmentType!,
+                  title: state.data[index].name,
+                  followerCount: state.data[index].followers,
+                  investmentType: state.data[index].investmentType,
                 );
               },
             ),
