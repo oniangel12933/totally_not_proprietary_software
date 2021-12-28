@@ -1,10 +1,11 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:involio/src/pages/main/search/trending_cards.dart';
 import 'package:involio/src/router/router.gr.dart';
-
 import 'bloc/trending_strategy_cubit.dart';
 
 class DiscoverTrendingStrategies extends StatefulWidget {

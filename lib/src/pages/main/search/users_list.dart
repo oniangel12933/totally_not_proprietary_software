@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:involio/src/pages/main/search/trending_user_card.dart';
 import 'package:involio/src/theme/colors.dart';
-
 import 'bloc/trending_user_cubit.dart';
 
 class TrendingUserList extends StatefulWidget {

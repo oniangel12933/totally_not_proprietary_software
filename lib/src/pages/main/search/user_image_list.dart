@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:involio/src/pages/main/search/user_image_card.dart';
-
 import 'bloc/trending_user_cubit.dart';
-
 
 class UserImageList extends StatelessWidget {
   const UserImageList({Key? key}) : super(key: key);

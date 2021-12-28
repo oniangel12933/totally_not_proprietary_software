@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:numeral/numeral.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-import 'package:numeral/numeral.dart';
 
 class UserCard extends StatelessWidget {
   final AppApiTrendingSchemaUser user;
