@@ -103,6 +103,10 @@
    "@drops": {
        "description": "Home screen tab for drops"
    },
+   "discover": "Discover",
+   "@discover": {
+       "description": "Search view title"
+   },
    "trending": "Trending",
    "@trending": {
        "description": "Posts by trending filter"
@@ -114,6 +118,10 @@
    "interests": "Interests",
    "@interests": {
        "description": "Posts by interests filter"
+   },
+   "cancel": "Cancel",
+   "@cancel": {
+       "description": "Cancel button"
    },
    "home": "Home",
    "@home": {

@@ -156,13 +156,20 @@ class _UserPostState extends State<UserPost> {
 
   Widget _buildUserNameAndPostTime() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "${widget.username}  ·  ${widget.timestamp}",
+          widget.username.length <= 25
+              ? widget.username
+              : widget.username.substring(0, 25),
           style: AppFonts.bodySmall.copyWith(
             color: AppColors.involioGreenGrayBlue,
           ),
         ),
+        Text("  ·  ${widget.timestamp}",
+            style: AppFonts.bodySmall.copyWith(
+              color: AppColors.involioGreenGrayBlue,
+            )),
       ],
     );
   }
@@ -171,11 +178,10 @@ class _UserPostState extends State<UserPost> {
     return Align(
       alignment: Alignment.topLeft,
       child: Text(
-        widget.text.length < 100
-            ? widget.text
-            : widget.text.substring(0, 100) + ' ...',
-        //TODO add expanding ellipses button
+        widget.text,
         softWrap: true,
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
         style: AppFonts.comments1.copyWith(
           color: AppColors.involioWhiteShades60,
         ),

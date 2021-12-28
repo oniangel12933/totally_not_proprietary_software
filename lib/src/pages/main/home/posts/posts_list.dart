@@ -6,6 +6,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:involio/src/pages/main/home/posts/posts_filter_popup.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:recase/recase.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
@@ -101,7 +103,7 @@ class _PostsListState extends State<PostsList> {
 
   @override
   Widget build(BuildContext context) {
-    const double filterButtonHeight = 25.0;
+    const double filterButtonHeight = 27.0;
 
     return BlocListener<PostsFilterBloc, PostsFilterState>(
       listenWhen: (previous, current) {
@@ -213,6 +215,7 @@ class _PostsListState extends State<PostsList> {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.only(left: 8, right: 8),
           primary: AppColors.involioBlue,
         ),
         onPressed: () {
@@ -221,12 +224,15 @@ class _PostsListState extends State<PostsList> {
           }
         },
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               _filterName.titleCase,
               style: AppFonts.headline7
                   .copyWith(color: AppColors.involioWhiteShades80),
             ),
+            const SizedBox(width: 8),
             // using RichText instead of Icon so that the
             // icon will move when animated
             RichText(
@@ -248,72 +254,28 @@ class _PostsListState extends State<PostsList> {
   }
 
   void _showPopupSheet(BuildContext context) async {
-    showPlatformModalSheet(
-      context: context,
-      cupertino: CupertinoModalSheetData(),
-      builder: (_) => PlatformWidget(
-        material: (_, __) => _androidPopupContent(context),
-        cupertino: (_, __) => _cupertinoSheetContent(context),
-      ),
-    );
-  }
-
-  Widget _androidPopupContent(BuildContext context) {
-    Widget _getAndroidItemContent(String filterName) {
-      return GestureDetector(
-        child: Container(
-          color: Colors.red,
-          padding: const EdgeInsets.all(8),
-          child: PlatformText(filterName),
-        ),
-        onTap: () {
-          Navigator.pop(context, filterName.toLowerCase());
-          context.read<PostsFilterBloc>().setFilter(filterName.toLowerCase());
-        },
-      );
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: <Widget>[
-          for (String f in widget.filters) _getAndroidItemContent(f)
-        ],
-      ),
-    );
-  }
-
-  Widget _cupertinoSheetContent(BuildContext context) {
-    Widget _getCupertinoItemContent(String filterName) {
-      return CupertinoActionSheetAction(
-        child: Text(filterName),
-        onPressed: () {
-          Navigator.pop(context, filterName.toLowerCase());
-          context.read<PostsFilterBloc>().setFilter(filterName.toLowerCase());
-        },
-      );
-    }
-
-    return CupertinoTheme(
-      data: CupertinoThemeData(
-        brightness: Theme.of(context).brightness,
-      ),
-      child: CupertinoActionSheet(
-        title: const Text('Posts Filter'),
-        message: const Text(
-            'Please select the posts you would like to see from below'),
-        actions: <Widget>[
-          for (String f in widget.filters) _getCupertinoItemContent(f)
-        ],
-        // cancelButton: CupertinoActionSheetAction(
-        //   child: const Text('Cancel'),
-        //   isDefaultAction: true,
-        //   onPressed: () {
-        //     Navigator.pop(context, 'Cancel');
-        //   },
-        // ),
-      ),
-    );
+    isMaterial(context)
+        ? showMaterialModalBottomSheet(
+            expand: false,
+            context: context,
+            barrierColor: Colors.black.withOpacity(0.5),
+            //backgroundColor: Colors.transparent,
+            builder: (_) => BlocProvider.value(
+              value: BlocProvider.of<PostsFilterBloc>(context),
+              child: const PostsFilterModal(),
+            ),
+          )
+        : showCupertinoModalBottomSheet(
+            expand: false,
+            context: context,
+            //backgroundColor: Colors.green,
+            //backgroundColor: Colors.transparent,
+            barrierColor: Colors.black.withOpacity(0.5),
+            builder: (_) => BlocProvider.value(
+              value: BlocProvider.of<PostsFilterBloc>(context),
+              child: const PostsFilterModal(),
+            ),
+          );
   }
 }
 

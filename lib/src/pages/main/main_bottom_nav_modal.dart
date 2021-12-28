@@ -23,13 +23,13 @@ class MainBottomNavModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-                margin: const EdgeInsets.only(top: 9),
-                width: 45,
-                height: 5,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                  color: AppColors.involioGreenGrayBlue,
-                ),
+              margin: const EdgeInsets.only(top: 9, bottom: 1),
+              width: 45,
+              height: 5,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(100)),
+                color: AppColors.involioGreenGrayBlue,
+              ),
             ),
             ListTile(
               title: Text(
@@ -38,7 +38,7 @@ class MainBottomNavModal extends StatelessWidget {
                     .copyWith(color: AppColors.involioWhiteShades80),
               ),
               leading: Icon(
-                context.involioIcons.account,
+                context.involioIcons.followUser,
                 color: AppColors.involioWhiteShades80,
               ),
               onTap: () => Navigator.of(context).pop(),
