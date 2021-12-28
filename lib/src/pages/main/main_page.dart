@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:involio/src/theme/app_theme.dart';
-import 'package:involio/src/theme/colors.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:involio/src/pages/main/pages.dart';
@@ -12,6 +10,9 @@ import 'package:involio/src/shared/icons/involio_action_icon.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
 import 'package:involio/src/shared/widgets/fade_indexed_stack.dart';
+import 'package:involio/src/shared/widgets/unfocus_widget.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 import 'home/home_view.dart';
 import 'main_bottom_nav_modal.dart';
 
@@ -55,56 +56,58 @@ class _MainPageState extends State<MainPage> {
       titleWidget
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        //elevation: 0,
-        centerTitle: true,
-        title: _titles[currentIndex],
-        leading: IconButton(
-          icon: Icon(context.involioIcons.menu),
-          color: AppColors.involioWhiteShades80,
-          onPressed: () {
-            isMaterial(context)
-                ? showMaterialModalBottomSheet(
-                    expand: false,
-                    context: context,
-                    barrierColor: Colors.black.withOpacity(0.5),
-                    //backgroundColor: Colors.transparent,
-                    builder: (context) => const MainBottomNavModal(),
-                  )
-                : showCupertinoModalBottomSheet(
-                    expand: false,
-                    context: context,
-                    //backgroundColor: Colors.green,
-                    //backgroundColor: Colors.transparent,
-                    barrierColor: Colors.black.withOpacity(0.5),
-                    builder: (context) => const MainBottomNavModal(),
-                  );
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(context.involioIcons.followUser),
+    return UnFocusWidget(
+      child: Scaffold(
+        appBar: AppBar(
+          //elevation: 0,
+          centerTitle: true,
+          title: _titles[currentIndex],
+          leading: IconButton(
+            icon: Icon(context.involioIcons.menu),
             color: AppColors.involioWhiteShades80,
-            onPressed: () {},
+            onPressed: () {
+              isMaterial(context)
+                  ? showMaterialModalBottomSheet(
+                      expand: false,
+                      context: context,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      //backgroundColor: Colors.transparent,
+                      builder: (context) => const MainBottomNavModal(),
+                    )
+                  : showCupertinoModalBottomSheet(
+                      expand: false,
+                      context: context,
+                      //backgroundColor: Colors.green,
+                      //backgroundColor: Colors.transparent,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      builder: (context) => const MainBottomNavModal(),
+                    );
+            },
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(context.involioIcons.bell),
-            color: AppColors.involioWhiteShades80,
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: FadeIndexedStack(
-        index: currentIndex,
-        children: _pages,
-        duration: const Duration(
-          milliseconds: 50,
+          actions: <Widget>[
+            IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(context.involioIcons.followUser),
+              color: AppColors.involioWhiteShades80,
+              onPressed: () {},
+            ),
+            IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(context.involioIcons.bell),
+              color: AppColors.involioWhiteShades80,
+              onPressed: () {},
+            ),
+          ],
         ),
+        body: FadeIndexedStack(
+          index: currentIndex,
+          children: _pages,
+          duration: const Duration(
+            milliseconds: 50,
+          ),
+        ),
+        bottomNavigationBar: bottomItems(),
       ),
-      bottomNavigationBar: bottomItems(),
     );
   }
 

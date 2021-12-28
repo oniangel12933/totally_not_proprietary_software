@@ -6,13 +6,13 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
-import 'package:involio/src/pages/main/home/posts/posts_filter_popup.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:recase/recase.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
 import 'package:involio/src/pages/main/home/posts/post_item.dart';
+import 'package:involio/src/pages/main/home/posts/posts_filter_popup.dart';
 import 'package:involio/src/repositories/api/posts/posts_repository.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';

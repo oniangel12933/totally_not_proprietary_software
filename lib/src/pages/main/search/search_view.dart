@@ -47,7 +47,8 @@ class _SearchViewState extends State<SearchView> {
           create: (context) => TrendingStrategyCubit(pageSize: 2),
         ),
         BlocProvider<TrendingUserCubit>(
-          create: (context) => TrendingUserCubit(pageSize: 20), //ToDo set pagination to 3 items
+          create: (context) =>
+              TrendingUserCubit(pageSize: 20), //ToDo set pagination to 3 items
         ),
       ],
       child: Container(
@@ -118,7 +119,7 @@ InputDecoration getSearchInputDecoration({
     prefix: prefix != null ? Text(prefix) : null,
     fillColor: AppColors.involioBackgroundSwatch[400],
     hintStyle:
-    AppFonts.body.copyWith(color: AppColors.involioBackgroundSwatch[100]),
+        AppFonts.body.copyWith(color: AppColors.involioBackgroundSwatch[100]),
     hintText: hintText,
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.always,

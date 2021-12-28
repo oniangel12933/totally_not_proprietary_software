@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/src/provider.dart';
 
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-import 'package:provider/src/provider.dart';
-
 import 'bloc/posts_filter_bloc.dart';
 
 class PostsFilterModal extends StatelessWidget {
