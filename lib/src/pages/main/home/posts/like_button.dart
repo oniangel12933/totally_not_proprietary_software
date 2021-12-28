@@ -82,7 +82,7 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
                 Icon(
                   likedState.isLiked == true
                       ? context.involioIcons.heartFill
-                      : context.involioIcons.heart,
+                      : context.involioIcons.heartBold,
                   color: likedState.isLiked == true
                       ? Colors.red
                       : Theme.of(context).brightness == Brightness.light

@@ -19,21 +19,20 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TabBar(
-              unselectedLabelColor:
-                  AppColors.involioGreenGrayBlue,
+              unselectedLabelColor: AppColors.involioGreenGrayBlue,
               labelColor: AppColors.involioBlue,
               indicatorColor: AppColors.involioBlue,
               tabs: [
                 Tab(
                   child: Text(
                     AppLocalizations.of(context)!.posts,
-                    style: AppFonts.headline7,
+                    style: AppFonts.headline5,
                   ),
                 ),
                 Tab(
                   child: Text(
                     AppLocalizations.of(context)!.drops,
-                    style: AppFonts.headline7,
+                    style: AppFonts.headline5,
                   ),
                 ),
               ],
