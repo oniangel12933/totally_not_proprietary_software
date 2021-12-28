@@ -24,34 +24,34 @@ Future<void> getItSetUp({bool testing = false}) async {
   });
 
   getIt.registerLazySingleton<Api>(
-        () => Api(),
+    () => Api(),
   );
 
   getIt.registerLazySingleton<AuthRepository>(
-        () => AuthRepository(),
+    () => AuthRepository(),
     dispose: (AuthRepository ar) => ar.dispose(),
   );
 
   getIt.registerLazySingleton<SecureStorageRepository>(
-        () => SecureStorageRepository(),
+    () => SecureStorageRepository(),
   );
 
   getIt.registerLazySingleton<UserRepository>(
-        () => UserRepository(),
+    () => UserRepository(),
   );
 
   getIt.registerLazySingleton<PostsRepository>(
-        () => PostsRepository(),
+    () => PostsRepository(),
   );
   getIt.registerLazySingleton<PortfoliosRepository>(
-        () => PortfoliosRepository(),
+    () => PortfoliosRepository(),
   );
   getIt.registerLazySingleton<StrategiesRepository>(
-        () => StrategiesRepository(),
+    () => StrategiesRepository(),
   );
 
   getIt.registerLazySingleton<AuthBloc>(
-        () => AuthBloc(),
+    () => AuthBloc(),
     dispose: (AuthBloc authBloc) => authBloc.close(),
   );
 
