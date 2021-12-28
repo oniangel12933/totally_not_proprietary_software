@@ -26,7 +26,7 @@ class TrendingStrategyCubit extends Cubit<TrendingStrategyState> {
     if (strategyResponse.items == null) {
       emit(const TrendingStrategyState(data: []));
     } else {
-      emit(TrendingStrategyState(data: strategyResponse.items!));
+      emit(TrendingStrategyState(data: strategyResponse.items ?? []));
     }
   }
 }
