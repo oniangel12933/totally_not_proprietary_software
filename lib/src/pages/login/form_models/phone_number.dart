@@ -11,7 +11,7 @@ class PhoneNumber extends FormzInput<PhoneEntity, PhoneNumberValidationError> {
   @override
   PhoneNumberValidationError? validator(PhoneEntity? value) {
 
-    if (value?.number == null || value?.number?.isEmpty == true) {
+    if (value?.number == null || value?.number.isEmpty == true) {
       return PhoneNumberValidationError.empty;
     }
 

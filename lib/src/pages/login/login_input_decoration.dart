@@ -24,7 +24,7 @@ InputDecoration getLoginInputDecoration({
     prefixIcon: prefixIcon,
     prefix: prefix != null ? Text(prefix) : null,
     errorText: field.invalid ? errorText : null,
-    errorStyle: TextStyle(color: AppColors.involioAssistiveAndAlertHeart),
+    errorStyle: const TextStyle(color: AppColors.involioAssistiveAndAlertHeart),
     fillColor: AppColors.involioFillFormBackgroundColor,
     hintStyle: AppFonts.bodyBig.copyWith(color: AppColors.involioWhiteShades100.withOpacity(.3)),
     hintText: hintText,

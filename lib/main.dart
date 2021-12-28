@@ -15,7 +15,7 @@ import 'src/app.dart';
 void main() async {
   try {
     await dotenv.load(fileName: 'assets/env/.env');
-  } on FileNotFoundError catch (e) {
+  } on FileNotFoundError {
     // this will load a blank config and use the defaults set in app config
     dotenv.testLoad();
   }

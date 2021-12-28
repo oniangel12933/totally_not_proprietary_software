@@ -17,7 +17,6 @@ class OptimisticLikeButton extends StatefulWidget {
     //required this.postLikeBloc,
   }) : super(key: key);
 
-  //final PostLikeBloc postLikeBloc;
   final double iconSize;
   final double fontSize;
   final String postId;
@@ -54,26 +53,8 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
     return BlocBuilder<PostLikeBloc, PostLikeState>(
         bloc: _postLikeBloc,
         builder: (BuildContext context, PostLikeState likedState) {
-          /// this has a separate bloc so that is is not
-          /// locked up when going is pressed
-          /// or the other way around
-          //if (bState.userToEvent != null) {
-
-          // var p = const PostLikeState(isSavingLike: false, error: null, like: 1, likeCnt: 10, postId: "");
-          // p.like;
 
           if (likedState.error != null) {}
-
-          if (likedState.isLiked != null) {
-            // if (bState.userToEvent != null) {
-            //   //UserToEventModel userToEvent = bState.userToEvent;
-            //   //DFEventModel dfEvent = bState.dfEvent;
-            //   widget.post.userToEvent.mUserToEventId =
-            //       bState.userToEvent.objectId;
-            // }
-            // widget.post.dfEvent.mLikeCount = bState.likeCnt;
-            // widget.post.userToEvent.mUserLike = bState.like;
-          }
 
           return TextButton(
             //padding: const EdgeInsets.all(10.0),
@@ -105,30 +86,12 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
               ],
             ),
             onPressed: () {
-              // todo: like count number for different types of likes
               _postLikeBloc.likeButtonPressed(
                 postId: widget.postId,
-                //like: widget.post.isLike() ? UserToEventModel.LIKE_NO : UserToEventModel.LIKE_YES,
                 likeWas: likedState.isLiked,
-                //likeCnt: widget.post.isLike()? widget.post.mLikeCount - 1 : widget.post.mLikeCount + 1,
                 likeCntWas: likedState.likeCnt,
               );
             },
-            /*
-                                IconButton(
-                                  icon: Icon(like
-                                      ? Icons.favorite
-                                      : Icons.favorite_border),
-                                  color: like
-                                      ? Colors.red
-                                      : Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.grey.shade600
-                                          : Colors.grey.shade500,
-                                  tooltip: 'Kudos',
-                                  onPressed: () => null,
-                                ),
-                                */
           );
         });
   }
