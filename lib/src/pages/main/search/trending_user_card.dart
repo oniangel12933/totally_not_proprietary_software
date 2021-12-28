@@ -23,7 +23,7 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isFollowing = user.following!;
+    bool isFollowing = user.following ?? false;
     String _followButtonText = isFollowing
         ? AppLocalizations.of(context)!.following
         : AppLocalizations.of(context)!.follow;
@@ -54,7 +54,7 @@ class UserCard extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.only(bottom: 4),
-              child: Text(user.name!,
+              child: Text(user.name ?? "",
                   style: AppFonts.headline7.copyWith(
                     color: AppColors.involioWhiteShades100,
                   )),

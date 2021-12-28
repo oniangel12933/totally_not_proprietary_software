@@ -52,7 +52,7 @@ class _TrendingPortfolioListState extends State<TrendingPortfolioList> {
                               title: state.data[index].name,
                               followerCount: state.data[index].followers,
                               investmentType:
-                                  state.data[index].investmentType!),
+                                  state.data[index].investmentType),
                           Container(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(

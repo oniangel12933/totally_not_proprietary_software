@@ -27,7 +27,7 @@ class TrendingPortfolioCubit extends Cubit<TrendingPortfolioState> {
     if (portfolioResponse.items == null) {
       emit(const TrendingPortfolioState(data: []));
     } else {
-      emit(TrendingPortfolioState(data: portfolioResponse.items!));
+      emit(TrendingPortfolioState(data: portfolioResponse.items ?? []));
     }
   }
 }

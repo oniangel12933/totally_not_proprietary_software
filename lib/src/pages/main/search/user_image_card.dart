@@ -6,14 +6,16 @@ import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
 class UserImageCard extends StatelessWidget {
-  final String name;
-  final String avatar;
+  final String? name;
+  late final String avatar;
 
-  const UserImageCard({
+  UserImageCard({
     Key? key,
     required this.name,
-    required this.avatar,
-  }) : super(key: key);
+    required String? avatar,
+  }) : super(key: key) {
+    this.avatar = avatar ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class UserImageCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              name,
+              name ?? "",
               style: AppFonts.bodySmall
                   .copyWith(color: AppColors.involioWhiteShades100),
               textAlign: TextAlign.center,

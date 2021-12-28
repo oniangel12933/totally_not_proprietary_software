@@ -22,7 +22,7 @@ class TrendingUserCubit extends Cubit<TrendingUserState> {
     if (userResponse.items == null) {
       emit(const TrendingUserState(data: []));
     } else {
-      emit(TrendingUserState(data: userResponse.items!));
+      emit(TrendingUserState(data: userResponse.items ?? []));
     }
   }
 }

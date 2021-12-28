@@ -24,8 +24,8 @@ class UserImageList extends StatelessWidget {
             ),
             itemBuilder: (BuildContext context, int index) {
               return UserImageCard(
-                name: state.data[index].name!,
-                avatar: state.data[index].ownerAvatar!,
+                name: state.data[index].name,
+                avatar: state.data[index].ownerAvatar,
               );
             },
             scrollDirection: Axis.horizontal,
