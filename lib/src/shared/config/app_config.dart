@@ -12,7 +12,7 @@ class AppConfig {
   Future<void> setup() async {}
 
   String get baseUrl {
-    return dotenv.get("BASE_URL", fallback: "https://api.involio.io/");
+    return dotenv.get("BASE_URL", fallback: "https://api.insidersapp.io/");
   }
 
   bool get isProduction {

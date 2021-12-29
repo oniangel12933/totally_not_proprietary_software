@@ -15,7 +15,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.4
+  #cupertino_icons: ^1.0.4
   phosphor_flutter: ^1.4.0
 
   #adaptive_dialog: ^1.2.0
@@ -59,7 +59,7 @@ dependencies:
   #chopper: ^4.0.3
   #chopper_built_value: ^1.0.0
 
-  jwt_decode: ^0.3.1
+  #jwt_decode: ^0.3.1
 
   #animations: ^2.0.2
 
@@ -68,7 +68,7 @@ dependencies:
   #network_info_plus: ^2.1.0
   #device_info_plus: ^3.1.1
 
-  share_plus: ^3.0.4
+  #share_plus: ^3.0.4
 
   # widgets
   flutter_svg: ^1.0.0
@@ -84,7 +84,7 @@ dependencies:
   # flutter flow
   #auto_size_text: ^3.0.0
   cached_network_image: ^3.2.0
-  font_awesome_flutter: ^9.2.0
+  #font_awesome_flutter: ^9.2.0
   google_fonts: ^2.1.1
   intl: ^0.17.0
   #intl_utils: ^2.5.1
