@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TabBar(
-              unselectedLabelColor: AppColors.involioGreenGrayBlue,
+              unselectedLabelColor: AppColors.involioTabInactive,
               labelColor: AppColors.involioBlue,
               indicatorColor: AppColors.involioBlue,
               tabs: [
@@ -37,6 +37,7 @@ class HomeView extends StatelessWidget {
                 ),
               ],
             ),
+            //Divider(height: 1, color: AppColors.involioTabInactive), ToDo grey line under tab bar
             const Expanded(
               child: TabBarView(
                 children: [

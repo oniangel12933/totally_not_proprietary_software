@@ -120,54 +120,57 @@ class _PostsListState extends State<PostsList> {
           return Stack(
             alignment: Alignment.topLeft,
             children: [
-              RefreshIndicator(
-                onRefresh: () => Future.sync(
-                  () => _pagingController.refresh(),
-                ),
-                child: CustomScrollView(
-                  /// AlwaysScrollableScrollPhysics allows pull to refresh
-                  /// to work on an empty list
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  controller: _scrollViewController,
-                  slivers: <Widget>[
-                    const SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 32,
+              Container(
+                padding: const EdgeInsets.only(top: 8),
+                child: RefreshIndicator(
+                  onRefresh: () => Future.sync(
+                    () => _pagingController.refresh(),
+                  ),
+                  child: CustomScrollView(
+                    /// AlwaysScrollableScrollPhysics allows pull to refresh
+                    /// to work on an empty list
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: _scrollViewController,
+                    slivers: <Widget>[
+                      const SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 32,
+                        ),
                       ),
-                    ),
-                    PagedSliverList<int, AppApiFeedSchemaPost>(
-                      pagingController: _pagingController,
-                      builderDelegate:
-                          PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
-                              noItemsFoundIndicatorBuilder: (context) =>
-                                  NoItemsFoundWidget(onTryAgain: () {
-                                    _pagingController.refresh();
-                                  }),
-                              animateTransitions: true,
-                              itemBuilder: (context, item, index) {
-                                // if we start to use websockets for post,
-                                // this will need to be moved into the bloc
-                                String imageUrl =
-                                    "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
-                                return UserPost(
-                                  postId: item.id ?? "",
-                                  imageUrl: imageUrl,
-                                  name: item.owner?.name ?? "",
-                                  username: "@${item.owner?.username}",
-                                  //TODO in future should show days ago/weeks ago/etc if longer than a day.
-                                  timestamp: item.timestamp != null
-                                      ? DateFormat('h:mm a')
-                                          .format(item.timestamp as DateTime)
-                                      : '',
-                                  text: item.content ?? "",
-                                  likes: item.postLikes ?? 0,
-                                  liked: item.liked ?? false,
-                                  comments: "${item.postComments}",
-                                  dollars: "${item.tips}",
-                                );
-                              }),
-                    ),
-                  ],
+                      PagedSliverList<int, AppApiFeedSchemaPost>(
+                        pagingController: _pagingController,
+                        builderDelegate:
+                            PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
+                                noItemsFoundIndicatorBuilder: (context) =>
+                                    NoItemsFoundWidget(onTryAgain: () {
+                                      _pagingController.refresh();
+                                    }),
+                                animateTransitions: true,
+                                itemBuilder: (context, item, index) {
+                                  // if we start to use websockets for post,
+                                  // this will need to be moved into the bloc
+                                  String imageUrl =
+                                      "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
+                                  return UserPost(
+                                    postId: item.id ?? "",
+                                    imageUrl: imageUrl,
+                                    name: item.owner?.name ?? "",
+                                    username: "@${item.owner?.username}",
+                                    //TODO in future should show days ago/weeks ago/etc if longer than a day.
+                                    timestamp: item.timestamp != null
+                                        ? DateFormat('h:mm a')
+                                            .format(item.timestamp as DateTime)
+                                        : '',
+                                    text: item.content ?? "",
+                                    likes: item.postLikes ?? 0,
+                                    liked: item.liked ?? false,
+                                    comments: "${item.postComments}",
+                                    dollars: "${item.tips}",
+                                  );
+                                }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Row(
