@@ -11,6 +11,8 @@ import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart'
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
+import 'follow_button.dart';
+
 class UserCard extends StatelessWidget {
   final AppApiTrendingSchemaUser user;
   final int index;
@@ -59,42 +61,11 @@ class UserCard extends StatelessWidget {
                     color: AppColors.involioWhiteShades100,
                   )),
             ),
-            SizedBox(
-              height: 19.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(Numeral(user.followers!).value(fractionDigits: 1),
-                      style: AppFonts.numbers1.copyWith(
-                        color: AppColors.involioWhiteShades80,
-                      )),
-                  const SizedBox(width: 4),
-                  Text(AppLocalizations.of(context)!.followers,
-                      style: AppFonts.numbers1.copyWith(
-                        color: AppColors.involioGreenGrayBlue,
-                      )),
-                  const SizedBox(width: 4),
-                  Text("•",
-                      style: AppFonts.numbers1.copyWith(
-                        color: AppColors.involioWhiteShades80,
-                      )),
-                  const SizedBox(width: 4),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(0, 0),
-                      padding: EdgeInsets.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    onPressed: () => isFollowing = !isFollowing,
-                    child: Text(_followButtonText,
-                        style: AppFonts.numbers1.copyWith(
-                          color: AppColors.involioWhiteShades80,
-                        )),
-                  ),
-                ],
-              ),
-            ),
+            OptimisticFollowButton(
+              userId: user.id,
+              isFollowing: user.following,
+              followers: user.followers,
+            )
           ],
         )
       ],

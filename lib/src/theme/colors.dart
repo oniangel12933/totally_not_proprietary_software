@@ -24,9 +24,10 @@ class AppColors {
   static const involioFooter = Color(0xff1e1f24);
   static const involioFooterBackground = Color(0xff1e1f24);
   static const involioKeyPadButtons = Color(0xff242424);
+
   static final involioKeyPadBackground = const Color(0xff202020).withOpacity(.92);
   static final involioFillFormText = const Color(0xffebebf5).withOpacity(.60);
-  static final involioLineSeparator = const Color(0xff797676).withOpacity(.30);
+  static const involioLineSeparator = Color(0xff404249);
   static const involioInactive = Color(0xff959595);
   static final involioTabInactive = const Color(0xffcfd3d9).withOpacity(.50);
   static final involioPopUps = const Color(0xff1f2025).withOpacity(.79);

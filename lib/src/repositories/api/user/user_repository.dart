@@ -42,4 +42,24 @@ class UserRepository {
 
     return TrendingUserResponse.fromJson(response.data);
   }
+
+  Future<CreateFollowResponse> followUser({required String userId}) async {
+    var request = CreateFollower(userId: userId,);
+
+    Response response = await GetIt.I.get<Api>()
+        .dio
+        .post('api/social/follow/follow_user', data: jsonEncode(request.toJson()));
+
+    return CreateFollowResponse.fromJson(response.data);
+  }
+
+  Future<CreateFollowResponse> unfollowUser({required String userId}) async {
+    var request = RemoveFollow(userId: userId,);
+
+    Response response = await GetIt.I.get<Api>()
+        .dio
+        .post('api/social/follow/unfollow_user', data: jsonEncode(request.toJson()));
+
+    return CreateFollowResponse.fromJson(response.data);
+  }
 }
