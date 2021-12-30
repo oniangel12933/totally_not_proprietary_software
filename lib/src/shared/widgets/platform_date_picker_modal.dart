@@ -38,7 +38,7 @@ Future<DateTime?> showCupertinoDatePicker(
     context: context,
     builder: (context) {
       DateTime tempPickedDate = initialDate;
-      return Container(
+      return SizedBox(
         height: 250,
         //color: Colors.,
         child: Column(

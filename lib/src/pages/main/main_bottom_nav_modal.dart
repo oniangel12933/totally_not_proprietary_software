@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:insidersapp/src/router/router.gr.dart';
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/router/router.gr.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 class MainBottomNavModal extends StatelessWidget {
   const MainBottomNavModal({Key? key}) : super(key: key);
@@ -13,64 +15,132 @@ class MainBottomNavModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: (Theme.of(context).brightness == Brightness.dark)
-          ? AppColors.involioBackground
-          : AppColors.involioLightBackground,
+          ? AppColors.involioFillFormBackgroundColor
+          : AppColors.involioFillFormBackgroundColor,
       child: SafeArea(
         top: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const SizedBox(height: 10,),
-            ListTile(
-              title: const Text('Account'),
-              leading: Icon(context.involioIcons.account),
-              onTap: () => Navigator.of(context).pop(),
+            Container(
+              margin: const EdgeInsets.only(top: 9, bottom: 1),
+              width: 45,
+              height: 5,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(100)),
+                color: AppColors.involioGreenGrayBlue,
+              ),
             ),
             ListTile(
-              title: const Text('Settings'),
-              leading: Icon(context.involioIcons.settings),
+              title: Text(
+                AppLocalizations.of(context)!.account,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.followUser,
+                color: AppColors.involioWhiteShades80,
+              ),
+              onTap: () => Navigator.of(context).pop(),
+            ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context)!.settings,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.settings,
+                color: AppColors.involioWhiteShades80,
+              ),
               onTap: () {
                 Navigator.of(context).pop();
                 context.router.push(const SettingsRoute());
               },
             ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
-                title: const Text('Notifications'),
-                leading: Icon(context.involioIcons.bell),
+                title: Text(
+                  AppLocalizations.of(context)!.notifications,
+                  style: AppFonts.bodyBig
+                      .copyWith(color: AppColors.involioWhiteShades80),
+                ),
+                leading: Icon(
+                  context.involioIcons.bell,
+                  color: AppColors.involioWhiteShades80,
+                ),
                 onTap: () {
                   Navigator.of(context).pop();
                   //context.router.push(const TestCupertinoRoute());
                 }),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
-              title: const Text('My Interests'),
-              leading: Icon(context.involioIcons.interests),
+              title: Text(
+                AppLocalizations.of(context)!.myInterests,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.interests,
+                color: AppColors.involioWhiteShades80,
+              ),
               onTap: () => Navigator.of(context).pop(),
             ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
+            /*ListTile( //TODO uncomment after MVP
+              title: Text(
+                AppLocalizations.of(context)!.myReviews,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.star,
+                color: AppColors.involioWhiteShades80,
+              ),
+              onTap: () => Navigator.of(context).pop(),
+            ),*/
+            Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
-              title: const Text('My Reviews'),
-              leading: Icon(context.involioIcons.star),
+              title: Text(
+                AppLocalizations.of(context)!.drafts,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.drafts,
+                color: AppColors.involioWhiteShades80,
+              ),
               onTap: () => Navigator.of(context).pop(),
             ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
-              title: const Text('Drafts'),
-              leading: Icon(context.involioIcons.drafts),
+              title: Text(
+                AppLocalizations.of(context)!.giveFeedback,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.feedback,
+                color: AppColors.involioWhiteShades80,
+              ),
               onTap: () => Navigator.of(context).pop(),
             ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
-              title: const Text('Give Feedback'),
-              leading: Icon(context.involioIcons.feedback),
+              title: Text(
+                AppLocalizations.of(context)!.involioWalkthrough,
+                style: AppFonts.bodyBig
+                    .copyWith(color: AppColors.involioWhiteShades80),
+              ),
+              leading: Icon(
+                context.involioIcons.walkThrough,
+                color: AppColors.involioWhiteShades80,
+              ),
               onTap: () => Navigator.of(context).pop(),
             ),
-            ListTile(
-              title: const Text('Involio Walk-through'),
-              leading: Icon(context.involioIcons.walkThrough),
-              onTap: () => Navigator.of(context).pop(),
-            ),
-            ListTile(
-              title: const Text('Help Center'),
-              leading: Icon(context.involioIcons.helpCenter),
-              onTap: () => Navigator.of(context).pop(),
-            ),
+            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const SizedBox(height: 25),
           ],
         ),
       ),

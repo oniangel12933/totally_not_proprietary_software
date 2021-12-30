@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/pages/login/form_models/phone_entity.dart';
 
 class SecureStorageRepository {
   static SecureStorageRepository? _instance;
@@ -17,14 +16,17 @@ class SecureStorageRepository {
   static const _phoneKey = 'PHONE';
   static const _phoneCountryCodeKey = 'PHONE_COUNTRY_CODE';
   static const _phoneCountryISOCodeKey = 'PHONE_COUNTRY_ISO_CODE';
-  static const _tokenKey = 'TOKEN';
+  static const _accessTokenKey = 'ACCESS_TOKEN';
+  static const _refreshTokenKey = 'REFRESH_TOKEN';
 
   Future<void> persistPhoneAndToken({
     required PhoneEntity phone,
-    required String token,
+    required String accessToken,
+    required String refreshToken,
   }) async {
     await persistPhone(phone);
-    await persistToken(token);
+    await persistAccessToken(accessToken);
+    await persistRefreshToken(refreshToken);
   }
 
   Future<void> persistPhone(
@@ -39,12 +41,14 @@ class SecureStorageRepository {
     required String phoneCountryISOCode,
     required String phoneCountryCode,
     required String phoneNumber,
-    required String token,
+    required String accessToken,
+    required String refreshToken,
   }) async {
     await persistPhoneCountryISOCode(phoneCountryISOCode);
     await persistPhoneCountryCode(phoneCountryCode);
     await persistPhoneNumber(phoneNumber);
-    await persistToken(token);
+    await persistAccessToken(accessToken);
+    await persistRefreshToken(refreshToken);
   }
 
   Future<void> persistPhoneNumber(String? phoneNumber) async {
@@ -60,12 +64,21 @@ class SecureStorageRepository {
         key: _phoneCountryISOCodeKey, value: phoneCountryISOCode);
   }
 
-  Future<void> persistToken(String token) async {
-    await _storage.write(key: _tokenKey, value: token);
+  Future<void> persistAccessToken(String accessToken) async {
+    await _storage.write(key: _accessTokenKey, value: accessToken);
   }
 
-  Future<bool> hasToken() async {
-    var value = await _storage.read(key: _tokenKey);
+  Future<void> persistRefreshToken(String refreshToken) async {
+    await _storage.write(key: _refreshTokenKey, value: refreshToken);
+  }
+
+  Future<bool> hasAccessToken() async {
+    var value = await _storage.read(key: _accessTokenKey);
+    return value != null;
+  }
+
+  Future<bool> hasRefreshToken() async {
+    var value = await _storage.read(key: _refreshTokenKey);
     return value != null;
   }
 
@@ -84,8 +97,12 @@ class SecureStorageRepository {
     return value != null;
   }
 
-  Future<void> deleteToken() async {
-    return await _storage.delete(key: _tokenKey);
+  Future<void> deleteAccessToken() async {
+    return await _storage.delete(key: _accessTokenKey);
+  }
+
+  Future<void> deleteRefreshToken() async {
+    return await _storage.delete(key: _refreshTokenKey);
   }
 
   Future<void> deletePhone() async {
@@ -125,37 +142,41 @@ class SecureStorageRepository {
     return await _storage.read(key: _phoneCountryISOCodeKey);
   }
 
-  Future<String?> getToken() async {
-    return await _storage.read(key: _tokenKey);
+  Future<String?> getAccessToken() async {
+    return await _storage.read(key: _accessTokenKey);
   }
 
-  /// todo: make sure that the token uses utc time
-  Future<bool> isTokenExpired() async {
-    String? token = await getToken();
-    if (token != null) {
-      //Map<String, dynamic> payload = Jwt.parseJwt(token);
-      DateTime? expirationDate = Jwt.getExpiryDate(token);
-      if (expirationDate != null) {
-        return DateTime.now().toUtc().isAfter(expirationDate);
-      } else {
-        return false;
-      }
-    }
-    return true;
+  Future<String?> getRefreshToken() async {
+    return await _storage.read(key: _refreshTokenKey);
   }
 
-  /// todo: make sure that the token uses utc time
-  Future<Duration?> getTokenRemainingTime() async {
-    String? token = await getToken();
-    if (token != null) {
-      //Map<String, dynamic> payload = Jwt.parseJwt(token);
-      DateTime? expirationDate = Jwt.getExpiryDate(token);
-      if (expirationDate != null) {
-        return expirationDate.difference(DateTime.now().toUtc());
-      }
-    }
-    return null;
-  }
+  // /// todo: make sure that the token uses utc time
+  // Future<bool> isTokenExpired() async {
+  //   String? token = await getAccessToken();
+  //   if (token != null) {
+  //     //Map<String, dynamic> payload = Jwt.parseJwt(token);
+  //     DateTime? expirationDate = Jwt.getExpiryDate(token);
+  //     if (expirationDate != null) {
+  //       return DateTime.now().toUtc().isAfter(expirationDate);
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+
+  // /// todo: make sure that the token uses utc time
+  // Future<Duration?> getTokenRemainingTime() async {
+  //   String? token = await getAccessToken();
+  //   if (token != null) {
+  //     //Map<String, dynamic> payload = Jwt.parseJwt(token);
+  //     DateTime? expirationDate = Jwt.getExpiryDate(token);
+  //     if (expirationDate != null) {
+  //       return expirationDate.difference(DateTime.now().toUtc());
+  //     }
+  //   }
+  //   return null;
+  // }
 
   Future<void> deleteAll() async {
     return _storage.deleteAll();

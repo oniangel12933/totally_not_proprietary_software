@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:formz/formz.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
 
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 InputDecoration getLoginInputDecoration({
   required String labelText,
@@ -24,7 +24,7 @@ InputDecoration getLoginInputDecoration({
     prefixIcon: prefixIcon,
     prefix: prefix != null ? Text(prefix) : null,
     errorText: field.invalid ? errorText : null,
-    errorStyle: TextStyle(color: AppColors.involioAssistiveAndAlertRed),
+    errorStyle: const TextStyle(color: AppColors.involioAssistiveAndAlertHeart),
     fillColor: AppColors.involioFillFormBackgroundColor,
     hintStyle: AppFonts.bodyBig.copyWith(color: AppColors.involioWhiteShades100.withOpacity(.3)),
     hintText: hintText,

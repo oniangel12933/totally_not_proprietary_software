@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 
 class TokenInterceptorForRefresh extends Interceptor {
   TokenInterceptorForRefresh();
@@ -11,10 +11,10 @@ class TokenInterceptorForRefresh extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    var accessToken = await GetIt.I.get<SecureStorageRepository>().getRefreshToken();
+    var refreshToken = await GetIt.I.get<SecureStorageRepository>().getRefreshToken();
 
-    if (accessToken != null && accessToken.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $accessToken';
+    if (refreshToken != null && refreshToken.isNotEmpty) {
+      options.headers['Authorization'] = 'Bearer $refreshToken';
     }
 
     return handler.next(options);

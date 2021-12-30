@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:insidersapp/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
-import 'package:insidersapp/src/pages/main/home/posts/posts_list.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:involio/src/pages/main/home/posts/bloc/posts_filter_bloc.dart';
+import 'package:involio/src/pages/main/home/posts/posts_list.dart';
 
 class PostsView extends StatelessWidget {
   const PostsView({Key? key}) : super(key: key);
@@ -13,10 +12,10 @@ class PostsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> _filters = [
-      AppLocalizations.of(context)!.trending,
-      AppLocalizations.of(context)!.following,
-      AppLocalizations.of(context)!.interests,
-      ];
+      AppLocalizations.of(context)!.trending.toLowerCase(),
+      AppLocalizations.of(context)!.following.toLowerCase(),
+      AppLocalizations.of(context)!.interests.toLowerCase(),
+    ];
 
     return _PostsFilterBlocProvider(
       filters: _filters,

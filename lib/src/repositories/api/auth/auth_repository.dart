@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/repositories/api/api_client/api_client.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/api/api_client/api_client.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
@@ -32,20 +32,11 @@ class AuthRepository {
         .dio
         .post('api/auth/login/sms', data: jsonEncode(request.toJson()));
 
-    // print('AuthRepo logInWithPhone 2 --------');
-    // print(response.data);
-
-    OTPLoginResponse responseModel = OTPLoginResponse.fromJson(response.data);
-
-    if (responseModel.accessToken != null) {
-
-    }
-
     return OTPLoginResponse.fromJson(response.data);
   }
 
-  /// https://api.insidersapp.io/docs#/auth/otp_start_api_auth_login_sms_start_post
-  /// https://api.insidersapp.io/api/auth/login/sms/start
+  /// https://api.involio.io/docs#/auth/otp_start_api_auth_login_sms_start_post
+  /// https://api.involio.io/api/auth/login/sms/start
   Future<SMSStartResponse> getOtpForPhoneNumber({
     required String phone,
   }) async {
@@ -63,8 +54,8 @@ class AuthRepository {
     return SMSStartResponse.fromJson(response.data);
   }
 
-  /// https://api.insidersapp.io/docs#/auth/create_user_api_auth_signup_post
-  /// https://api.insidersapp.io/api/auth/signup
+  /// https://api.involio.io/docs#/auth/create_user_api_auth_signup_post
+  /// https://api.involio.io/api/auth/signup
   Future<UserResponse> signUpNewUser({
     String? email,
     required String username,
@@ -80,9 +71,6 @@ class AuthRepository {
       birthdate: birthdate,
     );
 
-    //print("#############################");
-    //print(request);
-
     Response response = await getIt.get<Api>()
         .dio
         .post('api/auth/signup', data: jsonEncode(request.toJson()));
@@ -95,6 +83,4 @@ class AuthRepository {
   }
 
   void dispose() => _controller.close();
-
-  Future<void> refresh() async {}
 }

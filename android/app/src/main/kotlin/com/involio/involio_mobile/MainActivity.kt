@@ -1,4 +1,4 @@
-package com.example.insidersapp
+package com.involio.involio_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

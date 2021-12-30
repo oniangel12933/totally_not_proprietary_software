@@ -1,6 +1,6 @@
 import 'package:formz/formz.dart';
 
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/pages/login/form_models/phone_entity.dart';
 
 enum PhoneNumberValidationError { empty, toLong }
 
@@ -11,7 +11,7 @@ class PhoneNumber extends FormzInput<PhoneEntity, PhoneNumberValidationError> {
   @override
   PhoneNumberValidationError? validator(PhoneEntity? value) {
 
-    if (value?.number == null || value?.number?.isEmpty == true) {
+    if (value?.number == null || value?.number.isEmpty == true) {
       return PhoneNumberValidationError.empty;
     }
 

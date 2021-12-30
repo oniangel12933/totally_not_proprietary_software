@@ -1,30 +1,30 @@
-# insidersapp
+# Involio
 
-A new Flutter project.
+[Involio Mobile Application](https://github.com/insidersinc/involio_mobile)
 
 ## Getting Started
+1. [Install flutter](https://docs.flutter.dev/get-started/install)
+2. `git clone git@github.com:insidersinc/involio_mobile.git`
+3. cd into the involio_mobile directory 
+4. Create a file named `assets/env/.env` and add the text below
+   ```
+   IS_PRODUCTION=0
+   BASE_URL=https://api.insidersapp.io/
+   ```
+5. Download libraries
+   `flutter pub get`
+6. Build generated code
+   `flutter pub run build_runner build --delete-conflicting-outputs`
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
+## Development
+[Install Android Studio](https://developer.android.com/studio/)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Swagger Backend 
+https://api.insidersapp.io/docs
 
-## Assets
+When an endpoint is changed in the backed, the new endpoint objects 
+need to be regenerated using [swagger_dart_code_generator](https://pub.dev/packages/swagger_dart_code_generator)
 
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
-
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
-
-## Localization
-
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
-
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+`curl https://api.insidersapp.io/openapi.json --output swaggers/involio_api.json`
+then for generating code, run:
+`flutter pub run build_runner build --delete-conflicting-outputs`

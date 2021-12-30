@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'bloc/post_like_bloc.dart';
 import 'bloc/post_like_state.dart';
 
@@ -14,17 +14,14 @@ class OptimisticLikeButton extends StatefulWidget {
     required this.postId,
     required this.totalLikeCount,
     required this.isLikedByUser,
-    this.isVirticle = false,
     //required this.postLikeBloc,
   }) : super(key: key);
 
-  //final PostLikeBloc postLikeBloc;
   final double iconSize;
   final double fontSize;
   final String postId;
   final int totalLikeCount;
   final bool isLikedByUser;
-  final bool isVirticle;
 
   @override
   State<OptimisticLikeButton> createState() => _OptimisticLikeButtonState();
@@ -56,91 +53,46 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
     return BlocBuilder<PostLikeBloc, PostLikeState>(
         bloc: _postLikeBloc,
         builder: (BuildContext context, PostLikeState likedState) {
-          /// this has a separate bloc so that is is not
-          /// locked up when going is pressed
-          /// or the other way around
-          //if (bState.userToEvent != null) {
-
-          // var p = const PostLikeState(isSavingLike: false, error: null, like: 1, likeCnt: 10, postId: "");
-          // p.like;
 
           if (likedState.error != null) {}
 
-          if (likedState.like != null) {
-            // if (bState.userToEvent != null) {
-            //   //UserToEventModel userToEvent = bState.userToEvent;
-            //   //DFEventModel dfEvent = bState.dfEvent;
-            //   widget.post.userToEvent.mUserToEventId =
-            //       bState.userToEvent.objectId;
-            // }
-            // widget.post.dfEvent.mLikeCount = bState.likeCnt;
-            // widget.post.userToEvent.mUserLike = bState.like;
-          }
-
           return TextButton(
             //padding: const EdgeInsets.all(10.0),
-            child: format_heart_icon(likedState),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  likedState.isLiked == true
+                      ? context.involioIcons.heartFill
+                      : context.involioIcons.heartBold,
+                  color: likedState.isLiked == true
+                      ? Colors.red
+                      : Theme.of(context).brightness == Brightness.light
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade500,
+                  size: widget.iconSize,
+                ),
+                const SizedBox(
+                  width: 8.0,
+                ),
+                Text(
+                  '${likedState.likeCnt}',
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey.shade600
+                        : Colors.grey.shade500,
+                    fontSize: widget.fontSize,
+                  ),
+                ),
+              ],
+            ),
             onPressed: () {
-              // todo: like count number for different types of likes
               _postLikeBloc.likeButtonPressed(
                 postId: widget.postId,
-                //like: widget.post.isLike() ? UserToEventModel.LIKE_NO : UserToEventModel.LIKE_YES,
-                likeWas: likedState.like,
-                //likeCnt: widget.post.isLike()? widget.post.mLikeCount - 1 : widget.post.mLikeCount + 1,
+                likeWas: likedState.isLiked,
                 likeCntWas: likedState.likeCnt,
               );
             },
-            /*
-                                IconButton(
-                                  icon: Icon(like
-                                      ? Icons.favorite
-                                      : Icons.favorite_border),
-                                  color: like
-                                      ? Colors.red
-                                      : Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.grey.shade600
-                                          : Colors.grey.shade500,
-                                  tooltip: 'Kudos',
-                                  onPressed: () => null,
-                                ),
-                                */
           );
         });
   }
-
-  Widget format_heart_icon(PostLikeState likedState) {
-    if (widget.isVirticle) {
-      return Column(children: heartIcon(likedState));
-    } else {
-      return Row(children: heartIcon(likedState));
-    }
-  }
-
-  List<Widget> heartIcon(PostLikeState likedState) => [
-        Icon(
-          likedState.like == true
-              ? context.involioIcons.heartFill
-              : context.involioIcons.heart,
-          color: likedState.like == true
-              ? Colors.red
-              : Theme.of(context).brightness == Brightness.light
-                  ? Colors.grey.shade600
-                  : Colors.grey.shade500,
-          size: widget.iconSize,
-        ),
-        const SizedBox(
-          width: 8.0,
-          height: 10,
-        ),
-        Text(
-          '${likedState.likeCnt}',
-          style: TextStyle(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade600
-                : Colors.grey.shade500,
-            fontSize: widget.fontSize,
-          ),
-        ),
-      ];
 }

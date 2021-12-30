@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:dio/dio.dart';
-// import 'package:insidersapp/src/pages/main/home/posts/post_details_view.dart';
-// import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
+// import 'package:involio/src/pages/main/home/posts/post_details_view.dart';
+// import 'package:involio/src/pages/main/home/posts/post_item.dart';
 //
 // /// this pull all new posts for the user and displays them in an endless list
 // class PostsOld extends StatefulWidget {

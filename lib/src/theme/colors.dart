@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:insidersapp/src/extensions/swatch_gen.dart';
+import 'package:involio/src/extensions/swatch_gen.dart';
 
 /// Used to contain custom colors that are used by the app
 class AppColors {
@@ -24,16 +24,17 @@ class AppColors {
   static const involioFooter = Color(0xff1e1f24);
   static const involioFooterBackground = Color(0xff1e1f24);
   static const involioKeyPadButtons = Color(0xff242424);
-  static final involioKeyPadBackground = Color(0xff202020).withOpacity(.92);
-  static final involioFillFormText = Color(0xffebebf5).withOpacity(.60);
-  static final involioLineSeparator = Color(0xff797676).withOpacity(.30);
+
+  static final involioKeyPadBackground = const Color(0xff202020).withOpacity(.92);
+  static final involioFillFormText = const Color(0xffebebf5).withOpacity(.60);
+  static const involioLineSeparator = Color(0xff404249);
   static const involioInactive = Color(0xff959595);
-  static final involioTabInactive = Color(0xffcfd3d9).withOpacity(.50);
-  static final involioPopUps = Color(0xff1f2025).withOpacity(.79);
+  static final involioTabInactive = const Color(0xffcfd3d9).withOpacity(.50);
+  static final involioPopUps = const Color(0xff1f2025).withOpacity(.79);
 
   static const involioReplyBoxTextReplyText = Color(0xff9ba6bb);
-  static final involioReplyBoxTextOverlay = Color(0xff000000).withOpacity(.25);
-  static final involioReplyBoxTextUnfilledFillForm = Color(0xffffffff).withOpacity(.30);
+  static final involioReplyBoxTextOverlay = const Color(0xff000000).withOpacity(.25);
+  static final involioReplyBoxTextUnfilledFillForm = const Color(0xffffffff).withOpacity(.30);
 
   static const involioAssistiveAndAlertHeart = Color(0xffD90707);
   static const involioAssistiveAndAlertRed = Color(0xffff3737);

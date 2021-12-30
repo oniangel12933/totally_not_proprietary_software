@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
@@ -73,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final hasToken = await _secureRepository.hasToken();
+    final hasToken = await _secureRepository.hasAccessToken();
 
     if (!hasToken) {
       emit(const AuthUnauthenticated());
@@ -84,13 +84,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void setLoggedIn({
     required PhoneEntity phone,
-    required String token,
+    required String accessToken,
+    required String refreshToken,
     int expiresIn = 0,
     String? error,
   }) {
     add(AuthEvent.loggedIn(
       phone: phone,
-      token: token,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
       expiresIn: expiresIn,
       error: error,
     ));
@@ -103,7 +105,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthLoading());
     await _secureRepository.persistPhoneAndToken(
       phone: event.phone,
-      token: event.token,
+      accessToken: event.accessToken,
+      refreshToken: event.refreshToken,
     );
     await _initStartup(event, emit);
   }
@@ -113,7 +116,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoggingOut());
-    await _secureRepository.deleteToken();
+    await _secureRepository.deleteAccessToken();
     emit(const AuthLoggedOut());
   }
 

@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/pages/login/form_models/phone_entity.dart';
-import 'package:insidersapp/src/repositories/api/auth/auth_repository.dart';
-import 'package:insidersapp/src/repositories/local/secure_storage/secure_repository.dart';
-import 'package:insidersapp/src/shared/blocs/auth_bloc/auth_bloc.dart';
-import 'package:insidersapp/src/shared/blocs/event_transformers/throttle.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/repositories/api/auth/auth_repository.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
+import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/shared/blocs/event_transformers/throttle.dart';
 import 'otp_event.dart';
 import 'otp_state.dart';
 
@@ -77,7 +77,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
             _authBloc.setLoggedIn(
               phone: state.phone!,
-              token: response.accessToken!,
+              accessToken: response.accessToken!,
+              refreshToken: response.refreshToken!,
             );
           }
 

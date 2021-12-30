@@ -103,6 +103,10 @@
    "@drops": {
        "description": "Home screen tab for drops"
    },
+   "discover": "Discover",
+   "@discover": {
+       "description": "Search view title"
+   },
    "trending": "Trending",
    "@trending": {
        "description": "Posts by trending filter"
@@ -115,20 +119,100 @@
    "@interests": {
        "description": "Posts by interests filter"
    },
-       "home": "Home",
-       "@home": {
-           "description": "Navigation bar home"
-       },
-       "search": "Search",
-       "@search": {
-           "description": "Navigation bar Search"
-       },
-       "add": "Add",
-       "@add": {
-           "description": "Navigation bar Add"
-       },
-       "account": "Account",
-       "@account": {
-           "description": "Navigation bar Account"
-       }
+   "cancel": "Cancel",
+   "@cancel": {
+       "description": "Cancel button"
+   },
+   "home": "Home",
+   "@home": {
+       "description": "Navigation bar home"
+   },
+   "search": "Search",
+   "@search": {
+       "description": "Navigation bar Search"
+   },
+   "add": "Add",
+   "@add": {
+       "description": "Navigation bar Add"
+   },
+   "profile": "Profile",
+   "@add": {
+       "description": "Navigation bar Profile"
+   },
+   "account": "Account",
+   "@account": {
+       "description": "Hamburger dropdown Account"
+   },
+   "settings": "Settings",
+   "@settings": {
+       "description": "Hamburger dropdown Settings"
+   },
+   "notifications": "Notifications",
+   "@notifications": {
+       "description": "Hamburger dropdown Notifications"
+   },
+   "myInterests": "My Interests",
+   "@myInterests": {
+       "description": "Hamburger dropdown My Interests"
+   },
+   "myReviews": "My Reviews",
+   "@myReviews": {
+       "description": "Hamburger dropdown My Reviews"
+   },
+   "drafts": "Drafts",
+   "@drafts": {
+       "description": "Hamburger dropdown Drafts"
+   },
+   "giveFeedback": "Give Feedback",
+   "@giveFeedback": {
+       "description": "Hamburger dropdown Give Feedback"
+   },
+   "involioWalkthrough": "Involio Walkthrough",
+   "@involioWalkthrough": {
+       "description": "Hamburger dropdown Involio Walkthrough"
+   },
+   "helpCenter" : "Help Center",
+   "@helpCenter": {
+       "description": "Hamburger dropdown Help Center"
+   },
+   "trendingPortfolios": "Trending Portfolios",
+   "@trendingPortfolios": {
+       "description": "Search page portfolio title"
+   },
+   "trendingStrategies": "Trending Strategies",
+   "@trendingStrategies": {
+       "description": "Search page strategy title"
+   },
+   "trendingUsers": "Trending Users",
+   "@trendingUsers": {
+       "description": "Search page users title"
+   },
+   "top20Portfolios": "Top 20 Portfolios",
+   "@top20Portfolios": {
+       "description": "Top 20 portfolios title"
+   },
+   "top20Strategies": "Top 20 Strategies",
+   "@top20Strategies": {
+       "description": "Top 20 strategies title"
+   },
+   "top20Users": "Top 20 Users",
+   "@top20Users": {
+       "description": "Top 20 users title"
+   },
+   "viewTop20": "View Top 20",
+   "@viewTop20": {
+       "description": "Text button linking to top 20 trending of category"
+   },
+   "follow": "Follow",
+   "@follow": {
+       "description": "User is not following/ prompt to follow user"
+   },
+   "following": "Following",
+   "@following": {
+       "description": "User is following/ prompt to unfollow user"
+   },
+   "followers": "Followers",
+   "@followers": {
+       "description": "Displays user's follower count"
+   }
 }

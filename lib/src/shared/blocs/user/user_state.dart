@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:insidersapp/gen/involio_api.swagger.dart';
+import 'package:involio/gen/involio_api.swagger.dart';
 
 part 'user_state.freezed.dart';
 

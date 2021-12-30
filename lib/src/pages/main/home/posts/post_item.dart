@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:involio/src/shared/icons/involio_icons.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 import 'like_button.dart';
 
 /// This is a single post item that will be displayed in a list of posts
@@ -156,13 +156,20 @@ class _UserPostState extends State<UserPost> {
 
   Widget _buildUserNameAndPostTime() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "${widget.username}  ·  ${widget.timestamp}",
+          widget.username.length <= 25
+              ? widget.username
+              : widget.username.substring(0, 25),
           style: AppFonts.bodySmall.copyWith(
             color: AppColors.involioGreenGrayBlue,
           ),
         ),
+        Text("  ·  ${widget.timestamp}",
+            style: AppFonts.bodySmall.copyWith(
+              color: AppColors.involioGreenGrayBlue,
+            )),
       ],
     );
   }
@@ -171,13 +178,13 @@ class _UserPostState extends State<UserPost> {
     return Align(
       alignment: Alignment.topLeft,
       child: Text(
-        widget.text.length < 100
-            ? widget.text
-            : widget.text.substring(0, 100) + ' ...',
-        //TODO add expanding elipsies button
+        widget.text,
         softWrap: true,
-        style:
-            AppFonts.comments1.copyWith(color: AppColors.involioWhiteShades60),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+        style: AppFonts.comments1.copyWith(
+          color: AppColors.involioWhiteShades60,
+        ),
       ),
     );
   }
