@@ -131,6 +131,11 @@ dev_dependencies:
 
   very_good_analysis: ^2.4.0
 
+  flutter_launcher_icons:
+    git:
+      url: https://github.com/Davenchy/flutter_launcher_icons.git
+      ref: fixMinSdkParseFlutter2.8
+
 #dependency_overrides:
 #  analyzer: ^3.0.0 # for auto_route_generator
 
@@ -147,6 +152,12 @@ flutter:
     # Add assets from the images directory to the application.
     - assets/images/
     - assets/env/
+
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/launcher_black_small.png"
+  remove_alpha_ios: true
 
 import_sorter:
   comments: false
