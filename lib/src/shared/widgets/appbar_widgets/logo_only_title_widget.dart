@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:involio/gen/assets.gen.dart';
+import 'package:involio/src/theme/colors.dart';
 
 class LogoOnlyTitleWidget extends StatelessWidget {
   const LogoOnlyTitleWidget({Key? key}) : super(key: key);
@@ -17,8 +18,12 @@ class LogoOnlyTitleWidget extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: SvgPicture.asset(Assets.images.insidersLogo,
-              semanticsLabel: '', height: 32, width: 32),
+          child: SvgPicture.asset(
+            Assets.images.insidersLogo,
+            semanticsLabel: '',
+            height: 32,
+            width: 32,
+          ),
         ),
       ],
     );

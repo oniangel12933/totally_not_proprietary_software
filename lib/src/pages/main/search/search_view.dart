@@ -68,39 +68,42 @@ class _SearchInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 36,
-          child: TextField(
-            controller: controller,
-            key: const Key('discover_search_input_textField'),
-            decoration: getSearchInputDecoration(
-              labelText: '',
-              prefixIcon: Icon(
-                context.involioIcons.search,
-                size: 20.0,
+    return Container(
+      padding: const EdgeInsets.only(top: 25),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 36,
+            child: TextField(
+              controller: controller,
+              key: const Key('discover_search_input_textField'),
+              decoration: getSearchInputDecoration(
+                labelText: '',
+                prefixIcon: Icon(
+                  context.involioIcons.search,
+                  size: 20.0,
+                ),
+                context: context,
+                hintText: AppLocalizations.of(context)!.search,
+                errorText: '',
               ),
-              context: context,
-              hintText: AppLocalizations.of(context)!.search,
-              errorText: '',
-            ),
-            style: AppFonts.body,
-          ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: const [
-                DiscoverTrendingPortfolios(),
-                DiscoverTrendingStrategies(),
-                DiscoverTrendingUsers(),
-              ],
+              style: AppFonts.body,
             ),
           ),
-        ),
-      ],
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: const [
+                  DiscoverTrendingPortfolios(),
+                  DiscoverTrendingStrategies(),
+                  DiscoverTrendingUsers(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -117,9 +120,9 @@ InputDecoration getSearchInputDecoration({
     prefixIcon: prefixIcon,
     labelText: labelText,
     prefix: prefix != null ? Text(prefix) : null,
-    fillColor: AppColors.involioBackgroundSwatch[400],
+    fillColor: AppColors.involioFillFormBackgroundColor,
     hintStyle:
-        AppFonts.body.copyWith(color: AppColors.involioBackgroundSwatch[100]),
+        AppFonts.body.copyWith(color: AppColors.involioFillFormText),
     hintText: hintText,
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.always,
