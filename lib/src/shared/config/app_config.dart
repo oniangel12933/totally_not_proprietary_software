@@ -18,7 +18,7 @@ class AppConfig {
   bool get isProduction {
     String _isProductionString = dotenv.get(
       "IS_PRODUCTION",
-      fallback: "false",
+      fallback: "true",
     );
     return stringToBool(_isProductionString);
   }
