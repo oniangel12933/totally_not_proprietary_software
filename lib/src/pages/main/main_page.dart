@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleWidget = const LogoOnlyTitleWidget();
+    Widget titleWidget = const LogoOnlyTitleWidget(); //ToDo change involio icon colors
 
     late final List<Widget> _titles = [
       titleWidget,

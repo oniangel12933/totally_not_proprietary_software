@@ -83,24 +83,19 @@ class _UserPostState extends State<UserPost> {
               const SizedBox(
                 height: 8.0,
               ),
-              _buildText(),
-              const SizedBox(
-                height: 16.0,
-              ),
-              _buildButtons(context),
-              const SizedBox(
-                height: 12.0,
-              ),
+              Container(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: _buildText()),
+              Container(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: _buildButtons(context)),
             ],
           ),
         ),
         Container(
-          padding:
-              const EdgeInsets.only(top: 0, bottom: 24, left: 0.0, right: 0.0),
-          child: const Divider(
-            height: 0,
-            color: AppColors.involioGreenGrayBlue,
-          ),
+          padding: const EdgeInsets.only(bottom: 16),
+          child:
+              const Divider(height: 1, color: AppColors.involioLineSeparator),
         ),
       ],
     );
@@ -110,6 +105,7 @@ class _UserPostState extends State<UserPost> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(3.0),
       child: CachedNetworkImage(
+        fit: BoxFit.cover,
         imageUrl: widget.imageUrl,
         height: UserPost.imageSize,
         width: UserPost.imageSize,
@@ -118,7 +114,10 @@ class _UserPostState extends State<UserPost> {
   }
 
   Widget _buildEllipsisButton(BuildContext context) {
-    return Icon(context.involioIcons.dotsThree);
+    return Icon(
+      context.involioIcons.dotsThree,
+      color: AppColors.involioGreenGrayBlue,
+    );
   }
 
   Widget _buildHeaderText(BuildContext context) {
@@ -191,7 +190,6 @@ class _UserPostState extends State<UserPost> {
 
   Widget _buildButtons(BuildContext context) {
     const double iconSize = 16.0;
-    const double fontSize = 12.0;
     return Container(
       margin: const EdgeInsets.only(right: 32, left: 32),
       child: Row(
@@ -200,7 +198,8 @@ class _UserPostState extends State<UserPost> {
           //_buildIconButton(context.involioIcons.heart, widget.likes),
           OptimisticLikeButton(
             iconSize: iconSize,
-            fontSize: fontSize,
+            textStyle: AppFonts.comments1
+                .copyWith(color: AppColors.involioGreenGrayBlue),
             postId: widget.postId,
             totalLikeCount: widget.likes,
             isLikedByUser: widget.liked,

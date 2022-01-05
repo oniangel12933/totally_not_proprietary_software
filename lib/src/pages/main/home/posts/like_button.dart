@@ -10,7 +10,7 @@ class OptimisticLikeButton extends StatefulWidget {
   const OptimisticLikeButton({
     Key? key,
     required this.iconSize,
-    required this.fontSize,
+    required this.textStyle,
     required this.postId,
     required this.totalLikeCount,
     required this.isLikedByUser,
@@ -18,7 +18,7 @@ class OptimisticLikeButton extends StatefulWidget {
   }) : super(key: key);
 
   final double iconSize;
-  final double fontSize;
+  final TextStyle textStyle;
   final String postId;
   final int totalLikeCount;
   final bool isLikedByUser;
@@ -53,10 +53,14 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
     return BlocBuilder<PostLikeBloc, PostLikeState>(
         bloc: _postLikeBloc,
         builder: (BuildContext context, PostLikeState likedState) {
-
           if (likedState.error != null) {}
 
           return TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: const Size(0, 0),
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
             //padding: const EdgeInsets.all(10.0),
             child: Row(
               children: <Widget>[
@@ -76,12 +80,7 @@ class _OptimisticLikeButtonState extends State<OptimisticLikeButton> {
                 ),
                 Text(
                   '${likedState.likeCnt}',
-                  style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.grey.shade600
-                        : Colors.grey.shade500,
-                    fontSize: widget.fontSize,
-                  ),
+                  style: widget.textStyle,
                 ),
               ],
             ),
