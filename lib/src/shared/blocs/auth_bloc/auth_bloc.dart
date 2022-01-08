@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:involio/src/pages/login/form_models/phone_entity.dart';
+import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
@@ -116,6 +117,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoggingOut());
+    await GetIt.I.get<UserRepository>().clearUserCache();
     await _secureRepository.deleteAccessToken();
     emit(const AuthLoggedOut());
   }

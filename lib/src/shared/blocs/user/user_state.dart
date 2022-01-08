@@ -15,7 +15,7 @@ String userStateToJson(UserState data) => json.encode(data.toJson());
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    UserResponse? user,
+    UserBaseResponse? user,
   }) = _UserState;
 
   factory UserState.fromJson(Map<String, dynamic> json) =>

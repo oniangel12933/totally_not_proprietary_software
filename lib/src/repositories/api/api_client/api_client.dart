@@ -4,9 +4,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:stash/stash_api.dart';
-import 'package:stash_dio/stash_dio.dart';
-import 'package:stash_memory/stash_memory.dart';
 
 import 'package:involio/src/repositories/api/api_client/curl_interceptor.dart';
 import 'package:involio/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
@@ -14,7 +11,7 @@ import 'package:involio/src/repositories/api/api_client/token_with_refresh_inter
 import 'package:involio/src/shared/config/app_config.dart';
 
 class Api {
-  final dio = _createDioClient();
+  late final Dio dio;
 
   // final options = CacheOptions(
   //   // A default store is required for interceptor.
@@ -36,11 +33,28 @@ class Api {
   //   allowPostMethod: false,
   // );
 
-  Api._internal();
+  // Api._internal() {
+  //   dio = _createDioClient();
+  // }
+  //
+  // //static final _singleton = Api._internal();
+  // //factory Api() => _singleton;
+  //
+  // factory Api() {
+  //   return Api._internal();
+  // }
+  //
+  // factory Api.testing(Dio dio) {
+  //   return Api._internal();
+  // }
+  //
+  //
 
-  static final _singleton = Api._internal();
+  Api() {
+    dio = _createDioClient();
+  }
 
-  factory Api() => _singleton;
+  Api.testing({required this.dio});
 
   static Dio _getBaseClient() {
     Dio dioNew = Dio(BaseOptions(

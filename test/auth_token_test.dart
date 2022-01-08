@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
@@ -42,6 +43,9 @@ void main() {
     //print(envString);
 
     //await dotenv.load(fileName: envPath);
+
+    // this will load a blank config and use the defaults set in app config
+    dotenv.testLoad();
     await getItSetUp(testing: true);
 
     GetIt.I.unregister<SecureStorageRepository>();

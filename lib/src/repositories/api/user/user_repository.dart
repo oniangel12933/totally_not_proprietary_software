@@ -5,22 +5,44 @@ import 'package:get_it/get_it.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/repositories/api/api_client/api_client.dart';
+import 'package:involio/src/shared/cache/cache.dart';
+
+UserBaseResponse userResponseFromJson(String str) =>
+    UserBaseResponse.fromJson(json.decode(str));
+
+String userResponseToJson(UserBaseResponse data) => json.encode(data.toJson());
 
 class UserRepository {
-  //User? _user;
+  static String userCacheKey = "user_me";
 
-  // Future<User?> getUser() async {
-  //   if (_user != null) return _user;
-  //   return Future.delayed(
-  //     const Duration(milliseconds: 300),
-  //     () => _user = User(const Uuid().v4()),
-  //   );
-  // }
+  Future<void> clearUserCache() async {
+    GetIt.I.get<SimpleCache>().clear();
+  }
 
-  Future<UserResponse> getUser() async {
+  Future<UserBaseResponse> getUser() async {
+    SimpleCache simpleCache = GetIt.I.get<SimpleCache>();
+
+    String? cachedUserJson = await simpleCache.getString(
+      userCacheKey,
+    );
+
+    if (cachedUserJson != null) {
+      try {
+        UserBaseResponse userResponse = userResponseFromJson(cachedUserJson);
+        print("return cached user");
+        return userResponse;
+      } on Exception {}
+    }
+
     Response response = await GetIt.I.get<Api>().dio.get('api/user/get_user');
+    UserBaseResponse userResponse = UserBaseResponse.fromJson(response.data);
 
-    return UserResponse.fromJson(response.data);
+    await simpleCache.setString(
+      key: userCacheKey,
+      value: userResponseToJson(userResponse),
+    );
+
+    return userResponse;
   }
 
   Future<TrendingUserResponse> getTrendingUsers({
@@ -44,21 +66,21 @@ class UserRepository {
   }
 
   Future<CreateFollowResponse> followUser({required String userId}) async {
-    var request = CreateFollower(userId: userId,);
+    var request = CreateFollower(userId: userId);
 
-    Response response = await GetIt.I.get<Api>()
-        .dio
-        .post('api/social/follow/follow_user', data: jsonEncode(request.toJson()));
+    Response response = await GetIt.I.get<Api>().dio.post(
+        'api/social/follow/follow_user',
+        data: jsonEncode(request.toJson()));
 
     return CreateFollowResponse.fromJson(response.data);
   }
 
   Future<CreateFollowResponse> unfollowUser({required String userId}) async {
-    var request = RemoveFollow(userId: userId,);
+    var request = RemoveFollow(userId: userId);
 
-    Response response = await GetIt.I.get<Api>()
-        .dio
-        .post('api/social/follow/unfollow_user', data: jsonEncode(request.toJson()));
+    Response response = await GetIt.I.get<Api>().dio.post(
+        'api/social/follow/unfollow_user',
+        data: jsonEncode(request.toJson()));
 
     return CreateFollowResponse.fromJson(response.data);
   }

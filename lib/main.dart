@@ -18,6 +18,7 @@ import 'package:involio/src/shared/config/get_it_setup.dart';
 import 'src/app.dart';
 
 void main() async {
+
   try {
     await dotenv.load(fileName: 'assets/env/.env');
   } on FileNotFoundError {

@@ -8,6 +8,7 @@ import 'package:involio/src/repositories/api/strategies/strategies_repository.da
 import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/shared/cache/cache.dart';
 import 'app_config.dart';
 
 Future<void> getItSetUp({bool testing = false}) async {
@@ -53,6 +54,11 @@ Future<void> getItSetUp({bool testing = false}) async {
   getIt.registerLazySingleton<AuthBloc>(
     () => AuthBloc(),
     dispose: (AuthBloc authBloc) => authBloc.close(),
+  );
+
+  getIt.registerLazySingleton<SimpleCache>(
+    () => SimpleCache(),
+    dispose: (SimpleCache simpleCache) => simpleCache.close(),
   );
 
   return getIt.allReady();

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
+import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:involio/src/theme/theme_cubit.dart';
 
@@ -26,6 +29,8 @@ class _SettingsPageState extends State<SettingsPage> {
     buildSignature: 'Unknown',
   );
 
+  UserBaseResponse userResponse = UserBaseResponse();
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +42,8 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       _packageInfo = info;
     });
+    userResponse = await GetIt.I.get<UserRepository>().getUser();
+    setState(() {});
   }
 
   Widget _infoTile(String title, String subtitle) {
@@ -60,7 +67,6 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             DropdownButton<bool>(
               // Read the selected themeMode from the controller
               value: context.read<ThemeCubit>().getIsDark(),
@@ -90,7 +96,12 @@ class _SettingsPageState extends State<SettingsPage> {
               },
               child: const Text('Logout!!'),
             ),
-            _infoTile('Version', '${_packageInfo.version}+${_packageInfo.buildNumber}'),
+            _infoTile('Version',
+                '${_packageInfo.version}+${_packageInfo.buildNumber}'),
+            const SizedBox(
+              height: 30,
+            ),
+            _infoTile('User', '${userResponse.username}'),
           ],
         ),
       ),

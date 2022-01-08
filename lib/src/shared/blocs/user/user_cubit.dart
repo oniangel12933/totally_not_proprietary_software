@@ -8,9 +8,9 @@ import 'cubit.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(const UserState());
 
-  Future<UserResponse?> getUser() async {
+  Future<UserBaseResponse?> getUser() async {
     //print('UserCubit -> getUser()');
-    UserResponse user = await GetIt.I.get<UserRepository>().getUser();
+    UserBaseResponse user = await GetIt.I.get<UserRepository>().getUser();
     emit(UserState(user: user));
   }
 }
