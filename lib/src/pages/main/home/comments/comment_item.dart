@@ -1,29 +1,30 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:insidersapp/src/extensions/image_builder.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:involio/src/shared/config/app_config.dart';
+import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
-import '../posts/like_button.dart';
+import 'like_button.dart';
 
 class UserComment extends StatefulWidget {
-  final String commentId;
-  final String imageUrl;
-  final String username;
-  final String timestamp;
-  final String text;
-  final int likes;
-  final bool liked;
+  final String? commentId;
+  final String? ownerAvatar;
+  final String? username;
+  final DateTime? timestamp;
+  final String? content;
+  final int? likes;
+  final bool? liked;
   static const double edge = AppThemes.edgePadding;
   static const double imageSize = 45.0;
 
   const UserComment({
     Key? key,
     required this.commentId,
-    required this.imageUrl,
+    required this.ownerAvatar,
     required this.username,
     required this.timestamp,
-    required this.text,
+    required this.content,
     required this.likes,
     required this.liked,
   }) : super(key: key);
@@ -45,46 +46,59 @@ class _UserCommentState extends State<UserComment> {
 
   @override
   Widget build(BuildContext context) {
+    String imageUrl =
+        "${AppConfig().baseUrl}api/user/files/get_s3_image/${widget.ownerAvatar}";
+
     return Container(
-      padding: const EdgeInsets.only(
-        left: 58,
-      ),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(
-          width: UserComment.imageSize,
-          child: ImageBuilder(
-            url: widget.imageUrl,
-            height: UserComment.imageSize,
+      padding: const EdgeInsets.only(left: 38, bottom: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
             width: UserComment.imageSize,
-            imageType: ImageType.profilePicture,
+            child: AppImageBuilder(
+              imageUrl: imageUrl,
+              height: UserComment.imageSize,
+              width: UserComment.imageSize,
+              radius: 7,
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 8, bottom: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildUserNameAndPostTime(),
-              const SizedBox(height: 6),
-              Container(
-                width: 213,
-                child: _buildText(),
+          Container(
+            padding: const EdgeInsets.only(left: 8),
+            child: SizedBox(
+              width: 270,
+              child: Column(
+                children: [
+                  _buildUserNameAndPostTime(),
+                  const SizedBox(height: 6),
+                  _buildText(),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-        Container(
-          child: _buildButtons(),
-        ),
-      ]),
+          OptimisticCommentLikeButton(
+            iconSize: 16,
+            fontSize: 12,
+            commentId: widget.commentId!,
+            totalLikeCount: widget.likes!,
+            isLikedByUser: widget.liked!,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildUserNameAndPostTime() {
+    final String _timeStamp = widget.timestamp != null
+        ? DateFormat('h:mm a').format(widget.timestamp as DateTime)
+        : '';
+
+    final String _username = widget.username ?? "";
+
     return Align(
       alignment: Alignment.bottomLeft,
       child: Text(
-        "${widget.username}  ·  ${widget.timestamp}",
+        "@${_username.length <= 25 ? _username : _username.substring(0, 25)}  ·  $_timeStamp",
         style: AppFonts.bodySmall.copyWith(
           color: AppColors.involioGreenGrayBlue,
         ),
@@ -92,31 +106,19 @@ class _UserCommentState extends State<UserComment> {
     );
   }
 
+
   Widget _buildText() {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Text(
-        widget.text.length < 100
-            ? widget.text
-            : widget.text.substring(0, 100) + ' ...',
-        //TODO add expanding elipsies button
+        widget.content ?? "",
         softWrap: true,
-        style:
-            AppFonts.comments1.copyWith(color: AppColors.involioWhiteShades60),
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
+        style: AppFonts.comments1.copyWith(
+          color: AppColors.involioWhiteShades60,
+        ),
       ),
-    );
-  }
-
-  Widget _buildButtons() {
-    const double iconSize = 16.0;
-    const double fontSize = 12.0;
-    return OptimisticLikeButton(
-      iconSize: iconSize,
-      fontSize: fontSize,
-      postId: widget.commentId,
-      totalLikeCount: widget.likes,
-      isLikedByUser: widget.liked,
-      isVirticle: true,
     );
   }
 }

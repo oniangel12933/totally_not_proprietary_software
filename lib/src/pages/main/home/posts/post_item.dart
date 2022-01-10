@@ -1,6 +1,8 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:involio/src/router/router.gr.dart';
 
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
@@ -24,7 +26,8 @@ class UserPost extends StatefulWidget {
   final String text;
   final int likes;
   final bool liked;
-  final String comments;
+  final int commentsCnt;
+  final bool commentsEnabled;
   final String dollars;
   static const double edge = AppThemes.edgePadding;
   static const double imageSize = 45.0;
@@ -39,15 +42,30 @@ class UserPost extends StatefulWidget {
     required this.text,
     required this.likes,
     required this.liked,
-    required this.comments,
+    required this.commentsCnt,
+    required this.commentsEnabled,
     required this.dollars,
   }) : super(key: key);
 
   @override
-  State<UserPost> createState() => _UserPostState();
+  State<UserPost> createState() => UserPostState();
 }
 
-class _UserPostState extends State<UserPost> {
+class UserPostState extends State<UserPost> {
+  late int currentCommentCnt = widget.commentsCnt;
+
+  void incrementCommentCount() {
+    setState(() {
+      currentCommentCnt += 1;
+    });
+  }
+
+  void decrementCommentCount() {
+    setState(() {
+      currentCommentCnt -= 1;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -190,13 +208,14 @@ class _UserPostState extends State<UserPost> {
 
   Widget _buildButtons(BuildContext context) {
     const double iconSize = 16.0;
+
     return Container(
       margin: const EdgeInsets.only(right: 32, left: 32),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //_buildIconButton(context.involioIcons.heart, widget.likes),
-          OptimisticLikeButton(
+          OptimisticPostLikeButton(
             iconSize: iconSize,
             textStyle: AppFonts.comments1
                 .copyWith(color: AppColors.involioGreenGrayBlue),
@@ -204,7 +223,34 @@ class _UserPostState extends State<UserPost> {
             totalLikeCount: widget.likes,
             isLikedByUser: widget.liked,
           ),
-          _buildIconButton(context.involioIcons.comment, widget.comments),
+          TextButton(
+            child: _buildIconButton(
+                context.involioIcons.comment, "$currentCommentCnt"),
+            onPressed: () {
+              if (widget.commentsEnabled) {
+                final userPostKey = GlobalKey<UserPostState>();
+                context.router.push(
+                  CommentsRoute(
+                    userPost: UserPost(
+                      key: userPostKey,
+                      postId: widget.postId,
+                      imageUrl: widget.imageUrl,
+                      name: widget.name,
+                      username: widget.username,
+                      timestamp: widget.timestamp,
+                      text: widget.text,
+                      likes: widget.likes,
+                      liked: widget.liked,
+                      commentsCnt: currentCommentCnt,
+                      commentsEnabled: false,
+                      dollars: widget.dollars,
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+
           _buildIconButton(context.involioIcons.dollarSign, widget.dollars),
           _buildIconButton(context.involioIcons.share, ''),
         ],

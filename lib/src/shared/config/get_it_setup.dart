@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:involio/src/repositories/api/api_client/api_client.dart';
 import 'package:involio/src/repositories/api/auth/auth_repository.dart';
+import 'package:involio/src/repositories/api/comments/comments_repository.dart';
 import 'package:involio/src/repositories/api/portfolios/portfolios_repository.dart';
 import 'package:involio/src/repositories/api/posts/posts_repository.dart';
 import 'package:involio/src/repositories/api/strategies/strategies_repository.dart';
@@ -48,6 +49,9 @@ Future<void> getItSetUp({bool testing = false}) async {
   );
   getIt.registerLazySingleton<StrategiesRepository>(
     () => StrategiesRepository(),
+  );
+  getIt.registerLazySingleton<CommentsRepository>(
+    () => CommentsRepository(),
   );
 
   getIt.registerLazySingleton<AuthBloc>(

@@ -3,38 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:involio/src/shared/icons/involio_icons.dart';
-import 'bloc/post_like_bloc.dart';
-import 'bloc/post_like_state.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
+import 'bloc/comment_like_bloc.dart';
+import 'bloc/comment_like_state.dart';
 
-class OptimisticPostLikeButton extends StatefulWidget {
-  const OptimisticPostLikeButton({
+class OptimisticCommentLikeButton extends StatefulWidget {
+  const OptimisticCommentLikeButton({
     Key? key,
     required this.iconSize,
-    required this.textStyle,
-    required this.postId,
+    required this.fontSize,
+    required this.commentId,
     required this.totalLikeCount,
     required this.isLikedByUser,
-    //required this.postLikeBloc,
+    //required this.commentLikeBloc,
   }) : super(key: key);
 
   final double iconSize;
-  final TextStyle textStyle;
-  final String postId;
+  final double fontSize;
+  final String commentId;
   final int totalLikeCount;
   final bool isLikedByUser;
 
   @override
-  State<OptimisticPostLikeButton> createState() =>
-      _OptimisticPostLikeButtonState();
+  State<OptimisticCommentLikeButton> createState() =>
+      _OptimisticCommentLikeButtonState();
 }
 
-class _OptimisticPostLikeButtonState extends State<OptimisticPostLikeButton> {
-  late final PostLikeBloc _postLikeBloc;
+class _OptimisticCommentLikeButtonState
+    extends State<OptimisticCommentLikeButton> {
+  late final CommentLikeBloc _commentLikeBloc;
 
   @override
   void initState() {
-    _postLikeBloc = PostLikeBloc(
-      postId: widget.postId,
+    _commentLikeBloc = CommentLikeBloc(
+      commentId: widget.commentId,
       likedCount: widget.totalLikeCount,
       liked: widget.isLikedByUser,
     );
@@ -44,50 +47,47 @@ class _OptimisticPostLikeButtonState extends State<OptimisticPostLikeButton> {
 
   @override
   void dispose() {
-    _postLikeBloc.close();
+    _commentLikeBloc.close();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostLikeBloc, PostLikeState>(
-        bloc: _postLikeBloc,
-        builder: (BuildContext context, PostLikeState likedState) {
+    return BlocBuilder<CommentLikeBloc, CommentLikeState>(
+        bloc: _commentLikeBloc,
+        builder: (BuildContext context, CommentLikeState likedState) {
           if (likedState.error != null) {}
 
           return TextButton(
             style: TextButton.styleFrom(
               minimumSize: const Size(0, 0),
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.only(left: 8, right: 0),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            //padding: const EdgeInsets.all(10.0),
-            child: Row(
+            child: Column(
               children: <Widget>[
                 Icon(
                   likedState.isLiked == true
                       ? context.involioIcons.heartFill
                       : context.involioIcons.heartBold,
                   color: likedState.isLiked == true
-                      ? Colors.red
-                      : Theme.of(context).brightness == Brightness.light
-                          ? Colors.grey.shade600
-                          : Colors.grey.shade500,
+                      ? AppColors.involioAssistiveAndAlertHeart
+                      : AppColors.involioGreenGrayBlue,
                   size: widget.iconSize,
                 ),
                 const SizedBox(
-                  width: 8.0,
+                  height: 8.0,
                 ),
-                Text(
-                  '${likedState.likeCnt}',
-                  style: widget.textStyle,
-                ),
+                Text('${likedState.likeCnt}',
+                    style: AppFonts.comments1.copyWith(
+                      color: AppColors.involioGreenGrayBlue,
+                    )),
               ],
             ),
             onPressed: () {
-              _postLikeBloc.likeButtonPressed(
-                postId: widget.postId,
+              _commentLikeBloc.likeButtonPressed(
+                commentId: widget.commentId,
                 likeWas: likedState.isLiked,
                 likeCntWas: likedState.likeCnt,
               );

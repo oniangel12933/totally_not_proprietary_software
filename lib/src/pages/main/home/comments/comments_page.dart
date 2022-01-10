@@ -1,209 +1,215 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:insidersapp/gen/involio_api.swagger.dart';
-import 'package:insidersapp/src/extensions/image_builder.dart';
-import 'package:insidersapp/src/pages/login/sign_up_page/bloc/sign_up_bloc.dart';
-import 'package:insidersapp/src/pages/main/home/posts/post_item.dart';
-import 'package:insidersapp/src/pages/main/home/posts/posts_list.dart';
-import 'package:insidersapp/src/shared/config/app_config.dart';
-import 'package:insidersapp/src/shared/config/get_it_setup.dart';
-import 'package:insidersapp/src/theme/app_theme.dart';
-import 'package:insidersapp/src/theme/colors.dart';
-import 'package:insidersapp/src/shared/icons/involio_icons.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/src/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:involio/src/pages/main/home/comments/bloc/post_comment_bloc.dart';
+import 'package:involio/src/pages/main/home/comments/comments_list.dart';
+import 'package:involio/src/pages/main/home/posts/post_item.dart';
+import 'package:involio/src/shared/blocs/user/cubit.dart';
+import 'package:involio/src/shared/config/app_config.dart';
+import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:involio/src/theme/app_theme.dart';
+import 'package:involio/src/theme/colors.dart';
 
 import '../posts/post_item.dart';
-import '../posts/posts_list.dart';
-import 'comment_item.dart';
 
 class CommentsPage extends StatefulWidget {
-  const CommentsPage({Key? key}) : super(key: key);
+  final UserPost userPost;
+
+  const CommentsPage({
+    Key? key,
+    required this.userPost,
+  }) : super(key: key);
 
   @override
   _CommentsPageState createState() => _CommentsPageState();
 }
 
 class _CommentsPageState extends State<CommentsPage> {
-  late ScrollController _scrollViewController;
-  final PagingController<int, AppApiFeedSchemaPost> _pagingController =
-      PagingController(firstPageKey: 1);
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  //************* DON'T KNOW WHAT THIS DOES***********************
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => PostCommentBloc(
+        postId: widget.userPost.postId,
+        commentsCnt: widget.userPost.commentsCnt,
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: Text(AppLocalizations.of(context)!.comments,
+              style: AppFonts.body
+                  .copyWith(color: AppColors.involioWhiteShades80)),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            widget.userPost,
+            Expanded(
+              child: CommentsList(
+                postId: widget.userPost.postId,
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: AddCommentWidget(
+          post: widget.userPost,
+        ),
+      ),
+    );
+  }
+}
+
+class AddCommentWidget extends StatelessWidget {
+  final UserPost post;
+
+  const AddCommentWidget({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _textFieldController = TextEditingController();
+
+    return BlocListener<PostCommentBloc, PostCommentState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        if (state is CommentSuccessful) {
+          _textFieldController.clear();
+          (post.key as GlobalKey<UserPostState>)
+              .currentState
+              ?.incrementCommentCount();
+        }
+      },
+      child: BlocBuilder<PostCommentBloc, PostCommentState>(
+        builder: (context, state) {
+          return Container(
+            // height: 103,
+            // width: double.infinity,
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 50),
+            color: AppColors.involioFillFormBackgroundColor,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: 40,
+                minWidth: double.infinity,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const AppImageBuilder(
+                    imageUrl: "",
+                    height: 45,
+                    width: 45,
+                    radius: 7,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: TextField(
+                        textAlignVertical: TextAlignVertical.bottom,
+                        keyboardType: TextInputType.multiline,
+                        minLines: 1,
+                        maxLines: 15,
+                        cursorHeight: 16,
+                        cursorColor: AppColors.involioWhiteShades80,
+                        style: AppFonts.comments1.copyWith(
+                          color: AppColors.involioWhiteShades80,
+                        ),
+                        controller: _textFieldController,
+                        // onChanged: (content) => context
+                        //     .read<PostCommentBloc>()
+                        //     .add(WritingContent(content: content)),
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          contentPadding: const EdgeInsets.all(8),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 1,
+                              color: AppColors.involioWhiteShades80,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: AppColors.involioWhiteShades80),
+                          ),
+                          hintText: "add a comment",
+                          hintStyle: AppFonts.comments1.copyWith(
+                            color: AppColors.involioFillFormText,
+                          ),
+                          suffixIcon: TextButton(
+                            child: Text(
+                              AppLocalizations.of(context)!.post,
+                              style: AppFonts.numbers1.copyWith(
+                                color: AppColors.involioFillFormText,
+                              ),
+                            ),
+                            style: TextButton.styleFrom(
+                              minimumSize: const Size(0, 0),
+                              padding: const EdgeInsets.all(4),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () => {
+                              context.read<PostCommentBloc>().add(
+                                    PostingComment(
+                                      postId: state.postId ?? "",
+                                      commentsCnt: state.commentsCnt ?? 0,
+                                      content: _textFieldController.text,
+                                    ),
+                                  ),
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ProfilePicture extends StatefulWidget {
+  const ProfilePicture({Key? key}) : super(key: key);
+
+  @override
+  ProfilePictureState createState() => ProfilePictureState();
+}
+
+class ProfilePictureState extends State<ProfilePicture> {
   @override
   void initState() {
     super.initState();
 
-    _pagingController.addStatusListener((status) {
-      if (status == PagingStatus.subsequentPageError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text(
-              'Something went wrong while fetching your feed.',
-            ),
-            action: SnackBarAction(
-              label: 'Retry',
-              onPressed: () => _pagingController.retryLastFailedRequest(),
-            ),
-          ),
-        );
-      }
-    });
-
-    _scrollViewController = ScrollController();
-    // _scrollViewController.addListener(_scrollListener);
+    context.read<UserCubit>().getUser();
   }
 
-  //*************************************************************
-
+  //ToDo get profile image
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          title: Text('Comments',
-              style: AppFonts.body
-                  .copyWith(color: AppColors.involioWhiteShades80)),
-          leading: IconButton(
-            icon: Icon(context.involioIcons.backArrow),
-            color: AppColors.involioWhiteShades80,
-            onPressed: () => null, //TODO add functionality
-          ),
-        ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-          UserPost(
-            postId: "123",
-            imageUrl: "123",
-            name: "John Richardson",
-            username: "@ jDickie",
-            //TODO in future should show days ago/weeks ago/etc if longer than a day.
-            timestamp: DateFormat('h:mm a').format(DateTime.now()),
-            text: "Check out these sweet sweet investments",
-            likes: 38,
-            liked: true,
-            comments: "7",
-            dollars: "80",
-          ),
-          Expanded(
-            child: Container(
-              child: Column(children: [
-                UserComment(
-                  commentId: "12434",
-                  imageUrl: "imageUrl",
-                  username: "@ jakerowe",
-                  timestamp: DateFormat('h:mm a').format(DateTime.now()),
-                  text:
-                      "I have even more to say about this post so here is all i have to say about that but also more more more more",
-                  likes: 7,
-                  liked: false,
-                ),
-                UserComment(
-                  commentId: "12434",
-                  imageUrl: "imageUrl",
-                  username: "@ jakerowe",
-                  timestamp: DateFormat('h:mm a').format(DateTime.now()),
-                  text: "this is pretty cool man",
-                  likes: 7,
-                  liked: false,
-                ),
-                UserComment(
-                  commentId: "12434",
-                  imageUrl: "imageUrl",
-                  username: "@ jakerowe",
-                  timestamp: DateFormat('h:mm a').format(DateTime.now()),
-                  text: "this is pretty cool man",
-                  likes: 7,
-                  liked: false,
-                ),
-              ]),
-            ),
-            /*RefreshIndicator(
-            onRefresh: () => Future.sync(
-              () => _pagingController.refresh(),
-            ),
-            child: CustomScrollView(
-              // AlwaysScrollableScrollPhysics allows pull to refresh
-              // to work on an empty list
-              //physics: const AlwaysScrollableScrollPhysics(),
-              controller: _scrollViewController,
-              slivers: <Widget>[
-                PagedSliverList<int, AppApiFeedSchemaPost>(
-                  pagingController: _pagingController,
-                  builderDelegate:
-                      PagedChildBuilderDelegate<AppApiFeedSchemaPost>(
-                          noItemsFoundIndicatorBuilder: (context) =>
-                              NoItemsFoundWidget(onTryAgain: () {
-                                _pagingController.refresh();
-                              }),
-                          animateTransitions: true,
-                          itemBuilder: (context, item, index) {
-                            // if we start to use websockets for comment,
-                            // this will need to be moved into the bloc
-                            String imageUrl =
-                                "${AppConfig().baseUrl}api/user/files/get_s3_image/${item.ownerAvatar?.pictureS3Id}";
-                            //print("imageUrl: $imageUrl");
-                            return UserComment(
-                              commentId: item.id ?? "",
-                              imageUrl: imageUrl,
-                              username: "@${item.owner?.username}",
-                              //TODO in future should show days ago/weeks ago/etc if longer than a day.
-                              timestamp: item.timestamp != null
-                                  ? DateFormat('h:mm a')
-                                      .format(item.timestamp as DateTime)
-                                  : '',
-                              text: item.content ?? "",
-                              likes: item.postLikes ?? 0,
-                              liked: item.liked ?? false,
-                            );
-                          }),
-                ),
-              ],
-            ),
-          ),*/
-          ),
-        ]),
-        bottomNavigationBar: Container(
-          color: AppColors.involioFillFormBackgroundColor,
-          child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 50),
-            child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              ImageBuilder(
-                url: "some url",
-                height: 45,
-                width: 45,
-                imageType: ImageType.profilePicture
-              ),
-              const SizedBox(width: 8),
-              Container(
-                width: 290,
-                child: Row(children: [
-                  Flexible(fit: FlexFit.tight, flex: 50, child: add_comment()),
-                ]),
-              )
-            ]),
-          ),
-        ));
-  }
+    return BlocBuilder<UserCubit, UserState>(
+        builder: (context, UserState state) {
 
-  Widget add_comment() {
-    return TextField(
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      style: AppFonts.comments1.copyWith(color: AppColors.involioWhiteShades80),
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.involioWhiteShades100),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.involioWhiteShades100),
-        ),
-        contentPadding: EdgeInsets.all(8),
-        hintStyle:
-            AppFonts.comments1.copyWith(color: AppColors.involioFillFormText),
-        hintText: 'Add a comment as John Richardson',
-      ),
-    );
+      String imageUrl =
+          "${AppConfig().baseUrl}api/user/files/get_s3_image/ownerAvatar";
+
+      return AppImageBuilder(
+          imageUrl: imageUrl, height: 45, width: 45, radius: 7);
+    });
   }
 }
