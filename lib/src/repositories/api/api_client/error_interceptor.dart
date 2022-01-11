@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 
 class ErrorInterceptor extends Interceptor {
-  final Dio dio;
 
-  ErrorInterceptor(this.dio);
+  ErrorInterceptor();
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {

@@ -9,6 +9,7 @@ import 'package:involio/src/repositories/api/api_client/curl_interceptor.dart';
 import 'package:involio/src/repositories/api/api_client/token_interceptor_for_refresh.dart';
 import 'package:involio/src/repositories/api/api_client/token_with_refresh_interceptor.dart';
 import 'package:involio/src/shared/config/app_config.dart';
+import 'error_interceptor.dart';
 
 class Api {
   late final Dio dio;
@@ -124,7 +125,7 @@ class Api {
       //   ],
       // ),
       //DioCacheInterceptor(options: options),
-      //ErrorInterceptor(dio),
+      ErrorInterceptor(),
     };
   }
 }

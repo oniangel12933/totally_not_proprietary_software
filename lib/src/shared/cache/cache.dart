@@ -38,7 +38,7 @@ class SimpleCache {
     return prefs.containsKey(_getValueKey(key));
   }
 
-  Future<String?> getStringFromCacheThenFunction(
+  Future<String?> getStringFromCacheElseFunction(
       String key, Future<String> Function() f) async {
     SharedPreferences prefs = await _getSharedPreferences;
 

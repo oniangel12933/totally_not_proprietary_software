@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
@@ -43,7 +43,7 @@ class PostsFilterModal extends StatelessWidget {
                 color: AppColors.involioGreenGrayBlue,
               ),
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               minLeadingWidth: 0,
               horizontalTitleGap: 10,
@@ -70,7 +70,7 @@ class PostsFilterModal extends StatelessWidget {
                     AppLocalizations.of(context)!.trending.toLowerCase());
               },
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               minLeadingWidth: 0,
               horizontalTitleGap: 10,
@@ -97,7 +97,7 @@ class PostsFilterModal extends StatelessWidget {
                     AppLocalizations.of(context)!.following.toLowerCase());
               },
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               minLeadingWidth: 0,
               horizontalTitleGap: 10,
@@ -124,7 +124,7 @@ class PostsFilterModal extends StatelessWidget {
                     AppLocalizations.of(context)!.interests.toLowerCase());
               },
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             Container(
               padding: const EdgeInsets.only(
                   top: 20, left: 20, right: 20, bottom: 25),
