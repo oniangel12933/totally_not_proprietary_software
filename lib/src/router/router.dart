@@ -4,6 +4,7 @@ import 'package:involio/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:involio/src/pages/login/get_started/getting_started_page.dart';
 import 'package:involio/src/pages/login/login_page/login_page.dart';
 import 'package:involio/src/pages/login/sign_up_page/sign_up_page.dart';
+import 'package:involio/src/pages/main/home/posts/comments/post_comments_page.dart';
 import 'package:involio/src/pages/main/main_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';
@@ -75,7 +76,7 @@ import 'package:involio/src/pages/splash/splash_page.dart';
     ),
     AutoRoute(
       initial: true,
-      path: '/portfolios',
+      path: '/strategies',
       page: TrendingStrategiesPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
@@ -89,10 +90,17 @@ import 'package:involio/src/pages/splash/splash_page.dart';
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
+    AutoRoute(
+      initial: true,
+      path: '/comments',
+      page: PostCommentsPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: '/get_started'),
     //Home
   ],
 )
 class $AppRouter {}
-

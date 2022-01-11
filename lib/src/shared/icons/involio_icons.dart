@@ -129,5 +129,8 @@ class InvolioIcons { // extends PlatformIcons {
 
   IconData get at =>
       isMaterial(context) ? PhosphorIcons.at : PhosphorIcons.at;
+
+  IconData get backArrow =>
+      isMaterial(context) ? PhosphorIcons.caretLeft : PhosphorIcons.caretLeft;
 }
 

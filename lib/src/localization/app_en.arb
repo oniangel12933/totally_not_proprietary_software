@@ -95,6 +95,10 @@
    "@logIn": {
        "description": "Button linked to user log in"
    },
+   "post": "Post",
+   "@post": {
+       "description": "Post button text"
+   },
    "posts": "Posts",
    "@posts": {
        "description": "Home screen tab for posts"
@@ -214,5 +218,9 @@
    "followers": "Followers",
    "@followers": {
        "description": "Displays user's follower count"
-   }
+   },
+    "comments": "Comments",
+    "@comments": {
+        "description": "Comments page title"
+    }
 }

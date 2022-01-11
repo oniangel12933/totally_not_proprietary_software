@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
                 backgroundColor: state.loginFormStatus.isValidated
                     ? AppColors.involioBlue
                     : AppColors.involioGreyBlue,
-                foregroundColor: Colors.white,
+                foregroundColor: AppColors.involioWhiteShades100,
               ),
             ),
           );
