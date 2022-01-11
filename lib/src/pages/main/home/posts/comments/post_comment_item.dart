@@ -7,7 +7,7 @@ import 'package:involio/src/theme/colors.dart';
 
 import 'post_comment_like_button.dart';
 
-class UserComment extends StatefulWidget {
+class UserPostComment extends StatefulWidget {
   final String? commentId;
   final String? ownerAvatar;
   final String? username;
@@ -18,7 +18,7 @@ class UserComment extends StatefulWidget {
   static const double edge = AppThemes.edgePadding;
   static const double imageSize = 45.0;
 
-  const UserComment({
+  const UserPostComment({
     Key? key,
     required this.commentId,
     required this.ownerAvatar,
@@ -30,10 +30,10 @@ class UserComment extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<UserComment> createState() => _UserCommentState();
+  State<UserPostComment> createState() => _UserPostCommentState();
 }
 
-class _UserCommentState extends State<UserComment> {
+class _UserPostCommentState extends State<UserPostComment> {
   @override
   void initState() {
     super.initState();
@@ -55,11 +55,11 @@ class _UserCommentState extends State<UserComment> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: UserComment.imageSize,
+            width: UserPostComment.imageSize,
             child: AppImageBuilder(
               imageUrl: imageUrl,
-              height: UserComment.imageSize,
-              width: UserComment.imageSize,
+              height: UserPostComment.imageSize,
+              width: UserPostComment.imageSize,
               radius: 7,
             ),
           ),

@@ -9,19 +9,19 @@ import 'package:involio/src/repositories/api/comments/comments_repository.dart';
 
 import 'post_comment_item.dart';
 
-class CommentsList extends StatefulWidget {
+class PostCommentsList extends StatefulWidget {
   final String postId;
 
-  const CommentsList({
+  const PostCommentsList({
     Key? key,
     required this.postId,
   }) : super(key: key);
 
   @override
-  _CommentsListState createState() => _CommentsListState();
+  _PostCommentsListState createState() => _PostCommentsListState();
 }
 
-class _CommentsListState extends State<CommentsList> {
+class _PostCommentsListState extends State<PostCommentsList> {
   static const _pageSize = 20;
 
   final getIt = GetIt.instance;
@@ -128,7 +128,7 @@ class _CommentsListState extends State<CommentsList> {
                   builderDelegate: PagedChildBuilderDelegate<Comment>(
                       animateTransitions: true,
                       itemBuilder: (context, item, index) {
-                        return UserComment(
+                        return UserPostComment(
                           commentId: item.id,
                           username: item.owner?.username,
                           content: item.content,

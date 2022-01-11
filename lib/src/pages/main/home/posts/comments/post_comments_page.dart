@@ -51,7 +51,7 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
           children: [
             widget.userPost,
             Expanded(
-              child: CommentsList(
+              child: PostCommentsList(
                 postId: widget.userPost.postId,
               ),
             ),
