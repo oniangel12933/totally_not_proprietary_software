@@ -91,7 +91,19 @@ class _CommentsListState extends State<CommentsList> {
       listener: (context, state) {
         if (state is CommentSuccessful) {
           setState(() {
-            _pagingController.refresh();
+            if (_pagingController.itemList != null) {
+              _pagingController.itemList?.insert(
+                  0,
+                  Comment(
+                    id: "not a real id",
+                    content: state.content,
+                    timestamp: DateTime.now(),
+                  ));
+            }
+
+            _scrollViewController.animateTo(1,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.elasticInOut);
           });
         }
       },
