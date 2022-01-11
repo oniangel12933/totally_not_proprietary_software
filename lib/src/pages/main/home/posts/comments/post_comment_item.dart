@@ -5,7 +5,7 @@ import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart'
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
-import 'comment_like_button.dart';
+import 'post_comment_like_button.dart';
 
 class UserComment extends StatefulWidget {
   final String? commentId;
@@ -76,7 +76,7 @@ class _UserCommentState extends State<UserComment> {
               ),
             ),
           ),
-          OptimisticCommentLikeButton(
+          OptimisticPostCommentLikeButton(
             iconSize: 16,
             fontSize: 12,
             commentId: widget.commentId!,

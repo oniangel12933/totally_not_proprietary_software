@@ -2,19 +2,19 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'comment_like_state.freezed.dart';
+part 'post_comment_like_state.freezed.dart';
 
-part 'comment_like_state.g.dart';
+part 'post_comment_like_state.g.dart';
 
-CommentLikeState commentLikeStateFromJson(String str) =>
-    CommentLikeState.fromJson(json.decode(str));
+PostCommentLikeState commentLikeStateFromJson(String str) =>
+    PostCommentLikeState.fromJson(json.decode(str));
 
-String commentLikeStateToJson(CommentLikeState data) =>
+String commentLikeStateToJson(PostCommentLikeState data) =>
     json.encode(data.toJson());
 
 @freezed
-class CommentLikeState with _$CommentLikeState {
-  const factory CommentLikeState({
+class PostCommentLikeState with _$PostCommentLikeState {
+  const factory PostCommentLikeState({
     @Default(false) bool? isSavingLike,
     required String commentId,
     required int likeCnt,
@@ -22,7 +22,7 @@ class CommentLikeState with _$CommentLikeState {
     String? error,
   }) = CommentLikeStateMain;
 
-  const factory CommentLikeState.initial({
+  const factory PostCommentLikeState.initial({
     @Default(false) bool isSavingLike,
     String? error,
     required String commentId,
@@ -30,7 +30,7 @@ class CommentLikeState with _$CommentLikeState {
     required bool isLiked,
   }) = InitialCommentLikeState;
 
-  const factory CommentLikeState.saving({
+  const factory PostCommentLikeState.saving({
     @Default(true) bool isSavingLike,
     required String commentId,
     required int likeCnt,
@@ -38,7 +38,7 @@ class CommentLikeState with _$CommentLikeState {
     String? error,
   }) = SavingCommentLikeState;
 
-  const factory CommentLikeState.success({
+  const factory PostCommentLikeState.success({
     @Default(true) bool isSavingLike,
     required String commentId,
     required int likeCnt,
@@ -46,7 +46,7 @@ class CommentLikeState with _$CommentLikeState {
     String? error,
   }) = SuccessCommentLikeState;
 
-  const factory CommentLikeState.failure({
+  const factory PostCommentLikeState.failure({
     @Default(true) bool isSavingLike,
     required String commentId,
     required int likeCnt,
@@ -54,6 +54,6 @@ class CommentLikeState with _$CommentLikeState {
     String? error,
   }) = FailureCommentLikeState;
 
-  factory CommentLikeState.fromJson(Map<String, dynamic> json) =>
-      _$CommentLikeStateFromJson(json);
+  factory PostCommentLikeState.fromJson(Map<String, dynamic> json) =>
+      _$PostCommentLikeStateFromJson(json);
 }

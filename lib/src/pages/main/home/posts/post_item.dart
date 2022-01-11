@@ -230,7 +230,7 @@ class UserPostState extends State<UserPost> {
               if (widget.commentsEnabled) {
                 final userPostKey = GlobalKey<UserPostState>();
                 context.router.push(
-                  CommentsRoute(
+                  PostCommentsRoute(
                     userPost: UserPost(
                       key: userPostKey,
                       postId: widget.postId,

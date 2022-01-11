@@ -93,7 +93,7 @@ import 'package:involio/src/pages/splash/splash_page.dart';
     AutoRoute(
       initial: true,
       path: '/comments',
-      page: CommentsPage,
+      page: PostCommentsPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],

@@ -13,19 +13,19 @@ import 'package:involio/src/theme/colors.dart';
 
 import '../../posts/post_item.dart';
 
-class CommentsPage extends StatefulWidget {
+class PostCommentsPage extends StatefulWidget {
   final UserPost userPost;
 
-  const CommentsPage({
+  const PostCommentsPage({
     Key? key,
     required this.userPost,
   }) : super(key: key);
 
   @override
-  _CommentsPageState createState() => _CommentsPageState();
+  _PostCommentsPageState createState() => _PostCommentsPageState();
 }
 
-class _CommentsPageState extends State<CommentsPage> {
+class _PostCommentsPageState extends State<PostCommentsPage> {
   @override
   void initState() {
     super.initState();

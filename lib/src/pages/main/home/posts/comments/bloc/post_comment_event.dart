@@ -7,10 +7,10 @@ abstract class PostCommentEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class WritingContent extends PostCommentEvent {
+class WritingPostCommentContentEvent extends PostCommentEvent {
   final String content;
 
-  const WritingContent({
+  const WritingPostCommentContentEvent({
     required this.content,
   });
 

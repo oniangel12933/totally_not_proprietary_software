@@ -5,19 +5,19 @@ import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/repositories/api/comments/comments_repository.dart';
 import 'package:involio/src/shared/blocs/event_transformers/throttle.dart';
 
-import 'comment_like_event.dart';
-import 'comment_like_state.dart';
+import 'post_comment_like_event.dart';
+import 'post_comment_like_state.dart';
 
 const throttleDuration = Duration(milliseconds: 200);
 
-class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
+class PostCommentLikeBloc extends Bloc<PostCommentLikeEvent, PostCommentLikeState> {
   void likeButtonPressed({
     String? commentId,
     bool? likeWas,
     int? likeCntWas,
   }) {
     add(
-      CommentLikeEvent.buttonPressed(
+      PostCommentLikeEvent.buttonPressed(
         commentId: commentId,
         likeWas: likeWas,
         likeCntWas: likeCntWas,
@@ -25,11 +25,11 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
     );
   }
 
-  CommentLikeBloc({
+  PostCommentLikeBloc({
     required commentId,
     required likedCount,
     required liked,
-  }) : super(CommentLikeState.initial(
+  }) : super(PostCommentLikeState.initial(
           commentId: commentId,
           likeCnt: likedCount,
           isLiked: liked,
@@ -42,7 +42,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
 
   void _onLikeButtonPressed(
     CommentLikeButtonPressedEvent event,
-    Emitter<CommentLikeState> emit,
+    Emitter<PostCommentLikeState> emit,
   ) async {
 
     final String commentId = event.commentId ?? state.commentId;
@@ -54,7 +54,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
     int likeCnt = isLiked ? likeCntWas + 1 : likeCntWas - 1;
 
     emit(
-      CommentLikeState.saving(
+      PostCommentLikeState.saving(
         commentId: commentId,
         isLiked: isLiked,
         likeCnt: likeCnt,
@@ -72,7 +72,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
 
         if (commentLikeResponse.error == null) {
           emit(
-            CommentLikeState.success(
+            PostCommentLikeState.success(
               commentId: commentId,
               isLiked: isLiked,
               likeCnt: likeCnt,
@@ -80,7 +80,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
           );
         } else {
           emit(
-            CommentLikeState.failure(
+            PostCommentLikeState.failure(
               error: commentLikeResponse.error,
               commentId: commentId,
               isLiked: likeWas,
@@ -96,7 +96,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
 
         if (removeLikeResponse.error == null) {
           emit(
-            CommentLikeState.success(
+            PostCommentLikeState.success(
               commentId: commentId,
               isLiked: isLiked,
               likeCnt: likeCnt,
@@ -104,7 +104,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
           );
         } else {
           emit(
-            CommentLikeState.failure(
+            PostCommentLikeState.failure(
               error: removeLikeResponse.error,
               commentId: commentId,
               isLiked: likeWas,
@@ -117,7 +117,7 @@ class CommentLikeBloc extends Bloc<CommentLikeEvent, CommentLikeState> {
       print('catch CommentLikeBloc error: $error - $trace');
 
       emit(
-        CommentLikeState.failure(
+        PostCommentLikeState.failure(
           error: error.toString(),
           commentId: commentId,
           isLiked: likeWas,

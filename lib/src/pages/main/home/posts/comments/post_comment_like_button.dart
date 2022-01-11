@@ -5,18 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-import 'bloc/comment_like_bloc.dart';
-import 'bloc/comment_like_state.dart';
+import 'bloc/post_comment_like_bloc.dart';
+import 'bloc/post_comment_like_state.dart';
 
-class OptimisticCommentLikeButton extends StatefulWidget {
-  const OptimisticCommentLikeButton({
+class OptimisticPostCommentLikeButton extends StatefulWidget {
+  const OptimisticPostCommentLikeButton({
     Key? key,
     required this.iconSize,
     required this.fontSize,
     required this.commentId,
     required this.totalLikeCount,
     required this.isLikedByUser,
-    //required this.commentLikeBloc,
   }) : super(key: key);
 
   final double iconSize;
@@ -26,17 +25,17 @@ class OptimisticCommentLikeButton extends StatefulWidget {
   final bool isLikedByUser;
 
   @override
-  State<OptimisticCommentLikeButton> createState() =>
-      _OptimisticCommentLikeButtonState();
+  State<OptimisticPostCommentLikeButton> createState() =>
+      _OptimisticPostCommentLikeButtonState();
 }
 
-class _OptimisticCommentLikeButtonState
-    extends State<OptimisticCommentLikeButton> {
-  late final CommentLikeBloc _commentLikeBloc;
+class _OptimisticPostCommentLikeButtonState
+    extends State<OptimisticPostCommentLikeButton> {
+  late final PostCommentLikeBloc _commentLikeBloc;
 
   @override
   void initState() {
-    _commentLikeBloc = CommentLikeBloc(
+    _commentLikeBloc = PostCommentLikeBloc(
       commentId: widget.commentId,
       likedCount: widget.totalLikeCount,
       liked: widget.isLikedByUser,
@@ -54,9 +53,9 @@ class _OptimisticCommentLikeButtonState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CommentLikeBloc, CommentLikeState>(
+    return BlocBuilder<PostCommentLikeBloc, PostCommentLikeState>(
         bloc: _commentLikeBloc,
-        builder: (BuildContext context, CommentLikeState likedState) {
+        builder: (BuildContext context, PostCommentLikeState likedState) {
           if (likedState.error != null) {}
 
           return TextButton(
