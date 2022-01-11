@@ -18,12 +18,12 @@ class WritingContent extends PostCommentEvent {
   List<Object> get props => [content];
 }
 
-class PostingComment extends PostCommentEvent {
+class PostCommentPostButtonPressedEvent extends PostCommentEvent {
   final String postId;
   final int commentsCnt;
   final String content;
 
-  const PostingComment({
+  const PostCommentPostButtonPressedEvent({
     required this.postId,
     required this.commentsCnt,
     required this.content,

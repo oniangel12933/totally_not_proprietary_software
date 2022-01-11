@@ -33,24 +33,24 @@ class PostCommentState extends Equatable {
   }
 }
 
-class IsPostingComment extends PostCommentState {}
+class IsPostingCommentState extends PostCommentState {}
 
-class CommentSuccessful extends PostCommentState {
+class PostCommentPostedSuccessfullyState extends PostCommentState {
   final String postId;
   final int commentsCnt;
   final String content;
 
-  const CommentSuccessful({
+  const PostCommentPostedSuccessfullyState({
     required this.postId,
     required this.commentsCnt,
     required this.content,
   });
 }
 
-class CommentFailed extends PostCommentState {
+class PostCommentFailedToPostState extends PostCommentState {
   final String error;
 
-  const CommentFailed({
+  const PostCommentFailedToPostState({
     required this.error,
   });
 }

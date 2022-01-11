@@ -4,7 +4,7 @@ import 'package:involio/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:involio/src/pages/login/get_started/getting_started_page.dart';
 import 'package:involio/src/pages/login/login_page/login_page.dart';
 import 'package:involio/src/pages/login/sign_up_page/sign_up_page.dart';
-import 'package:involio/src/pages/main/home/comments/comments_page.dart';
+import 'package:involio/src/pages/main/home/posts/comments/post_comments_page.dart';
 import 'package:involio/src/pages/main/main_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';

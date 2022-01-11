@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:involio/src/pages/main/home/comments/bloc/post_comment_bloc.dart';
-import 'package:involio/src/pages/main/home/comments/comments_list.dart';
+import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
+import 'package:involio/src/pages/main/home/posts/comments/post_comments_list.dart';
 import 'package:involio/src/pages/main/home/posts/post_item.dart';
 import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/shared/config/app_config.dart';
@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
-import '../posts/post_item.dart';
+import '../../posts/post_item.dart';
 
 class CommentsPage extends StatefulWidget {
   final UserPost userPost;
@@ -80,7 +80,7 @@ class AddCommentWidget extends StatelessWidget {
     return BlocListener<PostCommentBloc, PostCommentState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
-        if (state is CommentSuccessful) {
+        if (state is PostCommentPostedSuccessfullyState) {
           _textFieldController.clear();
           (post.key as GlobalKey<UserPostState>)
               .currentState
@@ -162,7 +162,7 @@ class AddCommentWidget extends StatelessWidget {
                             ),
                             onPressed: () => {
                               context.read<PostCommentBloc>().add(
-                                    PostingComment(
+                                    PostCommentPostButtonPressedEvent(
                                       postId: state.postId ?? "",
                                       commentsCnt: state.commentsCnt ?? 0,
                                       content: _textFieldController.text,

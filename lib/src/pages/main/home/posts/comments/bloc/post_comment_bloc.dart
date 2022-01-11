@@ -18,18 +18,18 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
           postId: postId,
           commentsCnt: commentsCnt,
         )) {
-    on<PostingComment>(_posting);
+    on<PostCommentPostButtonPressedEvent>(_postingComment);
   }
 
-  Future<void> _posting(
-    PostingComment event,
+  Future<void> _postingComment(
+    PostCommentPostButtonPressedEvent event,
     Emitter<PostCommentState> emit,
   ) async {
     if (event.content.isEmpty) {
       return;
     }
 
-    emit(IsPostingComment());
+    emit(IsPostingCommentState());
 
     try {
       CommentsRepository _commentsRepository =
@@ -40,16 +40,16 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
       );
 
       if (response.success == true) {
-        emit(CommentSuccessful(
+        emit(PostCommentPostedSuccessfullyState(
           postId: event.postId,
           commentsCnt: event.commentsCnt + 1,
           content: event.content,
         ));
       } else {
-        emit(const CommentFailed(error: "Posting Comment Failed"));
+        emit(const PostCommentFailedToPostState(error: "Posting Comment Failed"));
       }
     } catch (error) {
-      emit(CommentFailed(error: "$error"));
+      emit(PostCommentFailedToPostState(error: "$error"));
     }
   }
 }

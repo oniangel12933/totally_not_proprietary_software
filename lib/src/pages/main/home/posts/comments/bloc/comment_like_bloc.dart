@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/pages/main/home/comments/bloc/comment_like_event.dart';
-import 'package:involio/src/pages/main/home/comments/bloc/comment_like_state.dart';
 import 'package:involio/src/repositories/api/comments/comments_repository.dart';
 import 'package:involio/src/shared/blocs/event_transformers/throttle.dart';
+
+import 'comment_like_event.dart';
+import 'comment_like_state.dart';
 
 const throttleDuration = Duration(milliseconds: 200);
 

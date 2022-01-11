@@ -7,7 +7,7 @@ import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-import 'like_button.dart';
+import 'post_like_button.dart';
 
 /// This is a single post item that will be displayed in a list of posts
 ///  imageUrl - The URL for where to get the image to display

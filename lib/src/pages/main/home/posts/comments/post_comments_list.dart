@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/pages/main/home/comments/bloc/post_comment_bloc.dart';
+import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
 import 'package:involio/src/repositories/api/comments/comments_repository.dart';
 
-import 'comment_item.dart';
+import 'post_comment_item.dart';
 
 class CommentsList extends StatefulWidget {
   final String postId;
@@ -89,7 +89,7 @@ class _CommentsListState extends State<CommentsList> {
     return BlocListener<PostCommentBloc, PostCommentState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
-        if (state is CommentSuccessful) {
+        if (state is PostCommentPostedSuccessfullyState) {
           setState(() {
             if (_pagingController.itemList != null) {
               _pagingController.itemList?.insert(
