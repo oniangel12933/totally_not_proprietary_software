@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
@@ -47,10 +48,10 @@ class _UserPostCommentState extends State<UserPostComment> {
   @override
   Widget build(BuildContext context) {
     String imageUrl =
-        "${AppConfig().baseUrl}api/user/files/get_s3_image/${widget.ownerAvatar}";
+        "${GetIt.I.get<AppConfig>().baseUrl}api/user/files/get_s3_image/${widget.ownerAvatar}";
 
     return Container(
-      padding: const EdgeInsets.only(left: 38, bottom: 20),
+      padding: const EdgeInsets.only(left: 38, right: 20, bottom: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,19 +64,17 @@ class _UserPostCommentState extends State<UserPostComment> {
               radius: 7,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 8),
-            child: SizedBox(
-              width: 270,
-              child: Column(
-                children: [
-                  _buildUserNameAndPostTime(),
-                  const SizedBox(height: 6),
-                  _buildText(),
-                ],
-              ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              children: [
+                _buildUserNameAndPostTime(),
+                const SizedBox(height: 6),
+                _buildText(),
+              ],
             ),
           ),
+          const SizedBox(width: 10),
           OptimisticPostCommentLikeButton(
             iconSize: 16,
             fontSize: 12,
@@ -105,7 +104,6 @@ class _UserPostCommentState extends State<UserPostComment> {
       ),
     );
   }
-
 
   Widget _buildText() {
     return Align(

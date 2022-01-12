@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:involio/gen/assets.gen.dart';
 
 class AppImageBuilder extends StatelessWidget {
   final String imageUrl;
@@ -21,6 +23,8 @@ class AppImageBuilder extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
       child: CachedNetworkImage(
+        placeholder: (context, url) => const CircularProgressIndicator(),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
         imageUrl: imageUrl,
         height: height,
         width: width,

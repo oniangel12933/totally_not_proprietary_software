@@ -18,7 +18,16 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
           postId: postId,
           commentsCnt: commentsCnt,
         )) {
+    on<WritingPostCommentContentEvent>(_writingContent);
     on<PostCommentPostButtonPressedEvent>(_postingComment);
+  }
+
+  Future<void> _writingContent(
+    WritingPostCommentContentEvent event,
+    Emitter<PostCommentState> emit,
+  ) async {
+    emit(MaxContentLengthReachedState(
+        maxCharactersMet: event.content.length == 2600));
   }
 
   Future<void> _postingComment(
@@ -46,7 +55,8 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
           content: event.content,
         ));
       } else {
-        emit(const PostCommentFailedToPostState(error: "Posting Comment Failed"));
+        emit(const PostCommentFailedToPostState(
+            error: "Posting Comment Failed"));
       }
     } catch (error) {
       emit(PostCommentFailedToPostState(error: "$error"));

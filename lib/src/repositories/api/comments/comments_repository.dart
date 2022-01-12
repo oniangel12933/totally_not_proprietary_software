@@ -46,13 +46,13 @@ class CommentsRepository {
     required String sorting,
   }) async {
     var request = GetPostComments(
-        context: AppSharedSchemasPageSchemaPost(
-          postId: postId,
-        ),
-        params: AppSharedSchemasPageSchemaParams(
-          page: page,
-          size: size,
-        ),
+      context: AppSharedSchemasPageSchemaPost(
+        postId: postId,
+      ),
+      params: AppSharedSchemasPageSchemaParams(
+        page: page,
+        size: size,
+      ),
       sorting: sorting,
     );
 
