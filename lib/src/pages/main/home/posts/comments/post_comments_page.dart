@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_list.dart';
 import 'package:involio/src/pages/main/home/posts/post_item.dart';
 import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-
 import '../../posts/post_item.dart';
 
 class PostCommentsPage extends StatefulWidget {
@@ -96,7 +96,7 @@ class AddCommentWidget extends StatelessWidget {
                 const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 50),
             color: AppColors.involioFillFormBackgroundColor,
             child: ConstrainedBox(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minHeight: 40,
                 minWidth: double.infinity,
               ),

@@ -1,9 +1,9 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:involio/src/router/router.gr.dart';
 
+import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';

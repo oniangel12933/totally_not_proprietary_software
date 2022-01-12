@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:numeral/numeral.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/shared/config/app_config.dart';
