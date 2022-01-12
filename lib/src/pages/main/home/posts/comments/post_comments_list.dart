@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,7 +102,7 @@ class _PostCommentsListState extends State<PostCommentsList> {
             }
 
             _scrollViewController.animateTo(1,
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.elasticInOut);
           });
         }
