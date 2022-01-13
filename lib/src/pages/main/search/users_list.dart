@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +28,7 @@ class _TrendingUserListState extends State<TrendingUserList> {
               separatorBuilder: (BuildContext context, int index) => Container(
                 padding: const EdgeInsets.only(top: 16, bottom: 16),
                 child:
-                Divider(height: 1, color: AppColors.involioLineSeparator),
+                const Divider(height: 1, color: AppColors.involioLineSeparator),
               ),
               itemBuilder: (BuildContext context, int index) {
                 return UserCard(user: state.data[index], index: index);

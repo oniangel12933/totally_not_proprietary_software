@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_list.dart';
 import 'package:involio/src/pages/main/home/posts/post_item.dart';
@@ -8,11 +11,9 @@ import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:involio/src/shared/widgets/unfocus_widget.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-
 import '../../posts/post_item.dart';
 
 class PostCommentsPage extends StatefulWidget {
@@ -123,7 +124,7 @@ class _PostCommentInputState extends State<PostCommentInput> {
         if (state is MaxContentLengthReachedState) {
           setState(() {
             _maxInputLengthError =
-            state.maxCharactersMet ? "max character limit met" : "";
+                state.maxCharactersMet ? "max character limit met" : "";
             _profileImageBottomPadding = state.maxCharactersMet ? 34 : 0;
           });
         } else if (state is PostCommentPostedSuccessfullyState) {
@@ -150,7 +151,8 @@ class _PostCommentInputState extends State<PostCommentInput> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(bottom: _profileImageBottomPadding),
+                    padding:
+                        EdgeInsets.only(bottom: _profileImageBottomPadding),
                     child: const AppImageBuilder(
                       imageUrl: "",
                       height: 45,
@@ -237,7 +239,6 @@ class _PostCommentInputState extends State<PostCommentInput> {
     );
   }
 }
-
 
 class ProfilePicture extends StatefulWidget {
   const ProfilePicture({Key? key}) : super(key: key);

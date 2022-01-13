@@ -9,7 +9,6 @@ import 'package:involio/src/pages/main/search/search_view.dart';
 import 'package:involio/src/shared/icons/involio_action_icon.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
-import 'package:involio/src/shared/widgets/fade_indexed_stack.dart';
 import 'package:involio/src/shared/widgets/unfocus_widget.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
@@ -43,7 +42,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleWidget = const LogoOnlyTitleWidget(); //ToDo change involio icon colors
+    Widget titleWidget =
+        const LogoOnlyTitleWidget(); //ToDo change involio icon colors
 
     late final List<Widget> _titles = [
       titleWidget,
@@ -99,13 +99,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-        body: FadeIndexedStack(
-          index: currentIndex,
-          children: _pages,
-          duration: const Duration(
-            milliseconds: 50,
-          ),
-        ),
+        body: _pages[currentIndex],
         bottomNavigationBar: bottomItems(),
       ),
     );

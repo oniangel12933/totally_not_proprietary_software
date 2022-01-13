@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
 import 'package:involio/src/repositories/api/comments/comments_repository.dart';
-
 import 'post_comment_item.dart';
 
 class PostCommentsList extends StatefulWidget {
@@ -102,7 +102,7 @@ class _PostCommentsListState extends State<PostCommentsList> {
             }
 
             _scrollViewController.animateTo(1,
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.elasticInOut);
           });
         }

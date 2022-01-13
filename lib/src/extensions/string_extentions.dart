@@ -6,7 +6,7 @@ bool stringToBool(String? str) {
   }
 }
 
-extension ColorToSwatchExtension on String {
+extension StringToBoolExtension on String {
   bool get toBool {
     return stringToBool(this);
   }

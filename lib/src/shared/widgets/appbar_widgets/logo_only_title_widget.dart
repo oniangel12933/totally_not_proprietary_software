@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
 
 import 'package:involio/gen/assets.gen.dart';
-import 'package:involio/src/theme/colors.dart';
 
 class LogoOnlyTitleWidget extends StatelessWidget {
   const LogoOnlyTitleWidget({Key? key}) : super(key: key);
