@@ -17,8 +17,6 @@ part 'sign_up_state.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   static const secretName = 'Jory';
 
-  //late final LoginFlowCubit _loginFlowCubit;
-
   SignUpBloc() : super(const SignUpState()) {
     on<SignUpNameChanged>(_onNameChanged);
     on<SignUpUsernameChanged>(_onUsernameChanged);
@@ -136,7 +134,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         GetIt.I.get<SecureStorageRepository>();
 
     if (state.signUpFormStatus.isValidated) {
-
       emit(state.copyWith(
           signUpFormStatus: FormzStatus.submissionInProgress, error: null));
       try {
@@ -154,19 +151,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           birthdate: birthDate,
         );
 
-        //print('222222222222222222222222222222222222');
-        //print(signUpResponse.error.runtimeType);
-
         if (signUpResponse.error == null) {
-          //emit(state.copyWith(signUpFormStatus: FormzStatus.submissionSuccess));
-
           SMSStartResponse otpSmsStartResponse =
               await _authRepository.getOtpForPhoneNumber(
             phone: fullPhoneNumber,
           );
-
-          //print('333333333333333333333333333333333333');
-          //print(otpSmsStartResponse.error.runtimeType);
 
           if (otpSmsStartResponse.error == null) {
             print("persisting ${state.phone.value} to secure storage");
@@ -178,11 +167,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
                 .persistPhoneCountryISOCode(state.phone.value.isoCode);
 
             emit(state.copyWith(
-                signUpFormStatus: FormzStatus.submissionSuccess, error: null));
+              signUpFormStatus: FormzStatus.submissionSuccess,
+              error: null,
+              goToWelcomePage: false,
+            ));
           } else {
+            /// go to welcome page because sign up was successful, but
+            /// the otp start was not successful
             emit(state.copyWith(
-                signUpFormStatus: FormzStatus.submissionFailure,
-                error: otpSmsStartResponse.error));
+                signUpFormStatus: FormzStatus.submissionSuccess,
+                error: otpSmsStartResponse.error,
+                goToWelcomePage: true));
           }
         } else {
           emit(state.copyWith(

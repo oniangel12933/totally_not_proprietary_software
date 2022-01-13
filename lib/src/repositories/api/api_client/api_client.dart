@@ -112,7 +112,8 @@ class Api {
           //responseHeader: false,
           error: true,
           //compact: true,
-          maxWidth: 90),
+          maxWidth: 120,
+      ),
       getCurlLoggerInterceptor(),
       // RetryInterceptor(
       //   dio: dio,
@@ -125,7 +126,7 @@ class Api {
       //   ],
       // ),
       //DioCacheInterceptor(options: options),
-      ErrorInterceptor(),
+      //ErrorInterceptor(),
     };
   }
 }

@@ -71,7 +71,7 @@ dependencies:
   #share_plus: ^3.0.4
 
   # widgets
-  flutter_svg: ^1.0.0
+  flutter_svg: ^1.0.1
   modal_bottom_sheet: ^2.0.0
   numeral: ^1.2.5
   pinput: ^1.2.2

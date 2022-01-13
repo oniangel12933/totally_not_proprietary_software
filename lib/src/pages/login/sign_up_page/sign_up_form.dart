@@ -218,7 +218,7 @@ class _PhoneInput extends StatelessWidget {
             ),
             ipn.InternationalPhoneNumberInput(
               initialValue: initialNumber,
-
+              countries: const ["US"],
               textFieldController: controller,
               // onInputChanged: (ipn.PhoneNumber number) {
               //   print(number.phoneNumber);

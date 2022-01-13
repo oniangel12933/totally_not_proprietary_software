@@ -7,6 +7,7 @@ import 'package:formz/formz.dart';
 
 import 'package:involio/src/pages/login/login_page/login_form.dart';
 import 'package:involio/src/router/router.gr.dart';
+import 'package:involio/src/shared/widgets/unfocus_widget.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
@@ -30,30 +31,33 @@ class LoginPage extends StatelessWidget {
           return BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               if (state.loginFormStatus.isSubmissionSuccess) {
-                // Navigator.restorablePushNamed(context, EnterOtpPage.routeName);
                 context.router.push(const EnterOtpRoute());
               }
             },
-            child: Scaffold(
-              appBar: getLoginAppBar(),
-              body: const SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(left: AppThemes.edgePadding, right: AppThemes.edgePadding),
-                  child: LoginForm(),
+            child: UnFocusWidget(
+              child: Scaffold(
+                appBar: getLoginAppBar(),
+                body: const SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: AppThemes.edgePadding,
+                        right: AppThemes.edgePadding),
+                    child: LoginForm(),
+                  ),
                 ),
-              ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: state.loginFormStatus.isValidated
-                    ? () {
-                        context.read<LoginBloc>().submitLogin();
-                      }
-                    : null,
-                tooltip: AppLocalizations.of(context)!.logIn,
-                child: const Icon(Icons.keyboard_arrow_right),
-                backgroundColor: state.loginFormStatus.isValidated
-                    ? AppColors.involioBlue
-                    : AppColors.involioGreyBlue,
-                foregroundColor: AppColors.involioWhiteShades100,
+                floatingActionButton: FloatingActionButton(
+                  onPressed: state.loginFormStatus.isValidated
+                      ? () {
+                          context.read<LoginBloc>().submitLogin();
+                        }
+                      : null,
+                  tooltip: AppLocalizations.of(context)!.logIn,
+                  child: const Icon(Icons.keyboard_arrow_right),
+                  backgroundColor: state.loginFormStatus.isValidated
+                      ? AppColors.involioBlue
+                      : AppColors.involioGreyBlue,
+                  foregroundColor: AppColors.involioWhiteShades100,
+                ),
               ),
             ),
           );

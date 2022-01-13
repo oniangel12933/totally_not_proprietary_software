@@ -102,6 +102,7 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                           ipn.InternationalPhoneNumberInput(
                             initialValue: initialNumber,
+                            countries: const ["US"],
                             textFieldController: phoneController,
                             // onInputChanged: (ipn.PhoneNumber number) {
                             //   print(number.phoneNumber);
