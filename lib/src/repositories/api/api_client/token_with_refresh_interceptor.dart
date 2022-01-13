@@ -40,7 +40,7 @@ class TokenWithRefreshInterceptor extends Interceptor {
 
     int? statusCode = err.response?.statusCode;
 
-    if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
+    if (err.response?.statusCode == 401) {
       Response? refreshResponse;
 
       try {
