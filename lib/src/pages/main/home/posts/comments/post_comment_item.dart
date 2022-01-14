@@ -9,15 +9,14 @@ import 'package:involio/src/theme/colors.dart';
 import 'post_comment_like_button.dart';
 
 class UserPostComment extends StatefulWidget {
-  final String? commentId;
-  final String? ownerAvatar;
-  final String? username;
+  final String commentId;
+  final String ownerAvatar;
+  final String username;
   final DateTime? timestamp;
-  final String? content;
-  final int? likes;
-  final bool? liked;
+  final String content;
+  final int likes;
+  final bool liked;
   static const double edge = AppThemes.edgePadding;
-  static const double imageSize = 45.0;
 
   const UserPostComment({
     Key? key,
@@ -47,23 +46,17 @@ class _UserPostCommentState extends State<UserPostComment> {
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl =
-        "${GetIt.I.get<AppConfig>().baseUrl}api/user/files/get_s3_image/${widget.ownerAvatar}";
-
     return Container(
-      padding: const EdgeInsets.only(left: 38, right: 20, bottom: 20),
+      padding: const EdgeInsets.only(left: 38, right: 25, bottom: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: UserPostComment.imageSize,
-            child: AppImageBuilder(
-              imageUrl: imageUrl,
-              height: UserPostComment.imageSize,
-              width: UserPostComment.imageSize,
-              radius: 7,
-            ),
-          ),
+              //width: UserPostComment.imageSize,
+              child: AppProfileImageBuilder(
+            pictureS3Id: widget.ownerAvatar,
+            size: AppImageSize.small,
+          )),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -78,9 +71,9 @@ class _UserPostCommentState extends State<UserPostComment> {
           OptimisticPostCommentLikeButton(
             iconSize: 16,
             fontSize: 12,
-            commentId: widget.commentId!,
-            totalLikeCount: widget.likes!,
-            isLikedByUser: widget.liked!,
+            commentId: widget.commentId,
+            totalLikeCount: widget.likes,
+            isLikedByUser: widget.liked,
           ),
         ],
       ),
@@ -92,7 +85,7 @@ class _UserPostCommentState extends State<UserPostComment> {
         ? DateFormat('h:mm a').format(widget.timestamp as DateTime)
         : '';
 
-    final String _username = widget.username ?? "";
+    final String _username = widget.username;
 
     return Align(
       alignment: Alignment.bottomLeft,
@@ -109,7 +102,7 @@ class _UserPostCommentState extends State<UserPostComment> {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Text(
-        widget.content ?? "",
+        widget.content,
         softWrap: true,
         maxLines: 4,
         overflow: TextOverflow.ellipsis,

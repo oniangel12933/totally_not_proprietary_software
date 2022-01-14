@@ -95,7 +95,7 @@ class _PostCommentsListState extends State<PostCommentsList> {
               _pagingController.itemList?.insert(
                   0,
                   Comment(
-                    id: "not a real id",
+                    id: state.commentId,
                     content: state.content,
                     timestamp: DateTime.now(),
                   ));
@@ -118,24 +118,19 @@ class _PostCommentsListState extends State<PostCommentsList> {
               physics: const AlwaysScrollableScrollPhysics(),
               controller: _scrollViewController,
               slivers: <Widget>[
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 32,
-                  ),
-                ),
                 PagedSliverList<int, Comment>(
                   pagingController: _pagingController,
                   builderDelegate: PagedChildBuilderDelegate<Comment>(
                       animateTransitions: true,
                       itemBuilder: (context, item, index) {
                         return UserPostComment(
-                          commentId: item.id,
-                          username: item.owner?.username,
-                          content: item.content,
-                          ownerAvatar: item.ownerAvatar?.pictureS3Id,
+                          commentId: item.id ?? "",
+                          username: item.owner?.username ?? "",
+                          content: item.content ?? "",
+                          ownerAvatar: item.ownerAvatar?.pictureS3Id ?? "",
                           timestamp: item.timestamp,
-                          likes: 0,
-                          liked: false,
+                          likes: item.likes ?? 0,
+                          liked: item.liked ?? false,
                         );
                       }),
                 )

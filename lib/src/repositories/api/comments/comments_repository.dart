@@ -82,9 +82,8 @@ class CommentsRepository {
   Future<RemoveLikeResponse> removeCommentLiked({
     required String commentId,
   }) async {
-    var request = RemovePostLike(
-      //TODO Change to LikeComment
-      likedPostId: commentId,
+    var request = RemoveCommentLike(
+      likedCommentId: commentId,
     );
 
     Response response = await getIt.get<Api>().dio.post(

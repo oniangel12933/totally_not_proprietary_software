@@ -50,8 +50,14 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
       );
 
       if (response.success == true) {
+
+        if(response.commentId == null) {
+          return;
+        }
+
         emit(PostCommentPostedSuccessfullyState(
           postId: event.postId,
+          commentId: response.commentId!,
           commentsCnt: event.commentsCnt + 1,
           content: event.content,
         ));
