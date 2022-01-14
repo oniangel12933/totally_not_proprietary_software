@@ -96,21 +96,25 @@ class PostCommentInput extends StatefulWidget {
 }
 
 class _PostCommentInputState extends State<PostCommentInput> {
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
 
-  final _textFieldController = TextEditingController();
-  late FocusScopeNode _currentFocus;
-  UserBaseResponse userResponse = UserBaseResponse();
+  late TextEditingController _textFieldController;
+  late FocusNode _currentFocus;
+  late UserBaseResponse userResponse;
   String _maxInputLengthError = "";
   double _maxInputLengthErrorPadding = 0;
 
   Future<void> _getUser() async {
     userResponse = await GetIt.I.get<UserRepository>().getUser();
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+    _textFieldController = TextEditingController();
+    _currentFocus = FocusNode();
+    userResponse = UserBaseResponse();
   }
 
   @override
@@ -122,7 +126,6 @@ class _PostCommentInputState extends State<PostCommentInput> {
 
   @override
   Widget build(BuildContext context) {
-    _currentFocus = FocusScope.of(context);
 
     /// if keyboard is not focused adds bottom padding to textfield
     double _bottomPadding = MediaQuery.of(context).viewInsets.bottom != 0

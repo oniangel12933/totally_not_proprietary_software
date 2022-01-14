@@ -50,8 +50,7 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
       );
 
       if (response.success == true) {
-
-        if(response.commentId == null) {
+        if (response.commentId == null) {
           return;
         }
 
@@ -62,8 +61,9 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
           content: event.content,
         ));
       } else {
-        emit(const PostCommentFailedToPostState(
-            error: "Posting Comment Failed"));
+        emit(PostCommentFailedToPostState(
+            error: response.error ??
+                "There was an error while posting your comment"));
       }
     } catch (error) {
       emit(PostCommentFailedToPostState(error: "$error"));
