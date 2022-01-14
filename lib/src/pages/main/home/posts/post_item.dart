@@ -82,7 +82,7 @@ class UserPostState extends State<UserPost> {
       children: [
         Container(
           padding:
-              const EdgeInsets.only(left: UserPost.edge, right: UserPost.edge),
+              const EdgeInsets.symmetric(horizontal: UserPost.edge),
           child: Column(
             children: [
               SizedBox(
@@ -109,11 +109,6 @@ class UserPostState extends State<UserPost> {
                   child: _buildButtons(context)),
             ],
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(bottom: 16),
-          child:
-              const Divider(height: 1, color: AppColors.involioLineSeparator),
         ),
       ],
     );

@@ -47,7 +47,7 @@ class _UserPostCommentState extends State<UserPostComment> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 38, right: 25, bottom: 20),
+      padding: const EdgeInsets.only(left: 38, right: 25, top: 16, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

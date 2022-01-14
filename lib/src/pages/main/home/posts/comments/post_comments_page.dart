@@ -57,7 +57,14 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    widget.userPost,
+                    Column(
+                      children: [
+                        widget.userPost,
+                        const Divider(
+                            height: 1,
+                            color: AppColors.involioLineSeparator)
+                      ],
+                    ),
                     Expanded(
                       child: PostCommentsList(
                         postId: widget.userPost.postId,
@@ -65,8 +72,11 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
                     ),
                   ],
                 ),
-                bottomNavigationBar: Container(
-                  height: MediaQuery.of(context).viewInsets.bottom + 60,
+                bottomNavigationBar: Container( /// this NavBar adjusts the padding behind the
+                  /// Comments input depending on whether or not the keyboard is open
+                  height: MediaQuery.of(context).viewInsets.bottom > 0
+                      ? MediaQuery.of(context).viewInsets.bottom + 60
+                      : MediaQuery.of(context).viewInsets.bottom + 100,
                 ),
               ),
             ),
@@ -96,7 +106,6 @@ class PostCommentInput extends StatefulWidget {
 }
 
 class _PostCommentInputState extends State<PostCommentInput> {
-
   late TextEditingController _textFieldController;
   late FocusNode _currentFocus;
   late UserBaseResponse userResponse;
@@ -126,7 +135,6 @@ class _PostCommentInputState extends State<PostCommentInput> {
 
   @override
   Widget build(BuildContext context) {
-
     /// if keyboard is not focused adds bottom padding to textfield
     double _bottomPadding = MediaQuery.of(context).viewInsets.bottom != 0
         ? MediaQuery.of(context).viewInsets.bottom.toDouble() + 8
