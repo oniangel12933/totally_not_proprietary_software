@@ -16,7 +16,7 @@ enum AppImageSize {
 class AppCurrentUserProfileImageBuilder extends StatefulWidget {
   final AppImageSize size;
 
-  const AppCurrentUserProfileImageBuilder({required this.size, Key? key})
+  const AppCurrentUserProfileImageBuilder({Key? key, required this.size})
       : super(key: key);
 
   @override
