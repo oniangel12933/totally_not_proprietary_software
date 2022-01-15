@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 
-import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';

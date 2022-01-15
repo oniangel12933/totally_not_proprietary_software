@@ -73,7 +73,7 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
                   ],
                 ),
                 bottomNavigationBar: Container( /// this NavBar adjusts the padding behind the
-                  /// Comments input depending on whether or not the keyboard is open
+                  /// Comments input to ensure the last comment is not hidden behind the keyboard
                   height: MediaQuery.of(context).viewInsets.bottom > 0
                       ? MediaQuery.of(context).viewInsets.bottom + 60
                       : MediaQuery.of(context).viewInsets.bottom + 100,
@@ -212,7 +212,7 @@ class _PostCommentInputState extends State<PostCommentInput> {
                                       contentPadding: const EdgeInsets.only(
                                           bottom: 6, left: 8),
                                       hintText:
-                                          "Add a comment as ${userResponse.username}",
+                                          "Add a comment as ${userResponse.name}",
                                       hintStyle: AppFonts.comments1.copyWith(
                                         color: AppColors.involioFillFormText,
                                       ),
