@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:numeral/numeral.dart';
 
-import 'package:involio/src/pages/main/search/bloc/user_follow_bloc.dart';
-import 'package:involio/src/pages/main/search/bloc/user_follow_state.dart';
+import 'package:involio/src/pages/main/search/follow_button/bloc/user_follow_bloc.dart';
+import 'package:involio/src/pages/main/search/follow_button/bloc/user_follow_state.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 

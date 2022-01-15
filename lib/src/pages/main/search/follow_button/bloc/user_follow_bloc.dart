@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/pages/main/search/bloc/user_follow_event.dart';
-import 'package:involio/src/pages/main/search/bloc/user_follow_state.dart';
+import 'package:involio/src/pages/main/search/follow_button/bloc/user_follow_event.dart';
+import 'package:involio/src/pages/main/search/follow_button/bloc/user_follow_state.dart';
 import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/shared/blocs/event_transformers/throttle.dart';
 
