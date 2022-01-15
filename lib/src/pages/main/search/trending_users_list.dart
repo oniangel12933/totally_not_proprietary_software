@@ -23,16 +23,16 @@ class _TrendingUserListState extends State<TrendingUserList> {
   Widget build(BuildContext context) {
     return BlocBuilder<TrendingUserCubit, TrendingUserState>(
         builder: (context, TrendingUserState state) {
-          return ListView.separated(
-              itemCount: state.data.length,
-              separatorBuilder: (BuildContext context, int index) => Container(
+      return ListView.separated(
+          itemCount: state.data.length,
+          separatorBuilder: (BuildContext context, int index) => Container(
                 padding: const EdgeInsets.only(top: 16, bottom: 16),
-                child:
-                const Divider(height: 1, color: AppColors.involioLineSeparator),
+                child: const Divider(
+                    height: 1, color: AppColors.involioLineSeparator),
               ),
-              itemBuilder: (BuildContext context, int index) {
-                return UserCard(user: state.data[index], index: index);
-              });
-        });
+          itemBuilder: (BuildContext context, int index) {
+            return TrendingUserCard(user: state.data[index], index: index);
+          });
+    });
   }
 }

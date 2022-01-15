@@ -9,6 +9,7 @@ import 'package:involio/src/pages/main/main_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';
 import 'package:involio/src/pages/main/search/trending_users_page.dart';
+import 'package:involio/src/pages/main/search/user_search_page/user_search_page.dart';
 import 'package:involio/src/pages/settings/settings_page.dart';
 import 'package:involio/src/pages/splash/splash_page.dart';
 
@@ -92,12 +93,21 @@ import 'package:involio/src/pages/splash/splash_page.dart';
     ),
     AutoRoute(
       initial: true,
-      path: '/comments',
+      path: '/post_comments',
       page: PostCommentsPage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
+    CustomRoute(
+      initial: true,
+      path: '/user_search',
+      page: UserSearchPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ], transitionsBuilder: TransitionsBuilders.fadeIn
+    ),
+
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: '/get_started'),
     //Home

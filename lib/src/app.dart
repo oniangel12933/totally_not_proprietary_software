@@ -9,6 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_state.dart';
+import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 import 'package:involio/src/theme/theme_cubit.dart';
@@ -35,6 +36,9 @@ class _AppState extends State<MyApp> {
         ),
         BlocProvider<ThemeCubit>(
           create: (BuildContext context) => ThemeCubit(),
+        ),
+        BlocProvider<UserCubit>(
+          create: (BuildContext context) => UserCubit(),
         ),
       ],
       child: PlatformProvider(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:involio/src/pages/main/search/portfolios_list.dart';
+import 'package:involio/src/pages/main/search/trending_portfolios_list.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 import 'bloc/trending_portfolio_cubit.dart';

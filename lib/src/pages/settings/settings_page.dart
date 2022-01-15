@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
+import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/theme/theme_cubit.dart';
 
 /// Displays the various settings that can be customized by the user.
@@ -42,8 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       _packageInfo = info;
     });
-    userResponse = await GetIt.I.get<UserRepository>().getUser();
-    setState(() {});
+    context.read<UserCubit>().getUser();
   }
 
   Widget _infoTile(String title, String subtitle) {
@@ -101,7 +100,11 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 30,
             ),
-            _infoTile('User', '${userResponse.username}'),
+            BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) {
+                return _infoTile('User', '${state.user?.username}');
+              },
+            ),
           ],
         ),
       ),

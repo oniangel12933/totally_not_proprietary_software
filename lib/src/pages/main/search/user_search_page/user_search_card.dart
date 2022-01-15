@@ -7,24 +7,17 @@ import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
-import 'follow_button.dart';
 
-class TrendingUserCard extends StatelessWidget {
+class UserSearchCard extends StatelessWidget {
   final AppApiTrendingSchemaUser user;
-  final int index;
 
-  const TrendingUserCard({
+  const UserSearchCard({
     Key? key,
     required this.user,
-    required this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isFollowing = user.following ?? false;
-    String _followButtonText = isFollowing
-        ? AppLocalizations.of(context)!.following
-        : AppLocalizations.of(context)!.follow;
 
     String imageUrl =
         "${AppConfig().baseUrl}api/user/files/get_s3_image/${user.ownerAvatar}";
@@ -34,16 +27,12 @@ class TrendingUserCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.only(right: 18),
-          child: Text("${index + 1}."),
-        ),
-        Container(
-          padding: const EdgeInsets.only(right: 8),
+          padding: const EdgeInsets.only(right: 16),
           child: AppImageBuilder(
             imageUrl: imageUrl,
-            height: 56,
-            width: 56,
-            radius: 7.0,
+            height: 48,
+            width: 48,
+            radius: 3.0,
           ),
         ),
         Column(
@@ -57,11 +46,13 @@ class TrendingUserCard extends StatelessWidget {
                     color: AppColors.involioWhiteShades100,
                   )),
             ),
-            OptimisticFollowButton(
-              userId: user.id,
-              isFollowing: user.following,
-              followers: user.followers,
-            )
+            Container(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(user.username != null ? "@${user.username}" : "",
+                  style: AppFonts.bodySmall.copyWith(
+                    color: AppColors.involioWhiteShades100,
+                  )),
+            ),
           ],
         )
       ],
