@@ -6,7 +6,7 @@ import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
 class UserSearchCard extends StatelessWidget {
-  final AppApiTrendingSchemaUser user;
+  final UserSearchResult user;
 
   const UserSearchCard({
     Key? key,
@@ -22,7 +22,7 @@ class UserSearchCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(right: 16),
           child: AppImageBuilder(
-            pictureS3Id: user.ownerAvatar ?? "",
+            pictureS3Id: user.ownerAvatar?.pictureS3Id ?? "",
             height: 48,
             width: 48,
             radius: 3.0,

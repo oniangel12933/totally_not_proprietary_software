@@ -45,6 +45,20 @@ class UserRepository {
     return userResponse;
   }
 
+  Future<UserSearchResponse> searchForUsers({
+    required String searchStr,
+  }) async {
+    var request = UserSearch(
+      username: searchStr,
+    );
+
+    Response response = await GetIt.I.get<Api>().dio.post(
+        'api/search/users',
+        data: jsonEncode(request.toJson()));
+
+    return UserSearchResponse.fromJson(response.data);
+  }
+
   Future<TrendingUserResponse> getTrendingUsers({
     required int page,
     required int size,

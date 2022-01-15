@@ -1,7 +1,7 @@
 part of 'user_search_bloc.dart';
 
 class UserSearchState extends Equatable {
-  final List<AppApiTrendingSchemaPortfolio> data;
+  final List<UserSearchResult> data;
 
   const UserSearchState({required this.data});
 

@@ -7,9 +7,9 @@ import 'package:involio/src/pages/main/search/follow_button/bloc/user_follow_sta
 import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/shared/blocs/event_transformers/throttle.dart';
 
-const throttleDuration = Duration(milliseconds: 200);
-
 class UserFollowBloc extends Bloc<UserFollowEvent, UserFollowState> {
+  static Duration throttleDuration = const Duration(milliseconds: 200);
+
   void followButtonPressed({
     String? userId,
     bool? wasFollowing,
