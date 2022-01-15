@@ -1,23 +1,20 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 import 'post_comment_like_button.dart';
 
 class UserPostComment extends StatefulWidget {
-  final String? commentId;
-  final String? ownerAvatar;
-  final String? username;
+  final String commentId;
+  final String ownerAvatar;
+  final String username;
   final DateTime? timestamp;
-  final String? content;
-  final int? likes;
-  final bool? liked;
+  final String content;
+  final int likes;
+  final bool liked;
   static const double edge = AppThemes.edgePadding;
-  static const double imageSize = 45.0;
 
   const UserPostComment({
     Key? key,
@@ -47,42 +44,34 @@ class _UserPostCommentState extends State<UserPostComment> {
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl =
-        "${AppConfig().baseUrl}api/user/files/get_s3_image/${widget.ownerAvatar}";
-
     return Container(
-      padding: const EdgeInsets.only(left: 38, bottom: 20),
+      padding: const EdgeInsets.only(left: 38, right: 25, top: 16, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: UserPostComment.imageSize,
-            child: AppImageBuilder(
-              imageUrl: imageUrl,
-              height: UserPostComment.imageSize,
-              width: UserPostComment.imageSize,
-              radius: 7,
+              //width: UserPostComment.imageSize,
+              child: AppProfileImageBuilder(
+            pictureS3Id: widget.ownerAvatar,
+            size: AppImageSize.small,
+          )),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              children: [
+                _buildUserNameAndPostTime(),
+                const SizedBox(height: 6),
+                _buildText(),
+              ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 8),
-            child: SizedBox(
-              width: 270,
-              child: Column(
-                children: [
-                  _buildUserNameAndPostTime(),
-                  const SizedBox(height: 6),
-                  _buildText(),
-                ],
-              ),
-            ),
-          ),
+          const SizedBox(width: 10),
           OptimisticPostCommentLikeButton(
             iconSize: 16,
             fontSize: 12,
-            commentId: widget.commentId!,
-            totalLikeCount: widget.likes!,
-            isLikedByUser: widget.liked!,
+            commentId: widget.commentId,
+            totalLikeCount: widget.likes,
+            isLikedByUser: widget.liked,
           ),
         ],
       ),
@@ -94,7 +83,7 @@ class _UserPostCommentState extends State<UserPostComment> {
         ? DateFormat('h:mm a').format(widget.timestamp as DateTime)
         : '';
 
-    final String _username = widget.username ?? "";
+    final String _username = widget.username;
 
     return Align(
       alignment: Alignment.bottomLeft,
@@ -107,12 +96,11 @@ class _UserPostCommentState extends State<UserPostComment> {
     );
   }
 
-
   Widget _buildText() {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Text(
-        widget.content ?? "",
+        widget.content,
         softWrap: true,
         maxLines: 4,
         overflow: TextOverflow.ellipsis,

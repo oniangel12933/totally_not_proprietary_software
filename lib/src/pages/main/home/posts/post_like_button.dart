@@ -14,7 +14,6 @@ class OptimisticPostLikeButton extends StatefulWidget {
     required this.postId,
     required this.totalLikeCount,
     required this.isLikedByUser,
-    //required this.postLikeBloc,
   }) : super(key: key);
 
   final double iconSize;

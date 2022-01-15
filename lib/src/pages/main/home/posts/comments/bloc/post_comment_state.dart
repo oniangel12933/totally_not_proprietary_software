@@ -33,18 +33,41 @@ class PostCommentState extends Equatable {
   }
 }
 
+class MaxContentLengthReachedState extends PostCommentState {
+  final bool maxCharactersMet;
+
+  const MaxContentLengthReachedState({
+    required this.maxCharactersMet,
+  });
+
+  @override
+  List<Object?> get props => [
+    maxCharactersMet,
+    content,
+  ];
+}
+
 class IsPostingCommentState extends PostCommentState {}
 
 class PostCommentPostedSuccessfullyState extends PostCommentState {
   final String postId;
+  final String commentId;
   final int commentsCnt;
   final String content;
 
   const PostCommentPostedSuccessfullyState({
     required this.postId,
+    required this.commentId,
     required this.commentsCnt,
     required this.content,
   });
+
+  @override
+  List<Object?> get props => [
+    commentId,
+    commentsCnt,
+    content,
+  ];
 }
 
 class PostCommentFailedToPostState extends PostCommentState {

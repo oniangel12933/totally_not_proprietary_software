@@ -47,13 +47,13 @@ class CommentsRepository {
     required String sorting,
   }) async {
     var request = GetPostComments(
-        context: AppSharedSchemasPageSchemaPost(
-          postId: postId,
-        ),
-        params: AppSharedSchemasPageSchemaParams(
-          page: page,
-          size: size,
-        ),
+      context: AppSharedSchemasPageSchemaPost(
+        postId: postId,
+      ),
+      params: AppSharedSchemasPageSchemaParams(
+        page: page,
+        size: size,
+      ),
       sorting: sorting,
     );
 
@@ -82,9 +82,8 @@ class CommentsRepository {
   Future<RemoveLikeResponse> removeCommentLiked({
     required String commentId,
   }) async {
-    var request = RemovePostLike(
-      //TODO Change to LikeComment
-      likedPostId: commentId,
+    var request = RemoveCommentLike(
+      likedCommentId: commentId,
     );
 
     Response response = await getIt.get<Api>().dio.post(

@@ -78,44 +78,33 @@ class UserPostState extends State<UserPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding:
-              const EdgeInsets.only(left: UserPost.edge, right: UserPost.edge),
-          child: Column(
-            children: [
-              SizedBox(
-                height: UserPost.imageSize,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildImage(),
-                    const SizedBox(
-                      width: 8.0,
-                    ),
-                    _buildHeaderText(context)
-                  ],
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: UserPost.edge),
+      child: Column(
+        children: [
+          SizedBox(
+            height: UserPost.imageSize,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildImage(),
+                const SizedBox(
+                  width: 8.0,
                 ),
-              ),
-              const SizedBox(
-                height: 8.0,
-              ),
-              Container(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: _buildText()),
-              Container(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: _buildButtons(context)),
-            ],
+                _buildHeaderText(context)
+              ],
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(bottom: 16),
-          child:
-              const Divider(height: 1, color: AppColors.involioLineSeparator),
-        ),
-      ],
+          const SizedBox(
+            height: 8.0,
+          ),
+          Container(
+              padding: const EdgeInsets.only(bottom: 20), child: _buildText()),
+          Container(
+              padding: const EdgeInsets.only(bottom: 15),
+              child: _buildButtons(context)),
+        ],
+      ),
     );
   }
 

@@ -9,7 +9,8 @@ import 'post_comment_like_state.dart';
 
 const throttleDuration = Duration(milliseconds: 200);
 
-class PostCommentLikeBloc extends Bloc<PostCommentLikeEvent, PostCommentLikeState> {
+class PostCommentLikeBloc
+    extends Bloc<PostCommentLikeEvent, PostCommentLikeState> {
   void likeButtonPressed({
     String? commentId,
     bool? likeWas,
@@ -43,7 +44,6 @@ class PostCommentLikeBloc extends Bloc<PostCommentLikeEvent, PostCommentLikeStat
     CommentLikeButtonPressedEvent event,
     Emitter<PostCommentLikeState> emit,
   ) async {
-
     final String commentId = event.commentId ?? state.commentId;
 
     final bool likeWas = event.likeWas ?? state.isLiked;

@@ -21,13 +21,6 @@ class TrendingUserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isFollowing = user.following ?? false;
-    String _followButtonText = isFollowing
-        ? AppLocalizations.of(context)!.following
-        : AppLocalizations.of(context)!.follow;
-
-    String imageUrl =
-        "${AppConfig().baseUrl}api/user/files/get_s3_image/${user.ownerAvatar}";
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -38,14 +31,11 @@ class TrendingUserCard extends StatelessWidget {
           child: Text("${index + 1}."),
         ),
         Container(
-          padding: const EdgeInsets.only(right: 8),
-          child: AppImageBuilder(
-            imageUrl: imageUrl,
-            height: 56,
-            width: 56,
-            radius: 7.0,
-          ),
-        ),
+            padding: const EdgeInsets.only(right: 8),
+            child: AppProfileImageBuilder(
+              pictureS3Id: user.ownerAvatar,
+              size: AppImageSize.medium,
+            )),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
