@@ -1,31 +1,64 @@
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/repositories/api/user/user_repository.dart';
+
+import 'package:involio/src/shared/blocs/user/cubit.dart';
 import 'package:involio/src/shared/config/app_config.dart';
 
-class AppProfileImageBuilder extends StatelessWidget {
-  late final String? pictureS3Id;
+enum AppImageSize {
+  small,
+  medium,
+  large,
+}
+
+class AppCurrentUserProfileImageBuilder extends StatefulWidget {
   final AppImageSize size;
 
-  AppProfileImageBuilder({
-    Key? key,
-    this.pictureS3Id,
-    required this.size,
-  }) : super(key: key);
+  const AppCurrentUserProfileImageBuilder({required this.size, Key? key})
+      : super(key: key);
 
-  Future<void> _setPictureS3IdToCurrentUser() async {
-    UserBaseResponse user = await GetIt.I.get<UserRepository>().getUser();
-    pictureS3Id = user.profile?.pictureS3Id;
+  @override
+  _AppCurrentUserProfileImageBuilderState createState() =>
+      _AppCurrentUserProfileImageBuilderState();
+}
+
+class _AppCurrentUserProfileImageBuilderState
+    extends State<AppCurrentUserProfileImageBuilder> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserCubit>().getUser();
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        return AppProfileImageBuilder(
+          pictureS3Id: state.user?.profile?.pictureS3Id,
+          size: widget.size,
+        );
+      },
+    );
+  }
+}
 
+class AppProfileImageBuilder extends StatelessWidget {
+  final String? pictureS3Id;
+  final AppImageSize size;
+
+  const AppProfileImageBuilder({
+    Key? key,
+    required this.pictureS3Id,
+    required this.size,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     double imageSize;
-    switch(size){
+    switch (size) {
       case AppImageSize.small:
         imageSize = 45;
         break;
@@ -39,12 +72,9 @@ class AppProfileImageBuilder extends StatelessWidget {
         imageSize = 45;
     }
 
-    if (pictureS3Id == null) {
-      _setPictureS3IdToCurrentUser();
-    }
-
     return AppImageBuilder(
-      pictureS3Id: /*pictureS3Id ??*/ "e92d27e8-7d91-43ea-ad3b-ce12f6004e9c", //ToDo find default profile image
+      pictureS3Id: /*pictureS3Id ??*/ "e92d27e8-7d91-43ea-ad3b-ce12f6004e9c",
+      //ToDo find default profile image
       height: imageSize,
       width: imageSize,
       radius: 7,
@@ -58,7 +88,7 @@ class AppImageBuilder extends StatelessWidget {
   final double width;
   final double radius;
 
-  AppImageBuilder({
+  const AppImageBuilder({
     Key? key,
     required this.pictureS3Id,
     required this.height,
@@ -83,10 +113,4 @@ class AppImageBuilder extends StatelessWidget {
       ),
     );
   }
-}
-
-enum AppImageSize{
-  small,
-  medium,
-  large
 }

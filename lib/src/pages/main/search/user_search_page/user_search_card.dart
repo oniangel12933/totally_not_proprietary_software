@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:involio/gen/involio_api.swagger.dart';
-import 'package:involio/src/shared/config/app_config.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
@@ -18,10 +15,6 @@ class UserSearchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    String imageUrl =
-        "${AppConfig().baseUrl}api/user/files/get_s3_image/${user.ownerAvatar}";
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +22,7 @@ class UserSearchCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(right: 16),
           child: AppImageBuilder(
-            imageUrl: imageUrl,
+            pictureS3Id: user.ownerAvatar ?? "",
             height: 48,
             width: 48,
             radius: 3.0,

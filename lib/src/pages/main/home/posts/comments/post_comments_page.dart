@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:involio/gen/involio_api.swagger.dart';
+import 'package:get_it/get_it.dart';
 
+import 'package:involio/gen/involio_api.swagger.dart';
 import 'package:involio/src/pages/main/home/posts/comments/bloc/post_comment_bloc.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_list.dart';
 import 'package:involio/src/pages/main/home/posts/post_item.dart';
 import 'package:involio/src/repositories/api/user/user_repository.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
-
 import 'package:involio/src/shared/widgets/unfocus_widget.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
@@ -61,8 +59,7 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
                       children: [
                         widget.userPost,
                         const Divider(
-                            height: 1,
-                            color: AppColors.involioLineSeparator)
+                            height: 1, color: AppColors.involioLineSeparator)
                       ],
                     ),
                     Expanded(
@@ -72,7 +69,8 @@ class _PostCommentsPageState extends State<PostCommentsPage> {
                     ),
                   ],
                 ),
-                bottomNavigationBar: Container( /// this NavBar adjusts the padding behind the
+                bottomNavigationBar: Container(
+                  /// this NavBar adjusts the padding behind the
                   /// Comments input to ensure the last comment is not hidden behind the keyboard
                   height: MediaQuery.of(context).viewInsets.bottom > 0
                       ? MediaQuery.of(context).viewInsets.bottom + 60
@@ -175,7 +173,8 @@ class _PostCommentInputState extends State<PostCommentInput> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        AppProfileImageBuilder(size: AppImageSize.small),
+                        const AppCurrentUserProfileImageBuilder(
+                            size: AppImageSize.small),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Container(
