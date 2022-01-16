@@ -23,12 +23,13 @@ import 'package:involio/src/pages/splash/splash_page.dart';
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
-    AutoRoute(
-      path: '/get_started',
-      page: GetStartedPage,
-      children: [
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
+    CustomRoute(
+        initial: true,
+        path: '/welcome',
+        page: GetStartedPage,
+        children: [
+          RedirectRoute(path: '*', redirectTo: ''),
+        ], transitionsBuilder: TransitionsBuilders.fadeIn
     ),
     AutoRoute(
       path: '/login',
@@ -100,7 +101,7 @@ import 'package:involio/src/pages/splash/splash_page.dart';
       ],
     ),
     CustomRoute(
-      initial: true,
+      initial: false,
       path: '/user_search',
       page: UserSearchPage,
       children: [
