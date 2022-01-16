@@ -34,13 +34,15 @@ class UserSearchBloc extends Bloc<UserSearchEvent, UserSearchState> {
     UserSearchEvent event,
     Emitter<UserSearchState> emit,
   ) async {
-    if (event.searchStr.length < 3) {
+    String searchStr = event.searchStr.trim();
+
+    if (searchStr.length < 3) {
       emit(const UserSearchState(data: []));
     } else {
       final UserSearchResponse userSearchResponse =
-      await GetIt.I.get<UserRepository>().searchForUsers(
-        searchStr: event.searchStr,
-      );
+          await GetIt.I.get<UserRepository>().searchForUsers(
+                searchStr: searchStr,
+              );
 
       emit(UserSearchState(data: userSearchResponse.users ?? []));
     }
