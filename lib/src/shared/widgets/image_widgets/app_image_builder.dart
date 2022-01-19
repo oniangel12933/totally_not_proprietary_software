@@ -11,6 +11,7 @@ enum AppImageSize {
   small,
   medium,
   large,
+  xlarge
 }
 
 class AppCurrentUserProfileImageBuilder extends StatefulWidget {
@@ -67,6 +68,9 @@ class AppProfileImageBuilder extends StatelessWidget {
         break;
       case AppImageSize.large:
         imageSize = 65;
+        break;
+      case AppImageSize.xlarge:
+        imageSize = 130;
         break;
       default:
         imageSize = 45;
