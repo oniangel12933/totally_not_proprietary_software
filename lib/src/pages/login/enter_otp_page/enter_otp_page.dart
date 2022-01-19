@@ -7,6 +7,7 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:involio/src/shared/widgets/loading_indicator.dart';
+import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 import '../get_login_app_bar.dart';
 import 'bloc/otp_bloc.dart';
@@ -129,7 +130,7 @@ class PinPutTestState extends State<PinPutTest> {
             if (state.phone != null) {
               phoneNumber = state.phone!.completeNumber();
             } else {
-              phoneNumber = 'xxx-xxx-xxxx';
+              phoneNumber = '123-456-7890';
             }
             return SingleChildScrollView(
               child: Column(
@@ -139,20 +140,16 @@ class PinPutTestState extends State<PinPutTest> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 //Center Column contents horizontally,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32),
                     child: Text(
                       'Verify your phone number',
-                      style: TextStyle(
-                        fontSize: 28.0,
-                      ),
+                      style: AppFonts.headline2,
                     ),
                   ),
                   Text(
                     'Thank you for entering you your number, now we just need to verify. Please enter the code sent to $phoneNumber',
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    style: AppFonts.body,
                   ),
                   const SizedBox(height: 32.0),
                   SizedBox(
@@ -179,18 +176,14 @@ class PinPutTestState extends State<PinPutTest> {
                   ),
                   Row(
                     children: [
-                      const Text(
+                      Text(
                         "Didn't receive a text?",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
+                        style: AppFonts.headline6,
                       ),
                       TextButton(
-                        child: const Text(
+                        child: Text(
                           'Resend',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
+                          style: AppFonts.bodyBig,
                         ),
                         onPressed: () => context.read<OtpBloc>().resendSms(),
                       )

@@ -38,7 +38,6 @@ class _SearchViewState extends State<SearchView> {
     );
   }*/
 
-
   @override
   void dispose() {
     searchTextController.dispose();

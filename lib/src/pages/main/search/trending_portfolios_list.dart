@@ -22,14 +22,14 @@ class _TrendingPortfolioListState extends State<TrendingPortfolioList> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<TrendingPortfolioCubit, TrendingPortfolioState>(
       builder: (context, TrendingPortfolioState state) {
         return ListView.separated(
           itemCount: state.data.length,
           separatorBuilder: (BuildContext context, int index) => Container(
             padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: Divider(height: 1, color: AppColors.involioLineSeparator),
+            child:
+                const Divider(height: 1, color: AppColors.involioLineSeparator),
           ),
           itemBuilder: (BuildContext context, int index) {
             return Row(
@@ -50,8 +50,7 @@ class _TrendingPortfolioListState extends State<TrendingPortfolioList> {
                           TrendingCard(
                               title: state.data[index].name,
                               followerCount: state.data[index].followers,
-                              investmentType:
-                                  state.data[index].investmentType),
+                              investmentType: state.data[index].investmentType),
                           Container(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
