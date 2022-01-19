@@ -41,9 +41,12 @@ class MainBottomNavModal extends StatelessWidget {
                 context.involioIcons.followUser,
                 color: AppColors.involioWhiteShades80,
               ),
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () {
+                Navigator.of(context).pop();
+                context.router.push(const ProfileRoute());
+              },
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               title: Text(
                 AppLocalizations.of(context)!.settings,
@@ -59,7 +62,7 @@ class MainBottomNavModal extends StatelessWidget {
                 context.router.push(const SettingsRoute());
               },
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
                 title: Text(
                   AppLocalizations.of(context)!.notifications,
@@ -74,7 +77,7 @@ class MainBottomNavModal extends StatelessWidget {
                   Navigator.of(context).pop();
                   //context.router.push(const TestCupertinoRoute());
                 }),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               title: Text(
                 AppLocalizations.of(context)!.myInterests,
@@ -87,7 +90,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () => Navigator.of(context).pop(),
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             /*ListTile( //TODO uncomment after MVP
               title: Text(
                 AppLocalizations.of(context)!.myReviews,
@@ -100,7 +103,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () => Navigator.of(context).pop(),
             ),*/
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               title: Text(
                 AppLocalizations.of(context)!.drafts,
@@ -113,7 +116,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () => Navigator.of(context).pop(),
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               title: Text(
                 AppLocalizations.of(context)!.giveFeedback,
@@ -126,7 +129,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () => Navigator.of(context).pop(),
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             ListTile(
               title: Text(
                 AppLocalizations.of(context)!.involioWalkthrough,
@@ -139,7 +142,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () => Navigator.of(context).pop(),
             ),
-            Divider(height: 1, color: AppColors.involioLineSeparator),
+            const Divider(height: 1, color: AppColors.involioLineSeparator),
             const SizedBox(height: 25),
           ],
         ),

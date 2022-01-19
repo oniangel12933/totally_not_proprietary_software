@@ -6,6 +6,7 @@ import 'package:involio/src/pages/login/login_page/login_page.dart';
 import 'package:involio/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_page.dart';
 import 'package:involio/src/pages/main/main_page.dart';
+import 'package:involio/src/pages/main/profile/profile_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';
 import 'package:involio/src/pages/main/search/trending_users_page.dart';
@@ -96,6 +97,14 @@ import 'package:involio/src/pages/splash/splash_page.dart';
       initial: true,
       path: '/post_comments',
       page: PostCommentsPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    AutoRoute(
+      initial: true,
+      path: '/profile',
+      page: ProfilePage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],

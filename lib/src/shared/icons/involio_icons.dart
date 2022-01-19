@@ -131,5 +131,8 @@ class InvolioIcons { // extends PlatformIcons {
 
   IconData get backButtonArrow =>
       isMaterial(context) ? Icons.arrow_back : Icons.arrow_back_ios;
+
+  IconData get mapPin =>
+      isMaterial(context) ? PhosphorIcons.mapPin : PhosphorIcons.mapPin;
 }
 
