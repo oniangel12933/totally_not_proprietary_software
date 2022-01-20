@@ -19,10 +19,6 @@
   "@accountExists": {
       "description": "Asks user about an existing account"
   },
-  "logIn": "Log in",
-  "@logIn": {
-      "description": "Button triggering account sign in"
-  },
   "userCreationError": "Could not create new user",
   "@userCreationError": {
       "description": "Error thrown on failed user creation"
@@ -111,16 +107,16 @@
    "@discover": {
        "description": "Search view title"
    },
-   "trending": "Trending",
-   "@trending": {
+   "trendingFilter": "Trending",
+   "@trendingFilter": {
        "description": "Posts by trending filter"
    },
-   "following": "Following",
-   "@following": {
+   "followingFilter": "Following",
+   "@followingFilter": {
        "description": "Posts by following filter"
    },
-   "interests": "Interests",
-   "@interests": {
+   "interestsFilter": "Interests",
+   "@interestsFilter": {
        "description": "Posts by interests filter"
    },
    "cancel": "Cancel",
@@ -140,7 +136,7 @@
        "description": "Navigation bar Add"
    },
    "profile": "Profile",
-   "@add": {
+   "@profile": {
        "description": "Navigation bar Profile"
    },
    "account": "Account",

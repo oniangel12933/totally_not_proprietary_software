@@ -48,10 +48,10 @@ class PostsFilterModal extends StatelessWidget {
               minLeadingWidth: 0,
               horizontalTitleGap: 10,
               title: Text(
-                AppLocalizations.of(context)!.trending,
+                AppLocalizations.of(context)!.trendingFilter,
                 style: AppFonts.bodyBig.copyWith(
                   color: _currentFilter ==
-                          AppLocalizations.of(context)!.trending.toLowerCase()
+                          AppLocalizations.of(context)!.trendingFilter.toLowerCase()
                       ? _blue
                       : _white,
                 ),
@@ -59,15 +59,15 @@ class PostsFilterModal extends StatelessWidget {
               leading: Icon(
                 context.involioIcons.trendUp,
                 color: _currentFilter ==
-                        AppLocalizations.of(context)!.trending.toLowerCase()
+                        AppLocalizations.of(context)!.trendingFilter.toLowerCase()
                     ? _blue
                     : _white,
               ),
               onTap: () {
                 Navigator.pop(context,
-                    AppLocalizations.of(context)!.trending.toLowerCase());
+                    AppLocalizations.of(context)!.trendingFilter.toLowerCase());
                 context.read<PostsFilterBloc>().setFilter(
-                    AppLocalizations.of(context)!.trending.toLowerCase());
+                    AppLocalizations.of(context)!.trendingFilter.toLowerCase());
               },
             ),
             const Divider(height: 1, color: AppColors.involioLineSeparator),
@@ -75,10 +75,10 @@ class PostsFilterModal extends StatelessWidget {
               minLeadingWidth: 0,
               horizontalTitleGap: 10,
               title: Text(
-                AppLocalizations.of(context)!.following,
+                AppLocalizations.of(context)!.followingFilter,
                 style: AppFonts.bodyBig.copyWith(
                   color: _currentFilter ==
-                          AppLocalizations.of(context)!.following.toLowerCase()
+                          AppLocalizations.of(context)!.followingFilter.toLowerCase()
                       ? _blue
                       : _white,
                 ),
@@ -86,15 +86,15 @@ class PostsFilterModal extends StatelessWidget {
               leading: Icon(
                 context.involioIcons.followUserCircled,
                 color: _currentFilter ==
-                        AppLocalizations.of(context)!.following.toLowerCase()
+                        AppLocalizations.of(context)!.followingFilter.toLowerCase()
                     ? _blue
                     : _white,
               ),
               onTap: () {
                 Navigator.pop(context,
-                    AppLocalizations.of(context)!.following.toLowerCase());
+                    AppLocalizations.of(context)!.followingFilter.toLowerCase());
                 context.read<PostsFilterBloc>().setFilter(
-                    AppLocalizations.of(context)!.following.toLowerCase());
+                    AppLocalizations.of(context)!.followingFilter.toLowerCase());
               },
             ),
             const Divider(height: 1, color: AppColors.involioLineSeparator),
@@ -105,7 +105,7 @@ class PostsFilterModal extends StatelessWidget {
                 AppLocalizations.of(context)!.myInterests,
                 style: AppFonts.bodyBig.copyWith(
                   color: _currentFilter ==
-                          AppLocalizations.of(context)!.interests.toLowerCase()
+                          AppLocalizations.of(context)!.interestsFilter.toLowerCase()
                       ? _blue
                       : _white,
                 ),
@@ -113,15 +113,15 @@ class PostsFilterModal extends StatelessWidget {
               leading: Icon(
                 context.involioIcons.heart,
                 color: _currentFilter ==
-                        AppLocalizations.of(context)!.interests.toLowerCase()
+                        AppLocalizations.of(context)!.interestsFilter.toLowerCase()
                     ? _blue
                     : _white,
               ),
               onTap: () {
                 Navigator.pop(context,
-                    AppLocalizations.of(context)!.interests.toLowerCase());
+                    AppLocalizations.of(context)!.interestsFilter.toLowerCase());
                 context.read<PostsFilterBloc>().setFilter(
-                    AppLocalizations.of(context)!.interests.toLowerCase());
+                    AppLocalizations.of(context)!.interestsFilter.toLowerCase());
               },
             ),
             const Divider(height: 1, color: AppColors.involioLineSeparator),

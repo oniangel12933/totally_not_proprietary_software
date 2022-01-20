@@ -12,9 +12,9 @@ class PostsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> _filters = [
-      AppLocalizations.of(context)!.trending.toLowerCase(),
-      AppLocalizations.of(context)!.following.toLowerCase(),
-      AppLocalizations.of(context)!.interests.toLowerCase(),
+      AppLocalizations.of(context)!.trendingFilter.toLowerCase(),
+      AppLocalizations.of(context)!.followingFilter.toLowerCase(),
+      AppLocalizations.of(context)!.interestsFilter.toLowerCase(),
     ];
 
     return _PostsFilterBlocProvider(
