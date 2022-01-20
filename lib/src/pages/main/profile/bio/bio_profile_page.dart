@@ -27,7 +27,6 @@ class _BioProfilePageState extends State<BioProfilePage> {
           //print(pickedFile.path);
         } else {
           //todo handle error
-          context.router.pop();
         }
       });
     } catch (error) {
@@ -118,7 +117,7 @@ class _BioProfilePageState extends State<BioProfilePage> {
                 TextButton.icon(
                   onPressed: () => null,
                   label: Text(
-                    "Joined November 2021",
+                    "Houston, TX",
                     style: AppFonts.comments1
                         .copyWith(color: AppColors.involioWhiteShades80),
                   ),

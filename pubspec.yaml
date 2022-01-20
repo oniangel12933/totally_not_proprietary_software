@@ -75,6 +75,9 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   numeral: ^1.2.5
   pinput: ^1.2.2
+  extended_image: ^4.0.0
+  image_picker: ^0.8.4+4
+  sliding_switch: ^1.0.0
   #like_button: ^2.0.3
   timeago: ^3.1.0
   #showcaseview: ^1.1.3
