@@ -7,14 +7,14 @@ import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart'
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class BioProfilePage extends StatefulWidget {
+  const BioProfilePage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _BioProfilePageState createState() => _BioProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _BioProfilePageState extends State<BioProfilePage> {
   final ImagePicker _picker = ImagePicker();
   dynamic _pickImageError;
 
@@ -59,7 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         actions: [
           TextButton(
-              onPressed: () => null,
+              onPressed: () {
+                context.router.push(const EditBioProfileRoute());
+              },
               child: Text(
                 "Edit",
                 style: AppFonts.bodySmall

@@ -6,8 +6,9 @@ import 'package:involio/src/pages/login/login_page/login_page.dart';
 import 'package:involio/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_page.dart';
 import 'package:involio/src/pages/main/main_page.dart';
-import 'package:involio/src/pages/main/profile/image_editor_page.dart';
-import 'package:involio/src/pages/main/profile/profile_page.dart';
+import 'package:involio/src/pages/main/profile/bio/edit_bio_profile_page.dart';
+import 'package:involio/src/pages/main/profile/bio/image_editor_page.dart';
+import 'package:involio/src/pages/main/profile/bio/bio_profile_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';
 import 'package:involio/src/pages/main/search/trending_users_page.dart';
@@ -105,7 +106,15 @@ import 'package:involio/src/pages/splash/splash_page.dart';
     AutoRoute(
       initial: true,
       path: '/profile',
-      page: ProfilePage,
+      page: BioProfilePage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    AutoRoute(
+      initial: true,
+      path: '/edit_profile',
+      page: EditBioProfilePage,
       children: [
         RedirectRoute(path: '*', redirectTo: ''),
       ],

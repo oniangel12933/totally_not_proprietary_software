@@ -43,7 +43,7 @@ class MainBottomNavModal extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pop();
-                context.router.push(const ProfileRoute());
+                context.router.push(const BioProfileRoute());
               },
             ),
             const Divider(height: 1, color: AppColors.involioLineSeparator),
