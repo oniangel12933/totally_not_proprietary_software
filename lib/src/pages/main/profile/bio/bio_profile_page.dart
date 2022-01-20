@@ -1,18 +1,52 @@
-import 'package:flutter/cupertino.dart';
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/shared/widgets/image_widgets/app_image_builder.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class BioProfilePage extends StatefulWidget {
+  const BioProfilePage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _BioProfilePageState createState() => _BioProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _BioProfilePageState extends State<BioProfilePage> {
+  final ImagePicker _picker = ImagePicker();
+  dynamic _pickImageError;
+
+  Future<void> selectImage(ImageSource source) async {
+    try {
+      final pickedFile = await _picker.pickImage(source: source);
+      setState(() {
+        if (pickedFile != null) {
+          context.router.push(ImageEditorRoute(image: pickedFile!));
+          //print(pickedFile.path);
+        } else {
+          //todo handle error
+          context.router.pop();
+        }
+      });
+    } catch (error) {
+      setState(() {
+        _pickImageError = error;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         actions: [
           TextButton(
-              onPressed: () => null,
+              onPressed: () {
+                context.router.push(const EditBioProfileRoute());
+              },
               child: Text(
                 "Edit",
                 style: AppFonts.bodySmall
@@ -43,9 +79,29 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
-                  child: AppCurrentUserProfileImageBuilder(
-                    size: AppImageSize.xlarge,
+                Center(
+                  child: Stack(
+                    children: [
+                      const AppCurrentUserProfileImageBuilder(
+                        size: AppImageSize.xlarge,
+                      ),
+                      Container(
+                          height: 130,
+                          width: 130,
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            padding: const EdgeInsets.all(6),
+                            constraints: const BoxConstraints(),
+                            icon: Icon(
+                              context.involioIcons.plusCircle,
+                              color: AppColors.involioBlue,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              selectImage(ImageSource.gallery);
+                            },
+                          ))
+                    ],
                   ),
                 ),
                 TextButton.icon(
@@ -101,12 +157,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: AppColors.involioFillFormBackgroundColor,
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                   ),
-                  child: Expanded(
-                      child: Text(
+                  child: Text(
                     "Duck NFT by DUCKIES",
                     style: AppFonts.comments1
                         .copyWith(color: AppColors.involioWhiteShades80),
-                  )),
+                  ),
                 )
               ],
             ),
@@ -131,12 +186,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: AppColors.involioFillFormBackgroundColor,
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                   ),
-                  child: Expanded(
-                      child: Text(
-                        "This is a Book",
-                        style: AppFonts.comments1
-                            .copyWith(color: AppColors.involioWhiteShades80),
-                      )),
+                  child: Text(
+                    "This is a Book",
+                    style: AppFonts.comments1
+                        .copyWith(color: AppColors.involioWhiteShades80),
+                  ),
                 )
               ],
             ),
@@ -161,12 +215,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: AppColors.involioFillFormBackgroundColor,
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                   ),
-                  child: Expanded(
-                      child: Text(
-                        "This is a Podcast",
-                        style: AppFonts.comments1
-                            .copyWith(color: AppColors.involioWhiteShades80),
-                      )),
+                  child: Text(
+                    "This is a Podcast",
+                    style: AppFonts.comments1
+                        .copyWith(color: AppColors.involioWhiteShades80),
+                  ),
                 )
               ],
             ),

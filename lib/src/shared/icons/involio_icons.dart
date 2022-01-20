@@ -75,6 +75,9 @@ class InvolioIcons { // extends PlatformIcons {
   IconData get plus =>
       isMaterial(context) ? PhosphorIcons.plus : PhosphorIcons.plus;
 
+  IconData get plusCircle =>
+      isMaterial(context) ? PhosphorIcons.plusCircleFill : PhosphorIcons.plusCircleFill;
+
   IconData get chartLine =>
       isMaterial(context) ? PhosphorIcons.chartLine : PhosphorIcons.chartLine;
 
