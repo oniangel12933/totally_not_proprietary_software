@@ -27,7 +27,6 @@ class _EditBioProfilePageState extends State<EditBioProfilePage> {
           //print(pickedFile.path);
         } else {
           //todo handle error
-          context.router.pop();
         }
       });
     } catch (error) {
