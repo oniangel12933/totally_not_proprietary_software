@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/widgets/appbar_widgets/logo_only_title_widget.dart';
 import 'package:involio/src/theme/app_theme.dart';
@@ -32,7 +30,6 @@ class _GetStartedPageState extends State<GetStartedPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(12),
-
             child: CustomScrollView(
               physics: const ClampingScrollPhysics(),
               slivers: [
@@ -49,7 +46,8 @@ class _GetStartedPageState extends State<GetStartedPage> {
                         const SizedBox(height: 98),
                         Text(
                           AppLocalizations.of(context)!.welcome,
-                          style: AppFonts.headline2.copyWith(color: AppColors.involioWhiteShades80),
+                          style: AppFonts.headline2
+                              .copyWith(color: AppColors.involioWhiteShades80),
                         ),
                         const SizedBox(height: 28),
                         SizedBox(
@@ -58,7 +56,8 @@ class _GetStartedPageState extends State<GetStartedPage> {
                           child: TextButton(
                             child: Text(
                               AppLocalizations.of(context)!.getStarted,
-                              style: AppFonts.headline7.copyWith(color: AppColors.involioWhiteShades100),
+                              style: AppFonts.headline7.copyWith(
+                                  color: AppColors.involioWhiteShades100),
                             ),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
@@ -71,7 +70,8 @@ class _GetStartedPageState extends State<GetStartedPage> {
                                 ),
                               ),
                             ),
-                            onPressed: () => context.router.push(const SignUpRoute()),
+                            onPressed: () =>
+                                context.router.push(const SignUpRoute()),
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -93,12 +93,18 @@ class _GetStartedPageState extends State<GetStartedPage> {
                   left: 20, right: 0, top: 20, bottom: 20),
               child: Row(
                 children: [
-                  Text (AppLocalizations.of(context)!.accountExists,
-                  style: AppFonts.headline6.copyWith(color: AppColors.involioWhiteShades80,),
+                  Text(
+                    AppLocalizations.of(context)!.accountExists,
+                    style: AppFonts.headline6.copyWith(
+                      color: AppColors.involioWhiteShades80,
+                    ),
                   ),
                   TextButton(
                     child: Text(AppLocalizations.of(context)!.logIn),
-                    style: TextButton.styleFrom(primary: AppColors.involioBlue, textStyle: AppFonts.bodyBig,),
+                    style: TextButton.styleFrom(
+                      primary: AppColors.involioBlue,
+                      textStyle: AppFonts.bodyBig,
+                    ),
                     onPressed: () => context.router.push(const LoginRoute()),
                   ),
                 ],

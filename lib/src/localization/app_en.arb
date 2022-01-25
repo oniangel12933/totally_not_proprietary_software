@@ -218,5 +218,69 @@
     "comments": "Comments",
     "@comments": {
         "description": "Comments page title"
+    },
+    "editPercent": "Edit %",
+    "@editPercent": {
+        "description": "Edit % button text"
+    },
+    "portfoiloAndStrategy": "Portfolios\nand Strategies",
+    "@portfoiloAndStrategy": {
+        "description": "Portfolios and Strategies"
+    },
+   "likes": "Likes",
+   "@likes": {
+       "description": "Home screen tab for likes"
+   },
+    "emptyPosts": "Nothing here yet! Start posting to see your posts section fill up",
+    "@emptyPosts": {
+        "description": "Description for empty posts on user profile page"
+    },
+    "emptyDrops": "Nothing here yet! Start dropping to see your drops section fill up",
+    "@emptyDrops": {
+        "description": "Description for empty drops on user profile page"
+    },
+    "emptyLikes": "Nothing here yet! Start liking to see your likes section fill up",
+    "@emptyLikes": {
+        "description": "Description for empty likes on user profile page"
+    },
+    "capitalAllocation": "Capital Allocation",
+    "@capitalAllocation": {
+        "description": "Capital Allocation"    
+    },
+    "example": "Example :",
+    "@example": {
+        "description": "Example"    
+    },
+    "exampleInvest": "Jon invests 50% of his money in stocks, 25% in crypto, and 25% in sports cards.",
+    "@exampleInvest": {
+        "description": "Description of investment examples"    
+    },
+    "investWhere": "Where do you invest?",
+    "@investWhere": {
+        "description": "Where do you invest?"    
+    },
+    "totalBe100": "Total must equal to 100% before saving.",
+    "@totalBe100": {
+        "description": "Total must equal to 100% before saving"    
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Title of save button"    
+    },
+    "addNewInvest": "Add Another Asset",
+    "@addNewInvest": {
+        "description": "Add Another Asset" 
+    },
+    "toolTipOfEditPercent": "Add your\ninvestment\npercentages\nhere.\n\n",
+    "@toolTipOfEditPercent": {
+        "description": "Text to show tooltip of edit percent" 
+    },
+    "toolTipOfPortfolio": "Click here to\ngo to your\nPortfolios &\nStrategies\n\n",
+    "@toolTipOfPortfolio": {
+        "description": "TExt to show tooltip of Portfolios and Strategies" 
+    },
+    "skip": "Skip",
+    "@skip": {
+        "description": "Text of skip button" 
     }
 }

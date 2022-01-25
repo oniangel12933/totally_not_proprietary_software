@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart' as ipn;
-
 import 'package:involio/src/pages/login/form_models/phone_entity.dart';
 import 'package:involio/src/shared/icons/involio_icons.dart';
 import 'package:involio/src/shared/widgets/platform_date_picker_modal.dart';
 import 'package:involio/src/theme/app_theme.dart';
 import 'package:involio/src/theme/colors.dart';
+
 import '../login_input_decoration.dart';
 import 'bloc/sign_up_bloc.dart';
 
@@ -47,7 +46,8 @@ class _SignUpFormState extends State<SignUpForm> {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.error ?? AppLocalizations.of(context)!.userCreationError),
+                content: Text(state.error ??
+                    AppLocalizations.of(context)!.userCreationError),
               ),
             );
         }
@@ -60,7 +60,8 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: const EdgeInsets.only(left: 0, right: 0, bottom: 12),
             child: Text(
               AppLocalizations.of(context)!.createAccount,
-              style: AppFonts.headline2.copyWith(color: AppColors.involioWhiteShades100),
+              style: AppFonts.headline2
+                  .copyWith(color: AppColors.involioWhiteShades100),
             ),
           ),
           Padding(
@@ -105,7 +106,8 @@ class _NameInput extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.nameSignUp,
-                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
+                style: AppFonts.headline8
+                    .copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             TextField(
@@ -114,11 +116,10 @@ class _NameInput extends StatelessWidget {
               onChanged: (name) =>
                   context.read<SignUpBloc>().add(SignUpNameChanged(name)),
               decoration: getLoginInputDecoration(
-                labelText: '',
-                errorText: AppLocalizations.of(context)!.invalidName,
-                field: state.name,
-                hintText: AppLocalizations.of(context)!.nameFormat
-              ),
+                  labelText: '',
+                  errorText: AppLocalizations.of(context)!.invalidName,
+                  field: state.name,
+                  hintText: AppLocalizations.of(context)!.nameFormat),
             ),
           ],
         );
@@ -148,7 +149,8 @@ class _UsernameInput extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.userNameSignUp,
-                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
+                style: AppFonts.headline8
+                    .copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             TextField(
@@ -161,9 +163,11 @@ class _UsernameInput extends StatelessWidget {
                 labelText: '',
                 errorText: AppLocalizations.of(context)!.invalidUserName,
                 field: state.username,
-                prefixIcon: Icon(context.involioIcons.at,
+                prefixIcon: Icon(
+                  context.involioIcons.at,
                   color: AppColors.involioWhiteShades100,
-                  size: 24,),
+                  size: 24,
+                ),
                 hintText: AppLocalizations.of(context)!.userNameFormat,
               ),
             ),
@@ -213,7 +217,8 @@ class _PhoneInput extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0, bottom: 8),
               child: Text(
                 AppLocalizations.of(context)!.phoneNumberSignUp,
-                style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
+                style: AppFonts.headline8
+                    .copyWith(color: AppColors.involioWhiteShades100),
               ),
             ),
             ipn.InternationalPhoneNumberInput(
@@ -325,7 +330,8 @@ class _BirthDateInputState extends State<_BirthDateInput> {
           padding: const EdgeInsets.only(left: 0, bottom: 8),
           child: Text(
             AppLocalizations.of(context)!.dateOfBirth,
-            style: AppFonts.headline8.copyWith(color: AppColors.involioWhiteShades100),
+            style: AppFonts.headline8
+                .copyWith(color: AppColors.involioWhiteShades100),
           ),
         ),
         BlocBuilder<SignUpBloc, SignUpState>(

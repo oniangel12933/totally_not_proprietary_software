@@ -23,7 +23,7 @@ class _EditBioProfilePageState extends State<EditBioProfilePage> {
       final pickedFile = await _picker.pickImage(source: source);
       setState(() {
         if (pickedFile != null) {
-          context.router.push(ImageEditorRoute(image: pickedFile!));
+          context.router.push(ImageEditorRoute(image: pickedFile));
           //print(pickedFile.path);
         } else {
           //todo handle error

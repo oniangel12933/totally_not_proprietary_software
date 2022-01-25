@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-
 import 'package:involio/src/pages/login/enter_otp_page/enter_otp_page.dart';
 import 'package:involio/src/pages/login/get_started/getting_started_page.dart';
 import 'package:involio/src/pages/login/login_page/login_page.dart';
 import 'package:involio/src/pages/login/sign_up_page/sign_up_page.dart';
 import 'package:involio/src/pages/main/home/posts/comments/post_comments_page.dart';
 import 'package:involio/src/pages/main/main_page.dart';
+import 'package:involio/src/pages/main/profile/bio/bio_profile_page.dart';
 import 'package:involio/src/pages/main/profile/bio/edit_bio_profile_page.dart';
 import 'package:involio/src/pages/main/profile/bio/image_editor_page.dart';
-import 'package:involio/src/pages/main/profile/bio/bio_profile_page.dart';
+import 'package:involio/src/pages/main/profile/percents/edit_percent_page.dart';
+import 'package:involio/src/pages/main/profile/percents/user_profile_page.dart';
 import 'package:involio/src/pages/main/search/trending_portfolios_page.dart';
 import 'package:involio/src/pages/main/search/trending_strategies_page.dart';
 import 'package:involio/src/pages/main/search/trending_users_page.dart';
@@ -32,8 +33,8 @@ import 'package:involio/src/pages/splash/splash_page.dart';
         page: GetStartedPage,
         children: [
           RedirectRoute(path: '*', redirectTo: ''),
-        ], transitionsBuilder: TransitionsBuilders.fadeIn
-    ),
+        ],
+        transitionsBuilder: TransitionsBuilders.fadeIn),
     AutoRoute(
       path: '/login',
       page: LoginPage,
@@ -128,16 +129,30 @@ import 'package:involio/src/pages/splash/splash_page.dart';
       ],
     ),
     CustomRoute(
-      initial: false,
-      path: '/user_search',
-      page: UserSearchPage,
-      children: [
-        RedirectRoute(path: '*', redirectTo: ''),
-      ], transitionsBuilder: TransitionsBuilders.fadeIn
-    ),
+        initial: false,
+        path: '/user_search',
+        page: UserSearchPage,
+        children: [
+          RedirectRoute(path: '*', redirectTo: ''),
+        ],
+        transitionsBuilder: TransitionsBuilders.fadeIn),
 
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: '/get_started'),
+    AutoRoute(
+      path: '/user_profile',
+      page: UserProfilePage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    AutoRoute(
+      path: '/edit_percent',
+      page: EditPercentPage,
+      children: [
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
     //Home
   ],
 )

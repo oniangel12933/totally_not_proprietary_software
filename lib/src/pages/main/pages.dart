@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:involio/src/pages/main/profile/percents/user_profile_page.dart';
 
 class SearchTab extends StatelessWidget {
   const SearchTab({Key? key}) : super(key: key);
@@ -38,8 +39,6 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile Tab'),
-    );
+    return const UserProfilePage();
   }
 }

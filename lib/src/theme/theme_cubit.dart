@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 @immutable
@@ -50,7 +49,6 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
 
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {
-
     return json['isDark'] as bool
         ? const ThemeState(isDark: true)
         : const ThemeState(isDark: false);

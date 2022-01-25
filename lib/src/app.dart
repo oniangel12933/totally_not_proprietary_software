@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:get_it/get_it.dart';
-
+import 'package:involio/src/pages/main/profile/percents/bloc/invest_bloc.dart';
 import 'package:involio/src/router/router.gr.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_bloc.dart';
 import 'package:involio/src/shared/blocs/auth_bloc/auth_state.dart';
@@ -39,6 +38,9 @@ class _AppState extends State<MyApp> {
         ),
         BlocProvider<UserCubit>(
           create: (BuildContext context) => UserCubit(),
+        ),
+        BlocProvider<InvestBloc>(
+          create: (BuildContext context) => InvestBloc(),
         ),
       ],
       child: PlatformProvider(
@@ -91,6 +93,7 @@ class _AppViewState extends State<AppView> {
           // returns to the app after it has been killed while running in the
           // background.
           restorationScopeId: 'app',
+          debugShowCheckedModeBanner: false,
 
           // Provide the generated AppLocalizations to the MaterialApp. This
           // allows descendant Widgets to display the correct translations

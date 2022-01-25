@@ -4,22 +4,20 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_dotenv/src/errors.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:involio/src/shared/blocs/bloc_observer.dart';
+import 'package:involio/src/shared/config/app_config.dart';
+import 'package:involio/src/shared/config/get_it_setup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'package:involio/src/shared/blocs/bloc_observer.dart';
-import 'package:involio/src/shared/config/app_config.dart';
-import 'package:involio/src/shared/config/get_it_setup.dart';
 import 'src/app.dart';
 
 void main() async {
-
   try {
     await dotenv.load(fileName: 'assets/env/.env');
   } on FileNotFoundError {
