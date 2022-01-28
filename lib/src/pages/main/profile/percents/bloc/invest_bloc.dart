@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:involio/gen/assets.gen.dart';
+import 'package:involio/src/repositories/local/secure_storage/secure_repository.dart';
 import 'package:toast/toast.dart';
 
 part 'invest_event.dart';
@@ -16,9 +18,13 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
   ];
   int selectedIndex = 0;
   bool isTypeRing = true;
+  late final SecureStorageRepository secureRepository;
 
   InvestBloc()
       : super(const InvestAdded(newInvests: [Invest(id: 0, percent: 0)])) {
+    
+    secureRepository = GetIt.I.get<SecureStorageRepository>();
+    
     on<AddInvest>((event, emit) async {
       addInvest(event, emit);
     });
@@ -122,5 +128,14 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
   bool isExisted(Invest invest) {
     final list = invests.where((element) => element.id == invest.id).toList();
     return list.isNotEmpty && list.isNotEmpty;
+  }
+
+  Future<bool> isTourPassed() async {
+    final status = await secureRepository.isPassedProfileTour();
+    return status;
+  }
+
+  Future<void> setTourPassed() async {
+    await secureRepository.persistProfileTourPassed('passed');    
   }
 }

@@ -41,10 +41,13 @@ class UserProfilePageState extends State<UserProfilePage> {
     if (investBloc!.invests.isEmpty) {
       investBloc!.add(const AddInvest(Invest(id: 0, percent: 0)));
     }
-    Future.delayed(const Duration(milliseconds: 800), () {
-      setState(() {
-        tooltipForEdit.showTooltip(immediately: true);
-      });
+    Future.delayed(const Duration(milliseconds: 800), () async {
+      bool isTourPassed = await investBloc!.isTourPassed();
+      if (!isTourPassed) {
+        setState(() {
+          tooltipForEdit.showTooltip(immediately: true);
+        });
+      }
     });
   }
 
@@ -169,6 +172,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           tooltipForPortfolio.hideTooltip();
+                                          investBloc!.setTourPassed();
                                         },
                                     ),
                                   ],

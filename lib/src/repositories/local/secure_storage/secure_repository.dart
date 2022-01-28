@@ -18,6 +18,7 @@ class SecureStorageRepository {
   static const _phoneCountryISOCodeKey = 'PHONE_COUNTRY_ISO_CODE';
   static const _accessTokenKey = 'ACCESS_TOKEN';
   static const _refreshTokenKey = 'REFRESH_TOKEN';
+  static const _profileTourPassed = 'PROFILE_TOUR_PASSED';
 
   Future<void> persistPhoneAndToken({
     required PhoneEntity phone,
@@ -72,6 +73,10 @@ class SecureStorageRepository {
     await _storage.write(key: _refreshTokenKey, value: refreshToken);
   }
 
+  Future<void> persistProfileTourPassed(String status) async {
+    await _storage.write(key: _profileTourPassed, value: status);
+  }
+
   Future<bool> hasAccessToken() async {
     var value = await _storage.read(key: _accessTokenKey);
     return value != null;
@@ -97,12 +102,21 @@ class SecureStorageRepository {
     return value != null;
   }
 
+  Future<bool> isPassedProfileTour() async {
+    var value = await _storage.read(key: _profileTourPassed);
+    return value != null;
+  }
+
   Future<void> deleteAccessToken() async {
     return await _storage.delete(key: _accessTokenKey);
   }
 
   Future<void> deleteRefreshToken() async {
     return await _storage.delete(key: _refreshTokenKey);
+  }
+
+  Future<void> deleteProfileTourPassed() async {
+    return await _storage.delete(key: _profileTourPassed);
   }
 
   Future<void> deletePhone() async {
