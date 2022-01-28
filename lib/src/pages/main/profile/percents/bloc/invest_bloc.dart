@@ -15,9 +15,10 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
     const Invest(id: 9, percent: 18)
   ];
   int selectedIndex = 0;
+  bool isTypeRing = true;
 
   InvestBloc()
-      : super(const InvestAdded(invests: [Invest(id: 0, percent: 0)])) {
+      : super(const InvestAdded(newInvests: [Invest(id: 0, percent: 0)])) {
     on<AddInvest>((event, emit) async {
       addInvest(event, emit);
     });
@@ -27,23 +28,31 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
     on<RemoveInvest>((event, emit) {
       removeInvest(event, emit);
     });
+    on<ChangeType>((event, emit) {
+      changeType(event, emit);
+    });
   }
 
   List<Invest> get items => invests;
 
   void addInvest(AddInvest event, Emitter<InvestState> emit) {
     invests.add(event.invest);
-    emit(InvestAdded(invests: invests));
+    emit(InvestAdded(newInvests: invests));
   }
 
   void updateInvest(UpdateInvest event, Emitter<InvestState> emit) {
     invests[event.index] = event.invest;
-    emit(InvestUpdated(invests: invests));
+    emit(InvestUpdated(newInvests: invests));
   }
 
   void removeInvest(RemoveInvest event, Emitter<InvestState> emit) {
     invests.remove(event.invest);
-    emit(InvestRemoved(invests: invests));
+    emit(InvestRemoved(newInvests: invests));
+  }
+
+  void changeType(ChangeType event, Emitter<InvestState> emit) {
+    isTypeRing = !isTypeRing;
+    emit(TypeChanged());
   }
 
   void addOrUpdate(

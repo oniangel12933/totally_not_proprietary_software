@@ -52,60 +52,6 @@ class UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.involioBackground,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: AppColors.involioBackground,
-      //   elevation: 0,
-      //   titleSpacing: -0,
-      //   centerTitle: false,
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     children: <Widget>[
-      //       MyTextButton(
-      //         isAssetIcon: true,
-      //         assetIcon: Assets.images.dollar,
-      //         color: Colors.grey,
-      //         iconSize: 20,
-      //         align: MainAxisAlignment.start,
-      //         action: () {},
-      //       ),
-      //       const Expanded(
-      //         child: Text(
-      //           'Not Finanacial Advice',
-      //           textAlign: TextAlign.center,
-      //           style: TextStyle(color: Colors.grey, fontSize: 13),
-      //         ),
-      //       ),
-      //       MyTextButton(
-      //         isAssetIcon: true,
-      //         assetIcon: Assets.images.upload,
-      //         iconSize: 20,
-      //         color: Colors.grey,
-      //         align: MainAxisAlignment.end,
-      //         action: () {
-      //           showMaterialModalBottomSheet(
-      //             context: context,
-      //             backgroundColor: Colors.transparent,
-      //             builder: (context) => Container(
-      //               height: 600,
-      //               decoration: const BoxDecoration(
-      //                 color: AppColors.involioFillFormBackgroundColor,
-      //                 borderRadius: BorderRadius.only(
-      //                     topLeft: Radius.circular(20),
-      //                     topRight: Radius.circular(20)),
-      //               ),
-      //               child: Column(
-      //                 mainAxisAlignment: MainAxisAlignment.start,
-      //                 children: [const SheetTopHandleWidget(), Container()],
-      //               ),
-      //             ),
-      //           );
-      //         },
-      //       )
-      //     ],
-      //   ),
-      // ),
       body: SingleChildScrollView(
         controller: scrollController,
         child: SizedBox(
@@ -144,21 +90,21 @@ class UserProfilePageState extends State<UserProfilePage> {
                         ),
                         const SizedBox(height: 10),
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             children: <TextSpan>[
-                              TextSpan(
+                              const TextSpan(
                                   text: '10 ',
                                   style: TextStyle(color: Colors.white)),
                               TextSpan(
-                                  text: 'Followers',
-                                  style: TextStyle(color: Colors.grey)),
-                              TextSpan(text: '   '),
-                              TextSpan(
+                                  text: AppLocalizations.of(context)!.followers,
+                                  style: const TextStyle(color: Colors.grey)),
+                              const TextSpan(text: '   '),
+                              const TextSpan(
                                   text: '35 ',
                                   style: TextStyle(color: Colors.white)),
                               TextSpan(
-                                  text: 'Following',
-                                  style: TextStyle(color: Colors.grey)),
+                                  text: AppLocalizations.of(context)!.following,
+                                  style: const TextStyle(color: Colors.grey)),
                             ],
                           ),
                         )
@@ -170,9 +116,74 @@ class UserProfilePageState extends State<UserProfilePage> {
               Padding(
                 padding: const EdgeInsets.only(
                     top: 50, bottom: 30, left: 20, right: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  alignment: Alignment.topLeft,
                   children: [
+                    Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        InvestChartWidget(
+                            radius:
+                                (MediaQuery.of(context).size.width - 100) / 1.5,
+                            duration: 800),
+                        JustTheTooltip(
+                          onShow: () {
+                            // print('onShow');
+                          },
+                          onDismiss: () {
+                            print('onDismiss');
+                          },
+                          backgroundColor: Colors.black,
+                          controller: tooltipForPortfolio,
+                          tailLength: 10,
+                          tailBaseWidth: 20.0,
+                          isModal: false,
+                          preferredDirection: AxisDirection.down,
+                          margin: const EdgeInsets.only(left: 10),
+                          borderRadius: BorderRadius.circular(8.0),
+                          offset: 30,
+                          content: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ConstrainedBox(
+                              constraints:
+                                  const BoxConstraints(maxWidth: 130.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: AppLocalizations.of(context)!
+                                            .toolTipOfPortfolio,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            height: 1.5,
+                                            fontSize: 16)),
+                                    const TextSpan(
+                                        text: 'percenta ',
+                                        style: TextStyle(color: Colors.black)),
+                                    TextSpan(
+                                      text: AppLocalizations.of(context)!.skip,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          tooltipForPortfolio.hideTooltip();
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          child: Container(
+                            height:
+                                (MediaQuery.of(context).size.width - 100) / 3 +
+                                    10,
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       width: 55,
                       child: JustTheTooltip(
@@ -238,87 +249,6 @@ class UserProfilePageState extends State<UserProfilePage> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          InvestChartWidget(
-                              radius:
-                                  (MediaQuery.of(context).size.width - 100) /
-                                      1.5,
-                              duration: 800),
-                          JustTheTooltip(
-                            onShow: () {
-                              // print('onShow');
-                            },
-                            onDismiss: () {
-                              print('onDismiss');
-                            },
-                            backgroundColor: Colors.black,
-                            controller: tooltipForPortfolio,
-                            tailLength: 10,
-                            tailBaseWidth: 20.0,
-                            isModal: false,
-                            preferredDirection: AxisDirection.down,
-                            margin: const EdgeInsets.only(left: 10),
-                            borderRadius: BorderRadius.circular(8.0),
-                            offset: -5,
-                            content: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: ConstrainedBox(
-                                constraints:
-                                    const BoxConstraints(maxWidth: 130.0),
-                                child: RichText(
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: AppLocalizations.of(context)!
-                                              .toolTipOfPortfolio,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              height: 1.5,
-                                              fontSize: 16)),
-                                      const TextSpan(
-                                          text: 'percenta ',
-                                          style:
-                                              TextStyle(color: Colors.black)),
-                                      TextSpan(
-                                        text:
-                                            AppLocalizations.of(context)!.skip,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            decoration:
-                                                TextDecoration.underline,
-                                            fontSize: 14),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            tooltipForPortfolio.hideTooltip();
-                                          },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .portfoiloAndStrategy,
-                                maxLines: 2,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    height: 1.5,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(width: 50)
                   ],
                 ),
               ),

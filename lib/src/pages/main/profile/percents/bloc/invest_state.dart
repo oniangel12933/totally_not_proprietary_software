@@ -5,47 +5,48 @@ abstract class InvestState {
 
   const InvestState({this.invests = const <Invest>[]});
 
-  @override
   List<Object> get props => [invests];
 }
 
 class InvestLoading extends InvestState {}
 
 class InvestAdded extends InvestState {
-  final List<Invest> invests;
+  final List<Invest> newInvests;
 
-  const InvestAdded({required this.invests}) : super(invests: invests);
-
-  @override
-  List<Object> get props => [invests];
+  const InvestAdded({required this.newInvests}) : super(invests: newInvests);
 
   @override
-  String toString() => 'InvestAdded { todos: $invests }';
+  List<Object> get props => [newInvests];
+
+  @override
+  String toString() => 'InvestAdded { todos: $newInvests }';
 }
 
 class InvestUpdated extends InvestState {
-  final List<Invest> invests;
+  final List<Invest> newInvests;
 
-  const InvestUpdated({required this.invests}) : super(invests: invests);
-
-  @override
-  List<Object> get props => [invests];
+  const InvestUpdated({required this.newInvests}) : super(invests: newInvests);
 
   @override
-  String toString() => 'InvestUpdated { todos: $invests }';
+  List<Object> get props => [newInvests];
+
+  @override
+  String toString() => 'InvestUpdated { todos: $newInvests }';
 }
 
 class InvestRemoved extends InvestState {
-  final List<Invest> invests;
+  final List<Invest> newInvests;
 
-  const InvestRemoved({required this.invests}) : super(invests: invests);
-
-  @override
-  List<Object> get props => [invests];
+  const InvestRemoved({required this.newInvests}) : super(invests: newInvests);
 
   @override
-  String toString() => 'InvestRemoved { todos: $invests }';
+  List<Object> get props => [newInvests];
+
+  @override
+  String toString() => 'InvestRemoved { todos: $newInvests }';
 }
+
+class TypeChanged extends InvestState {}
 
 class Invest extends Equatable {
   final int? id;
@@ -61,91 +62,91 @@ List<dynamic> listOfInvest = [
   {
     'title': 'Cryptocurrency',
     'icon': Assets.images.investCrypto,
-    'color': Colors.red
+    'color': const Color(0xFF004D40)
   },
   {
     'title': 'Stocks',
     'icon': Assets.images.investStock,
-    'color': Colors.blue
+    'color': const Color(0xFF00695C)
   },
   {
     'title': 'Real Estate',
     'icon': Assets.images.investRealEsate,
-    'color': Colors.white
+    'color': const Color(0xFF00796B)
   },
   {
     'title': 'NFTs',
     'icon': Assets.images.investNft,
-    'color': Colors.green
+    'color': const Color(0xFF006064)
   },
   {
     'title': 'Startups',
     'icon': Assets.images.investStartup,
-    'color': Colors.orange
+    'color': const Color(0xFF00838F)
   },
   {
     'title': 'Shoes',
     'icon': Assets.images.investShoes,
-    'color': Colors.pink
+    'color': const Color(0xFF0097A7)
   },
   {
     'title': 'Sports Cards',
     'icon': Assets.images.investSportsCards,
-    'color': Colors.yellow
+    'color': const Color(0xFF01579B)
   },
   {
     'title': 'Pokemon Cards',
     'icon': Assets.images.investPokemon,
-    'color': Colors.black
+    'color': const Color(0xFF0277BD)
   },
   {
     'title': 'Commodities',
     'icon': Assets.images.investCommodities,
-    'color': Colors.blueGrey
+    'color': const Color(0xFF0288D1)
   },
   {
     'title': 'Private Companies',
     'icon': Assets.images.investPrivateCompany,
-    'color': Colors.brown
+    'color': const Color(0xFF1A237E)
   },
   {
     'title': 'Watches',
     'icon': Assets.images.investWatch,
-    'color': Colors.lightBlue
+    'color': const Color(0xFF283593)
   },
   {
     'title': 'Cars',
     'icon': Assets.images.investCar,
-    'color': Colors.greenAccent
+    'color': const Color(0xFF303F9F)
   },
   {
     'title': 'Clothing',
     'icon': Assets.images.investClothing,
-    'color': Colors.cyan
+    'color': const Color(0xFF64B4F6)
   },
   {
     'title': 'Fine Art',
     'icon': Assets.images.investFineArt,
-    'color': Colors.lightBlue
+    'color': const Color(0xFFBBDEFB)
   },
   {
     'title': 'Jewelry',
     'icon': Assets.images.investJewelry,
-    'color': Colors.amber
+    'color': const Color(0xFF29B6F6)
   },
   {
     'title': 'Coins',
     'icon': Assets.images.investCoin,
-    'color': Colors.pinkAccent
+    'color': const Color(0xFFB2EBF2)
   },
   {
     'title': 'Cash',
     'icon': Assets.images.investCash,
-    'color': Colors.yellowAccent
+    'color': const Color(0xFF26A69A)
   },
   {
     'title': 'Other',
     'icon': Assets.images.investOther,
-    'color': Colors.cyanAccent
+    'color': const Color(0xFFE0F2F1)
   },
 ];

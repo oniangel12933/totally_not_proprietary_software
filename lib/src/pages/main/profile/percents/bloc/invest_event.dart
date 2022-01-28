@@ -43,3 +43,5 @@ class RemoveInvest extends InvestEvent {
   @override
   String toString() => 'RemoveInvest { index: $invest }';
 }
+
+class ChangeType extends InvestEvent {}

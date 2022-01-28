@@ -71,7 +71,7 @@ class _GetStartedPageState extends State<GetStartedPage> {
                               ),
                             ),
                             onPressed: () =>
-                                context.router.push(const SignUpRoute()),
+                                context.router.push(const UserProfileRoute()),
                           ),
                         ),
                         const SizedBox(height: 32),
