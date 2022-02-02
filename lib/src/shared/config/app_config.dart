@@ -12,7 +12,9 @@ class AppConfig {
   Future<void> setup() async {}
 
   String get baseUrl {
-    return dotenv.get("BASE_URL", fallback: "https://api.insidersapp.io/");
+    return dotenv.get("BASE_URL",
+        fallback:
+            "https://ec2-3-94-128-128.compute-1.amazonaws.com/"); //"https://api.insidersapp.io/");
   }
 
   bool get isProduction {

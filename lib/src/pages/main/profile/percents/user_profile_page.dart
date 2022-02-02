@@ -130,12 +130,8 @@ class UserProfilePageState extends State<UserProfilePage> {
                                 (MediaQuery.of(context).size.width - 100) / 1.5,
                             duration: 800),
                         JustTheTooltip(
-                          onShow: () {
-                            // print('onShow');
-                          },
-                          onDismiss: () {
-                            print('onDismiss');
-                          },
+                          onShow: () {},
+                          onDismiss: () {},
                           backgroundColor: Colors.black,
                           controller: tooltipForPortfolio,
                           tailLength: 10,
@@ -191,11 +187,8 @@ class UserProfilePageState extends State<UserProfilePage> {
                     SizedBox(
                       width: 55,
                       child: JustTheTooltip(
-                        onShow: () {
-                          // print('onShow');
-                        },
+                        onShow: () {},
                         onDismiss: () {
-                          print('onDismiss');
                           tooltipForPortfolio.showTooltip();
                         },
                         backgroundColor: Colors.black,

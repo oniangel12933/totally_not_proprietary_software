@@ -11,9 +11,10 @@ part 'invest_state.dart';
 
 class InvestBloc extends Bloc<InvestEvent, InvestState> {
   final List<Invest> invests = [
-    const Invest(id: 3, percent: 24),
-    const Invest(id: 7, percent: 18),
-    const Invest(id: 11, percent: 26),
+    const Invest(id: 3, percent: 13),
+    const Invest(id: 7, percent: 32),
+    const Invest(id: 11, percent: 21),
+    const Invest(id: 13, percent: 9),
     const Invest(id: 9, percent: 18)
   ];
   int selectedIndex = 0;
@@ -22,18 +23,20 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
 
   InvestBloc()
       : super(const InvestAdded(newInvests: [Invest(id: 0, percent: 0)])) {
-    
     secureRepository = GetIt.I.get<SecureStorageRepository>();
-    
+
     on<AddInvest>((event, emit) async {
       addInvest(event, emit);
     });
+
     on<UpdateInvest>((event, emit) async {
       updateInvest(event, emit);
     });
+
     on<RemoveInvest>((event, emit) {
       removeInvest(event, emit);
     });
+
     on<ChangeType>((event, emit) {
       changeType(event, emit);
     });
@@ -136,6 +139,6 @@ class InvestBloc extends Bloc<InvestEvent, InvestState> {
   }
 
   Future<void> setTourPassed() async {
-    await secureRepository.persistProfileTourPassed('passed');    
+    await secureRepository.persistProfileTourPassed('passed');
   }
 }
